@@ -1,3 +1,13 @@
+# ☕ Kopi Siholta - Landing Page
+
+Selamat datang di repository **Kopi Siholta**! Website ini adalah landing page modern yang dibangun menggunakan Astro untuk memperkenalkan cita rasa kopi khas Siholta kepada dunia dengan performa yang super cepat.
+
+## 🚀 Tech Stack
+
+- **Framework:** [Astro](https://astro.build/) (Static Site Generator)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+
+
 # Astro Starter Kit: Basics
 
 ```sh

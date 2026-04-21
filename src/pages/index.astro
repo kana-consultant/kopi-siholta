@@ -1,11 +1,44 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import Products from '../components/Products';
+import Stats from '../components/Stats';
+import About from '../components/About';
+import Partnerships from '../components/Partnerships';
+import CTA from '../components/CTA';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
 ---
 
 <Layout>
-	<Welcome />
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-[var(--color-primary)] focus:text-white focus:px-4 focus:py-2 focus:rounded">
+    Langsung ke konten utama
+  </a>
+
+  <Navbar />
+
+  <main id="main-content">
+    <Hero />
+	<div class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 animate-bounce">
+      <div class="bg-white p-2 rounded-full shadow-lg border border-gray-100">
+        <svg
+          class="w-6 h-6 text-[var(--color-primary)]"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </div>
+    <Products />
+    <Stats />
+    <About />
+    <Partnerships />
+    <CTA />
+    <Contact />
+  </main>
+
+  <Footer />
 </Layout>
