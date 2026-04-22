@@ -1,0 +1,141 @@
+---
+import { Handshake, Building2, Users, Coffee, Star, ArrowRight } from 'lucide-astro';
+
+const partnershipTypes = [
+  {
+    icon: Building2,
+    title: 'Coffee Shop & Cafe',
+    description: 'Program supplied untuk coffee shop dan cafe. Dapatkan kopi berkualitas dengan harga kompetitif dan support marketing.',
+    features: ['Harga wholesale khusus', 'Marketing support', 'Barista training', 'Custom blend option']
+  },
+  {
+    icon: Coffee,
+    title: 'Restoran & Hotel',
+    description: 'Jasa supplied kopi untuk restoran, hotel, dan hospitality bisnis. Layanan lengkap dari konsultasi hingga delivery.',
+    features: ['Custom packaging', 'Priority delivery', 'Menu consultation', 'Quality guarantee']
+  },
+  {
+    icon: Users,
+    title: 'Franchise Kedai Kopi',
+    description: 'Mari bangun bisnis kedai kopi bersama Kopi Siholta. Dapatkan brand support, training komprehensif, dan ongoing assistance.',
+    features: ['Brand licensing', 'Store design support', 'Operational training', 'Marketing package']
+  },
+  {
+    icon: Star,
+    title: 'Distributor & Reseller',
+    description: 'Bergabung sebagai distributor atau reseller resmi Kopi Siholta. Dapatkan margin kompetitif dan priority akses produk.',
+    features: ['Exclusive territory', 'Competitive margin', 'Marketing materials', 'Priority stock']
+  }
+];
+---
+
+<section id="kerjasama" class="section-padding bg-gradient-to-b from-[#4A2511] to-[#1C0F07] relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <defs>
+        <pattern id="diagonal" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M0,20 L20,0" stroke="currentColor" stroke-width="0.5" fill="none" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#diagonal)" class="text-[#F9F6F0]" />
+    </svg>
+  </div>
+
+  <div class="container-custom relative">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="inline-block px-4 py-2 bg-[#F9F6F0]/20 rounded-full text-[#F9F6F0]/80 font-medium text-sm mb-4">
+        Kemitraan
+      </span>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[#F9F6F0] mb-6">
+        Mari
+        <span class="bg-gradient-to-r from-[#F3B700] to-[#CD1222] bg-clip-text text-transparent">Berkolaborasi</span>
+      </h2>
+      <p class="text-lg text-[#F9F6F0]/70 max-w-2xl mx-auto">
+        Kopi Siholta membuka peluang kemitraan untuk berbagai sektor bisnis. Bersama, kita bisa menghadirkan kelezatan kopi Lintong ke lebih banyak konsumen.
+      </p>
+    </div>
+
+    <!-- Partnership Cards -->
+    <div class="grid md:grid-cols-2 gap-8 mb-16">
+      {partnershipTypes.map((type, index) => (
+        <div class="group bg-[#F9F6F0]/10 backdrop-blur-md rounded-3xl p-8 border border-[#F9F6F0]/20 hover:border-[#F3B700]/50 transition-all duration-500 animate-on-scroll" style={`animation-delay: ${index * 100}ms`}>
+          <div class="flex items-start gap-6">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#F3B700] to-[#CD1222] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <type.icon class="w-8 h-8 text-white" />
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-display font-bold text-[#F9F6F0] mb-3">{type.title}</h3>
+              <p class="text-[#F9F6F0]/70 leading-relaxed mb-6">{type.description}</p>
+              <div class="grid grid-cols-2 gap-3">
+                {type.features.map((feature) => (
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#2A7B40] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-[#F9F6F0]/80 text-sm">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Benefits -->
+    <div class="bg-[#F9F6F0]/10 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-[#F9F6F0]/20 mb-16">
+      <h3 class="text-2xl md:text-3xl font-display font-bold text-[#F9F6F0] text-center mb-10">
+        Mengapa Bermitra dengan Kami?
+      </h3>
+      <div class="grid md:grid-cols-4 gap-8">
+        {[
+          { icon: 'shield', title: 'Kualitas Terjamin', desc: 'Setiap batch melewati quality control ketat' },
+          { icon: 'dollar', title: 'Harga Kompetitif', desc: 'Margin menguntungkan untuk mitra bisnis' },
+          { icon: 'truck', title: 'Delivery Cepat', desc: 'Pengiriman tepat waktu ke seluruh Indonesia' },
+          { icon: 'users', title: 'Support Penuh', desc: 'Tim support siap membantu 24/7' }
+        ].map((item) => (
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-[#F3B700]/20 flex items-center justify-center mx-auto mb-4">
+              {item.icon === 'shield' && (
+                <svg class="w-8 h-8 text-[#F3B700]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              )}
+              {item.icon === 'dollar' && (
+                <svg class="w-8 h-8 text-[#F3B700]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )}
+              {item.icon === 'truck' && (
+                <svg class="w-8 h-8 text-[#F3B700]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              )}
+              {item.icon === 'users' && (
+                <svg class="w-8 h-8 text-[#F3B700]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              )}
+            </div>
+            <h4 class="text-lg font-display font-bold text-[#F9F6F0] mb-2">{item.title}</h4>
+            <p class="text-[#F9F6F0]/60 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <p class="text-[#F9F6F0]/70 mb-6 text-lg">Siap memulai perjalanan bisnis bersama kami?</p>
+      <a
+        href="#kontak"
+        class="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-[#CD1222] to-[#B91C1C] text-white font-bold rounded-full hover:shadow-lg hover:shadow-[#CD1222]/30 transition-all duration-300 hover:scale-105"
+      >
+        <Handshake class="w-6 h-6" />
+        <span>Mulai Kerjasama Sekarang</span>
+        <ArrowRight class="w-5 h-5" />
+      </a>
+    </div>
+  </div>
+</section>
