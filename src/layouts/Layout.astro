@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Kopi Siholta | Produsen Kopi Khas Danau Toba - Jual Kopi Kemasan Premium',
+  description = 'Kopi Siholta - Produsen kopi khas Danau Toba dari Lintong Nihuta, Sumatera Utara. Jual kopi kemasan premium Arabika & Robusta untuk wholesale, bisnis, dan ekspor. Buka kesempatan kemitraan franchise.'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="kopi siholta, kopi lintong, kopi danau toba, kopi kemasan premium, kopi wholesale, франшиза кофе, 咖啡批发, kopi export, kopi arabika sumatera, bisnis kopi" />
+    <meta name="author" content="PT. Siholta Toba Indonesia" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.kopisiholta.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Kopi Siholta | Produsen Kopi Khas Danau Toba" />
+    <meta property="og:description" content="Jual kopi kemasan premium dari Lintong Nihuta. Tersedia Arabika & Robusta untuk wholesale, ekspor, dan kemitraan franchise." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.kopisiholta.com/" />
+    <meta property="og:site_name" content="Kopi Siholta" />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kopi Siholta | Produsen Kopi Khas Danau Toba" />
+    <meta name="twitter:description" content="Jual kopi kemasan premium untuk wholesale, ekspor, dan kemitraan." />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Kopi Siholta",
+        "alternateName": "PT. Siholta Toba Indonesia",
+        "url": "https://www.kopisiholta.com",
+        "logo": "https://www.kopisiholta.com/favicon.svg",
+        "description": "Produsen kopi khas Danau Toba dari Lintong Nihuta, Sumatera Utara",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lintong Nihuta",
+          "addressRegion": "Sumatera Utara",
+          "addressCountry": "ID"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+6281322518527",
+          "contactType": "sales"
+        }
+      }
+    </script>
+  </head>
+  <body class="grain-overlay">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+  }
+</style>
