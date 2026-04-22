@@ -1,0 +1,155 @@
+---
+import { ShoppingBag, Package, Star, Shield, Truck } from 'lucide-astro';
+
+const products = [
+  {
+    name: 'Arabika Biji Utuh',
+    weight: '250gr / 500gr',
+    origin: 'Lintong Nihuta',
+    notes: ['Spicy', 'Herba', 'Rempah', 'Cokelat'],
+    description: 'Biji kopi arabika pilihan dari dataran tinggi Lintong. Cocok untuk pour over, French press, atau espresso.',
+    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80',
+    badge: 'Best Seller',
+    features: ['Grinding optional', 'Fresh roasted', 'Vacuum packed']
+  },
+  {
+    name: 'Arabika Giling Halus',
+    weight: '250gr / 500gr',
+    origin: 'Lintong Nihuta',
+    notes: ['Nutty', 'Chocolate', 'Fruity', 'Floral'],
+    description: 'Arabika yang sudah digiling halus, siap seduh. Ideal untuk drip coffee atau mesin kopi otomatis.',
+    image: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=600&q=80',
+    badge: 'Popular',
+    features: ['Pre-ground', 'Fine grind', 'Nitrogen flush']
+  },
+  {
+    name: 'Robusta Premium',
+    weight: '250gr / 500gr',
+    origin: 'Lintong Nihuta',
+    notes: ['Strong', 'Bold', 'Earthy', 'Chocolate'],
+    description: 'Robusta berkualitas tinggi dengan body kuat dan crema yang tebal. Cocok untuk espresso blend atau Vietnamese drip.',
+    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80',
+    badge: 'Value Pack',
+    features: ['High caffeine', 'Strong crema', 'Bold flavor']
+  },
+  {
+    name: 'Hampers & Gift Set',
+    weight: 'Custom',
+    origin: 'Pilihan Premium',
+    notes: ['Premium Selection', 'Gift Packaging', 'Customizable'],
+    description: 'Pilihan hadiah eksklusif untuk momen spesial. Tersedia berbagai varian dan dapat dikustomisasi sesuai kebutuhan.',
+    image: 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600&q=80',
+    badge: 'Gift Ready',
+    features: ['Premium box', 'Include guide', 'Custom ribbon']
+  }
+];
+
+const features = [
+  { icon: Star, text: 'Kualitas Premium Grade 1' },
+  { icon: Shield, text: 'Garansi 100% Asli' },
+  { icon: Truck, text: 'Pengiriman Seluruh Indonesia' },
+  { icon: Package, text: 'Kemasan Kedap Udara' }
+];
+---
+
+<section id="produk" class="section-padding bg-gradient-to-b from-[#4A2511] to-[#1C0F07] relative overflow-hidden">
+  <div class="absolute top-0 left-0 w-64 h-64 bg-[#F3B700]/5 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#CD1222]/5 rounded-full blur-3xl"></div>
+
+  <div class="container-custom relative">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="inline-block px-4 py-2 bg-[#F9F6F0]/20 rounded-full text-[#F9F6F0]/80 font-medium text-sm mb-4">
+        Produk Kami
+      </span>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[#F9F6F0] mb-6">
+        Pilihan Kopi
+        <span class="bg-gradient-to-r from-[#F3B700] to-[#CD1222] bg-clip-text text-transparent">Berkualitas</span>
+      </h2>
+      <p class="text-lg text-[#F9F6F0]/70 max-w-2xl mx-auto">
+        Dari biji utuh hingga giling halus, Hampers hadiah, kami menyediakan berbagai pilihan untuk kebutuhan Anda.
+      </p>
+    </div>
+
+    <!-- Feature Pills -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      {features.map((feature) => (
+        <div class="flex items-center gap-2 px-4 py-2 bg-[#F9F6F0]/10 rounded-full backdrop-blur-sm">
+          <feature.icon class="w-4 h-4 text-[#F3B700]" />
+          <span class="text-[#F9F6F0]/90 text-sm font-medium">{feature.text}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {products.map((product, index) => (
+        <article
+          class="group relative bg-[#F9F6F0] rounded-3xl overflow-hidden shadow-2xl card-hover animate-on-scroll"
+          style={`animation-delay: ${index * 100}ms`}
+        >
+          {product.badge && (
+            <div class="absolute top-4 left-4 z-10 px-3 py-1 bg-[#CD1222] text-white text-xs font-bold rounded-full">
+              {product.badge}
+            </div>
+          )}
+
+          <div class="relative aspect-square overflow-hidden">
+            <img
+              src={product.image}
+              alt={product.name}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1C0F07]/60 via-transparent to-transparent"></div>
+          </div>
+
+          <div class="p-6">
+            <h3 class="text-xl font-display font-bold text-[#1C0F07] mb-2">{product.name}</h3>
+            <p class="text-sm text-[#4A2511]/60 mb-3">{product.weight} • {product.origin}</p>
+            <p class="text-[#4A2511]/80 text-sm leading-relaxed mb-4">{product.description}</p>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              {product.notes.map((note) => (
+                <span class="px-2 py-1 bg-[#F3B700]/20 text-[#4A2511] text-xs font-medium rounded-full">
+                  {note}
+                </span>
+              ))}
+            </div>
+
+            <div class="space-y-1 mb-4">
+              {product.features.map((feature) => (
+                <div class="flex items-center gap-2 text-xs text-[#4A2511]/70">
+                  <svg class="w-3 h-3 text-[#2A7B40] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span>{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="https://www.tokopedia.com/kopisiholta"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-[#CD1222] font-semibold hover:text-[#B91C1C] transition-colors group"
+            >
+              <span>Beli di Tokopedia</span>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-16">
+      <p class="text-[#F9F6F0]/70 mb-6">Butuh jumlah besar untuk bisnis atau evento?</p>
+      <a href="#kontak" class="inline-flex items-center gap-2 px-8 py-4 bg-[#F3B700] text-[#1C0F07] font-semibold rounded-full hover:bg-[#D4A000] transition-colors">
+        <ShoppingBag class="w-5 h-5" />
+        <span>Hubungi untuk Penawaran Wholesale</span>
+      </a>
+    </div>
+  </div>
+</section>
