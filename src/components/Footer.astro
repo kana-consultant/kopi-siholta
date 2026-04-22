@@ -1,0 +1,165 @@
+---
+import { Coffee, MapPin, Phone, Mail, Instagram, Send } from 'lucide-astro';
+
+const quickLinks = [
+  { label: 'Beranda', href: '#beranda' },
+  { label: 'Tentang Kami', href: '#tentang' },
+  { label: 'Produk', href: '#produk' },
+  { label: 'Pasar Internasional', href: '#ekspor' },
+  { label: 'Kerjasama', href: '#kerjasama' },
+  { label: 'Kontak', href: '#kontak' }
+];
+
+const productLinks = [
+  { label: 'Arabika Biji Utuh', href: '#produk' },
+  { label: 'Arabika Giling Halus', href: '#produk' },
+  { label: 'Robusta Premium', href: '#produk' },
+  { label: 'Hampers & Gift Set', href: '#produk' }
+];
+
+const socialLinks = [
+  { icon: Instagram, label: '@kopi_siholta.id', href: 'https://instagram.com/kopi_siholta.id' },
+  { icon: Send, label: 'Tokopedia', href: 'https://www.tokopedia.com/kopisiholta' }
+];
+---
+
+<footer class="bg-[#1C0F07] text-[#F9F6F0] pt-20 pb-8 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-5">
+    <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <defs>
+        <pattern id="footer-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <ellipse cx="10" cy="10" rx="6" ry="4" fill="currentColor" transform="rotate(30 10 10)" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#footer-pattern)" class="text-[#F3B700]" />
+    </svg>
+  </div>
+
+  <div class="container-custom relative">
+    <!-- Main Content -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <a href="#beranda" class="flex items-center gap-3 mb-6">
+          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-[#F3B700] to-[#CD1222] flex items-center justify-center shadow-lg">
+            <Coffee class="w-7 h-7 text-white" />
+          </div>
+          <div class="flex flex-col">
+            <span class="text-2xl font-display font-bold text-[#F9F6F0] tracking-wide">KOPI</span>
+            <span class="text-lg font-accent text-[#F3B700] -mt-1">SIHOLTA</span>
+          </div>
+        </a>
+        <p class="text-[#F9F6F0]/70 leading-relaxed mb-6">
+          Kopi Lintong asli Sumatera Utara. Menghadirkan kelezatan dan kehangatan dari lereng Danau Toba dalam setiap cangkir.
+        </p>
+        <div class="flex items-center gap-4">
+          {socialLinks.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-full bg-[#F9F6F0]/10 flex items-center justify-center hover:bg-[#F3B700] hover:text-[#1C0F07] transition-all duration-300"
+              aria-label={social.label}
+            >
+              <social.icon class="w-5 h-5" />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h4 class="text-lg font-display font-bold text-[#F3B700] mb-6">Navigasi</h4>
+        <ul class="space-y-3">
+          {quickLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-[#F9F6F0]/70 hover:text-[#F3B700] transition-colors duration-300 inline-flex items-center gap-2 group"
+              >
+                <svg class="w-4 h-4 text-[#F3B700]/50 group-hover:text-[#F3B700] group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Products -->
+      <div>
+        <h4 class="text-lg font-display font-bold text-[#F3B700] mb-6">Produk</h4>
+        <ul class="space-y-3">
+          {productLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-[#F9F6F0]/70 hover:text-[#F3B700] transition-colors duration-300 inline-flex items-center gap-2 group"
+              >
+                <svg class="w-4 h-4 text-[#F3B700]/50 group-hover:text-[#F3B700] group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="text-lg font-display font-bold text-[#F3B700] mb-6">Kontak</h4>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <MapPin class="w-5 h-5 text-[#F3B700] flex-shrink-0 mt-0.5" />
+            <span class="text-[#F9F6F0]/70 text-sm">Dusun IV, Desa Sitolu Bahal, Kec. Lintong Nihuta, Kab. Humbang Hasundutan, Sumatera Utara 22475</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <Phone class="w-5 h-5 text-[#F3B700] flex-shrink-0 mt-0.5" />
+            <span class="text-[#F9F6F0]/70 text-sm">+62 813 2251 8527</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <Mail class="w-5 h-5 text-[#F3B700] flex-shrink-0 mt-0.5" />
+            <span class="text-[#F9F6F0]/70 text-sm">siholtatobaindonesia@gmail.com</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="border-t border-[#F9F6F0]/10 pt-12 mb-12">
+      <div class="max-w-xl mx-auto text-center">
+        <h4 class="text-2xl font-display font-bold text-[#F9F6F0] mb-4">Tetap Terhubung</h4>
+        <p class="text-[#F9F6F0]/60 mb-6">Dapatkan update terbaru tentang produk dan promo spesial.</p>
+        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="Masukkan email Anda"
+            class="flex-1 px-6 py-4 rounded-full bg-[#F9F6F0]/10 border border-[#F9F6F0]/20 text-[#F9F6F0] placeholder:text-[#F9F6F0]/50 focus:border-[#F3B700] focus:outline-none transition-colors"
+          />
+          <button
+            type="submit"
+            class="px-8 py-4 bg-gradient-to-r from-[#F3B700] to-[#CD1222] text-white font-bold rounded-full hover:shadow-lg hover:shadow-[#F3B700]/30 transition-all duration-300"
+          >
+            Berlangganan
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-[#F9F6F0]/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-[#F9F6F0]/50 text-sm text-center md:text-left">
+        &copy; {new Date().getFullYear()} PT. Siholta Toba Indonesia. All rights reserved.
+      </p>
+      <div class="flex items-center gap-2 text-[#F9F6F0]/50 text-sm">
+        <span>Dibuat dengan</span>
+        <svg class="w-4 h-4 text-[#CD1222]" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span>untuk kopi Indonesia</span>
+      </div>
+    </div>
+  </div>
+</footer>
