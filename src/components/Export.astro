@@ -1,0 +1,139 @@
+---
+import { Globe, MapPin, TrendingUp, Award, ArrowRight } from 'lucide-astro';
+
+const markets = [
+  { country: 'Korea Selatan', flag: '🇰🇷', status: 'Aktif' },
+  { country: 'Jepang', flag: '🇯🇵', status: 'Aktif' },
+  { country: 'Belanda', flag: '🇳🇱', status: 'Aktif' },
+  { country: 'Jerman', flag: '🇩🇪', status: 'Aktif' },
+  { country: 'Rusia', flag: '🇷🇺', status: 'Aktif' },
+  { country: 'Amerika Serikat', flag: '🇺🇸', status: 'Aktif' },
+  { country: 'China', flag: '🇨🇳', status: 'Target 2026' },
+  { country: 'Australia', flag: '🇦🇺', status: 'Target 2026' }
+];
+
+const achievements = [
+  { value: '6+', label: 'Negara Tujuan Ekspor' },
+  { value: '50+', label: 'Importir & Distributor' },
+  { value: '100 Ton', label: 'Volume Ekspor/Tahun' },
+  { value: '99%', label: 'Klien Puas' }
+];
+---
+
+<section id="ekspor" class="section-padding bg-[#F9F6F0] relative overflow-hidden">
+  <div class="absolute inset-0">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#F3B700]/5 to-transparent"></div>
+  </div>
+
+  <div class="container-custom relative">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="inline-block px-4 py-2 bg-[#4A2511]/10 rounded-full text-[#4A2511]/70 font-medium text-sm mb-4">
+        Pasar Internasional
+      </span>
+      <h2 class="section-title">
+        Merambah
+        <span class="text-gradient">Pasar Dunia</span>
+      </h2>
+      <p class="section-subtitle mx-auto">
+        Kopi Siholta telah menembus pasar internasional dan terus berkembang. Komitmen kami adalah menghadirkan kopi specialty Indonesia ke seluruh dunia.
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+      {achievements.map((stat, index) => (
+        <div class="text-center p-6 bg-white rounded-2xl shadow-lg animate-on-scroll" style={`animation-delay: ${index * 100}ms`}>
+          <div class="text-4xl md:text-5xl font-display font-bold text-[#CD1222] mb-2">{stat.value}</div>
+          <div class="text-[#4A2511]/70 font-medium">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+      <!-- Globe Visual -->
+      <div class="relative">
+        <div class="relative aspect-square max-w-md mx-auto">
+          <div class="absolute inset-0 rounded-full bg-gradient-to-br from-[#4A2511]/5 to-[#F3B700]/10 flex items-center justify-center">
+            <Globe class="w-48 h-48 text-[#4A2511]/20" />
+          </div>
+
+          <div class="absolute top-1/4 left-1/4 flex flex-col items-center animate-pulse-glow">
+            <div class="w-8 h-8 rounded-full bg-[#CD1222] flex items-center justify-center shadow-lg">
+              <MapPin class="w-4 h-4 text-white" />
+            </div>
+            <div class="mt-2 px-2 py-1 bg-[#1C0F07] text-[#F9F6F0] text-xs rounded-full">Korea</div>
+          </div>
+          <div class="absolute top-1/3 right-1/4 flex flex-col items-center animate-pulse-glow" style="animation-delay: 0.5s;">
+            <div class="w-8 h-8 rounded-full bg-[#35729E] flex items-center justify-center shadow-lg">
+              <MapPin class="w-4 h-4 text-white" />
+            </div>
+            <div class="mt-2 px-2 py-1 bg-[#1C0F07] text-[#F9F6F0] text-xs rounded-full">Jepang</div>
+          </div>
+          <div class="absolute top-1/2 left-1/3 flex flex-col items-center animate-pulse-glow" style="animation-delay: 1s;">
+            <div class="w-8 h-8 rounded-full bg-[#F3B700] flex items-center justify-center shadow-lg">
+              <MapPin class="w-4 h-4 text-[#1C0F07]" />
+            </div>
+            <div class="mt-2 px-2 py-1 bg-[#1C0F07] text-[#F9F6F0] text-xs rounded-full">Eropa</div>
+          </div>
+          <div class="absolute bottom-1/3 right-1/3 flex flex-col items-center animate-pulse-glow" style="animation-delay: 1.5s;">
+            <div class="w-8 h-8 rounded-full bg-[#CD1222] flex items-center justify-center shadow-lg">
+              <MapPin class="w-4 h-4 text-white" />
+            </div>
+            <div class="mt-2 px-2 py-1 bg-[#1C0F07] text-[#F9F6F0] text-xs rounded-full">AS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Market List -->
+      <div class="space-y-6">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="w-12 h-12 rounded-xl bg-[#CD1222]/10 flex items-center justify-center">
+            <TrendingUp class="w-6 h-6 text-[#CD1222]" />
+          </div>
+          <div>
+            <h3 class="text-2xl font-display font-bold text-[#1C0F07]">Jangkauan Global</h3>
+            <p class="text-[#4A2511]/70">Mencapai 6+ negara di berbagai benua</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          {markets.map((market) => (
+            <div class="flex items-center gap-3 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <span class="text-2xl">{market.flag}</span>
+              <div class="flex-1">
+                <div class="font-semibold text-[#1C0F07]">{market.country}</div>
+                <div class={`text-xs font-medium ${market.status === 'Aktif' ? 'text-[#2A7B40]' : 'text-[#35729E]'}`}>
+                  {market.status}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="flex items-center gap-4 p-6 bg-gradient-to-r from-[#F3B700]/10 to-[#CD1222]/10 rounded-2xl border border-[#F3B700]/20">
+          <div class="w-12 h-12 rounded-full bg-[#F3B700] flex items-center justify-center flex-shrink-0">
+            <Award class="w-6 h-6 text-[#1C0F07]" />
+          </div>
+          <div>
+            <div class="font-display font-bold text-[#1C0F07]">Target Ekspor 2026</div>
+            <p class="text-sm text-[#4A2511]/70">Memperluas jaringan ke China, Australia, dan negara-negara Asia Tenggara</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <a
+        href="#kontak"
+        class="inline-flex items-center gap-3 px-8 py-4 bg-[#4A2511] text-[#F9F6F0] font-semibold rounded-full hover:bg-[#6B4423] transition-colors group"
+      >
+        <Globe class="w-5 h-5" />
+        <span>Jadilah Mitra Ekspor Kami</span>
+        <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+      </a>
+    </div>
+  </div>
+</section>
