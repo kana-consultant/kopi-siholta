@@ -50,9 +50,9 @@ const partnershipTypes = [
     <!-- Partnership Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">
       {partnershipTypes.map((type, index) => (
-        <div class="group bg-[var(--color-cream)]/10 backdrop-blur-md rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 border border-[var(--color-cream)]/20 hover:border-[var(--color-gold)]/50 transition-all duration-500 animate-on-scroll" style={`animation-delay: ${index * 100}ms`}>
+        <div class="group bg-[var(--color-cream)]/10 backdrop-blur-md rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 border border-[var(--color-cream)]/20 hover:border-[var(--color-gold)]/50 card-transition animate-on-scroll">
           <div class="flex items-start gap-4 sm:gap-6">
-            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[var(--color-gold)] to-[var(--color-red)] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[var(--color-gold)] to-[var(--color-red)] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-bounce">
               <type.icon class="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
             <div class="flex-1">
@@ -84,7 +84,7 @@ const partnershipTypes = [
           { icon: Truck, title: 'Delivery Cepat', desc: 'Pengiriman tepat waktu ke seluruh Indonesia' },
           { icon: Users2, title: 'Support Penuh', desc: 'Tim support siap membantu 24/7' }
         ].map((item) => (
-          <div class="text-center">
+          <div class="text-center hover-lift">
             <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[var(--color-gold)]/20 flex items-center justify-center mx-auto mb-3 sm:mb-4">
               <item.icon class="w-5.5 h-5.5 sm:w-8 sm:h-8 text-[var(--color-gold)]" />
             </div>
@@ -100,11 +100,11 @@ const partnershipTypes = [
       <p class="text-[var(--color-cream)]/70 mb-4 sm:mb-6 text-base sm:text-lg">Siap memulai perjalanan bisnis bersama kami?</p>
       <a
         href="#kontak"
-        class="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 sm:px-10 py-3 sm:py-4 sm:py-5 bg-gradient-to-r from-[var(--color-red)] to-[var(--color-red)] text-white font-bold rounded-full hover:shadow-lg hover:shadow-[var(--color-red)]/30 transition-all duration-300 hover:scale-105"
+        class="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 sm:px-10 py-3 sm:py-4 sm:py-5 bg-gradient-to-r from-[var(--color-red)] to-[var(--color-red)] text-white font-bold rounded-full hover:shadow-lg hover:shadow-[var(--color-red)]/30 transition-bounce hover:scale-105"
       >
         <Handshake class="w-5 h-5 sm:w-6 sm:h-6" />
         <span class="text-sm sm:text-base">Mulai Kerjasama Sekarang</span>
-        <ArrowRight class="w-4 h-4 sm:w-5 sm:h-5" />
+        <ArrowRight class="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-fast" />
       </a>
     </div>
   </div>

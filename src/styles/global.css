@@ -315,3 +315,77 @@ h1, h2, h3, h4, h5, h6 {
 /* Responsive text */
 .text-responsive { font-size: clamp(2rem, 5vw, 4rem); }
 .text-responsive-lg { font-size: clamp(2.5rem, 8vw, 5rem); }
+
+/* Transition utilities - centralized for performance */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.transition-bounce {
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.transition-slow {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.transition-fast {
+  transition: all 0.15s ease-out;
+}
+
+/* Hover scale utilities */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(28, 15, 7, 0.15);
+}
+
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Shadow on hover */
+.shadow-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.shadow-hover:hover {
+  box-shadow: 0 10px 30px -6px rgba(28, 15, 7, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Card transitions - prevent CLS */
+.card-transition {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s ease,
+              border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Staggered animation optimization */
+@keyframes fadeInUpOptimized {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fadeInUpOptimized 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

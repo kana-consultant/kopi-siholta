@@ -43,7 +43,7 @@ const achievements = [
     <!-- Stats -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-12 sm:mb-16">
       {achievements.map((stat, index) => (
-        <div class="text-center p-4 sm:p-6 bg-white rounded-xl sm:rounded-2xl shadow-lg animate-on-scroll" style={`animation-delay: ${index * 100}ms`}>
+        <div class="text-center p-4 sm:p-6 bg-white rounded-xl sm:rounded-2xl shadow-lg shadow-hover card-transition animate-on-scroll">
           <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-[var(--color-red)] mb-1 sm:mb-2">{stat.value}</div>
           <div class="text-xs sm:text-sm text-[var(--color-roasted)]/70 font-medium">{stat.label}</div>
         </div>
@@ -52,19 +52,19 @@ const achievements = [
 
     <!-- Market List -->
     <div class="max-w-4xl mx-auto mb-16">
-      <div class="flex items-center gap-4 mb-8">
-        <div class="w-12 h-12 rounded-xl bg-[var(--color-red)]/10 flex items-center justify-center">
-          <TrendingUp class="w-6 h-6 text-[var(--color-red)]" />
+      <div class="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--color-red)]/10 flex items-center justify-center flex-shrink-0">
+          <TrendingUp class="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-red)]" />
         </div>
         <div>
           <h3 class="text-lg sm:text-xl md:text-2xl font-display font-bold text-[var(--color-dark-brown)] leading-tight">Jangkauan Global</h3>
-          <p class="text-[var(--color-roasted)]/70">Mencapai 6+ negara di berbagai benua</p>
+          <p class="text-sm sm:text-base text-[var(--color-roasted)]/70">Mencapai 6+ negara di berbagai benua</p>
         </div>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
         {markets.map((market) => (
-          <div class="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-shadow">
+          <div class="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white rounded-lg sm:rounded-xl shadow-md shadow-hover card-transition cursor-pointer">
             <span class="text-xl sm:text-2xl">{market.flag}</span>
             <div class="flex-1 min-w-0">
               <div class="font-semibold text-[var(--color-dark-brown)] text-xs sm:text-sm truncate">{market.country}</div>
