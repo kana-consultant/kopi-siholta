@@ -1,5 +1,7 @@
 ---
 import { Coffee, MapPin, Phone, Mail, Instagram, Send } from 'lucide-astro';
+import {Image} from 'astro:assets';
+import Logo from '../images/logo-kopi-siholta.png';
 
 const quickLinks = [
   { label: 'Beranda', href: '#beranda' },
@@ -33,7 +35,7 @@ const socialLinks = [
       <div class="lg:col-span-1">
         <a href="#beranda" class="flex items-center gap-3 mb-6">
           <div class="w-14 h-14 rounded-full bg-gradient-to-br from-[#F3B700] to-[#CD1222] flex items-center justify-center shadow-lg">
-            <Coffee class="w-7 h-7 text-white" />
+            <Image src={Logo} class="w-13 h-13 rounded-full" alt="logo kopi siholta" />
           </div>
           <div class="flex flex-col">
             <span class="text-2xl font-display font-bold text-[#F9F6F0] tracking-wide">KOPI</span>
