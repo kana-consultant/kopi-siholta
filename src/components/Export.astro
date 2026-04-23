@@ -41,11 +41,11 @@ const achievements = [
     </div>
 
     <!-- Stats -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-12 sm:mb-16">
       {achievements.map((stat, index) => (
-        <div class="text-center p-6 bg-white rounded-2xl shadow-lg animate-on-scroll" style={`animation-delay: ${index * 100}ms`}>
-          <div class="text-4xl md:text-5xl font-display font-bold text-[var(--color-red)] mb-2">{stat.value}</div>
-          <div class="text-[var(--color-roasted)]/70 font-medium">{stat.label}</div>
+        <div class="text-center p-4 sm:p-6 bg-white rounded-xl sm:rounded-2xl shadow-lg animate-on-scroll" style={`animation-delay: ${index * 100}ms`}>
+          <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-[var(--color-red)] mb-1 sm:mb-2">{stat.value}</div>
+          <div class="text-xs sm:text-sm text-[var(--color-roasted)]/70 font-medium">{stat.label}</div>
         </div>
       ))}
     </div>
@@ -62,12 +62,12 @@ const achievements = [
         </div>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
         {markets.map((market) => (
-          <div class="flex items-center gap-3 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-            <span class="text-2xl">{market.flag}</span>
-            <div class="flex-1">
-              <div class="font-semibold text-[var(--color-dark-brown)] text-sm">{market.country}</div>
+          <div class="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <span class="text-xl sm:text-2xl">{market.flag}</span>
+            <div class="flex-1 min-w-0">
+              <div class="font-semibold text-[var(--color-dark-brown)] text-xs sm:text-sm truncate">{market.country}</div>
               <div class={`text-xs font-medium ${market.status === 'Aktif' ? 'text-[var(--color-green)]' : 'text-[var(--color-blue)]'}`}>
                 {market.status}
               </div>
@@ -76,9 +76,9 @@ const achievements = [
         ))}
       </div>
 
-      <div class="flex items-center gap-4 p-6 bg-gradient-to-r from-[var(--color-gold)]/10 to-[var(--color-red)]/10 rounded-2xl border border-[var(--color-gold)]/20">
-        <div class="w-12 h-12 rounded-full bg-[var(--color-gold)] flex items-center justify-center flex-shrink-0">
-          <Award class="w-6 h-6 text-[var(--color-dark-brown)]" />
+      <div class="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 bg-gradient-to-r from-[var(--color-gold)]/10 to-[var(--color-red)]/10 rounded-xl sm:rounded-2xl border border-[var(--color-gold)]/20">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[var(--color-gold)] flex items-center justify-center flex-shrink-0">
+          <Award class="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-dark-brown)]" />
         </div>
         <div>
           <div class="font-display font-bold text-[var(--color-dark-brown)]">Target Ekspor 2026</div>

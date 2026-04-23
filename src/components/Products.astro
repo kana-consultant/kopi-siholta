@@ -85,24 +85,24 @@ const features = [
       ))}
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 animate-stagger">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 animate-stagger">
       {products.map((product, index) => (
         <article
-          class="group relative bg-[var(--color-cream)] rounded-3xl overflow-hidden shadow-2xl card-hover animate-on-scroll"
+          class="group relative bg-[var(--color-cream)] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl card-hover animate-on-scroll"
         >
           {product.badge && (
-            <div class="absolute top-4 left-4 z-10 px-3 py-1 bg-[var(--color-red)] text-white text-xs font-bold rounded-full">
+            <div class="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 px-2.5 py-1 sm:px-3 sm:py-1 bg-[var(--color-red)] text-white text-xs font-bold rounded-full">
               {product.badge}
             </div>
           )}
 
-          <div class="relative aspect-square overflow-hidden">
+          <div class="relative aspect-[4/3] sm:aspect-square overflow-hidden">
             <Image
               src={product.image}
               alt={product.name}
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              width={400}
-              height={400}
+              width={320}
+              height={240}
               loading="lazy"
               decoding="async"
               format="avif"
@@ -110,12 +110,12 @@ const features = [
             <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-dark-brown)]/60 via-transparent to-transparent"></div>
           </div>
 
-          <div class="p-6">
-            <h3 class="text-xl font-display font-bold text-[var(--color-dark-brown)] mb-2">{product.name}</h3>
-            <p class="text-sm text-[var(--color-roasted)]/60 mb-3">{product.weight} • {product.origin}</p>
-            <p class="text-[var(--color-roasted)]/80 text-sm leading-relaxed mb-4">{product.description}</p>
+          <div class="p-4 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-display font-bold text-[var(--color-dark-brown)] mb-1 sm:mb-2">{product.name}</h3>
+            <p class="text-xs sm:text-sm text-[var(--color-roasted)]/60 mb-2 sm:mb-3">{product.weight} • {product.origin}</p>
+            <p class="text-[var(--color-roasted)]/80 text-sm leading-relaxed mb-3 sm:mb-4 hidden sm:block">{product.description}</p>
 
-            <div class="flex flex-wrap gap-2 mb-4">
+            <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
               {product.notes.map((note) => (
                 <span class="px-2 py-1 bg-[var(--color-gold)]/20 text-[var(--color-roasted)] text-xs font-medium rounded-full">
                   {note}
@@ -123,7 +123,7 @@ const features = [
               ))}
             </div>
 
-            <div class="space-y-1 mb-4">
+            <div class="space-y-1 mb-3 sm:mb-4 hidden sm:block">
               {product.features.map((feature) => (
                 <div class="flex items-center gap-2 text-xs text-[var(--color-roasted)]/70">
                   <Check class="w-3 h-3 text-[var(--color-green)] flex-shrink-0" />
@@ -136,10 +136,10 @@ const features = [
               href="https://www.tokopedia.com/kopisiholta"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 text-[var(--color-red)] font-semibold hover:text-[var(--color-red)] transition-colors group"
+              class="inline-flex items-center gap-1.5 sm:gap-2 text-[var(--color-red)] font-semibold hover:text-[var(--color-red)] transition-colors group text-sm sm:text-base"
             >
               <span>Beli di Tokopedia</span>
-              <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight class="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </article>
