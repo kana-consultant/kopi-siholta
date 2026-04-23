@@ -1,32 +1,30 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
+    {
+      "source": "/_astro/chunks/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Content-Encoding",
+          "value": "br"
+        },
+        {
+          "key": "Vary",
+          "value": "Accept-Encoding"
+        }
+      ]
+    },
     {
       "source": "/_astro/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        },
-        {
-          "key": "Content-Encoding",
-          "value": "br"
-        }
-      ]
-    },
-    {
-      "source": "/_astro/(.*).css",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        },
-        {
-          "key": "Content-Encoding",
-          "value": "br"
-        },
-        {
-          "key": "Content-Type",
-          "value": "text/css; charset=utf-8"
         }
       ]
     },
@@ -40,20 +38,15 @@
       ]
     },
     {
-      "source": "/(.*).woff",
+      "source": "/_image(.*)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*).ttf",
-      "headers": [
+        },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "key": "Vary",
+          "value": "Accept"
         }
       ]
     },
@@ -88,7 +81,11 @@
         },
         {
           "key": "Accept-CH",
-          "value": "Sec-CH-Prefers-Color-Scheme"
+          "value": "Sec-CH-Prefers-Color-Scheme, Sec-CH-Prefers-Reduced-Motion, Sec-CH-Prefers-Reduced-Transparancy"
+        },
+        {
+          "key": "Timing-Allow-Origin",
+          "value": "*"
         }
       ]
     }
