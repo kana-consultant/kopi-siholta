@@ -57,21 +57,21 @@ const features = [
 ];
 ---
 
-<section id="produk" class="section-padding bg-gradient-to-b from-[#4A2511] to-[#1C0F07] relative overflow-hidden">
-  <div class="absolute top-0 left-0 w-64 h-64 bg-[#F3B700]/5 rounded-full blur-3xl"></div>
-  <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#CD1222]/5 rounded-full blur-3xl"></div>
+<section id="produk" class="section-padding bg-gradient-to-b from-[var(--color-roasted)] to-[var(--color-dark-brown)] relative overflow-hidden">
+  <div class="absolute top-0 left-0 w-64 h-64 bg-[var(--color-gold)]/5 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-0 w-96 h-96 bg-[var(--color-red)]/5 rounded-full blur-3xl"></div>
 
   <div class="container-custom relative">
     <!-- Header -->
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <span class="inline-block px-4 py-2 bg-[#F9F6F0]/20 rounded-full text-[#F9F6F0]/80 font-medium text-sm mb-4">
+      <span class="inline-block px-4 py-2 bg-[var(--color-cream)]/20 rounded-full text-[var(--color-cream)]/80 font-medium text-sm mb-4">
         Produk Kami
       </span>
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[#F9F6F0] mb-6">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[var(--color-cream)] mb-6">
         Pilihan Kopi
-        <span class="bg-gradient-to-r from-[#F3B700] to-[#CD1222] bg-clip-text text-transparent">Berkualitas</span>
+        <span class="bg-gradient-to-r from-[var(--color-gold)] to-[var(--color-red)] bg-clip-text text-transparent">Berkualitas</span>
       </h2>
-      <p class="text-lg text-[#F9F6F0]/70 max-w-2xl mx-auto">
+      <p class="text-lg text-[var(--color-cream)]/70 max-w-2xl mx-auto">
         Dari biji utuh hingga giling halus, Hampers hadiah, kami menyediakan berbagai pilihan untuk kebutuhan Anda.
       </p>
     </div>
@@ -79,9 +79,9 @@ const features = [
     <!-- Feature Pills -->
     <div class="flex flex-wrap justify-center gap-4 mb-12">
       {features.map((feature) => (
-        <div class="flex items-center gap-2 px-4 py-2 bg-[#F9F6F0]/10 rounded-full backdrop-blur-sm">
-          <feature.icon class="w-4 h-4 text-[#F3B700]" />
-          <span class="text-[#F9F6F0]/90 text-sm font-medium">{feature.text}</span>
+        <div class="flex items-center gap-2 px-4 py-2 bg-[var(--color-cream)]/10 rounded-full backdrop-blur-sm">
+          <feature.icon class="w-4 h-4 text-[var(--color-gold)]" />
+          <span class="text-[var(--color-cream)]/90 text-sm font-medium">{feature.text}</span>
         </div>
       ))}
     </div>
@@ -90,11 +90,11 @@ const features = [
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
       {products.map((product, index) => (
         <article
-          class="group relative bg-[#F9F6F0] rounded-3xl overflow-hidden shadow-2xl card-hover animate-on-scroll"
+          class="group relative bg-[var(--color-cream)] rounded-3xl overflow-hidden shadow-2xl card-hover animate-on-scroll"
           style={`animation-delay: ${index * 100}ms`}
         >
           {product.badge && (
-            <div class="absolute top-4 left-4 z-10 px-3 py-1 bg-[#CD1222] text-white text-xs font-bold rounded-full">
+            <div class="absolute top-4 left-4 z-10 px-3 py-1 bg-[var(--color-red)] text-white text-xs font-bold rounded-full">
               {product.badge}
             </div>
           )}
@@ -107,17 +107,17 @@ const features = [
               width={600}
               height={600}
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1C0F07]/60 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-dark-brown)]/60 via-transparent to-transparent"></div>
           </div>
 
           <div class="p-6">
-            <h3 class="text-xl font-display font-bold text-[#1C0F07] mb-2">{product.name}</h3>
-            <p class="text-sm text-[#4A2511]/60 mb-3">{product.weight} • {product.origin}</p>
-            <p class="text-[#4A2511]/80 text-sm leading-relaxed mb-4">{product.description}</p>
+            <h3 class="text-xl font-display font-bold text-[var(--color-dark-brown)] mb-2">{product.name}</h3>
+            <p class="text-sm text-[var(--color-roasted)]/60 mb-3">{product.weight} • {product.origin}</p>
+            <p class="text-[var(--color-roasted)]/80 text-sm leading-relaxed mb-4">{product.description}</p>
 
             <div class="flex flex-wrap gap-2 mb-4">
               {product.notes.map((note) => (
-                <span class="px-2 py-1 bg-[#F3B700]/20 text-[#4A2511] text-xs font-medium rounded-full">
+                <span class="px-2 py-1 bg-[var(--color-gold)]/20 text-[var(--color-roasted)] text-xs font-medium rounded-full">
                   {note}
                 </span>
               ))}
@@ -125,8 +125,8 @@ const features = [
 
             <div class="space-y-1 mb-4">
               {product.features.map((feature) => (
-                <div class="flex items-center gap-2 text-xs text-[#4A2511]/70">
-                  <Check class="w-3 h-3 text-[#2A7B40] flex-shrink-0" />
+                <div class="flex items-center gap-2 text-xs text-[var(--color-roasted)]/70">
+                  <Check class="w-3 h-3 text-[var(--color-green)] flex-shrink-0" />
                   <span>{feature}</span>
                 </div>
               ))}
@@ -136,7 +136,7 @@ const features = [
               href="https://www.tokopedia.com/kopisiholta"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 text-[#CD1222] font-semibold hover:text-[#B91C1C] transition-colors group"
+              class="inline-flex items-center gap-2 text-[var(--color-red)] font-semibold hover:text-[var(--color-red)] transition-colors group"
             >
               <span>Beli di Tokopedia</span>
               <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -148,8 +148,8 @@ const features = [
 
     <!-- CTA -->
     <div class="text-center mt-16">
-      <p class="text-[#F9F6F0]/70 mb-6">Butuh jumlah besar untuk bisnis atau evento?</p>
-      <a href="#kontak" class="inline-flex items-center gap-2 px-8 py-4 bg-[#F3B700] text-[#1C0F07] font-semibold rounded-full hover:bg-[#D4A000] transition-colors">
+      <p class="text-[var(--color-cream)]/70 mb-6">Butuh jumlah besar untuk bisnis atau evento?</p>
+      <a href="#kontak" class="inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-gold)] text-[var(--color-dark-brown)] font-semibold rounded-full hover:bg-[var(--color-gold)] transition-colors">
         <ShoppingBag class="w-5 h-5" />
         <span>Hubungi untuk Penawaran Wholesale</span>
       </a>
