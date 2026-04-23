@@ -63,6 +63,8 @@ const navItems = [
         id="mobile-menu-btn"
         class="lg:hidden p-3 rounded-lg bg-[var(--color-roasted)]/50 hover:bg-[var(--color-gold)]/20 transition-colors duration-300"
         aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
       >
         <Menu class="w-6 h-6 text-[var(--color-cream)]" id="menu-icon" />
       </button>
@@ -114,6 +116,7 @@ const navItems = [
 
   mobileMenuBtn?.addEventListener('click', () => {
     const isOpen = !mobileMenu?.classList.contains('hidden');
+    mobileMenuBtn?.setAttribute('aria-expanded', String(!isOpen));
 
     if (isOpen) {
       mobileMenu?.style.setProperty('max-height', '0');
@@ -136,6 +139,7 @@ const navItems = [
     link.addEventListener('click', () => {
       mobileMenu?.style.setProperty('max-height', '0');
       mobileMenu?.style.setProperty('opacity', '0');
+      mobileMenuBtn?.setAttribute('aria-expanded', 'false');
       setTimeout(() => mobileMenu?.classList.add('hidden'), 300);
     });
   });
