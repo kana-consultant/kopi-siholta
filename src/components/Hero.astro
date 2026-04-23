@@ -8,33 +8,32 @@ import { ArrowRight } from 'lucide-astro';
 
     <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_2px_2px,_var(--tw-gradient-stops))] from-[var(--color-gold)]/30 via-transparent to-transparent [background-size:24px_24px]"></div>
 
-    <div class="absolute top-20 left-10 w-32 h-32 rounded-full bg-[var(--color-gold)]/10 blur-3xl animate-float"></div>
-    <div class="absolute bottom-40 right-20 w-48 h-48 rounded-full bg-[var(--color-red)]/10 blur-3xl animate-float" style="animation-delay: 2s;"></div>
-    <div class="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-[var(--color-cream)]/5 blur-2xl animate-float" style="animation-delay: 4s;"></div>
+    <div class="absolute top-[15%] left-[10%] w-40 h-40 rounded-full bg-[var(--color-gold)]/8 blur-3xl animate-float"></div>
+    <div class="absolute bottom-[25%] right-[15%] w-56 h-56 rounded-full bg-[var(--color-red)]/8 blur-3xl animate-float-alt" style="animation-delay: 1.5s;"></div>
+    <div class="absolute top-[40%] right-[20%] w-28 h-28 rounded-full bg-[var(--color-cream)]/5 blur-2xl animate-float-slow" style="animation-delay: 3s;"></div>
+    <div class="absolute bottom-[15%] left-[25%] w-20 h-20 rounded-full bg-[var(--color-gold)]/5 blur-2xl animate-float-alt" style="animation-delay: 4.5s;"></div>
   </div>
 
   <div class="container-custom relative z-10 text-center px-4 py-32">
 
-    <div class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-gold)]/20 rounded-full mb-8 animate-fade-in-up">
-      <span class="w-2 h-2 bg-[var(--color-gold)] rounded-full animate-pulse"></span>
+    <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--color-gold)]/15 rounded-full mb-8 animate-fade-in-up opacity-0" style="animation-delay: 200ms;">
+      <span class="w-2.5 h-2.5 bg-[var(--color-gold)] rounded-full animate-pulse"></span>
       <span class="text-[var(--color-gold)] font-medium text-sm tracking-wide">Kopi Lintong Asli Sumatera Utara</span>
     </div>
 
     <h1 class="text-responsive-lg font-display font-bold text-[var(--color-cream)] mb-6 leading-tight">
-      <span class="block animate-fade-in-up delay-100">Nikmati Keindahan</span>
-      <span class="block animate-fade-in-up delay-200">Danau Toba dalam</span>
-      <span class="block bg-gradient-to-r from-[var(--color-gold)] via-[var(--color-copper)] to-[var(--color-red)] bg-clip-text text-transparent animate-fade-in-up delay-300">
+      <span class="block opacity-0 animate-fade-in-up" style="animation-delay: 400ms;">Nikmati Keindahan</span>
+      <span class="block opacity-0 animate-fade-in-up" style="animation-delay: 600ms;">Danau Toba dalam</span>
+      <span class="block bg-gradient-to-r from-[var(--color-gold)] via-[var(--color-copper)] to-[var(--color-red)] bg-clip-text text-transparent opacity-0 animate-fade-in-up" style="animation-delay: 800ms;">
         Setiap Cangkir
       </span>
     </h1>
 
-    <!-- Subtitle -->
-    <p class="text-lg md:text-xl text-[var(--color-cream)]/80 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up delay-400">
+    <p class="text-lg md:text-xl text-[var(--color-cream)]/80 max-w-2xl mx-auto mb-10 leading-relaxed opacity-0 animate-fade-in-up" style="animation-delay: 1000ms;">
       Kopi Siholta menghadirkan aroma dan cita rasa khas Lintong Nihuta dengan notes spicy, herba, rempah, dan cokelat yang tak terlupakan.
     </p>
 
-    <!-- CTA Buttons -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-500">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up" style="animation-delay: 1200ms;">
       <a href="#produk" class="btn-primary group">
         <span>Lihat Produk</span>
         <ArrowRight class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -45,8 +44,7 @@ import { ArrowRight } from 'lucide-astro';
     </div>
   </div>
 
-  <!-- Scroll Indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-0 animate-fade-in-up" style="animation-delay: 1500ms;">
     <span class="text-[var(--color-cream)]/50 text-xs tracking-[0.3em] uppercase">Scroll</span>
     <div class="w-6 h-10 rounded-full border-2 border-[var(--color-cream)]/30 flex justify-center pt-2">
       <div class="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)] animate-bounce"></div>

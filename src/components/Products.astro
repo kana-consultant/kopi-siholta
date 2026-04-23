@@ -76,7 +76,6 @@ const features = [
       </p>
     </div>
 
-    <!-- Feature Pills -->
     <div class="flex flex-wrap justify-center gap-4 mb-12">
       {features.map((feature) => (
         <div class="flex items-center gap-2 px-4 py-2 bg-[var(--color-cream)]/10 rounded-full backdrop-blur-sm">
@@ -86,12 +85,10 @@ const features = [
       ))}
     </div>
 
-    <!-- Products Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 animate-stagger">
       {products.map((product, index) => (
         <article
           class="group relative bg-[var(--color-cream)] rounded-3xl overflow-hidden shadow-2xl card-hover animate-on-scroll"
-          style={`animation-delay: ${index * 100}ms`}
         >
           {product.badge && (
             <div class="absolute top-4 left-4 z-10 px-3 py-1 bg-[var(--color-red)] text-white text-xs font-bold rounded-full">
@@ -146,7 +143,6 @@ const features = [
       ))}
     </div>
 
-    <!-- CTA -->
     <div class="text-center mt-16">
       <p class="text-[var(--color-cream)]/70 mb-6">Butuh jumlah besar untuk bisnis atau evento?</p>
       <a href="#kontak" class="inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-gold)] text-[var(--color-dark-brown)] font-semibold rounded-full hover:bg-[var(--color-gold)] transition-colors">
