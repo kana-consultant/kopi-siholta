@@ -3,6 +3,9 @@ import { Menu, Coffee } from 'lucide-astro';
 import {Image} from 'astro:assets';
 import Logo from '../images/logo-kopi-siholta.png';
 
+// Get optimized logo path for preload
+const logoPath = Logo.src;
+
 const navItems = [
   { label: 'Beranda', href: '#beranda' },
   { label: 'Tentang', href: '#tentang' },
@@ -20,7 +23,13 @@ const navItems = [
       <!-- Logo -->
       <a href="#beranda" class="flex items-center gap-3 group">
         <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-gold)] to-[var(--color-copper)] flex items-center justify-center shadow-lg group-hover:shadow-[var(--color-gold)]/50 transition-shadow duration-300">
-          <Image src={Logo} class="w-11 h-11 rounded-full" alt="logo kopi siholta" />
+          <Image
+            src={Logo}
+            class="w-11 h-11 rounded-full"
+            alt="logo kopi siholta"
+            loading="eager"
+            fetchpriority="high"
+          />
         </div>
         <div class="flex flex-col">
           <span class="text-xl font-display font-bold text-[var(--color-cream)] tracking-wide">KOPI</span>
