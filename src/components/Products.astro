@@ -1,5 +1,5 @@
 ---
-import { ShoppingBag, Package, Star, Shield, Truck } from 'lucide-astro';
+import { ShoppingBag, Package, Star, Shield, Truck, Check, ArrowRight } from 'lucide-astro';
 import { Image } from 'astro:assets';
 import arabicaBeans from '../images/arabica-beans.jpg';
 import arabicaGround from '../images/arabica-ground.jpg';
@@ -126,9 +126,7 @@ const features = [
             <div class="space-y-1 mb-4">
               {product.features.map((feature) => (
                 <div class="flex items-center gap-2 text-xs text-[#4A2511]/70">
-                  <svg class="w-3 h-3 text-[#2A7B40] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
+                  <Check class="w-3 h-3 text-[#2A7B40] flex-shrink-0" />
                   <span>{feature}</span>
                 </div>
               ))}
@@ -141,9 +139,7 @@ const features = [
               class="inline-flex items-center gap-2 text-[#CD1222] font-semibold hover:text-[#B91C1C] transition-colors group"
             >
               <span>Beli di Tokopedia</span>
-              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </article>
