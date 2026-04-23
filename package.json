@@ -20,6 +20,7 @@
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
+    "terser": "^5.46.2",
     "vite-plugin-compression": "^0.5.1"
   }
 }

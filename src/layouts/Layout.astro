@@ -22,9 +22,55 @@ const {
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Performance: Preconnect to external domains -->
+    <!-- Critical CSS - Inlined for instant FCP -->
+    <style>
+      /* System fonts for instant render - matches Tailwind defaults */
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background-color: #1C0F07;
+        color: #F5E6D3;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Critical hero styles for LCP */
+      h1 {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        line-height: 1.1;
+        margin: 0 0 1.5rem 0;
+        font-weight: 700;
+      }
+      /* Prevent CLS with min-height */
+      #beranda {
+        min-height: 100vh;
+      }
+      /* Critical animation - instant */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      /* Loading skeleton */
+      .skeleton {
+        background: linear-gradient(90deg, #2a1a0f 25%, #3d2a1a 50%, #2a1a0f 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+      }
+      @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+    </style>
+
+    <!-- Preconnect for faster font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+    <!-- Font loading: Load fonts async, apply when ready -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" />
+    </noscript>
 
     <!-- SEO Meta Tags -->
     <title>{title}</title>
@@ -75,12 +121,3 @@ const {
     <slot />
   </body>
 </html>
-
-<style is:global>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    min-height: 100%;
-  }
-</style>
