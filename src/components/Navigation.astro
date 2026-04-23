@@ -14,37 +14,35 @@ const navItems = [
 ---
 
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-  <div class="absolute inset-0 bg-[#1C0F07]/95 backdrop-blur-md"></div>
+  <div class="absolute inset-0 bg-[var(--color-dark-brown)]/95 backdrop-blur-md"></div>
   <div class="container-custom relative">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
       <a href="#beranda" class="flex items-center gap-3 group">
-        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#F3B700] to-[#C17F3C] flex items-center justify-center shadow-lg group-hover:shadow-[#F3B700]/50 transition-shadow duration-300">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-gold)] to-[var(--color-copper)] flex items-center justify-center shadow-lg group-hover:shadow-[var(--color-gold)]/50 transition-shadow duration-300">
           <Image src={Logo} class="w-11 h-11 rounded-full" alt="logo kopi siholta" />
         </div>
         <div class="flex flex-col">
-          <span class="text-xl font-display font-bold text-[#F9F6F0] tracking-wide">KOPI</span>
-          <span class="text-sm font-accent text-[#F3B700] -mt-1">SIHOLTA</span>
+          <span class="text-xl font-display font-bold text-[var(--color-cream)] tracking-wide">KOPI</span>
+          <span class="text-sm font-accent text-[var(--color-gold)] -mt-1">SIHOLTA</span>
         </div>
       </a>
 
-      <!-- Desktop Navigation -->
       <div class="hidden lg:flex items-center gap-8">
         {navItems.map((item) => (
           <a
             href={item.href}
-            class="relative text-[#F9F6F0]/80 hover:text-[#F3B700] font-medium tracking-wide transition-colors duration-300 py-2 group"
+            class="relative text-[var(--color-cream)]/80 hover:text-[var(--color-gold)] font-medium tracking-wide transition-colors duration-300 py-2 group"
           >
             {item.label}
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#F3B700] to-[#CD1222] transition-all duration-300 group-hover:w-full"></span>
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[var(--color-gold)] to-[var(--color-red)] transition-all duration-300 group-hover:w-full"></span>
           </a>
         ))}
       </div>
 
-      <!-- CTA Button -->
       <a
         href="#kontak"
-        class="hidden lg:inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#CD1222] to-[#B91C1C] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-[#CD1222]/30 transition-all duration-300 hover:scale-105"
+        class="hidden lg:inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[var(--color-red)] to-[var(--color-red)] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-[var(--color-red)]/30 transition-all duration-300 hover:scale-105"
       >
         <span>Hubungi Kami</span>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,35 +50,34 @@ const navItems = [
         </svg>
       </a>
 
-      <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-btn"
-        class="lg:hidden p-3 rounded-lg bg-[#4A2511]/50 hover:bg-[#F3B700]/20 transition-colors duration-300"
+        class="lg:hidden p-3 rounded-lg bg-[var(--color-roasted)]/50 hover:bg-[var(--color-gold)]/20 transition-colors duration-300"
         aria-label="Toggle menu"
       >
-        <Menu class="w-6 h-6 text-[#F9F6F0]" id="menu-icon" />
+        <Menu class="w-6 h-6 text-[var(--color-cream)]" id="menu-icon" />
       </button>
     </div>
   </div>
 
-  <!-- Mobile Menu -->
   <div
     id="mobile-menu"
-    class="lg:hidden hidden absolute top-full left-0 right-0 bg-[#1C0F07]/98 backdrop-blur-lg border-t border-[#F3B700]/20"
+    class="lg:hidden hidden absolute top-full left-0 right-0 bg-[var(--color-dark-brown)]/98 backdrop-blur-lg border-t border-[var(--color-gold)]/20 overflow-hidden transition-all duration-300 ease-out"
+    style="max-height: 0; opacity: 0;"
   >
-    <div class="container-custom py-6">
-      <div class="flex flex-col gap-4">
+    <div class="container-custom py-6 animate-slide-down">
+      <div class="flex flex-col gap-2">
         {navItems.map((item) => (
           <a
             href={item.href}
-            class="text-[#F9F6F0]/80 hover:text-[#F3B700] font-medium tracking-wide py-3 px-4 rounded-lg hover:bg-[#F3B700]/10 transition-all duration-300"
+            class="text-[var(--color-cream)]/80 hover:text-[var(--color-gold)] font-medium tracking-wide py-3 px-4 rounded-lg hover:bg-[var(--color-gold)]/10 transition-all duration-200"
           >
             {item.label}
           </a>
         ))}
         <a
           href="#kontak"
-          class="mt-4 inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#CD1222] to-[#B91C1C] text-white font-semibold rounded-full"
+          class="mt-4 inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[var(--color-red)] to-[var(--color-red)] text-white font-semibold rounded-full"
         >
           <span>Hubungi Kami</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,22 +97,38 @@ const navItems = [
 
   window.addEventListener('scroll', () => {
     if (window.pageYOffset > 100) {
-      navbar?.classList.add('shadow-2xl', 'shadow-[#1C0F07]/50');
+      navbar?.classList.add('shadow-2xl', 'shadow-[var(--color-dark-brown)]/50');
     } else {
-      navbar?.classList.remove('shadow-2xl', 'shadow-[#1C0F07]/50');
+      navbar?.classList.remove('shadow-2xl', 'shadow-[var(--color-dark-brown)]/50');
     }
   });
 
   mobileMenuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
     const isOpen = !mobileMenu?.classList.contains('hidden');
-    menuIcon!.innerHTML = isOpen
+
+    if (isOpen) {
+      mobileMenu?.style.setProperty('max-height', '0');
+      mobileMenu?.style.setProperty('opacity', '0');
+      setTimeout(() => mobileMenu?.classList.add('hidden'), 300);
+    } else {
+      mobileMenu?.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        mobileMenu?.style.setProperty('max-height', '400px');
+        mobileMenu?.style.setProperty('opacity', '1');
+      });
+    }
+
+    menuIcon!.innerHTML = !isOpen
       ? '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>'
       : '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>';
   });
 
   mobileMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => mobileMenu?.classList.add('hidden'));
+    link.addEventListener('click', () => {
+      mobileMenu?.style.setProperty('max-height', '0');
+      mobileMenu?.style.setProperty('opacity', '0');
+      setTimeout(() => mobileMenu?.classList.add('hidden'), 300);
+    });
   });
 
   const observer = new IntersectionObserver((entries) => {
