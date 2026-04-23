@@ -123,5 +123,31 @@ const {
   </head>
   <body class="grain-overlay">
     <slot />
+
+    <!-- Skeleton loader handler -->
+    <script>
+      // Auto-hide skeleton when images load
+      document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('.skeleton-wrapper + img, .skeleton-wrapper ~ img');
+        images.forEach(img => {
+          if (img.complete) {
+            const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
+            if (skeleton) skeleton.classList.add('loaded');
+          } else {
+            img.addEventListener('load', () => {
+              const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
+              if (skeleton) skeleton.classList.add('loaded');
+            });
+          }
+        });
+
+        // Fallback: hide skeleton after 3 seconds
+        setTimeout(() => {
+          document.querySelectorAll('.skeleton-wrapper').forEach(el => {
+            el.classList.add('loaded');
+          });
+        }, 3000);
+      });
+    </script>
   </body>
 </html>
