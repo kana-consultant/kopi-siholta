@@ -1,10 +1,11 @@
 ---
-import { ShoppingBag, Package, Star, Shield, Truck, Check, ArrowRight } from 'lucide-astro';
+import { Package, Star, Shield, Truck, Check, ArrowRight, Images } from 'lucide-astro';
 import { Image } from 'astro:assets';
 import arabicaBeans from '../images/arabica-beans.jpg';
 import arabicaGround from '../images/arabica-ground.jpg';
 import robustaBeans from '../images/robusta-beans.jpg';
 import hampers from '../images/hampers.png';
+import whatsapp from'../images/logo-whatsapp.png'
 
 const products = [
   {
@@ -151,7 +152,7 @@ const features = [
     <div class="text-center mt-16">
       <p class="text-[var(--color-cream)]/70 mb-6">Butuh jumlah besar untuk bisnis?</p>
       <a href="#kontak" class="inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-gold)] text-[var(--color-dark-brown)] font-semibold rounded-full hover:bg-[var(--color-gold)] transition-colors">
-        <ShoppingBag class="w-5 h-5" />
+         <Image src={whatsapp} class="w-5 h-5" alt="whastapp"/>
         <span>Hubungi untuk Penawaran Menarik</span>
       </a>
     </div>

@@ -1,5 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Store } from 'lucide-astro';
+import tokopediaLogo from '../images/logo-tokopedia.png';
+import shopeeLogo from '../images/logo-shopee.png';
+import whatsapp from '../images/logo-whatsapp.png';
 
 const contactInfo = [
   {
@@ -18,7 +22,7 @@ const contactInfo = [
   },
   {
     icon: Phone,
-    title: 'WhatsApp',
+    title: 'Nomor Telepon',
     lines: ['+62 813 2251 8527']
   },
   {
@@ -54,9 +58,7 @@ const contactInfo = [
     </div>
 
     <div class="grid lg:grid-cols-2 gap-12">
-      <!-- Left: Contact Info -->
       <div class="space-y-6">
-        <!-- WhatsApp CTA -->
         <a
           href="https://wa.me/6281322518527?text=Halo%20Kopi%20Siholta,%20saya%20tertarik%20dengan%20produk%20anda"
           target="_blank"
@@ -64,7 +66,7 @@ const contactInfo = [
           class="flex items-center gap-4 p-6 bg-gradient-to-r from-[var(--color-green)] to-[var(--color-blue)] rounded-2xl text-white hover:shadow-lg hover:shadow-[var(--color-green)]/30 transition-all duration-300 group"
         >
           <div class="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
-            <MessageCircle class="w-7 h-7" />
+            <Image class="w-13 h-13" src={whatsapp} alt="logo-whatsapp"/>
           </div>
           <div>
             <div class="font-display font-bold text-lg">Chat WhatsApp</div>
@@ -100,11 +102,9 @@ const contactInfo = [
             href="https://www.tokopedia.com/kopisiholta"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-3 text-[var(--color-red)] hover:text-[var(--color-red)] transition-colors group"
+            class="flex items-center gap-3 text-[var(--color-green)] hover:text-[var(--color-green)] transition-colors group"
           >
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-            </svg>
+            <Image src={tokopediaLogo} alt="Tokopedia" class="w-6 h-6" />
             <span class="font-semibold">Tokopedia: kopisiholta</span>
             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -115,10 +115,9 @@ const contactInfo = [
               href="https://shopee.co.id/kopi_siholta"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-3 text-[var(--color-blue)] hover:text-[var(--color-green)] transition-colors group"
+              class="flex items-center gap-3 text-[var(--color-red)] hover:text-[var(--color-red)] transition-colors group"
             >
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M7 8V6a5 5 0 0 1 10 0v2h4v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8h4zm8 0V6a3 3 0 0 0-6 0v2h6z"/>              </svg>
+              <Image src={shopeeLogo} alt="Shopee" class="w-6 h-6" />
               <span class="font-semibold">kopi_siholta</span>
               <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -149,7 +148,7 @@ const contactInfo = [
                 type="email"
                 name="email"
                 required
-                class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-gold)] focus:ring-2 focus:ring-[var(--color-gold)]/20 transition-all outline-none"
+                class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-roasted)] focus:ring-2 focus:ring-[var(--color-roasted)]/20 transition-all outline-none"
                 placeholder="email@contoh.com"
               />
             </div>
@@ -193,7 +192,7 @@ const contactInfo = [
             type="submit"
             class="w-full py-4 bg-gradient-to-r from-[var(--color-red)] to-[var(--color-red)] text-white font-bold rounded-xl hover:shadow-lg hover:shadow-[var(--color-red)]/30 transition-all duration-300 flex items-center justify-center gap-2 group"
           >
-            <Send class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <Image class="w-6 h-6 group-hover:translate-x-1 transition-transform" src={whatsapp} alt="whatsapp"/>
             <span>Kirim Pesan</span>
           </button>
         </form>
