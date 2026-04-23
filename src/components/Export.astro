@@ -1,5 +1,5 @@
 ---
-import { Globe, MapPin, TrendingUp, Award, ArrowRight } from 'lucide-astro';
+import { MapPin, TrendingUp, Award, ArrowRight, Plane } from 'lucide-astro';
 
 const markets = [
   { country: 'Korea Selatan', flag: '🇰🇷', status: 'Aktif' },
@@ -50,76 +50,39 @@ const achievements = [
       ))}
     </div>
 
-    <!-- Main Content -->
-    <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
-      <!-- Globe Visual -->
-      <div class="relative">
-        <div class="relative aspect-square max-w-md mx-auto">
-          <div class="absolute inset-0 rounded-full bg-gradient-to-br from-[var(--color-roasted)]/5 to-[var(--color-gold)]/10 flex items-center justify-center">
-            <Globe class="w-48 h-48 text-[var(--color-roasted)]/20" />
-          </div>
-
-          <div class="absolute top-1/4 left-1/4 flex flex-col items-center animate-pulse-glow">
-            <div class="w-8 h-8 rounded-full bg-[var(--color-red)] flex items-center justify-center shadow-lg">
-              <MapPin class="w-4 h-4 text-white" />
-            </div>
-            <div class="mt-2 px-2 py-1 bg-[var(--color-dark-brown)] text-[var(--color-cream)] text-xs rounded-full">Korea</div>
-          </div>
-          <div class="absolute top-1/3 right-1/4 flex flex-col items-center animate-pulse-glow" style="animation-delay: 0.5s;">
-            <div class="w-8 h-8 rounded-full bg-[var(--color-blue)] flex items-center justify-center shadow-lg">
-              <MapPin class="w-4 h-4 text-white" />
-            </div>
-            <div class="mt-2 px-2 py-1 bg-[var(--color-dark-brown)] text-[var(--color-cream)] text-xs rounded-full">Jepang</div>
-          </div>
-          <div class="absolute top-1/2 left-1/3 flex flex-col items-center animate-pulse-glow" style="animation-delay: 1s;">
-            <div class="w-8 h-8 rounded-full bg-[var(--color-gold)] flex items-center justify-center shadow-lg">
-              <MapPin class="w-4 h-4 text-[var(--color-dark-brown)]" />
-            </div>
-            <div class="mt-2 px-2 py-1 bg-[var(--color-dark-brown)] text-[var(--color-cream)] text-xs rounded-full">Eropa</div>
-          </div>
-          <div class="absolute bottom-1/3 right-1/3 flex flex-col items-center animate-pulse-glow" style="animation-delay: 1.5s;">
-            <div class="w-8 h-8 rounded-full bg-[var(--color-red)] flex items-center justify-center shadow-lg">
-              <MapPin class="w-4 h-4 text-white" />
-            </div>
-            <div class="mt-2 px-2 py-1 bg-[var(--color-dark-brown)] text-[var(--color-cream)] text-xs rounded-full">AS</div>
-          </div>
+    <!-- Market List -->
+    <div class="max-w-4xl mx-auto mb-16">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-12 h-12 rounded-xl bg-[var(--color-red)]/10 flex items-center justify-center">
+          <TrendingUp class="w-6 h-6 text-[var(--color-red)]" />
+        </div>
+        <div>
+          <h3 class="text-2xl font-display font-bold text-[var(--color-dark-brown)]">Jangkauan Global</h3>
+          <p class="text-[var(--color-roasted)]/70">Mencapai 6+ negara di berbagai benua</p>
         </div>
       </div>
 
-      <!-- Market List -->
-      <div class="space-y-6">
-        <div class="flex items-center gap-4 mb-8">
-          <div class="w-12 h-12 rounded-xl bg-[var(--color-red)]/10 flex items-center justify-center">
-            <TrendingUp class="w-6 h-6 text-[var(--color-red)]" />
-          </div>
-          <div>
-            <h3 class="text-2xl font-display font-bold text-[var(--color-dark-brown)]">Jangkauan Global</h3>
-            <p class="text-[var(--color-roasted)]/70">Mencapai 6+ negara di berbagai benua</p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
-          {markets.map((market) => (
-            <div class="flex items-center gap-3 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <span class="text-2xl">{market.flag}</span>
-              <div class="flex-1">
-                <div class="font-semibold text-[var(--color-dark-brown)]">{market.country}</div>
-                <div class={`text-xs font-medium ${market.status === 'Aktif' ? 'text-[var(--color-green)]' : 'text-[var(--color-blue)]'}`}>
-                  {market.status}
-                </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        {markets.map((market) => (
+          <div class="flex items-center gap-3 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <span class="text-2xl">{market.flag}</span>
+            <div class="flex-1">
+              <div class="font-semibold text-[var(--color-dark-brown)] text-sm">{market.country}</div>
+              <div class={`text-xs font-medium ${market.status === 'Aktif' ? 'text-[var(--color-green)]' : 'text-[var(--color-blue)]'}`}>
+                {market.status}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
 
-        <div class="flex items-center gap-4 p-6 bg-gradient-to-r from-[var(--color-gold)]/10 to-[var(--color-red)]/10 rounded-2xl border border-[var(--color-gold)]/20">
-          <div class="w-12 h-12 rounded-full bg-[var(--color-gold)] flex items-center justify-center flex-shrink-0">
-            <Award class="w-6 h-6 text-[var(--color-dark-brown)]" />
-          </div>
-          <div>
-            <div class="font-display font-bold text-[var(--color-dark-brown)]">Target Ekspor 2026</div>
-            <p class="text-sm text-[var(--color-roasted)]/70">Memperluas jaringan ke China, Australia, dan negara-negara Asia Tenggara</p>
-          </div>
+      <div class="flex items-center gap-4 p-6 bg-gradient-to-r from-[var(--color-gold)]/10 to-[var(--color-red)]/10 rounded-2xl border border-[var(--color-gold)]/20">
+        <div class="w-12 h-12 rounded-full bg-[var(--color-gold)] flex items-center justify-center flex-shrink-0">
+          <Award class="w-6 h-6 text-[var(--color-dark-brown)]" />
+        </div>
+        <div>
+          <div class="font-display font-bold text-[var(--color-dark-brown)]">Target Ekspor 2026</div>
+          <p class="text-sm text-[var(--color-roasted)]/70">Memperluas jaringan ke China, Australia, dan negara-negara Asia Tenggara</p>
         </div>
       </div>
     </div>
@@ -130,7 +93,7 @@ const achievements = [
         href="#kontak"
         class="inline-flex items-center gap-3 px-8 py-4 bg-[var(--color-roasted)] text-[var(--color-cream)] font-semibold rounded-full hover:bg-[var(--color-warm)] transition-colors group"
       >
-        <Globe class="w-5 h-5" />
+        <Plane class="w-5 h-5" />
         <span>Jadilah Mitra Ekspor Kami</span>
         <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
       </a>
