@@ -62,20 +62,11 @@ const {
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
-      /* Critical animation - instant */
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
       /* Loading skeleton */
       .skeleton {
         background: linear-gradient(90deg, #2a1a0f 25%, #3d2a1a 50%, #2a1a0f 75%);
         background-size: 200% 100%;
         animation: shimmer 1.5s infinite;
-      }
-      @keyframes shimmer {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
       }
     </style>
 
