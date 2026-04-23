@@ -1,51 +1,160 @@
-# ☕ Kopi Siholta - Landing Page
+# ☕ Kopi Siholta Landing Page
 
-Selamat datang di repository **Kopi Siholta**! Website ini adalah landing page modern yang dibangun menggunakan Astro untuk memperkenalkan cita rasa kopi khas Siholta kepada dunia dengan performa yang super cepat.
+> Website katalog dan company profile untuk **PT. Siholta Toba Indonesia** - Produsen kopi premium khas Danau Toba.
 
-## 🚀 Tech Stack
+![Astro](https://img.shields.io/badge/Astro-6.x-violet?style=for-the-badge&logo=astro)
+![Tailwind](https://img.shields.io/badge/Tailwind-4.x-38b2ac?style=for-the-badge&logo=tailwindcss)
+![Vercel](https://img.shields.io/badge/Vercel-Ready-black?style=for-the-badge&logo=vercel)
+![Node](https://img.shields.io/badge/Node.js-22-green?style=for-the-badge&logo=nodedotjs)
 
-- **Framework:** [Astro](https://astro.build/) (Static Site Generator)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+---
 
+## 🎯 Tentang Project
 
-# Astro Starter Kit: Basics
+Website landing page yang menampilkan kopi Sumatera Utara yang otentik dengan desain visual yang kaya dan estetika yang menawan. Featuring:
 
-```sh
-npm create astro@latest -- --template basics
+- 🌿 **Hero Section** 
+- 📦 **Katalog Produk** - Produk kopi Arabika & Robusta
+- 🗺️ **Pasar Internasional** - Jangkauan ekspor global
+- 🤝 **Partnership** - Kesempatan kemitraan franchise
+- 📬 **Contact Form** - Integrasi WhatsApp & email
+
+---
+
+## 🚀 Cara Menjalankan
+
+### Prerequisites
+- Node.js v22.12.0 atau lebih tinggi
+- npm atau yarn
+
+### Langkah-langkah
+
+```bash
+# 1. Clone repository
+git clone https://github.com/your-repo/kopi-siholta.git
+cd kopi-siholta
+
+# 2. Install dependencies
+npm install
+
+# 3. Jalankan development server
+npm run dev
+
+# 4. Buka di browser
+# http://localhost:4321
 ```
 
+### Build untuk Production
 
-## 🚀 Project Structure
+```bash
+# Build static files
+npm run build
 
-Inside of your Astro project, you'll see the following folders and files:
+# Preview hasil build
+npm run preview
+```
 
-```text
-/
+---
+
+## 🧩 Komponen Modular
+
+Website ini dibangun dengan arsitektur komponen yang modular:
+
+| Komponen | Deskripsi |
+|----------|------------|
+| `Hero.astro` | Hero section dengan gradient animation |
+| `Products.astro` | Katalog produk dengan image grid |
+| `About.astro` | Cerita perusahaan dan fitur |
+| `Export.astro` | Pasar internasional |
+| `Partnership.astro` | Kemitraan franchise |
+| `Contact.astro` | Form kontak & Google Maps |
+| `Navigation.astro` | Navigasi sticky dengan mobile menu |
+| `Footer.astro` | Footer dengan social links |
+
+### Struktur Komponen
+
+```
+src/
+├── components/
+│   ├── Hero.astro        
+│   ├── Products.astro    # 📦 Grid produk
+│   ├── About.astro       # 📖 Cerita brand
+│   ├── Export.astro      # 🌍 Info ekspor
+│   ├── Partnership.astro  # 🤝 Section kemitraan
+│   ├── Contact.astro     # 📧 Form & Maps
+│   ├── Navigation.astro  # 🔝 Navbar
+│   └── Footer.astro      # 🔚 Footer
+├── layouts/
+│   └── Layout.astro     
+└── pages/
+    └── index.astro      # Homepage
+```
+
+---
+
+## 💻 Tech Stack
+
+| Teknologi | Kegunaan |
+|-----------|----------|
+| **Astro** | Static Site Generator - performa tinggi |
+| **Tailwind CSS** | Utility-first styling |
+| **Lucide Icons** | Icon library yang ringan |
+| **Vercel** | Deployment & edge hosting |
+
+
+---
+
+## 🎨 Design System
+
+### Color Palette
+
+```
+Primary (Dark Brown)    : #1C0F07
+Roasted Brown           : #4A2511
+Gold Accent             : #F3B700
+Red Accent              : #CD1222
+Cream Text              : #F9F6F0
+```
+
+### Typography
+
+- **Display Font** : Playfair Display (heading)
+- **Body Font** : Plus Jakarta Sans (paragraph)
+
+---
+
+## 📁 Struktur File
+
+```
+kopi-siholta/
 ├── public/
 │   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+├── src/
+│   ├── components/
+│   ├── images/          # Source images
+│   ├── layouts/
+│   ├── pages/
+│   └── styles/
+│       └── global.css   # Tailwind + custom styles
+├── astro.config.mjs
+├── vercel.json
 └── package.json
 ```
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+## 🚢 Deployment
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### Vercel (Recommended)
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy ke production
+vercel --prod
+```
+
+Atau connect repo ke Vercel untuk auto-deploy setiap push.
 
 

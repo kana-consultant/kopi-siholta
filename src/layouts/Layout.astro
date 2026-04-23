@@ -17,14 +17,69 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1C0F07" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preconnect for faster connections -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload critical font subset for LCP -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" media="print" onload="this.media='all'" />
+
+    <!-- Critical CSS - Inlined for instant FCP -->
+    <style>
+      /* System fonts for instant render - matches Tailwind defaults */
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background-color: #1C0F07;
+        color: #F5E6D3;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Critical hero styles for LCP */
+      h1 {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        line-height: 1.1;
+        margin: 0 0 1.5rem 0;
+        font-weight: 700;
+      }
+      /* Prevent CLS with min-height */
+      #beranda {
+        min-height: 100vh;
+      }
+      /* Hero text gradient for LCP */
+      .hero-gradient {
+        background: linear-gradient(135deg, #F3B700, #C17F3C, #CD1222);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      /* Loading skeleton */
+      .skeleton {
+        background: linear-gradient(90deg, #2a1a0f 25%, #3d2a1a 50%, #2a1a0f 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+      }
+    </style>
+
+    <!-- Font loading: Load fonts async, apply when ready -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
+    </noscript>
+
     <!-- SEO Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="kopi siholta, kopi lintong, kopi danau toba, kopi kemasan premium, kopi wholesale, франшиза кофе, 咖啡批发, kopi export, kopi arabika sumatera, bisnis kopi" />
+    <meta name="keywords" content="kopi siholta, kopi lintong, kopi danau toba, kopi kemasan premium,kopi export, kopi arabika sumatera, bisnis kopi" />
     <meta name="author" content="PT. Siholta Toba Indonesia" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.kopisiholta.com/" />
@@ -68,14 +123,31 @@ const {
   </head>
   <body class="grain-overlay">
     <slot />
+
+    <!-- Skeleton loader handler -->
+    <script>
+      // Auto-hide skeleton when images load
+      document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('.skeleton-wrapper + img, .skeleton-wrapper ~ img');
+        images.forEach(img => {
+          if (img.complete) {
+            const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
+            if (skeleton) skeleton.classList.add('loaded');
+          } else {
+            img.addEventListener('load', () => {
+              const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
+              if (skeleton) skeleton.classList.add('loaded');
+            });
+          }
+        });
+
+        // Fallback: hide skeleton after 3 seconds
+        setTimeout(() => {
+          document.querySelectorAll('.skeleton-wrapper').forEach(el => {
+            el.classList.add('loaded');
+          });
+        }, 3000);
+      });
+    </script>
   </body>
 </html>
-
-<style is:global>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    min-height: 100%;
-  }
-</style>

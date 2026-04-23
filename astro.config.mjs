@@ -1,15 +1,57 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
 import tailwindcss from '@tailwindcss/vite';
-
-import react from '@astrojs/react';
+import viteCompression from 'vite-plugin-compression';
 
 // https://astro.build/config
 export default defineConfig({
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [
+      tailwindcss(),
+      viteCompression({
+        algorithm: 'brotliCompress',
+        threshold: 1024,
+        ext: '.br'
+      }),
+      viteCompression({
+        algorithm: 'gzip',
+        threshold: 1024,
+        ext: '.gz'
+      })
+    ],
+    build: {
+      cssMinify: 'lightningcss',
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true
+        }
+      },
+      rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            if (id.includes('node_modules')) {
+              // Split astro core
+              if (id.includes('astro')) return 'astro-vendor';
+              // Split lucide icons separately (tree-shake unused)
+              if (id.includes('lucide')) return 'icons-vendor';
+              return 'vendor';
+            }
+          }
+        }
+      }
+    },
+    chunkSizeWarningLimit: 300,
+    // Optimize for mobile
+    target: 'es2020'
   },
-
-  integrations: [react()]
+  image: {
+    formats: ['avif', 'webp'],
+    quality: 80,
+    densities: [1, 2],
+    maximumLocalLength: 1024
+  },
+  compressHTML: true,
+  inlineStylesheets: 'auto'
 });
