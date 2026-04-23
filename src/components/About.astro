@@ -1,5 +1,5 @@
 ---
-import { Leaf, Mountain, Award, Users, Droplets, Sun } from 'lucide-astro';
+import { Leaf, Mountain, Award, Users, Droplets, Coffee } from 'lucide-astro';
 import { Image } from 'astro:assets';
 import myImage from '../images/about.webp';
 
@@ -22,9 +22,9 @@ const features = [
     description: "Menggunakan metode pasca-panen Giling Basah (wet-hulled) yang memberikan ciri rasa unik dan distinctive."
   },
   {
-    icon: Sun,
-    title: "Papa Kering Mandiri",
-    description: "Diolah dengan penjemuran alami di bawah sinar matahari plateau Sumatera untuk menjaga kualitas aroma."
+    icon: Coffee,
+    title: "Pilihan Roast",
+    description: "Light roast, medium roast, dan dark roast."
   },
   {
     icon: Award,
@@ -34,7 +34,7 @@ const features = [
   {
     icon: Users,
     title: "Petani Berpengalaman",
-    description: "Diwakki oleh petani kopi berpengalaman turun-temurun yang mencintai tradisi menanam kopi."
+    description: "Ditanam oleh petani kopi berpengalaman turun-temurun yang mencintai tradisi menanam kopi."
   }
 ];
 ---
@@ -77,16 +77,16 @@ const features = [
           Menghadirkan Kelezatan Kopi Lintong untuk Dunia
         </h3>
         <p class="text-[var(--color-roasted)]/80 leading-relaxed">
-          Kopi Lintong telah lama dikenal sebagai salah satu kopi specialty terbaik di Indonesia. Berasal dari kawasan Lintong Nihuta, kopi ini memiliki karakter unik yang tidak ditemukan di daerah lain.
+          Kopi Lintong telah mengukuhkan posisinya sebagai salah satu kopi specialty terbaik dari Sumatera.
         </p>
         <p class="text-[var(--color-roasted)]/80 leading-relaxed">
-          Dengan <strong class="text-[var(--color-red)]">aroma spicy, herba, rempah, kacang, dan cokelat</strong>, Kopi Lintong Siholta memberikan pengalaman yang tak terlupakan. Saat ini, kopi kami telah menjangkau pasar nasional dan internasional di Korea, Jepang, Belanda, Jerman, Rusia, dan Amerika.
+          Berasal dari dataran tinggi Lintong Nihuta, kopi ini menawarkan karakteristik unik yang memadukan <strong class="text-[var(--color-red)]">aroma rempah (spicy), herba, serta sentuhan kacang dan cokelat yang memikat.</strong>, Melalui brand Siholta, kebanggaan lokal ini kini telah melintasi batas negara dan dinikmati oleh para pencinta kopi di berbagai belahan dunia, mulai dari pasar Asia hingga Amerika dan Eropa.
         </p>
 
         <div class="grid grid-cols-2 gap-4 mt-8">
           {[
             { text: 'Arabika & Robusta', check: true },
-            { text: 'Kemasan 250-500gr', check: true },
+            { text: 'Kemasan 100-1000gr', check: true },
             { text: 'Quality Control', check: true },
             { text: 'Ekspor Global', check: true }
           ].map((item) => (
