@@ -6,8 +6,8 @@ import { ArrowRight } from 'lucide-astro';
   <!-- Critical: Background renders immediately, no animations -->
   <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-dark-brown)] via-[var(--color-roasted)] to-[var(--color-dark-brown)]"></div>
 
-  <!-- Decorative elements with animations (non-critical) -->
-  <div class="absolute inset-0 pointer-events-none">
+  <!-- Decorative elements with animations (non-critical, will-load) -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_2px_2px,_var(--tw-gradient-stops))] from-[var(--color-gold)]/30 via-transparent to-transparent [background-size:24px_24px]"></div>
     <div class="absolute top-[15%] left-[10%] w-40 h-40 rounded-full bg-[var(--color-gold)]/8 blur-3xl animate-float"></div>
     <div class="absolute bottom-[25%] right-[15%] w-56 h-56 rounded-full bg-[var(--color-red)]/8 blur-3xl animate-float-alt" style="animation-delay: 1.5s;"></div>
@@ -27,7 +27,7 @@ import { ArrowRight } from 'lucide-astro';
     <h1 class="text-responsive-lg font-display font-bold text-[var(--color-cream)] mb-6 leading-tight" style="animation: fadeIn 0.6s ease-out 0.1s forwards; opacity: 0;">
       <span class="block">Nikmati Keindahan</span>
       <span class="block">Danau Toba dalam</span>
-      <span class="block bg-gradient-to-r from-[var(--color-gold)] via-[var(--color-copper)] to-[var(--color-red)] bg-clip-text text-transparent">
+      <span class="block hero-gradient">
         Setiap Cangkir
       </span>
     </h1>
@@ -50,7 +50,7 @@ import { ArrowRight } from 'lucide-astro';
   </div>
 
   <!-- Scroll indicator - non-critical -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3" style="animation: fadeIn 1s ease-out 0.5s forwards; opacity: 0;">
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3" style="animation: fadeIn 1s ease-out 0.5s forwards; opacity: 0;" aria-hidden="true">
     <span class="text-[var(--color-cream)]/50 text-xs tracking-[0.3em] uppercase">Scroll</span>
     <div class="w-6 h-10 rounded-full border-2 border-[var(--color-cream)]/30 flex justify-center pt-2">
       <div class="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)] animate-bounce"></div>

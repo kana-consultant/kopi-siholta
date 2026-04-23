@@ -22,6 +22,17 @@ const {
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preconnect for faster connections -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload critical font subset for LCP -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" media="print" onload="this.media='all'" />
+
     <!-- Critical CSS - Inlined for instant FCP -->
     <style>
       /* System fonts for instant render - matches Tailwind defaults */
@@ -44,6 +55,13 @@ const {
       #beranda {
         min-height: 100vh;
       }
+      /* Hero text gradient for LCP */
+      .hero-gradient {
+        background: linear-gradient(135deg, #F3B700, #C17F3C, #CD1222);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
       /* Critical animation - instant */
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
@@ -61,15 +79,10 @@ const {
       }
     </style>
 
-    <!-- Preconnect for faster font loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-
     <!-- Font loading: Load fonts async, apply when ready -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
     </noscript>
 
     <!-- SEO Meta Tags -->
