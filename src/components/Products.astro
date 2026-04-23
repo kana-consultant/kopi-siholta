@@ -96,11 +96,13 @@ const features = [
             </div>
           )}
 
-          <div class="relative aspect-[4/3] sm:aspect-square overflow-hidden">
+          <div class="relative aspect-[4/3] sm:aspect-square overflow-hidden bg-[var(--color-roasted)]/10">
+            <!-- Skeleton loader for image -->
+            <div class="skeleton-wrapper absolute inset-0 rounded-t-2xl sm:rounded-t-3xl"></div>
             <Image
               src={product.image}
               alt={product.name}
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 relative z-10"
               width={320}
               height={240}
               loading="lazy"

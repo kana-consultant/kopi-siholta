@@ -62,20 +62,11 @@ const {
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
-      /* Critical animation - instant */
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
       /* Loading skeleton */
       .skeleton {
         background: linear-gradient(90deg, #2a1a0f 25%, #3d2a1a 50%, #2a1a0f 75%);
         background-size: 200% 100%;
         animation: shimmer 1.5s infinite;
-      }
-      @keyframes shimmer {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
       }
     </style>
 
@@ -132,5 +123,31 @@ const {
   </head>
   <body class="grain-overlay">
     <slot />
+
+    <!-- Skeleton loader handler -->
+    <script>
+      // Auto-hide skeleton when images load
+      document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('.skeleton-wrapper + img, .skeleton-wrapper ~ img');
+        images.forEach(img => {
+          if (img.complete) {
+            const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
+            if (skeleton) skeleton.classList.add('loaded');
+          } else {
+            img.addEventListener('load', () => {
+              const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
+              if (skeleton) skeleton.classList.add('loaded');
+            });
+          }
+        });
+
+        // Fallback: hide skeleton after 3 seconds
+        setTimeout(() => {
+          document.querySelectorAll('.skeleton-wrapper').forEach(el => {
+            el.classList.add('loaded');
+          });
+        }, 3000);
+      });
+    </script>
   </body>
 </html>

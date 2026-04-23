@@ -248,6 +248,39 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(0);
 }
 
+/* Hero animations - instant fadeIn for LCP */
+.animate-fade-in-hero {
+  animation: fadeInHero 0.6s ease-out forwards;
+}
+.animate-fade-in-hero-delay-1 { animation: fadeInHero 0.6s ease-out 0.1s forwards; }
+.animate-fade-in-hero-delay-2 { animation: fadeInHero 0.6s ease-out 0.2s forwards; }
+.animate-fade-in-hero-delay-3 { animation: fadeInHero 0.6s ease-out 0.3s forwards; }
+.animate-fade-in-hero-delay-4 { animation: fadeInHero 1s ease-out 0.5s forwards; }
+
+.animate-fade-in-hero,
+.animate-fade-in-hero-delay-1,
+.animate-fade-in-hero-delay-2,
+.animate-fade-in-hero-delay-3,
+.animate-fade-in-hero-delay-4 {
+  opacity: 0;
+}
+
+@keyframes fadeInHero {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Decorative orb animation delays */
+.animate-delay-1500 { animation-delay: 1.5s; }
+.animate-delay-3000 { animation-delay: 3s; }
+.animate-delay-4500 { animation-delay: 4.5s; }
+
+/* Mobile menu initial state */
+.mobile-menu-closed {
+  max-height: 0;
+  opacity: 0;
+}
+
 /* Staggered animation delays */
 .animate-stagger > .animate-on-scroll:nth-child(1) { transition-delay: 0ms; }
 .animate-stagger > .animate-on-scroll:nth-child(2) { transition-delay: 100ms; }
@@ -315,6 +348,40 @@ h1, h2, h3, h4, h5, h6 {
 /* Responsive text */
 .text-responsive { font-size: clamp(2rem, 5vw, 4rem); }
 .text-responsive-lg { font-size: clamp(2.5rem, 8vw, 5rem); }
+.text-nowrap { white-space: nowrap; }
+
+/* Skeleton loaders for perceived performance */
+.skeleton-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: linear-gradient(90deg,
+    rgba(74, 37, 17, 0.08) 25%,
+    rgba(74, 37, 17, 0.15) 50%,
+    rgba(74, 37, 17, 0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Auto-hide skeleton when loaded */
+.skeleton-wrapper.loaded {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* Ensure images sit above skeleton */
+.skeleton-wrapper ~ img,
+.relative > img {
+  position: relative;
+  z-index: 10;
+}
 
 /* Transition utilities - centralized for performance */
 .transition-smooth {
