@@ -1,34 +1,39 @@
 ---
 import { ShoppingBag, Package, Star, Shield, Truck } from 'lucide-astro';
+import { Image } from 'astro:assets';
+import arabicaBeans from '../images/arabica-beans.jpg';
+import arabicaGround from '../images/arabica-ground.jpg';
+import robustaBeans from '../images/robusta-beans.jpg';
+import hampers from '../images/hampers.png';
 
 const products = [
   {
-    name: 'Arabika Biji Utuh',
-    weight: '250gr / 500gr',
+    name: 'Arabica Roasted Beans',
+    weight: '100gr - 1000gr',
     origin: 'Lintong Nihuta',
     notes: ['Spicy', 'Herba', 'Rempah', 'Cokelat'],
     description: 'Biji kopi arabika pilihan dari dataran tinggi Lintong. Cocok untuk pour over, French press, atau espresso.',
-    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80',
+    image: arabicaBeans,
     badge: 'Best Seller',
     features: ['Grinding optional', 'Fresh roasted', 'Vacuum packed']
   },
   {
-    name: 'Arabika Giling Halus',
-    weight: '250gr / 500gr',
+    name: 'Arabika Ground',
+    weight: '100gr - 1000gr',
     origin: 'Lintong Nihuta',
     notes: ['Nutty', 'Chocolate', 'Fruity', 'Floral'],
     description: 'Arabika yang sudah digiling halus, siap seduh. Ideal untuk drip coffee atau mesin kopi otomatis.',
-    image: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=600&q=80',
+    image: arabicaGround,
     badge: 'Popular',
     features: ['Pre-ground', 'Fine grind', 'Nitrogen flush']
   },
   {
-    name: 'Robusta Premium',
-    weight: '250gr / 500gr',
+    name: 'Robusta Roasted Beans',
+    weight: '100gr - 1000gr',
     origin: 'Lintong Nihuta',
     notes: ['Strong', 'Bold', 'Earthy', 'Chocolate'],
     description: 'Robusta berkualitas tinggi dengan body kuat dan crema yang tebal. Cocok untuk espresso blend atau Vietnamese drip.',
-    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80',
+    image: robustaBeans,
     badge: 'Value Pack',
     features: ['High caffeine', 'Strong crema', 'Bold flavor']
   },
@@ -38,7 +43,7 @@ const products = [
     origin: 'Pilihan Premium',
     notes: ['Premium Selection', 'Gift Packaging', 'Customizable'],
     description: 'Pilihan hadiah eksklusif untuk momen spesial. Tersedia berbagai varian dan dapat dikustomisasi sesuai kebutuhan.',
-    image: 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600&q=80',
+    image: hampers,
     badge: 'Gift Ready',
     features: ['Premium box', 'Include guide', 'Custom ribbon']
   }
@@ -95,10 +100,12 @@ const features = [
           )}
 
           <div class="relative aspect-square overflow-hidden">
-            <img
+            <Image
               src={product.image}
               alt={product.name}
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              width={600}
+              height={600}
             />
             <div class="absolute inset-0 bg-gradient-to-t from-[#1C0F07]/60 via-transparent to-transparent"></div>
           </div>
