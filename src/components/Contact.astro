@@ -136,7 +136,7 @@ const contactInfo = [
                 type="text"
                 name="name"
                 required
-                class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-gold)] focus:ring-2 focus:ring-[var(--color-gold)]/20 transition-all outline-none"
+                class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-gold)] focus:ring-2 focus:ring-[var(--color-gold)]/20 transition-all outline-none placeholder:text-[var(--color-roasted)]/50"
                 placeholder="Masukkan nama Anda"
               />
             </div>
@@ -146,8 +146,8 @@ const contactInfo = [
                 type="email"
                 name="email"
                 required
-                class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-roasted)] focus:ring-2 focus:ring-[var(--color-roasted)]/20 transition-all outline-none"
-                placeholder="email@contoh.com"
+                class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-roasted)] focus:ring-2 focus:ring-[var(--color-roasted)]/20 transition-all outline-none placeholder:text-[var(--color-roasted)]/50"
+                placeholder="email@example.com"
               />
             </div>
           </div>
@@ -156,7 +156,7 @@ const contactInfo = [
             <input
               type="tel"
               name="phone"
-              class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-gold)] focus:ring-2 focus:ring-[var(--color-gold)]/20 transition-all outline-none"
+              class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-gold)] focus:ring-2 focus:ring-[var(--color-gold)]/20 transition-all outline-none placeholder:text-[var(--color-roasted)]/50"
               placeholder="+62 812 xxxx xxxx"
             />
           </div>
@@ -166,9 +166,9 @@ const contactInfo = [
               id="subject"
               name="subject"
               required
-              class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-gold)] focus:ring-2 focus:ring-[var(--color-gold)]/20 transition-all outline-none bg-white"
+              class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-gold)] focus:ring-2 focus:ring-[var(--color-gold)]/20 transition-all outline-none bg-white text-[var(--color-roasted)]/50 [&_option]:text-[var(--color-roasted)]/50"
             >
-              <option value="">Pilih subjek pesan</option>
+              <option value="" disabled selected class="text-[var(--color-roasted)]/50">Pilih subjek pesan</option>
               <option value="produk">Pertanyaan Produk</option>
               <option value="wholesale">Penawaran Wholesale Menarik</option>
               <option value="mitra">Kerjasama Kemitraan</option>
@@ -182,7 +182,7 @@ const contactInfo = [
               name="message"
               rows="4"
               required
-              class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-gold)] focus:ring-2 focus:ring-[var(--color-gold)]/20 transition-all outline-none resize-none"
+              class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-gold)] focus:ring-2 focus:ring-[var(--color-gold)]/20 transition-all outline-none resize-none placeholder:text-[var(--color-roasted)]/50"
               placeholder="Tulis pesan Anda di sini..."
             ></textarea>
           </div>
