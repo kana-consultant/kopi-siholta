@@ -5,6 +5,7 @@ dist/
 .astro/
 .omc/
 .playwright-mcp/
+.claude/
 
 # dependencies
 node_modules/
