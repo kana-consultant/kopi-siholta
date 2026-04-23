@@ -76,6 +76,7 @@ const contactInfo = [
         </a>
 
         <!-- Contact Cards -->
+        <h3 class="sr-only">Informasi Kontak</h3>
         <div class="grid gap-4">
           {contactInfo.map((info) => (
             <div class="flex items-start gap-4 p-5 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
@@ -94,7 +95,7 @@ const contactInfo = [
 
         <!-- Online Store Links -->
         <div class="p-6 bg-gradient-to-r from-[var(--color-roasted)]/5 to-[var(--color-gold)]/5 rounded-2xl border border-[var(--color-gold)]/20">
-          <h4 class="font-display font-bold text-[var(--color-dark-brown)] mb-4">Toko Online</h4>
+          <h3 class="font-display font-bold text-[var(--color-dark-brown)] mb-4">Toko Online</h3>
           <a
             href="https://www.tokopedia.com/kopisiholta"
             target="_blank"
@@ -164,8 +165,9 @@ const contactInfo = [
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-[var(--color-roasted)]/80 mb-2">Subjek</label>
+            <label for="subject" class="block text-sm font-medium text-[var(--color-roasted)]/80 mb-2">Subjek</label>
             <select
+              id="subject"
               name="subject"
               required
               class="w-full px-4 py-3 rounded-xl border border-[var(--color-roasted)]/20 focus:border-[var(--color-gold)] focus:ring-2 focus:ring-[var(--color-gold)]/20 transition-all outline-none bg-white"
@@ -206,6 +208,7 @@ const contactInfo = [
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
           <div class="aspect-video bg-[var(--color-roasted)]/10">
             <iframe
+              title="Peta Lokasi Kantor Pusat Kopi Siholta di Sumatera Utara"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.8!2d98.5!3d2.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTgnMDAuMCJTIDk4wrAyOScwMC4wIkU!5e0!3m2!1sen!2sid!4v1234567890"
               width="100%"
               height="100%"
@@ -216,13 +219,14 @@ const contactInfo = [
             ></iframe>
           </div>
           <div class="p-4">
-            <h4 class="font-display font-bold text-[var(--color-dark-brown)]">Kantor Pusat - Sumatera Utara</h4>
+            <h3 class="font-display font-bold text-[var(--color-dark-brown)]">Kantor Pusat - Sumatera Utara</h3>
             <p class="text-[var(--color-roasted)]/70 text-sm">Lintong Nihuta, Humbang Hasundutan</p>
           </div>
         </div>
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
           <div class="aspect-video bg-[var(--color-roasted)]/10">
             <iframe
+              title="Peta Lokasi Toko Kopi Siholta di Jakarta"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.2!2d106.9!3d-6.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTgnMDAuMCJTIDEwNsKwNTQnMDAuMCJF!5e0!3m2!1sen!2sid!4v1234567890"
               width="100%"
               height="100%"
@@ -233,7 +237,7 @@ const contactInfo = [
             ></iframe>
           </div>
           <div class="p-4">
-            <h4 class="font-display font-bold text-[var(--color-dark-brown)]">Toko Jakarta</h4>
+            <h3 class="font-display font-bold text-[var(--color-dark-brown)]">Toko Jakarta</h3>
             <p class="text-[var(--color-roasted)]/70 text-sm">Jln. Lubang Buaya No. 50, Cipayung, Jakarta Timur</p>
           </div>
         </div>
