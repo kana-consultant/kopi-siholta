@@ -1,102 +1,136 @@
 {
   "nav": {
-    "story": "Notre Histoire",
-    "products": "Produits",
-    "export": "Export",
-    "partnership": "Partenariat",
-    "tourism": "Tourisme",
-    "contact": "Contact",
-    "contactCTA": "Contactez-nous"
+    "home": "Beranda",
+    "about": "Tentang Kami",
+    "products": "Produk",
+    "export": "Ekspor",
+    "b2b": "Kemitraan",
+    "contact": "Kontak"
   },
   "hero": {
-    "eyebrow": "1ER PRODUCTEUR & EXPORTATEUR DE CAFÉ SPECIALTY EN INDONÉSIE",
-    "headline": "La Beauté du Lac Toba dans Chaque Tasse",
-    "sub": "Café Arabica Lintong Specialty de Humbang Hasundutan, Sumatra du Nord",
-    "cta_primary": "Voir les Produits",
-    "cta_secondary": "Contacter via WhatsApp"
+    "badge": "Produsen & Eksportir Kopi Specialty Pertama di Indonesia",
+    "title_1": "Warisan Kopi dari",
+    "title_2": "Danau Toba",
+    "subtitle": "Dari lereng Sumatera Lintong hingga ke meja dunia — Kopi Siholta mempersembahkan cita rasa autentik dari bumi Humbang Hasundutan, Sumatera Utara.",
+    "cta_products": "Jelajahi Produk",
+    "cta_story": "Cerita Kami"
+  },
+  "stats": {
+    "countries": "Negara Tujuan",
+    "volume": "Ton per Tahun",
+    "pioneer": "Pionir Kopi Specialty",
+    "vision": "Visi 2035",
+    "sectors": "Sektor Bisnis"
   },
   "heritage": {
-    "label1": "Producteur Specialty #1",
-    "label2": "Destinations d'Export",
-    "label3": "Volume d'Export/An",
-    "label4": "Hypermarchés Nationaux"
+    "tag": "Identitas & Warisan",
+    "title": "Dari Generasi ke Generasi",
+    "subtitle": "PT Siholta Toba Indonesia lahir dari tanah Humbang Hasundutan — sebuah kawasan yang telah dikenal dunia sejak era kolonial sebagai penghasil kopi specialty paling prestisius di Nusantara.",
+    "card1_label": "Petani Lokal",
+    "card1_desc": "lebih dari 200 keluarga petani partner tersebar di dataran tinggi Lintong dan Dolok, merawat pohon kopi tradisi sejak turun-temurun.",
+    "card2_label": "Proses Autentik",
+    "card2_desc": "Pengolahan pasca-panen mengikuti standar specialty coffee — dari washing, honey, hingga natural process dengan pengeringan matahari.",
+    "card3_label": "Sertifikasi Internasional",
+    "card3_desc": "Produk kami tersertifikasi oleh lembaga verifikasi internasional dan memenuhi standar ekspor ke pasar Amerika, Eropa, dan Asia Timur.",
+    "card4_label": "Pekat Budaya Batak",
+    "card4_desc": "Setiap cangkir Kopi Siholta adalah ungkapan kebanggaan budaya Batak Toba — warisan yang dijaga dan diwariskan kepada generasi penerus."
   },
-  "about": {
-    "title": "Un Héritage Café du Pays Toba",
-    "subtitle": "PT. Siholta Toba Indonesia est née d'une passion pour le café et les terres fertiles de Sumatra du Nord. Nous nous engageons à produire un café de qualité premium.",
-    "heading": "Apporter l'Excellence du Café Lintong au Monde",
-    "body": "Le café Lintong s'est imposé comme l'un des meilleurs cafés specialty de Sumatra. Cultivé dans les hauts plateaux de Lintong Nihuta, ce café offre des caractéristiques uniques alliant arôme épicé, notes herbacées et subtils arômes de noix et de chocolat."
+  "pioneer": {
+    "tag": "Keistimewaan",
+    "title": "Yang Pertama & Utama",
+    "subtitle": "Mengukir sejarah sebagai pelopor kopi specialty Indonesia."
+  },
+  "vision": {
+    "tag": "Visi 2035",
+    "title": "Mewujudkan Indonesia sebagai Raja Kopi Dunia",
+    "subtitle": "Pada 2035, kami menargetkan peningkatan ekspor 5× lipat, perluasan jaringan petani partner menjadi 1.000+ keluarga, dan kehadiran Kopi Siholta di 30 negara."
+  },
+  "sectors": {
+    "tag": "Tiga Sektor",
+    "title": "Satu Misi: Kopi Berkualitas Dunia",
+    "agriculture": {
+      "label": "Pertanian",
+      "tag": "Agrikultur",
+      "desc": "Budidaya dan pengolahan kopi specialty dari dataran tinggi Sumatera Utara dengan standar internasional."
+    },
+    "tourism": {
+      "label": "Pariwisata",
+      "tag": "Wisata Kopi",
+      "desc": "Pengalaman agro-wisata di lokasi farmshop kami — merasakan langsung proses dari biji ke cangkir."
+    },
+    "export": {
+      "label": "Ekonomi",
+      "tag": "Ekonomi Kreatif",
+      "desc": "Penggerak ekonomi kreatif berbasis kopi yang memberdayakan masyarakat lokal dan menjangkau pasar global."
+    }
   },
   "products": {
-    "title": "Sélection de Qualité Premium",
-    "subtitle": "Des grains entiers au café moulu, en passant par les coffrets cadeaux, nous proposons une variété de choix pour répondre à vos besoins.",
-    "cta": "Contactez-nous pour des Offres Spéciales",
-    "wholesale": "Besoin de grandes quantités pour votre entreprise?"
+    "tag": "Koleksi Kami",
+    "title": "Rasakan Autentik Kopi Siholta",
+    "subtitle": "Setiap varian diproses denganDedikasi tinggi, dipilih langsung dari kebun petani partner kami di Sumatera Lintong.",
+    "view_all": "Lihat Semua Produk",
+    "origin": "Asal: Humbang Hasundutan, Sumatera Utara"
   },
   "export": {
-    "eyebrow": "Portée Mondiale",
-    "title": "Kopi Siholta Conquiert les Marchés Mondiaux",
-    "subtitle": "Approuvé par des importateurs et distributeurs à travers le monde.",
-    "market_title": "Destinations d'Export",
-    "target_eyebrow": "Objectif Export 2026",
-    "target_heading": "Expansion vers la Chine et l'Australie",
-    "target_body": "Dans notre feuille de route de croissance 2026, Kopi Siholta a identifié la Chine et l'Australie comme de nouveaux marchés stratégiques."
+    "tag": "Jangkauan Internasional",
+    "title": "Dari Sumatera ke Dunia",
+    "subtitle": "Kopi Siholta telah dipercaya oleh importir dan distributor di berbagai belahan dunia. Komitmen kami: kualitas konsisten dan rantai pasok yang transparan.",
+    "kpi1_label": "Volume Ekspor Tahunan",
+    "kpi2_label": "Negara Tujuan Ekspor",
+    "kpi3_label": "Tahun Pengalaman",
+    "kpi4_label": "Partner Internasional",
+    "countries_label": "Negara Tujuan Ekspor"
   },
-  "partnership": {
-    "eyebrow": "Rejoignez-nous",
-    "title": "Collaborons Ensemble",
-    "subtitle": "Ouverts à diverses formes de partenariat — de la fourniture de café aux franchises de salons de café.",
-    "benefits_title": "Avantages Partenaires",
-    "cta": "Contactez-nous Maintenant"
+  "b2b": {
+    "tag": "Mitra Bisnis",
+    "title": "Jadilah Bagian dari Cerita Kami",
+    "subtitle": "Kopi Siholta terbuka untuk kemitraan dengan importir, distributor, kafe, hotel, dan brand kopi global yang sejalan dengan nilai kami.",
+    "type1_label": "Importir & Distributor",
+    "type1_desc": "Bergabunglah dengan jaringan distribusi kami untuk membawa Kopi Siholta ke pasar lokal Anda.",
+    "type2_label": "HoReCa Partner",
+    "type2_desc": "Kafe, hotel, restoran — supplied dengan beans segar dan mendukung cerita brand Anda.",
+    "type3_label": "White Label",
+    "type3_desc": "Kemitraan produksi private label untuk brand kopi yang ingin launching produk specialty.",
+    "type4_label": "Corporate Gift",
+    "type4_desc": "量身定制 hampers dan gift set untuk keperluan corporate — kopi premium sebagai simbol apresiasi.",
+    "cta": "Ajukan Kerjasama"
   },
-  "tourism": {
-    "eyebrow": "Tourisme Café",
-    "title": "Vivez l'Grandeur du Lac Toba",
-    "subtitle": "Visitez notre plantation de café à Lintong Nihuta et profitez d'une expérience unique de préparation du café tout en admirant les vues imprenables sur le lac Toba."
+  "omni": {
+    "tag": "Toko Online",
+    "title": "Beli Kopi Siholta Sekarang",
+    "subtitle": "Temukan produk kami di platform marketplace favorit Anda."
   },
   "contact": {
-    "title": "Intéressé à Contribuer?",
-    "subtitle": "N'hésitez pas à nous contacter. L'équipe Kopi Siholta est prête à vous aider à trouver la solution café idéale.",
-    "form_title": "Envoyer un Message",
-    "chat": "Chat WhatsApp",
-    "chat_sub": "Réponse rapide, généralement sous 24h",
-    "office_address": "Adresse du Bureau",
-    "jakarta_store": "Boutique Jakarta",
-    "phone": "Numéro de Téléphone",
-    "email": "Email",
-    "hours": "Heures d'Ouverture",
-    "online_store": "Boutique en Ligne",
-    "map_title": "Nos Emplacements"
+    "tag": "Hubungi Kami",
+    "title": "Mari Bercerita",
+    "subtitle": "Punya pertanyaan tentang produk, potensi bisnis, atau sekadar ingin menyapa? Tim kami siap membantu.",
+    "form_name": "Nama Lengkap",
+    "form_company": "Perusahaan / Outlet",
+    "form_email": "Alamat Email",
+    "form_phone": "Nomor Telepon / WhatsApp",
+    "form_inquiry": "Jenis Pertanyaan",
+    "form_inquiry_opt1": "Pertanyaan Produk",
+    "form_inquiry_opt2": "Kemitraan Bisnis (B2B)",
+    "form_inquiry_opt3": "Kunjungan Farm / Tours",
+    "form_inquiry_opt4": "Lainnya",
+    "form_message": "Pesan Anda",
+    "form_submit": "Kirim Pesan",
+    "wa_title": "Chat Langsung via WhatsApp",
+    "wa_desc": "Respons lebih cepat untuk pertanyaan produk dan bisnis."
   },
   "footer": {
-    "brand_desc": "Café Lintong authentique de Sumatra du Nord. Apportant la richesse et la chaleur des pentes du lac Toba dans chaque tasse.",
-    "nav_title": "Navigation",
-    "products_title": "Produits",
-    "contact_title": "Contact",
-    "newsletter_title": "Restez Connecté",
-    "newsletter_sub": "Recevez les dernières nouvelles sur les produits et promotions spéciales.",
-    "subscribe": "S'abonner",
-    "copyright": "PT. Siholta Toba Indonesia. Tous droits réservés."
+    "tagline": "Dari Sumatera Lintong ke Dunia — Kopi Siholta, Pionir Kopi Specialty Indonesia.",
+    "col1_title": "Merek",
+    "col2_title": "Produk & Toko",
+    "col3_title": "Perusahaan",
+    "col4_title": "Kontak",
+    "col4_social": "Media Sosial",
+    "copyright": "© 2025 PT Siholta Toba Indonesia. Seluruh hak dilindungi.",
+    "privacy": "Kebijakan Privasi",
+    "terms": "Syarat & Ketentuan"
   },
-  "whatsapp": {
-    "tooltip": "Discutez avec Nous"
-  },
-  "form": {
-    "name": "Nom Complet",
-    "email": "Email",
-    "phone": "Numéro WhatsApp",
-    "subject": "Sujet",
-    "message": "Message",
-    "submit": "Envoyer le Message",
-    "success": "Message Envoyé! Nous vous contacterons bientôt.",
-    "placeholder_name": "Entrez votre nom",
-    "placeholder_email": "email@example.com",
-    "placeholder_phone": "+62 812 xxxx xxxx",
-    "placeholder_message": "Écrivez votre message ici...",
-    "option_retail": "Achat au Détail",
-    "option_wholesale": "Offre Grossiste",
-    "option_partnership": "Coopération en Partenariat",
-    "option_export": "Demande d'Export",
-    "option_other": "Autre"
+  "meta": {
+    "title": "Kopi Siholta — Pionir Kopi Specialty Indonesia dari Danau Toba",
+    "description": "PT Siholta Toba Indonesia adalah produsen dan eksportir kopi specialty pertama di Indonesia dari Sumatera Lintong, Humbang Hasundutan, Sumatera Utara."
   }
 }

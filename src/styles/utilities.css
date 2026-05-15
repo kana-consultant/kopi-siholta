@@ -498,6 +498,8 @@
 .stat-band--earth   { background: var(--color-brand-earth); }
 .stat-band--green   { background: var(--color-agri-green); }
 .stat-band--cream   { background: var(--color-brand-cream); }
+.stat-band--red   { background: var(--color-brand-red); }
+
 
 .stat-band__grid {
   display: grid;
@@ -520,7 +522,7 @@
   font-family: var(--font-display);
   font-size: clamp(22px, 2.5vw, 32px);
   font-weight: 700;
-  color: var(--color-brand-gold);
+  color: var(--color-text-main);
   line-height: 1;
   letter-spacing: -0.02em;
 }
