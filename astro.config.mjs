@@ -3,10 +3,11 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import viteCompression from 'vite-plugin-compression';
 import react from '@astrojs/react';
+import iconify from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
+  integrations: [react(), iconify()],
   vite: {
     plugins: [
       tailwindcss(),

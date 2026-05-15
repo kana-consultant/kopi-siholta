@@ -1,0 +1,72 @@
+/* =========================================================
+   Stats Ribbon Component
+   Scoped styles for StatsRibbon.astro
+   ========================================================= */
+
+.stats-ribbon {
+  background: var(--color-brand-red);
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.stats-ribbon__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.stats-ribbon__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+}
+
+.stats-ribbon__num {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.stats-ribbon__label {
+  font-family: var(--font-label);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.stats-ribbon__sep {
+  width: 0.5px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .stats-ribbon {
+    height: auto;
+    padding-block: var(--space-4);
+  }
+  .stats-ribbon__inner {
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+  }
+  .stats-ribbon__item {
+    flex: 0 0 calc(33.333% - var(--space-4));
+    min-width: 80px;
+  }
+  .stats-ribbon__sep { display: none; }
+  .stats-ribbon__num { font-size: 18px; }
+}
+
+@media (max-width: 480px) {
+  .stats-ribbon__item { flex: 0 0 calc(50% - var(--space-3)); }
+}
