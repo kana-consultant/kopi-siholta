@@ -1,0 +1,208 @@
+/* =========================================================
+   Kopi Siholta — Base
+   Design tokens, reset, and foundational styles
+   ========================================================= */
+
+/* ── Google Fonts ─────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400&display=swap');
+
+/* ── Design Tokens ─────────────────────────────────────── */
+:root {
+  /* Brand Colors */
+  --color-brand-red:    #CD1222;
+  --color-brand-cream:   #F9F6F0;
+  --color-brand-dark:    #F5F2EC;
+  --color-brand-earth:   #5C3D1E;
+  --color-brand-gold:    #D4A046;
+  --color-brand-muted:   #7A6A5A;
+
+  /* Text Colors */
+  --color-text-main: rgba(255, 255, 255, 1);
+  --color-text-muted: rgba(255, 255, 255, 0.25);
+  --color-text-red: rgba(205, 18, 34, 1);
+  --color-text-brown: rgba(92, 61, 30, 1);
+  --color-text-brown-muted: rgba(92, 61, 30, 0.70);
+
+  /* Section Backgrounds */
+  --color-section-cream:  #F5F2EC;
+  --color-section-red:    #CD1222;
+
+  /* Semantic */
+  --color-agri-green:    #225522;
+  --color-tourism-blue:  #1E508C;
+  --color-wa-green:      #25D366;
+  --color-tokopedia:     #42AA52;
+  --color-shopee:        #EE4D2D;
+
+  /* Neutrals */
+  --color-neutral-100:   #F5F2EC;
+  --color-neutral-200:   #E8E3D8;
+  --color-neutral-400:   #B0A898;
+  --color-neutral-700:   #3D3028;
+  --color-neutral-900:   #F5F2EC;
+
+  /* Overlays */
+  --overlay-earth-high:  rgba(92,61,30,0.88);
+  --overlay-earth-mid:   rgba(92,61,30,0.60);
+  --overlay-earth-low:   rgba(92,61,30,0.38);
+  --overlay-gold-border: rgba(212,160,70,0.30);
+  --overlay-gold-fill:   rgba(212,160,70,0.10);
+  --overlay-red-light:   rgba(205,18,34,0.06);
+  --overlay-border-earth: rgba(92,61,30,0.16);
+  --overlay-white-high:  rgba(92,61,30,0.88);
+  --overlay-white-mid:    rgba(92,61,30,0.60);
+  --overlay-white-low:    rgba(92,61,30,0.38);
+
+  /* Typography */
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-body:    'DM Sans', 'Helvetica Neue', sans-serif;
+  --font-label:   'DM Mono', 'Courier New', monospace;
+
+  /* Spacing Scale */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Grid */
+  --grid-max-width:    1280px;
+  --grid-columns:      12;
+  --grid-gutter:       clamp(16px, 2.5vw, 32px);
+  --section-padding-y: clamp(48px, 7vw, 96px);
+  --section-padding-x: clamp(20px, 5vw, 80px);
+
+  /* Border Radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* Borders */
+  --border-default:   0.5px solid var(--color-neutral-200);
+  --border-emphasis: 0.5px solid rgba(205,18,34,0.25);
+  --border-dark:     0.5px solid rgba(92,61,30,0.18);
+  --border-gold:     0.5px solid rgba(212,160,70,0.30);
+  --focus-ring:      0 0 0 3px rgba(205,18,34,0.25);
+  --shadow-focus:   0 0 0 3px rgba(205,18,34,0.25);
+}
+
+/* ── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--color-neutral-700);
+  background-color: var(--color-neutral-100);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img, svg, video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul, ol { list-style: none; }
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ── Selection ───────────────────────────────────────────── */
+::selection {
+  background-color: var(--color-brand-red);
+  color: #fff;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-neutral-100); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-400);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand-earth); }
+
+/* ── Focus ───────────────────────────────────────────────── */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* ── Favicon ────────────────────────────────────────────── */
+.favicon-circular { border-radius: 50%; }
+
+/* ── Container ──────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding-inline: var(--section-padding-x);
+}
+
+/* ── Section ─────────────────────────────────────────────── */
+.section { padding-block: var(--section-padding-y); }
+.section--dark  { background: var(--color-brand-dark); }
+.section--cream { background: var(--color-brand-cream); }
+.section--white { background: #fff; }
+.section__header { margin-bottom: var(--space-12); }
+
+/* ── Typography ─────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--color-brand-earth);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; }
+h2 { font-size: clamp(22px, 3.5vw, 32px); font-weight: 700; }
+h3 { font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; }
+
+/* ── Interaction States ───────────────────────────────────── */
+a:hover, button:hover { cursor: pointer; }
+.disabled, [disabled] { opacity: 0.38; pointer-events: none; }
+
+/* ── Z-index Scale ───────────────────────────────────────── */
+:root {
+  --z-navbar:    50;
+  --z-overlay:   60;
+  --z-modal:     80;
+  --z-fab:       90;
+  --z-toast:    100;
+}

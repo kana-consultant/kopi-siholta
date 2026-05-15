@@ -1,0 +1,295 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/layout/Navbar.astro';
+import Footer from '../../components/layout/Footer.astro';
+import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
+import farmingBg from '../../images/bg/bg-farming.jpg';
+import h1 from '../../images/heritage/heritage-1.jpg';
+import h2 from '../../images/heritage/heritage-2.jpg';
+import h3 from '../../images/heritage/heritage-3.jpg';
+import h4 from '../../images/heritage/heritage-4.jpg';
+import h5 from '../../images/heritage/heritage-5.jpg';
+import h6 from '../../images/heritage/heritage-6.jpg';
+
+interface Props {
+  lang?: 'id' | 'en' | 'fr';
+}
+
+const { lang = 'id' } = Astro.props;
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'id' }, props: { lang: 'id' } },
+    { params: { lang: 'en' }, props: { lang: 'en' } },
+    { params: { lang: 'fr' }, props: { lang: 'fr' } },
+  ];
+}
+
+const breadcrumb = {
+  id: { home: 'Beranda', company: 'Tentang Kami', page: 'Budidaya Kopi' },
+  en: { home: 'Home', company: 'About Us', page: 'Coffee Farming' },
+  fr: { home: 'Accueil', company: 'À Propos', page: 'Caféiculture' },
+};
+const t = breadcrumb[lang] ?? breadcrumb.id;
+
+const process = [
+  {
+    step: '01',
+    title: 'Panen Cherry',
+    desc: 'Buah kopi dipetik manual hanya saat merah sempurna. Satu pohon dikunjungi beberapa kali untuk memastikan kesempurnaan.',
+    iconName: 'mdi:flower',
+  },
+  {
+    step: '02',
+    title: 'Fermentasi',
+    desc: 'Biji kopi difermentasi 24–36 jam dalam tong kayu tradisional. Proses ini mengembangkan profil rasa kompleks.',
+    iconName: 'mdi:flask',
+  },
+  {
+    step: '03',
+    title: 'Giling Basah',
+    desc: 'Metode tradisional Lintong — kulit buah dikupas, lendir difermentasi, menghasilkan body khas Tanah Batak.',
+    iconName: 'mdi:sprout',
+  },
+  {
+    step: '04',
+    title: 'Penjemuran',
+    desc: 'Biji dihamparkan di atas tikar bamboo selama 7–14 hari, dibalik secara berkala di bawah sinar matahari.',
+    iconName: 'mdi:white-balance-sunny',
+  },
+  {
+    step: '05',
+    title: 'Sortasi & Grading',
+    desc: 'Biji disortir manual dan mekanis. Hanya Grade 1 yang lolos standar specialty coffee internasional.',
+    iconName: 'mdi:filter-variant',
+  },
+  {
+    step: '06',
+    title: 'Penyangraian',
+    desc: 'Dipangganglight-medium untuk menonjolkan karakter rempah dan cokelat khas Kopi Lintong. Profil roast signature.',
+    iconName: 'mdi:fire',
+  },
+];
+
+const regions = [
+  { name: 'Lintong Nihuta', alt: '1.200 – 1.500 mdpl', desc: 'Kawasan utama produksi Arabika. Tanah vulkanik dan iklim sejuk menciptakan profil rasa rempah yang diakui dunia.', img: h1 },
+  { name: 'Dolok Sijunjung', alt: '900 – 1.200 mdpl', desc: 'Wilayah Robusta dengan body bold dan aftertaste cokelat kuat. Cocok untuk espresso blend.', img: h2 },
+  { name: 'Humbangu Hasundutan', alt: '1.000 – 1.500 mdpl', desc: 'Jantung operasional PT Siholta. 200+ keluarga petani partner tersebar di 7 desa di kawasan ini.', img: h3 },
+];
+
+const farmers = [
+  { name: 'Bapak Margondang', village: 'Desa Lintong Nihuta', since: 'Petani sejak 1987', img: h4, quote: 'Kopi sudah menjadi darah dalam tubuh keluarga kami selama tiga generasi.' },
+  { name: 'Ibu Rohani', village: 'Desa Sitalang', since: 'Petani sejak 2003', img: h5, quote: 'Setelah bermitra dengan Siholta, penghasilan kami meningkat 40% dan kami belajar standar internasional.' },
+];
+---
+
+<Base
+  title="Budidaya Kopi — Kopi Siholta"
+  description="Pelajari proses budidaya kopi specialty PT Siholta — dari panen cherry di dataran tinggi Humbang Hasundutan hingga penyangraian."
+  lang={lang}
+>
+  <Navbar lang={lang} />
+
+  <!-- ── Hero ─────────────────────────────────────────── -->
+  <section class="page-hero page-hero--tall" aria-label="Budidaya Kopi Kopi Siholta">
+    <div class="page-hero__bg">
+      <Image
+        src={farmingBg}
+        alt="Perkebunan kopi Siholta di dataran tinggi Humbang Hasundutan"
+        class="page-hero__img"
+        style="object-position: center 25%"
+        loading="eager"
+        widths={[768, 1280, 1920]}
+        sizes="100vw"
+      />
+      <div class="page-hero__overlay page-hero__overlay--farm" aria-hidden="true"></div>
+    </div>
+
+    <div class="container page-hero__inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item">
+            <a href={`/${lang}/`} class="breadcrumb__link">{t.home}</a>
+          </li>
+          <li class="breadcrumb__sep" aria-hidden="true">
+            <Icon name="mdi:chevron-right" width="10" height="10" />
+          </li>
+          <li class="breadcrumb__item">
+            <a href={`/${lang}/company`} class="breadcrumb__link">{t.company}</a>
+          </li>
+          <li class="breadcrumb__sep" aria-hidden="true">
+            <Icon name="mdi:chevron-right" width="10" height="10" />
+          </li>
+          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">
+            {t.page}
+          </li>
+        </ol>
+      </nav>
+
+      <div class="farm-hero__content">
+        <p class="page-hero__label">Agronomi &amp; Produksi</p>
+        <h1 class="page-hero__title">Dari Tanah,<br />Datang Rasa.</h1>
+        <p class="page-hero__sub">Setiap butir kopi yang kami hasilkan dimulai dari tanah vulkanik dataran tinggi Humbang Hasundutan — dipanen dengan tangan, diproses dengan tradisi, dan dijaga dengan dedikasi.</p>
+        <a href="#process" class="btn btn--primary">Lihat Proses</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-line" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── Process ──────────────────────────────────────── -->
+  <section class="process section" id="process" aria-labelledby="process-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <p class="section-tag">Dari Pohon ke Cangkir</p>
+        <h2 id="process-heading" class="section-title">Proses Budidaya<br />Kopi Specialty</h2>
+        <p class="section-sub">Enam tahap kritis yang mengubah buah cherry menjadi biji kopi berkualitas specialty — semuanya dilakukan dengan presisi dan hormat terhadap tradisi.</p>
+      </div>
+
+      <!-- Bento grid layout -->
+      <div class="bento-grid--3col">
+        {process.map((step, i) => (
+          <article class={`feature-card animate-on-scroll ${i === 0 || i === 5 ? 'feature-card--wide' : ''}`} style={`transition-delay: ${i * 60}ms`}>
+            <div class="feature-card__icon" aria-hidden="true"><Icon name={step.iconName} width="20" height="20" /></div>
+            <div class="feature-card__step">{step.step}</div>
+            <h3 class="feature-card__title">{step.title}</h3>
+            <p class="feature-card__desc">{step.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Regions ──────────────────────────────────────── -->
+  <section class="regions section section--cream" aria-labelledby="regions-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <p class="section-tag">Dataran Tinggi</p>
+        <h2 id="regions-heading" class="section-title">Wilayah<br />Penghasil</h2>
+        <p class="section-sub">Tiga kawasan utama di Sumatera Utara yang masing-masing memberikan karakter unik pada kopi yang kami hasilkan.</p>
+      </div>
+
+      <div class="regions__grid">
+        {regions.map((region, i) => (
+          <article class="region-card animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>
+            <div class="region-card__media">
+              <Image
+                src={region.img}
+                alt={`Perkebunan kopi di ${region.name}`}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                widths={[480, 768]}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                class="region-card__img"
+              />
+              <div class="region-card__alt-badge">
+                <Icon name="mdi:arrow-up" width="10" height="10" />
+                {region.alt}
+              </div>
+            </div>
+            <div class="region-card__body">
+              <h3 class="region-card__name">{region.name}</h3>
+              <p class="region-card__desc">{region.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Farmer Stories ────────────────────────────────── -->
+  <section class="farmers section" aria-labelledby="farmers-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <p class="section-tag">Cerita Petani</p>
+        <h2 id="farmers-heading" class="section-title">Tangan di<br />Balik Setiap Cangkir</h2>
+        <p class="section-sub">200+ keluarga petani partner di Humbang Hasundutan — mereka adalah fondasi nyata dari setiap produk Kopi Siholta.</p>
+      </div>
+
+      <div class="farmers__grid">
+        {farmers.map((farmer, i) => (
+          <article class={`farmer-card animate-on-scroll ${i % 2 !== 0 ? 'farmer-card--rev' : ''}`}>
+            <div class="farmer-card__media">
+              <Image
+                src={farmer.img}
+                alt={`${farmer.name} — petani kopi partner Kopi Siholta`}
+                loading="lazy"
+                widths={[480, 768]}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                class="farmer-card__img"
+              />
+              <div class="farmer-card__info-badge" aria-label={`Petani ${farmer.name}`}>
+                <span class="farmer-card__village">{farmer.village}</span>
+                <span class="farmer-card__since">{farmer.since}</span>
+              </div>
+            </div>
+            <div class="farmer-card__content">
+              <blockquote class="farmer-card__quote">
+                <p>"{farmer.quote}"</p>
+              </blockquote>
+              <div class="farmer-card__author">
+                <span class="farmer-card__name">{farmer.name}</span>
+                <span class="farmer-card__role">Petani Partner Kopi Siholta</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stats Band ────────────────────────────────────── -->
+  <section class="stat-band stat-band--green" aria-label="Statistik Pertanian Kopi">
+    <div class="container">
+      <div class="stat-band__grid">
+        <div class="stat-band__item animate-on-scroll">
+          <span class="stat-band__value">200+</span>
+          <span class="stat-band__label">Keluarga Petani</span>
+        </div>
+        <div class="stat-band__item animate-on-scroll" style="transition-delay: 80ms">
+          <span class="stat-band__value">1.500 mdpl</span>
+          <span class="stat-band__label">Ketinggian Maksimum</span>
+        </div>
+        <div class="stat-band__item animate-on-scroll" style="transition-delay: 160ms">
+          <span class="stat-band__value">Giling Basah</span>
+          <span class="stat-band__label">Metode Utama</span>
+        </div>
+        <div class="stat-band__item animate-on-scroll" style="transition-delay: 240ms">
+          <span class="stat-band__value">100 ton</span>
+          <span class="stat-band__label">Kapasitas / Tahun</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ─────────────────────────────────────────── -->
+  <section class="page-cta page-cta--dark" aria-label="Bergabung sebagai Petani Partner">
+    <div class="container page-cta__inner">
+      <div class="page-cta__text animate-on-scroll">
+        <h2 class="page-cta__title">Mitra Petani<br />dan Eksportir</h2>
+        <p class="page-cta__sub">PT Siholta Toba Indonesia terbuka untuk kemitraan dengan petani kopi dan buyer internasional. Hubungi kami untuk diskusi lebih lanjut.</p>
+      </div>
+      <div class="page-cta__actions animate-on-scroll">
+        <a href={`/${lang}/#contact`} class="btn btn--primary">Hubungi Kami</a>
+        <a href={`/${lang}/company`} class="btn btn--outline-dark">Tentang Perusahaan</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer lang={lang} />
+  <WhatsAppFAB />
+</Base>
+
+<script>
+  const els = document.querySelectorAll<HTMLElement>('.animate-on-scroll');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); }
+      });
+    },
+    { threshold: 0.10, rootMargin: '0px 0px -40px 0px' }
+  );
+  els.forEach(el => observer.observe(el));
+</script>

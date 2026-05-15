@@ -1,0 +1,185 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../images/logo/logo-kopi-siholta.png';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const navItems = [
+  { key: 'nav.company',       href: `/${lang}/company` }, 
+  { key: 'nav.products',   href: `/${lang}/#products` },
+  { key: 'nav.export',     href: `/${lang}/#export` },
+  { key: 'nav.partnerships',        href: `/${lang}/#b2b` },
+  { key: 'nav.contact',    href: `/${lang}/#contact` },
+];
+
+const langs = [
+  { code: 'id', label: 'ID' },
+  { code: 'en', label: 'EN' },
+  { code: 'fr', label: 'FR' },
+];
+
+const currentPath = Astro.url.pathname;
+
+// Build locale-switcher hrefs by replacing the current lang prefix
+// e.g. /id/products → /en/products, /fr/about → /id/about
+function localeHref(targetLang: string): string {
+  const segs = currentPath.split('/');
+  if (segs[1] && ['id', 'en', 'fr'].includes(segs[1])) {
+    segs[1] = targetLang;
+  } else {
+    segs.splice(1, 0, targetLang);
+  }
+  return segs.join('/') || '/';
+}
+---
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner container">
+    <!-- Logo -->
+    <a href={`/${lang}/`} class="navbar__logo" aria-label="Kopi Siholta — Home">
+      <Image src={logo} alt="Kopi Siholta" width="32" height="32" class="navbar__logo-img" />
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="navbar__nav hide-mobile" aria-label="Main navigation">
+      <ul class="navbar__links">
+        {navItems.map(item => (
+          <li>
+            <a href={item.href} class="navbar__link">
+              {item.key.replace('nav.', '')}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Right Side -->
+    <div class="navbar__right">
+      <!-- Language Switcher -->
+      <div class="lang-switcher hide-mobile" role="group" aria-label="Select language">
+        {langs.map(l => (
+          <a
+            href={localeHref(l.code)}
+            class={`lang-btn ${lang === l.code ? 'lang-btn--active' : ''}`}
+            aria-pressed={lang === l.code}
+          >
+            {l.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <a href={`/${lang}/#contact`} class="btn btn--primary navbar__cta hide-mobile">
+        Hubungi Kami
+      </a>
+
+      <!-- Mobile Hamburger -->
+      <button
+        class="navbar__hamburger hide-desktop"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div
+    class="mobile-menu"
+    id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+    data-menu
+  >
+    <div class="mobile-menu__overlay" data-menu-close></div>
+    <nav class="mobile-menu__panel">
+      <button class="mobile-menu__close" aria-label="Close menu" data-menu-close>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <ul class="mobile-menu__links">
+        {navItems.map(item => (
+          <li>
+            <a href={item.href} class="mobile-menu__link">{item.key.replace('nav.', '')}</a>
+          </li>
+        ))}
+      </ul>
+      <div class="mobile-menu__footer">
+        <a href={`/${lang}/#contact`} class="mobile-menu__cta">
+          Hubungi Kami
+        </a>
+        <div class="mobile-menu__lang">
+          {langs.map(l => (
+            <a
+              href={localeHref(l.code)}
+              class={`lang-btn ${lang === l.code ? 'lang-btn--active' : ''}`}
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* Navbar mobile breakpoint only — all other styles live in global.css */
+  @media (max-width: 768px) {
+    .navbar { height: 48px; }
+  }
+</style>
+
+<script>
+  const menu = document.querySelector('[data-menu]') as HTMLElement | null;
+  const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement | null;
+  const closeBtns = document.querySelectorAll('[data-menu-close]');
+  const navLinks = menu?.querySelectorAll('.mobile-menu__link') ?? [];
+
+  function openMenu() {
+    if (!menu || !toggle) return;
+    menu.classList.add('is-open');
+    toggle.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    // Focus the close button for accessibility
+    const closeBtn = menu.querySelector('[data-menu-close]') as HTMLElement | null;
+    closeBtn?.focus();
+  }
+
+  function closeMenu() {
+    if (!menu || !toggle) return;
+    menu.classList.remove('is-open');
+    toggle.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle?.addEventListener('click', () => {
+    menu?.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+
+  closeBtns.forEach(btn => btn.addEventListener('click', closeMenu));
+
+  navLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu?.classList.contains('is-open')) closeMenu();
+  });
+
+  // Reset body overflow on page hide/navigation
+  window.addEventListener('beforeunload', () => {
+    document.body.style.overflow = '';
+  });
+</script>

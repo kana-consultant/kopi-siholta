@@ -2,9 +2,12 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import viteCompression from 'vite-plugin-compression';
+import react from '@astrojs/react';
+import iconify from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
+  integrations: [react(), iconify()],
   vite: {
     plugins: [
       tailwindcss(),
@@ -32,9 +35,7 @@ export default defineConfig({
         output: {
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
-              // Split astro core
               if (id.includes('astro')) return 'astro-vendor';
-              // Split lucide icons separately (tree-shake unused)
               if (id.includes('lucide')) return 'icons-vendor';
               return 'vendor';
             }
@@ -43,7 +44,6 @@ export default defineConfig({
       }
     },
     chunkSizeWarningLimit: 300,
-    // Optimize for mobile
     target: 'es2020'
   },
   image: {

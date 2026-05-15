@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+
+import tokpedLogo from '../../images/logo/logo-tokopedia.png';
+import shopeeLogo from '../../images/logo/logo-shopee.png';
+import igLogo from '../../images/logo/logo-instagram.png';
+import waLogo from '../../images/logo/logo-whatsapp.png';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+// Correct shop links
+const TOKPED_URL = 'https://www.tokopedia.com/kopisiholta';
+const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
+const INSTAGRAM_URL = 'https://www.instagram.com/kopi_siholta.id/';
+const WHATSAPP_URL = 'https://wa.me/6281322518527';
+
+const channels = [
+  {
+    name: 'Tokopedia',
+    label: 'Tokopedia',
+    image: tokpedLogo,
+    href: TOKPED_URL,
+    color: '#03AC0E',
+  },
+  {
+    name: 'Shopee',
+    label: 'Shopee',
+    image: shopeeLogo,
+    href: SHOPEE_URL,
+    color: '#EE4D2D',
+  },
+  {
+    name: 'Instagram',
+    label: 'Instagram',
+    image: igLogo,
+    href: INSTAGRAM_URL,
+    color: '#C13584',
+  },
+  {
+    name: 'WhatsApp',
+    label: 'WhatsApp',
+    image: waLogo,
+    href: WHATSAPP_URL,
+    color: '#25D366',
+  },
+];
+---
+
+<section class="omni section section--cream" id="omni" aria-label="Omnichannel Shopping Links">
+  <div class="container">
+    <!-- Header -->
+    <div class="section__header">
+      <p class="section-tag">Toko Online</p>
+      <h2 class="section-title">Beli Kopi Siholta Sekarang</h2>
+      <p class="section-sub">Temukan produk kami di platform marketplace favorit Anda.</p>
+    </div>
+
+    <!-- Channel Links -->
+<div class="omni__channels">
+  {channels.map(channel => (
+    <a
+      href={channel.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="omni__channel"
+      style={`--channel-color: ${channel.color}`}
+      aria-label={`Hubungi via ${channel.label}`}
+    >
+      <!-- Menambahkan Ikon Gambar -->
+      <div class="omni__channel-icon">
+        <Image 
+          src={channel.image} 
+          alt={`${channel.label} logo`} 
+          width={24} 
+          height={24}
+          format="webp"
+        />
+      </div>
+
+      <span class="omni__channel-name">Beli di {channel.label}</span>
+      
+      <Icon name="mdi:arrow-top-right" class="omni__channel-arrow" width="14" height="14" />
+    </a>
+  ))}
+</div>
+

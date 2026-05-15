@@ -1,0 +1,215 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+
+// Product images from src/images/products/
+import arabicaImg from '../../images/products/arabica-beans.jpg';
+import robustaImg from '../../images/products/robusta-beans.jpg';
+import hampersImg from '../../images/products/hampers.png';
+import groundImg from '../../images/products/arabica-ground.jpg';
+
+// E-commerce logos
+import tokpedLogo from '../../images/logo/logo-tokopedia.png';
+import shopeeLogo from '../../images/logo/logo-shopee.png';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
+const TOKPED_URL = 'https://www.tokopedia.com/kopisiholta';
+const RB_TOKPED_URL = 'https://tk.tokopedia.com/ZSxRaCBXg/';
+const RG_TOKPED_URL = 'https://tk.tokopedia.com/ZSxRmkexJ/';
+const AG_TOKPED_URL = 'https://tk.tokopedia.com/ZSxRm12mu/';
+const AB_TOKPED_URL = 'https://tk.tokopedia.com/ZSxRaEDUp/';
+const RB_SHOPEE_URL = 'https://s.shopee.co.id/5L8l02GVoQ?share_channel_code=1';
+const RG_SHOPEE_URL = 'https://s.shopee.co.id/2VoZcrNoF8?share_channel_code=1';
+const AB_SHOPEE_URL = 'https://s.shopee.co.id/BQeqUtbv3?share_channel_code=1';
+const AG_SHOPEE_URL = 'https://s.shopee.co.id/1BJC2ICX6K?share_channel_code=1';
+
+const products = [
+  {
+    slug: 'Arabica-roasted-beans',
+    name: 'Arabica Roasted Beans',
+    badge: 'Best Seller',
+    badgeColor: '#2A7B40',
+    origin: 'Lintong Nihuta, Humbang Hasundutan',
+    altitude: '1.200 – 1.500 mdpl',
+    process: 'Giling Basah (Wet Hulled)',
+    roast: 'Light – Medium',
+    weight: '100gr – 1000gr',
+    notes: ['Spicy', 'Herbal', 'Rempah', 'Cokelat'],
+    price: 'Rp 45.000 – 350.000',
+    description: 'Arabica Roasted Beans dari kopi Lintong pilihan. Daging buah dikumpulkan dari petani berpengalaman, diproses secara tradisional Giling Basah, lalu disangrai dengan profil roast light-medium untuk menonjolkan karakter rempah dan cokelat yang menjadi ciri khas Kopi Lintong.',
+    image: arabicaImg,
+    alt: 'Arabica Roasted Beans — whole roasted coffee from Lintong Nihuta',
+    shopeeUrl: AB_SHOPEE_URL,
+    tokpedUrl: AB_TOKPED_URL,
+  },
+  {
+    slug: 'Arabica-ground',
+    name: 'Arabica Ground',
+    badge: 'Popular',
+    badgeColor: '#CD1222',
+    origin: 'Lintong Nihuta, Humbang Hasundutan',
+    altitude: '1.200 – 1.500 mdpl',
+    process: 'Giling Basah (Wet Hulled)',
+    roast: 'Medium',
+    weight: '100gr – 1000gr',
+    notes: ['Nutty', 'Chocolate', 'Fruity', 'Floral'],
+    price: 'Rp 48.000 – 370.000',
+    description: 'Arabica Ground berkualitas premium, diayak dan dikemas dengan sistem kedap udara untuk menjaga kesegaran aroma. Cocok untuk metode seduh manual (V60, Chemex, Aeropress) maupun mesin espresso rumah.',
+    image: groundImg,
+    alt: 'Arabica Ground — premium ground coffee for manual brew and espresso',
+    shopeeUrl: AG_SHOPEE_URL,
+    tokpedUrl: AG_TOKPED_URL,
+  },
+  {
+    slug: 'robusta-premium',
+    name: 'Robusta Premium',
+    badge: 'Value Pack',
+    badgeColor: '#4A2511',
+    origin: 'Lintong Nihuta, Humbang Hasundutan',
+    altitude: '800 – 1.200 mdpl',
+    process: 'Natural Dry Process',
+    roast: 'Medium – Dark',
+    weight: '250gr – 1000gr',
+    notes: ['Strong', 'Bold', 'Earthy', 'Chocolate'],
+    price: 'Rp 35.000 – 280.000',
+    description: 'Robusta Premium dari dataran rendah Lintong. Diproses natural untuk menghasilkan body yang penuh, rasa bold earthy, dan aftertaste cokelat yang kuat. Ideal untuk espresso blend maupun kopi susu.',
+    image: robustaImg,
+    alt: 'Robusta Premium — natural dry process robusta from Lake Toba',
+    shopeeUrl: RB_SHOPEE_URL,
+    tokpedUrl: RB_TOKPED_URL,
+  },
+  {
+    slug: 'hampers-gift-set',
+    name: 'Hampers & Gift Set',
+    badge: 'Gift Ready',
+    badgeColor: '#C17F3C',
+    origin: 'Pilihan Premium',
+    altitude: 'Beragam',
+    process: 'Multi-origin blend',
+    roast: 'Various',
+    weight: 'Custom',
+    notes: ['Premium Selection', 'Gift Packaging', 'Customizable'],
+    price: 'Rp 85.000 – 500.000',
+    description: 'Hampers dan gift set premium untuk hadiah perusahaan, apresiasi karyawan, atau hadiah spesial. Tersedia dalam berbagai ukuran dan kombinasi produk. Packaging eksklusif dengan desain khas Kopi Siholta.',
+    image: hampersImg,
+    alt: 'Hampers & Gift Set — premium corporate gift packaging Kopi Siholta',
+    shopeeUrl: SHOPEE_URL,
+    tokpedUrl: TOKPED_URL,
+  },
+];
+---
+
+<section class="products section" id="products" aria-label="Product Showcase">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="section__header">
+      <p class="section-tag">Koleksi Kami</p>
+      <h2 class="section-title">Rasakan Autentik Kopi Siholta</h2>
+      <p class="section-sub">Setiap varian diproses dengan dedikasi tinggi, dipilih langsung dari kebun petani partner kami di Sumatera Lintong.</p>
+    </div>
+
+    <!-- Product Rows — alternating image-left / image-right -->
+    {products.map((product, i) => (
+      <article
+        class={`product-row ${i % 2 === 0 ? 'product-row--image-left' : 'product-row--image-right'} ${i === 0 ? 'product-row--feature' : ''}`}
+        role="listitem"
+      >
+        <!-- Image Panel -->
+        <div class="product-row__media">
+          <Image
+            src={product.image}
+            alt={product.alt}
+            class="product-row__img"
+            loading={i < 2 ? 'eager' : 'lazy'}
+            widths={[480, 768, 1024, 1280]}
+            sizes={i === 0 ? '100vw' : '(max-width: 768px) 100vw, 50vw'}
+          />
+          <div class="product-row__img-overlay"></div>
+
+          <!-- Badge floating over image -->
+          <div class="product-row__badge-wrap">
+            <span class="product-row__badge" style={`background: ${product.badgeColor}`}>
+              {product.badge}
+            </span>
+          </div>
+        </div>
+
+        <!-- Content Panel -->
+        <div class="product-row__content">
+          <!-- Origin line -->
+          <div class="product-row__origin">
+            <Icon name="mdi:map-marker" width="10" height="10" />
+            <span>{product.origin}</span>
+          </div>
+
+          <!-- Product name -->
+          <h3 class="product-row__name">{product.name}</h3>
+
+          <!-- Description -->
+          <p class="product-row__desc">{product.description}</p>
+
+          <!-- Tasting Notes -->
+          <div class="product-row__notes">
+            {product.notes.map(note => (
+              <span class="product-row__note">{note}</span>
+            ))}
+          </div>
+
+          <!-- Detail grid -->
+          <div class="product-row__details">
+            <div class="product-row__detail">
+              <span class="product-row__detail-label">Process</span>
+              <span class="product-row__detail-value">{product.process}</span>
+            </div>
+            <div class="product-row__detail">
+              <span class="product-row__detail-label">Roast</span>
+              <span class="product-row__detail-value">{product.roast}</span>
+            </div>
+            <div class="product-row__detail">
+              <span class="product-row__detail-label">Altitude</span>
+              <span class="product-row__detail-value">{product.altitude}</span>
+            </div>
+            <div class="product-row__detail">
+              <span class="product-row__detail-label">Weight</span>
+              <span class="product-row__detail-value">{product.weight}</span>
+            </div>
+          </div>
+
+          <!-- Footer: price + e-comm buttons -->
+          <div class="product-row__footer">
+            <span class="product-row__price">{product.price}</span>
+            <div class="product-row__ecomm">
+              <a
+                href={product.tokpedUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ecomm-btn ecomm-btn--tokped"
+                aria-label={`Beli ${product.name} di Tokopedia`}
+              >
+                <Image src={tokpedLogo} alt="Tokopedia" width={56}  />
+              </a>
+              <a
+                href={product.shopeeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ecomm-btn ecomm-btn--shopee"
+                aria-label={`Beli ${product.name} di Shopee`}
+              >
+                <Image src={shopeeLogo} alt="Shopee" width={58} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    ))}
+
+  </div>
+</section>
+

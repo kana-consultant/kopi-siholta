@@ -1,0 +1,157 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import waLogo from '../../images/logo/logo-whatsapp.png';
+import tokpedLogo from '../../images/logo/logo-tokopedia.png';
+import shopeeLogo from '../../images/logo/logo-shopee.png';
+import igLogo from '../../images/logo/logo-instagram.png';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+// ─── Contact Constants ───────────────────────────────────────────────────────
+const WHATSAPP_NUMBER = '6281322518527';
+const WHATSAPP_MSG = encodeURIComponent(
+  'Halo, saya tertarik dengan Kopi Siholta. Bisa info lengkap lebih lanjut?'
+);
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
+const EMAIL = 'siholtatobaindonesia@gmail.com';
+const INSTAGRAM_URL = 'https://www.instagram.com/kopi_siholta.id/';
+const TOKPED_URL = 'https://www.tokopedia.com/kopisiholta';
+const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
+
+const ADDRESS = 'Dusun IV, Desa/Kelurahan Sitolu Bahal, Kec. Lintong Nihuta, Kab. Humbang Hasundutan, Provinsi Sumatera Utara, Kode Pos 22475';
+---
+
+<section class="contact section" id="contact" aria-label="Contact Section">
+  <div class="container contact__inner">
+
+    <!-- Left: Info -->
+    <div class="contact__info">
+      <div class="section__header">
+        <p class="section-tag">Hubungi Kami</p>
+        <h2 class="section-title">Mari Bercerita</h2>
+        <p class="section-sub">Punya pertanyaan tentang produk, potensi bisnis, atau sekadar ingin menyapa? Tim kami siap membantu.</p>
+      </div>
+
+      <!-- WhatsApp Block -->
+      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="contact__wa-block" aria-label="Chat Kopi Siholta via WhatsApp">
+        <div class="contact__wa-icon" aria-hidden="true">
+          <Image src={waLogo} alt="WhatsApp" width={24} height={24} />
+        </div>
+        <div class="contact__wa-text">
+          <p class="contact__wa-title">Chat Langsung via WhatsApp</p>
+          <p class="contact__wa-desc">Respons lebih cepat untuk pertanyaan produk dan bisnis.</p>
+        </div>
+        <div class="contact__wa-arrow" aria-hidden="true">
+          <Icon name="mdi:arrow-right" width="14" height="14" />
+          </svg>
+        </div>
+      </a>
+
+      <!-- Social + Marketplace -->
+      <div class="contact__social-grid">
+        <!-- Instagram -->
+        <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="contact__social-card" aria-label="Ikuti Instagram Kopi Siholta">
+          <Image src={igLogo} alt="Instagram" width={20} height={20} />
+          <span>@kopi_siholta.id</span>
+        </a>
+        <!-- Tokopedia -->
+        <a href={TOKPED_URL} target="_blank" rel="noopener noreferrer" class="contact__social-card" aria-label="Tokopedia Kopi Siholta">
+          <Image src={tokpedLogo} alt="Tokopedia" width={20} height={20} />
+          <span>@kopisiholta</span>
+        </a>
+        <!-- Shopee -->
+        <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" class="contact__social-card" aria-label="Shopee Kopi Siholta">
+          <Image src={shopeeLogo} alt="Shopee" width={20} height={20} />
+          <span>@kopi_siholta</span>
+        </a>
+      </div>
+
+      <!-- Contact Details -->
+      <div class="contact__details">
+        <div class="contact__detail-item">
+          <Icon name="mdi:map-marker" width="14" height="14" />
+            <circle cx="7" cy="6" r="1.5" stroke="currentColor" stroke-width="1"/>
+          </svg>
+          <span>{ADDRESS}</span>
+        </div>
+        <div class="contact__detail-item">
+          <Icon name="mdi:email" width="14" height="14" />
+          <a href={`mailto:${EMAIL}`} class="contact__link">{EMAIL}</a>
+        </div>
+        <div class="contact__detail-item">
+          <Icon name="mdi:phone" width="14" height="14" />
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="contact__link">+62 813 2251 8527</a>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="contact__maps">
+        <div class="contact__map-label">Kebun — Kopi Siholta</div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.6765180231273!2d98.8646577!3d2.2739400000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e1702ecca12b9%3A0xddab3e62499da70!2sKopi%20Siholta!5e0!3m2!1sid!2sid!4v1778757587057!5m2!1sid!2sid"
+          width="100%"
+          height="180"
+          style="border:0; border-radius: var(--radius-lg);"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lokasi Kebun Kopi Siholta"
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="contact__form-wrap">
+      <form class="contact__form" action="/api/contact" method="POST" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name" class="form-label">Nama Lengkap</label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="Masukkan nama lengkap Anda" required autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label for="company" class="form-label">Perusahaan</label>
+            <input type="text" id="company" name="company" class="form-input" placeholder="Nama perusahaan atau outlet Anda" autocomplete="organization" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email" class="form-label">Alamat Email</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="email@contoh.com" required autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">Nomor Telepon / WhatsApp</label>
+            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+62 8xx xxxx xxxx" autocomplete="tel" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inquiry" class="form-label">Jenis Pertanyaan</label>
+          <select id="inquiry" name="inquiry" class="form-input form-select" required>
+            <option value="" disabled selected>Pilih jenis pertanyaan</option>
+            <option value="product">Pertanyaan Produk</option>
+            <option value="b2b">Kemitraan Bisnis </option>
+            <option value="tour">Kunjungan Farm</option>
+            <option value="other">Lainnya</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="form-label">Pesan Anda</label>
+          <textarea id="message" name="message" class="form-input form-textarea" rows="4" placeholder="Tulis pesan atau pertanyaan Anda di sini..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary form-submit">
+          Kirim Pesan
+          <Icon name="mdi:send" width="14" height="14" />
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+

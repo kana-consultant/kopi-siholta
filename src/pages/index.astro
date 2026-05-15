@@ -1,25 +1,39 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Products from '../components/Products.astro';
-import Export from '../components/Export.astro';
-import Partnership from '../components/Partnership.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+import WhatsAppFAB from '../components/layout/WhatsAppFAB.astro';
+import Hero from '../components/sections/Hero.astro';
+import StatsRibbon from '../components/sections/StatsRibbon.astro';
+import Heritage from '../components/sections/Heritage.astro';
+import Products from '../components/sections/Products.astro';
+import ExportDashboard from '../components/sections/ExportDashboard.astro';
+import Partnerships from '../components/sections/Partnerships.astro';
+import OmnichannelLinks from '../components/sections/OmnichannelLinks.astro';
+import ContactSection from '../components/sections/ContactSection.astro';
 
+export const prerender = false;
+
+const lang = 'en';
+
+const meta = {
+  title: 'Kopi Siholta — Indonesia\'s Specialty Coffee Pioneer from Lake Toba',
+  description: 'PT Siholta Toba Indonesia is Indonesia\'s first specialty coffee producer and exporter from Sumatera Lintong, Humbang Hasundutan, North Sumatra.',
+};
 ---
 
-<Layout>
-  <Navigation/>
-    <main>
-      <Hero/>
-      <About/>
-      <Products/>
-      <Export/>
-      <Partnership/>
-      <Contact/>
-    </main>
-  <Footer/>
-</Layout>
+<Base title={meta.title} description={meta.description} lang={lang}>
+  <Navbar lang={lang} />
+  <main id="main-content">
+    <Hero lang={lang} />
+    <!-- <StatsRibbon lang={lang} /> -->
+    <Heritage lang={lang} />
+    <Products lang={lang} />
+    <ExportDashboard lang={lang} />
+    <Partnerships lang={lang} />
+    <OmnichannelLinks lang={lang} />
+    <ContactSection lang={lang} />
+  </main>
+  <Footer lang={lang} />
+  <WhatsAppFAB />
+</Base>

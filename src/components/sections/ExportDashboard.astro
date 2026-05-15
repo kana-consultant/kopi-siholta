@@ -1,0 +1,132 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import globePic from '../../images/globe-p.png';
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const countries = [
+  { name: 'Amerika Serikat', code: 'US', flag: '🇺🇸', active: true },
+  { name: 'Jepang', code: 'JP', flag: '🇯🇵', active: true },
+  { name: 'Korea Selatan', code: 'KR', flag: '🇰🇷', active: true },
+  { name: 'Australia', code: 'AU', flag: '🇦🇺', active: false },
+  { name: 'Singapura', code: 'SG', flag: '🇸🇬', active: false },
+  { name: 'Malaysia', code: 'MY', flag: '🇲🇾', active: false },
+];
+
+const kpis = [
+  { num: '100T', label: 'Volume Ekspor / Tahun', icon: 'mdi:weight' },
+  { num: '6+', label: 'Negara Tujuan Ekspor', icon: 'mdi:earth' },
+  { num: '15+', label: 'Tahun Pengalaman', icon: 'mdi:calendar' },
+  { num: '12+', label: 'Partner Internasional', icon: 'mdi:handshake' },
+];
+
+const activeCountries = countries.filter(c => c.active);
+const plannedCountries = countries.filter(c => !c.active);
+---
+
+<section class="export" id="export" aria-label="Jangkauan Internasional">
+  <div class="export__wrap">
+
+    <!-- Top: Header + Globe side by side -->
+    <div class="export__top">
+      <div class="export__head">
+        <div class="export__badge">
+          <Icon name="mdi:airplane-takeoff" width="13" height="13" />
+          <span>Jangkauan Internasional</span>
+        </div>
+        <h2 class="export__title">Dari Sumatera<br />ke Dunia</h2>
+        <p class="export__desc">Kopi Siholta dipercaya oleh importir dan distributor di berbagai belahan dunia. Komitmen kami: kualitas konsisten dan rantai pasok yang transparan dari dataran tinggi Humbang Hasundutan.</p>
+
+        <!-- Active routes mini-list -->
+        <div class="export__routes">
+          <p class="export__routes-label">Rute Ekspor Aktif:</p>
+          <div class="export__route-list">
+            {activeCountries.map(c => (
+              <div class="export__route-item">
+                <Icon name="mdi:map-marker" width="10" height="10" />
+                <span>{c.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Globe Illustration -->
+      <div class="export__globe-wrap" aria-hidden="true">
+        <Image
+          src={globePic}
+          alt="Peta jangkauan ekspor Kopi Siholta ke berbagai negara"
+          class="export__globe-img"
+          loading="lazy"
+          widths={[400, 600, 800]}
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
+        <!-- Overlay label -->
+        <div class="export__globe-label">
+          <span class="export__globe-label-dot"></span>
+          <span>Kantor Pusat Indonesia</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- KPI Strip -->
+    <div class="export__kpi-strip">
+      {kpis.map((kpi, i) => (
+        <div class="export__kpi-cell">
+          <div class="export__kpi-icon">
+            <Icon name={kpi.icon} width="18" height="18" />
+          </div>
+          <span class="export__kpi-num">{kpi.num}</span>
+          <span class="export__kpi-label">{kpi.label}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Country Grid -->
+    <div class="export__country-grid">
+      <div class="export__country-section">
+        <div class="export__country-section-header">
+          <span class="export__country-section-dot export__country-section-dot--active"></span>
+          <span>Pasar Aktif</span>
+        </div>
+        <div class="export__country-cards">
+          {activeCountries.map(c => (
+            <div class="export__country-card export__country-card--active">
+              <div class="export__country-card-code">{c.code}</div>
+              <div class="export__country-card-info">
+                <span class="export__country-card-name">{c.name}</span>
+                <span class="export__country-card-status">Ekspor aktif</span>
+              </div>
+              <Icon name="mdi:check-circle" width="14" height="14" class="export__country-card-check" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="export__country-section">
+        <div class="export__country-section-header">
+          <span class="export__country-section-dot export__country-section-dot--planned"></span>
+          <span>Rencana Ekspansi</span>
+        </div>
+        <div class="export__country-cards">
+          {plannedCountries.map(c => (
+            <div class="export__country-card">
+              <div class="export__country-card-code">{c.code}</div>
+              <div class="export__country-card-info">
+                <span class="export__country-card-name">{c.name}</span>
+                <span class="export__country-card-status">Segera hadir</span>
+              </div>
+              <Icon name="mdi:clock-outline" width="14" height="14" class="export__country-card-clock" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
