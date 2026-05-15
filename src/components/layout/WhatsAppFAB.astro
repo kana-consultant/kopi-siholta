@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import waLogo from '../../images/logo-whatsapp.png';
+
+interface Props {
+  waNumber?: string;
+  message?: string;
+}
+
+const {
+  waNumber = '6281322518527',
+  message = 'Halo, saya tertarik dengan Kopi Siholta. Bisa info lengkap lebih lanjut?',
+} = Astro.props;
+
+const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+---
+
+<a
+  href={waLink}
+  class="whatsapp-fab"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Chat via WhatsApp"
+  title="Chat via WhatsApp"
+>
+  <Image src={waLogo} alt="WhatsApp" width={32} height={32} class="whatsapp-fab__img" />
+</a>
+

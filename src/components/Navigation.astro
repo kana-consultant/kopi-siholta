@@ -1,148 +1,489 @@
 ---
-import { Menu, Coffee } from 'lucide-astro';
-import {Image} from 'astro:assets';
+import { Image } from 'astro:assets';
 import Logo from '../images/logo-kopi-siholta.png';
-
-const logoPath = Logo.src;
-
-const navItems = [
-  { label: 'Beranda', href: '#beranda' },
-  { label: 'Tentang', href: '#tentang' },
-  { label: 'Produk', href: '#produk' },
-  { label: 'Pasar Internasional', href: '#ekspor' },
-  { label: 'Kerjasama', href: '#kerjasama' },
-  { label: 'Kontak', href: '#kontak' },
-];
 ---
 
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-  <div class="absolute inset-0 bg-[var(--color-dark-brown)]/95 backdrop-blur-md"></div>
-  <div class="container-custom relative">
-    <div class="flex items-center justify-between h-16 md:h-20">
-      <!-- Logo -->
-      <a href="#beranda" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[var(--color-gold)] to-[var(--color-copper)] flex items-center justify-center shadow-lg group-hover:shadow-[var(--color-gold)]/50 transition-shadow duration-300 overflow-hidden">
-          <Image
-            src={Logo}
-            width={48}
-            height={48}
-            class="w-full h-full object-cover"
-            alt="Logo Kopi Siholta"
-            loading="eager"
-            fetchpriority="high"
-            decoding="sync"
-          />
-        </div>
-      </a>
-
-      <div class="hidden lg:flex items-center gap-8">
-        {navItems.map((item) => (
-          <a
-            href={item.href}
-            class="relative text-[var(--color-cream)]/80 hover:text-[var(--color-gold)] font-medium tracking-wide transition-colors duration-300 py-2 group"
-          >
-            {item.label}
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[var(--color-gold)] to-[var(--color-red)] transition-all duration-300 group-hover:w-full"></span>
-          </a>
-        ))}
+<nav id="navbar" class="navbar">
+  <div class="navbar-inner">
+    <!-- Logo -->
+    <a href="#beranda" class="logo-link">
+      <div class="logo-image-wrapper">
+        <Image
+          src={Logo}
+          alt="Kopi Siholta"
+          width={48}
+          height={48}
+          class="logo-img"
+        />
       </div>
+      <span class="brand-name">Kopi Siholta</span>
+    </a>
 
-      <a
-        href="#kontak"
-        class="hidden lg:inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[var(--color-red)] to-[var(--color-red)] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-[var(--color-red)]/30 transition-all duration-300 hover:scale-105"
-      >
-        <span>Hubungi Kami</span>
-      </a>
+    <!-- Desktop Nav Links -->
+    <ul class="nav-links">
+      <li><a href="#beranda" class="nav-link"><span>Beranda</span></a></li>
+      <li><a href="#tentang" class="nav-link"><span>Tentang</span></a></li>
+      <li><a href="#produk" class="nav-link"><span>Produk</span></a></li>
+      <li><a href="#ekspor" class="nav-link"><span>Pasar Internasional</span></a></li>
+      <li><a href="#kerjasama" class="nav-link"><span>Kerjasama</span></a></li>
+      <li><a href="#kontak" class="nav-link"><span>Kontak</span></a></li>
+    </ul>
 
-      <button
-        id="mobile-menu-btn"
-        class="lg:hidden p-2 md:p-3 rounded-lg bg-[var(--color-roasted)]/50 hover:bg-[var(--color-gold)]/20 transition-colors duration-300"
-        aria-label="Toggle menu"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-      >
-        <Menu class="w-6 h-6 text-[var(--color-cream)]" id="menu-icon" />
-      </button>
-    </div>
+    <!-- CTA Button (desktop) -->
+    <a href="#kontak" class="cta-btn desktop-cta">Hubungi Kami</a>
+
+    <!-- Mobile Hamburger -->
+    <button
+      id="mobile-menu-btn"
+      class="hamburger"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
   </div>
 
-  <div
-    id="mobile-menu"
-    class="lg:hidden hidden absolute top-full left-0 right-0 bg-[var(--color-dark-brown)]/98 backdrop-blur-lg border-t border-[var(--color-gold)]/20 overflow-hidden transition-all duration-300 ease-out mobile-menu-closed"
-  >
-    <div class="container-custom py-4 md:py-6 animate-slide-down">
-      <div class="flex flex-col gap-2">
-        {navItems.map((item) => (
-          <a
-            href={item.href}
-            class="text-[var(--color-cream)]/80 hover:text-[var(--color-gold)] font-medium tracking-wide py-2 md:py-3 px-4 rounded-lg hover:bg-[var(--color-gold)]/10 transition-all duration-200"
-          >
-            {item.label}
-          </a>
-        ))}
-        <a
-          href="#kontak"
-          class="mt-2 md:mt-4 inline-flex items-center justify-center gap-2 px-5 py-3 md:px-6 md:py-4 bg-gradient-to-r from-[var(--color-red)] to-[var(--color-red)] text-white font-semibold rounded-full"
-        >
-          <span>Hubungi Kami</span>
-        </a>
-      </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-inner">
+      <a href="#beranda" class="mobile-link">Beranda</a>
+      <a href="#tentang" class="mobile-link">Tentang</a>
+      <a href="#produk" class="mobile-link">Produk</a>
+      <a href="#ekspor" class="mobile-link">Pasar Internasional</a>
+      <a href="#kerjasama" class="mobile-link">Kerjasama</a>
+      <a href="#kontak" class="mobile-link">Kontak</a>
+      <a href="#kontak" class="cta-btn mobile-cta">Hubungi Kami</a>
     </div>
   </div>
 </nav>
 
+<style>
+  /* ========================================
+     NAVBAR BASE
+  ======================================== */
+  .navbar {
+    --color-dark-brown: #1C0F07;
+    --color-gold: #F3B700;
+    --color-cream: #F9F6F0;
+    --color-red: #CD1222;
+    --color-red-dark: #A01020;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+    background: linear-gradient(
+      to bottom,
+      rgba(28, 15, 7, 0) 0%,
+      rgba(28, 15, 7, 0) 100%
+    );
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+
+  .navbar.scrolled {
+    background: linear-gradient(
+      to bottom,
+      rgba(28, 15, 7, 0.97) 0%,
+      rgba(28, 15, 7, 0.98) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(28, 15, 7, 0.5), 0 0 0 1px rgba(243, 183, 0, 0.1);
+    border-bottom: 1px solid rgba(243, 183, 0, 0.1);
+  }
+
+  /* ========================================
+     INNER LAYOUT
+  ======================================== */
+  .navbar-inner {
+    max-width: 80rem; /* max-w-7xl */
+    margin: 0 auto;
+    padding: 0 1.5rem; /* px-6 */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem; /* h-16 */
+  }
+
+  @media (min-width: 768px) {
+    .navbar-inner {
+      height: 5rem; /* md:h-20 */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .navbar-inner {
+      padding: 0 2rem; /* lg:px-8 */
+    }
+  }
+
+  /* ========================================
+     PAGE LOAD SLIDE-DOWN ANIMATION
+  ======================================== */
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .navbar {
+    animation: slideDown 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* ========================================
+     LOGO
+  ======================================== */
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* gap-3 */
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo-image-wrapper {
+    width: 2.5rem; /* w-10 */
+    height: 2.5rem; /* h-10 */
+    border-radius: 9999px; /* rounded-full */
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    .logo-image-wrapper {
+      width: 3rem; /* md:w-12 */
+      height: 3rem; /* md:h-12 */
+    }
+  }
+
+  .logo-link:hover .logo-image-wrapper {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(243, 183, 0, 0.5);
+  }
+
+  .logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .brand-name {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 700;
+    color: #F9F6F0;
+    letter-spacing: 0.025em; /* tracking-wide */
+    line-height: 1;
+  }
+
+  @media (min-width: 768px) {
+    .brand-name {
+      font-size: 1.25rem; /* md:text-xl */
+    }
+  }
+
+  /* ========================================
+     DESKTOP NAV LINKS
+  ======================================== */
+  .nav-links {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    gap: 2rem; /* gap-8 */
+  }
+
+  @media (min-width: 1024px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+    position: relative;
+    display: block;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500;
+    color: rgba(249, 246, 240, 0.7);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #F3B700, #CD1222);
+    border-radius: 1px;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: #F3B700;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Stagger animation for nav items on load */
+  .nav-link {
+    opacity: 0;
+    animation: navFadeIn 0.5s ease forwards;
+  }
+
+  .nav-links li:nth-child(1) .nav-link { animation-delay: 0.05s; }
+  .nav-links li:nth-child(2) .nav-link { animation-delay: 0.10s; }
+  .nav-links li:nth-child(3) .nav-link { animation-delay: 0.15s; }
+  .nav-links li:nth-child(4) .nav-link { animation-delay: 0.20s; }
+  .nav-links li:nth-child(5) .nav-link { animation-delay: 0.25s; }
+  .nav-links li:nth-child(6) .nav-link { animation-delay: 0.30s; }
+
+  @keyframes navFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ========================================
+     CTA BUTTON (desktop)
+  ======================================== */
+  .desktop-cta {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.5rem; /* px-6 py-3 */
+    background: linear-gradient(135deg, #CD1222 0%, #A01020 100%);
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(205, 18, 34, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: ctaFadeIn 0.5s ease 0.5s forwards;
+  }
+
+  @keyframes ctaFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .desktop-cta {
+      display: inline-flex;
+    }
+  }
+
+  .desktop-cta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px rgba(205, 18, 34, 0.4);
+  }
+
+  .desktop-cta:active {
+    transform: scale(0.98);
+  }
+
+  /* ========================================
+     HAMBURGER BUTTON
+  ======================================== */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.375rem; /* gap-1.5 */
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    background: rgba(74, 37, 17, 0.5);
+    border: 1px solid rgba(243, 183, 0, 0.15);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  @media (min-width: 1024px) {
+    .hamburger {
+      display: none;
+    }
+  }
+
+  .hamburger:hover {
+    background: rgba(243, 183, 0, 0.2);
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 1.25rem; /* w-5 */
+    height: 2px;
+    background-color: #F9F6F0;
+    border-radius: 1px;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  /* Hamburger open state — top line rotates */
+  .navbar.mobile-open .hamburger-line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  /* Middle line fades out */
+  .navbar.mobile-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  /* Bottom line rotates opposite direction */
+  .navbar.mobile-open .hamburger-line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* ========================================
+     MOBILE MENU
+  ======================================== */
+  .mobile-menu {
+    display: none;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    border-top: 1px solid rgba(243, 183, 0, 0.2);
+    background: rgba(28, 15, 7, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  @media (max-width: 1023px) {
+    .mobile-menu {
+      display: block;
+    }
+  }
+
+  /* When mobile-open is set on nav, expand menu */
+  .navbar.mobile-open .mobile-menu {
+    max-height: 600px;
+  }
+
+  .mobile-menu-inner {
+    padding: 1rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .mobile-link {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: block;
+    font-weight: 500;
+    color: rgba(249, 246, 240, 0.8);
+    text-decoration: none;
+    padding: 0.75rem 1rem; /* py-3 px-4 */
+    border-radius: 0.5rem;
+    transition: color 0.3s ease, background 0.3s ease;
+  }
+
+  .mobile-link:hover {
+    color: #F3B700;
+    background: rgba(243, 183, 0, 0.1);
+  }
+
+  /* CTA in mobile menu */
+  .mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    margin-top: 0.75rem;
+    background: linear-gradient(135deg, #CD1222 0%, #A01020 100%);
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .mobile-cta:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 32px rgba(205, 18, 34, 0.4);
+  }
+
+  /* ========================================
+     FOCUS / ACCESSIBILITY STATES
+  ======================================== */
+  .nav-link:focus-visible,
+  .cta-btn:focus-visible,
+  .mobile-link:focus-visible {
+    outline: 2px solid #F3B700;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+</style>
+
 <script>
-  const navbar = document.getElementById('navbar');
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuIcon = document.getElementById('menu-icon');
+  const navbar = document.getElementById('navbar') as HTMLElement;
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn') as HTMLButtonElement;
+  const mobileMenu = document.getElementById('mobile-menu') as HTMLElement;
 
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 100) {
-      navbar?.classList.add('shadow-2xl', 'shadow-[var(--color-dark-brown)]/50');
-    } else {
-      navbar?.classList.remove('shadow-2xl', 'shadow-[var(--color-dark-brown)]/50');
-    }
-  });
-
+  // Toggle mobile menu
   mobileMenuBtn?.addEventListener('click', () => {
-    const isOpen = !mobileMenu?.classList.contains('hidden');
-    mobileMenuBtn?.setAttribute('aria-expanded', String(!isOpen));
-
-    if (isOpen) {
-      mobileMenu?.style.setProperty('max-height', '0');
-      mobileMenu?.style.setProperty('opacity', '0');
-      setTimeout(() => mobileMenu?.classList.add('hidden'), 300);
-    } else {
-      mobileMenu?.classList.remove('hidden');
-      requestAnimationFrame(() => {
-        mobileMenu?.style.setProperty('max-height', '400px');
-        mobileMenu?.style.setProperty('opacity', '1');
-      });
-    }
-
-    menuIcon!.innerHTML = !isOpen
-      ? '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>'
-      : '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>';
+    const isOpen = navbar.classList.toggle('mobile-open');
+    mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
   });
 
-  mobileMenu?.querySelectorAll('a').forEach(link => {
+  // Close mobile menu when clicking a nav link
+  mobileMenu?.querySelectorAll('.mobile-link, .mobile-cta').forEach(link => {
     link.addEventListener('click', () => {
-      mobileMenu?.style.setProperty('max-height', '0');
-      mobileMenu?.style.setProperty('opacity', '0');
-      mobileMenuBtn?.setAttribute('aria-expanded', 'false');
-      setTimeout(() => mobileMenu?.classList.add('hidden'), 300);
+      navbar.classList.remove('mobile-open');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
     });
   });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-fade-in-up');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  // Scroll behavior — add scrolled class when past 80px
+  const handleScroll = () => {
+    if (window.scrollY > 80) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  };
 
-  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  // Run on load in case page starts scrolled
+  handleScroll();
 </script>

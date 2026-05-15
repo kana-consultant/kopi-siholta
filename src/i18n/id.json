@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "story": "Tentang Kami",
+    "products": "Produk",
+    "export": "Ekspor",
+    "partnership": "Kemitraan",
+    "tourism": "Pariwisata",
+    "contact": "Kontak",
+    "contactCTA": "Hubungi Kami"
+  },
+  "hero": {
+    "eyebrow": "PRODUSEN & EKSPORTIR SPECIALTY COFFEE #1 INDONESIA",
+    "headline": "Keindahan Danau Toba dalam Setiap Cangkir",
+    "sub": "Kopi Lintong Arabica Specialty dari Humbang Hasundutan, Sumatera Utara",
+    "cta_primary": "Lihat Produk",
+    "cta_secondary": "Chat WhatsApp"
+  },
+  "heritage": {
+    "label1": "Produsen Specialty #1",
+    "label2": "Negara Tujuan Ekspor",
+    "label3": "Volume Ekspor/Tahun",
+    "label4": "Hypermart Nasional"
+  },
+  "about": {
+    "title": "Warisan Kopi dari Tanah Toba",
+    "subtitle": "PT. Siholta Toba Indonesia lahir dari kecintaan terhadap kopi dan tanah Sumatera Utara yang subur. Kami berkomitmen menghasilkan kopi berkualitas premium.",
+    "heading": "Menghadirkan Kelezatan Kopi Lintong untuk Dunia",
+    "body": "Kopi Lintong telah mengukuhkan posisinya sebagai salah satu kopi specialty terbaik dari Sumatera. Berasal dari dataran tinggi Lintong Nihuta, kopi ini menawarkan karakteristik unik yang memadukan aroma rempah (spicy), herba, serta sentuhan kacang dan cokelat yang memikat."
+  },
+  "products": {
+    "title": "Berkualitas Pilihan Kopi",
+    "subtitle": "Dari biji utuh hingga giling halus, hingga hampers hadiah, kami menyediakan berbagai pilihan untuk kebutuhan Anda.",
+    "cta": "Hubungi untuk Penawaran Menarik",
+    "wholesale": "Butuh jumlah besar untuk bisnis?"
+  },
+  "export": {
+    "eyebrow": "Jangkauan Global",
+    "title": "Kopi Siholta Pasar Dunia",
+    "subtitle": "Telah dipercaya oleh importir dan distributor di berbagai negara.",
+    "market_title": "Negara Tujuan Ekspor",
+    "target_eyebrow": "Target Ekspor 2026",
+    "target_heading": "Rambah Pasar China & Australia",
+    "target_body": "Dalam roadmap pertumbuhan 2026, Kopi Siholta menetapkan China dan Australia sebagai pasar baru strategis."
+  },
+  "partnership": {
+    "eyebrow": "Bergabung Bersama Kami",
+    "title": "Berkolaborasi",
+    "subtitle": "Terbuka untuk berbagai bentuk kerja sama — dari supplied kopi hingga franchise kedai kopi.",
+    "benefits_title": "Keuntungan Menjadi Mitra",
+    "cta": "Hubungi Kami Sekarang"
+  },
+  "tourism": {
+    "eyebrow": "Coffee Tourism",
+    "title": "Rasakan Langsung Kesan­tunan Danau Toba",
+    "subtitle": "Kunjungi kebun kopi kami di Lintong Nihuta dan rasakan pengalaman unik menyeduh kopi sambil menikmati pemandangan Danau Toba yang memukau."
+  },
+  "contact": {
+    "title": "Tertarik untuk Berkontribusi?",
+    "subtitle": "Jangan ragu untuk menghubungi kami. Tim Kopi Siholta siap membantu Anda menemukan solusi kopi yang tepat.",
+    "form_title": "Kirim Pesan",
+    "chat": "Chat WhatsApp",
+    "chat_sub": "Respon cepat, biasanya dalam 1x24 jam",
+    "office_address": "Alamat Kantor",
+    "jakarta_store": "Toko Jakarta",
+    "phone": "Nomor Telepon",
+    "email": "Email",
+    "hours": "Jam Operasional",
+    "online_store": "Toko Online",
+    "map_title": "Lokasi Kami"
+  },
+  "footer": {
+    "brand_desc": "Kopi Lintong asli Sumatera Utara. Menghadirkan kelezatan dan kehangatan dari lereng Danau Toba dalam setiap cangkir.",
+    "nav_title": "Navigasi",
+    "products_title": "Produk",
+    "contact_title": "Kontak",
+    "newsletter_title": "Tetap Terhubung",
+    "newsletter_sub": "Dapatkan update terbaru tentang produk dan promo spesial.",
+    "subscribe": "Berlangganan",
+    "copyright": "PT. Siholta Toba Indonesia. All rights reserved."
+  },
+  "whatsapp": {
+    "tooltip": "Chat dengan Kami"
+  },
+  "form": {
+    "name": "Nama Lengkap",
+    "email": "Email",
+    "phone": "Nomor WhatsApp",
+    "subject": "Subjek",
+    "message": "Pesan",
+    "submit": "Kirim Pesan",
+    "success": "Pesan Terkirim! Kami akan segera menghubungi Anda.",
+    "placeholder_name": "Masukkan nama Anda",
+    "placeholder_email": "email@example.com",
+    "placeholder_phone": "+62 812 xxxx xxxx",
+    "placeholder_message": "Tulis pesan Anda di sini...",
+    "option_retail": "Pembelian Retail",
+    "option_wholesale": "Penawaran Wholesale",
+    "option_partnership": "Kerjasama Kemitraan",
+    "option_export": "Pertanyaan Ekspor",
+    "option_other": "Lainnya"
+  }
+}

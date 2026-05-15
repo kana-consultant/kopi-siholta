@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "story": "About Us",
+    "products": "Products",
+    "export": "Export",
+    "partnership": "Partnership",
+    "tourism": "Tourism",
+    "contact": "Contact",
+    "contactCTA": "Contact Us"
+  },
+  "hero": {
+    "eyebrow": "INDONESIA'S #1 SPECIALTY COFFEE PRODUCER & EXPORTER",
+    "headline": "The Beauty of Lake Toba in Every Cup",
+    "sub": "Lintong Arabica Specialty Coffee from Humbang Hasundutan, North Sumatra",
+    "cta_primary": "View Products",
+    "cta_secondary": "Chat on WhatsApp"
+  },
+  "heritage": {
+    "label1": "Specialty Producer #1",
+    "label2": "Export Destinations",
+    "label3": "Export Volume/Year",
+    "label4": "National Hypermarkets"
+  },
+  "about": {
+    "title": "A Coffee Legacy from Toba Land",
+    "subtitle": "PT. Siholta Toba Indonesia was born from a love of coffee and the fertile land of North Sumatra. We are committed to producing premium quality coffee.",
+    "heading": "Bringing Lintong Coffee Excellence to the World",
+    "body": "Lintong coffee has established itself as one of the finest specialty coffees from Sumatra. Grown in the highlands of Lintong Nihuta, this coffee offers unique characteristics combining spicy aroma, herbal notes, and captivating nutty and chocolate undertones."
+  },
+  "products": {
+    "title": "Premium Quality Selection",
+    "subtitle": "From whole beans to ground, and gift hampers, we offer a variety of choices for your needs.",
+    "cta": "Contact for Special Offers",
+    "wholesale": "Need bulk quantities for your business?"
+  },
+  "export": {
+    "eyebrow": "Global Reach",
+    "title": "Kopi Siholta Conquers World Markets",
+    "subtitle": "Trusted by importers and distributors across multiple countries.",
+    "market_title": "Export Destinations",
+    "target_eyebrow": "2026 Export Target",
+    "target_heading": "Expanding to China & Australia",
+    "target_body": "In our 2026 growth roadmap, Kopi Siholta has identified China and Australia as strategic new markets."
+  },
+  "partnership": {
+    "eyebrow": "Join Us",
+    "title": "Let's Collaborate",
+    "subtitle": "Open to various forms of partnership — from coffee supply to franchise coffee shops.",
+    "benefits_title": "Partner Benefits",
+    "cta": "Contact Us Now"
+  },
+  "tourism": {
+    "eyebrow": "Coffee Tourism",
+    "title": "Experience the Grandeur of Lake Toba Firsthand",
+    "subtitle": "Visit our coffee plantation in Lintong Nihuta and enjoy a unique experience of brewing coffee while gazing at the stunning views of Lake Toba."
+  },
+  "contact": {
+    "title": "Interested in Contributing?",
+    "subtitle": "Don't hesitate to reach out. The Kopi Siholta team is ready to help you find the perfect coffee solution.",
+    "form_title": "Send a Message",
+    "chat": "WhatsApp Chat",
+    "chat_sub": "Fast response, typically within 24 hours",
+    "office_address": "Office Address",
+    "jakarta_store": "Jakarta Store",
+    "phone": "Phone Number",
+    "email": "Email",
+    "hours": "Business Hours",
+    "online_store": "Online Store",
+    "map_title": "Our Locations"
+  },
+  "footer": {
+    "brand_desc": "Authentic Lintong Coffee from North Sumatra. Bringing the richness and warmth of Lake Toba's slopes into every cup.",
+    "nav_title": "Navigation",
+    "products_title": "Products",
+    "contact_title": "Contact",
+    "newsletter_title": "Stay Connected",
+    "newsletter_sub": "Get the latest updates on products and special promotions.",
+    "subscribe": "Subscribe",
+    "copyright": "PT. Siholta Toba Indonesia. All rights reserved."
+  },
+  "whatsapp": {
+    "tooltip": "Chat with Us"
+  },
+  "form": {
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "WhatsApp Number",
+    "subject": "Subject",
+    "message": "Message",
+    "submit": "Send Message",
+    "success": "Message Sent! We will contact you shortly.",
+    "placeholder_name": "Enter your name",
+    "placeholder_email": "email@example.com",
+    "placeholder_phone": "+62 812 xxxx xxxx",
+    "placeholder_message": "Write your message here...",
+    "option_retail": "Retail Purchase",
+    "option_wholesale": "Wholesale Offer",
+    "option_partnership": "Partnership Cooperation",
+    "option_export": "Export Inquiry",
+    "option_other": "Other"
+  }
+}

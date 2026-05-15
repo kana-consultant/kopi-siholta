@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "story": "Notre Histoire",
+    "products": "Produits",
+    "export": "Export",
+    "partnership": "Partenariat",
+    "tourism": "Tourisme",
+    "contact": "Contact",
+    "contactCTA": "Contactez-nous"
+  },
+  "hero": {
+    "eyebrow": "1ER PRODUCTEUR & EXPORTATEUR DE CAFÉ SPECIALTY EN INDONÉSIE",
+    "headline": "La Beauté du Lac Toba dans Chaque Tasse",
+    "sub": "Café Arabica Lintong Specialty de Humbang Hasundutan, Sumatra du Nord",
+    "cta_primary": "Voir les Produits",
+    "cta_secondary": "Contacter via WhatsApp"
+  },
+  "heritage": {
+    "label1": "Producteur Specialty #1",
+    "label2": "Destinations d'Export",
+    "label3": "Volume d'Export/An",
+    "label4": "Hypermarchés Nationaux"
+  },
+  "about": {
+    "title": "Un Héritage Café du Pays Toba",
+    "subtitle": "PT. Siholta Toba Indonesia est née d'une passion pour le café et les terres fertiles de Sumatra du Nord. Nous nous engageons à produire un café de qualité premium.",
+    "heading": "Apporter l'Excellence du Café Lintong au Monde",
+    "body": "Le café Lintong s'est imposé comme l'un des meilleurs cafés specialty de Sumatra. Cultivé dans les hauts plateaux de Lintong Nihuta, ce café offre des caractéristiques uniques alliant arôme épicé, notes herbacées et subtils arômes de noix et de chocolat."
+  },
+  "products": {
+    "title": "Sélection de Qualité Premium",
+    "subtitle": "Des grains entiers au café moulu, en passant par les coffrets cadeaux, nous proposons une variété de choix pour répondre à vos besoins.",
+    "cta": "Contactez-nous pour des Offres Spéciales",
+    "wholesale": "Besoin de grandes quantités pour votre entreprise?"
+  },
+  "export": {
+    "eyebrow": "Portée Mondiale",
+    "title": "Kopi Siholta Conquiert les Marchés Mondiaux",
+    "subtitle": "Approuvé par des importateurs et distributeurs à travers le monde.",
+    "market_title": "Destinations d'Export",
+    "target_eyebrow": "Objectif Export 2026",
+    "target_heading": "Expansion vers la Chine et l'Australie",
+    "target_body": "Dans notre feuille de route de croissance 2026, Kopi Siholta a identifié la Chine et l'Australie comme de nouveaux marchés stratégiques."
+  },
+  "partnership": {
+    "eyebrow": "Rejoignez-nous",
+    "title": "Collaborons Ensemble",
+    "subtitle": "Ouverts à diverses formes de partenariat — de la fourniture de café aux franchises de salons de café.",
+    "benefits_title": "Avantages Partenaires",
+    "cta": "Contactez-nous Maintenant"
+  },
+  "tourism": {
+    "eyebrow": "Tourisme Café",
+    "title": "Vivez l'Grandeur du Lac Toba",
+    "subtitle": "Visitez notre plantation de café à Lintong Nihuta et profitez d'une expérience unique de préparation du café tout en admirant les vues imprenables sur le lac Toba."
+  },
+  "contact": {
+    "title": "Intéressé à Contribuer?",
+    "subtitle": "N'hésitez pas à nous contacter. L'équipe Kopi Siholta est prête à vous aider à trouver la solution café idéale.",
+    "form_title": "Envoyer un Message",
+    "chat": "Chat WhatsApp",
+    "chat_sub": "Réponse rapide, généralement sous 24h",
+    "office_address": "Adresse du Bureau",
+    "jakarta_store": "Boutique Jakarta",
+    "phone": "Numéro de Téléphone",
+    "email": "Email",
+    "hours": "Heures d'Ouverture",
+    "online_store": "Boutique en Ligne",
+    "map_title": "Nos Emplacements"
+  },
+  "footer": {
+    "brand_desc": "Café Lintong authentique de Sumatra du Nord. Apportant la richesse et la chaleur des pentes du lac Toba dans chaque tasse.",
+    "nav_title": "Navigation",
+    "products_title": "Produits",
+    "contact_title": "Contact",
+    "newsletter_title": "Restez Connecté",
+    "newsletter_sub": "Recevez les dernières nouvelles sur les produits et promotions spéciales.",
+    "subscribe": "S'abonner",
+    "copyright": "PT. Siholta Toba Indonesia. Tous droits réservés."
+  },
+  "whatsapp": {
+    "tooltip": "Discutez avec Nous"
+  },
+  "form": {
+    "name": "Nom Complet",
+    "email": "Email",
+    "phone": "Numéro WhatsApp",
+    "subject": "Sujet",
+    "message": "Message",
+    "submit": "Envoyer le Message",
+    "success": "Message Envoyé! Nous vous contacterons bientôt.",
+    "placeholder_name": "Entrez votre nom",
+    "placeholder_email": "email@example.com",
+    "placeholder_phone": "+62 812 xxxx xxxx",
+    "placeholder_message": "Écrivez votre message ici...",
+    "option_retail": "Achat au Détail",
+    "option_wholesale": "Offre Grossiste",
+    "option_partnership": "Coopération en Partenariat",
+    "option_export": "Demande d'Export",
+    "option_other": "Autre"
+  }
+}

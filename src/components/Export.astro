@@ -1,99 +1,565 @@
 ---
-import { TrendingUp, Award, ArrowRight, Plane } from 'lucide-astro';
-
+// ─── Data ──────────────────────────────────────────────────────────────────────
 const markets = [
-  { country: 'Korea Selatan', flag: '🇰🇷', status: 'Aktif' },
-  { country: 'Jepang', flag: '🇯🇵', status: 'Aktif' },
-  { country: 'Belanda', flag: '🇳🇱', status: 'Aktif' },
-  { country: 'Jerman', flag: '🇩🇪', status: 'Aktif' },
-  { country: 'Rusia', flag: '🇷🇺', status: 'Aktif' },
-  { country: 'Amerika Serikat', flag: '🇺🇸', status: 'Aktif' },
-  { country: 'China', flag: '🇨🇳', status: 'Target 2026' },
-  { country: 'Australia', flag: '🇦🇺', status: 'Target 2026' }
+  { country: "Korea Selatan",  flag: "🇰🇷", status: "Aktif" },
+  { country: "Jepang",         flag: "🇯🇵", status: "Aktif" },
+  { country: "Belanda",         flag: "🇳🇱", status: "Aktif" },
+  { country: "Jerman",          flag: "🇩🇪", status: "Aktif" },
+  { country: "Rusia",           flag: "🇷🇺", status: "Aktif" },
+  { country: "Amerika Serikat", flag: "🇺🇸", status: "Aktif" },
+  { country: "China",           flag: "🇨🇳", status: "Target 2026" },
+  { country: "Australia",       flag: "🇦🇺", status: "Target 2026" },
 ];
 
 const achievements = [
-  { value: '6+', label: 'Negara Tujuan Ekspor' },
-  { value: '50+', label: 'Importir & Distributor' },
-  { value: '100 Ton', label: 'Volume Ekspor/Tahun' },
-  { value: '99%', label: 'Klien Puas' }
+  { value: 6,    suffix: "+",  label: "Negara Tujuan Ekspor" },
+  { value: 50,   suffix: "+",  label: "Importir & Distributor" },
+  { value: 100,  suffix: " Ton", label: "Volume Ekspor/Tahun" },
+  { value: 99,   suffix: "%",  label: "Klien Puas" },
 ];
 ---
 
-<section id="ekspor" class="section-padding bg-[var(--color-cream)] relative overflow-hidden">
-  <div class="absolute inset-0">
-    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[var(--color-gold)]/5 to-transparent"></div>
-  </div>
+<section id="ekspor" class="ekspor-section reveal-on-scroll">
+  <!-- Decorative top-right glow -->
+  <div class="ekspor-glow" aria-hidden="true"></div>
 
-  <div class="container-custom relative">
-    <!-- Header -->
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="section-title">
-        Merambah
-        <span class="text-gradient">Pasar Dunia</span>
+  <div class="ekspor-container">
+
+    <!-- ── Header ── -->
+    <header class="ekspor-header">
+      <p class="ekspor-eyebrow">Jangkauan Global</p>
+      <h2 class="ekspor-title">
+        Kopi Siholta&nbsp;
+        <span class="ekspor-title-accent">Pasar Dunia</span>
       </h2>
-      <p class="section-subtitle mx-auto">
-        Kopi Siholta telah menembus pasar internasional dan terus berkembang. Komitmen kami adalah menghadirkan kopi specialty Indonesia ke seluruh dunia.
+      <p class="ekspor-subtitle">
+        Telah dipercaya oleh importir dan distributor di berbagai negara,
+        membangun kehadiran merek Indonesia di panggung internasional.
       </p>
-    </div>
+    </header>
 
-    <!-- Stats -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-12 sm:mb-16">
-      {achievements.map((stat, index) => (
-        <div class="text-center p-4 sm:p-6 bg-white rounded-xl sm:rounded-2xl shadow-lg shadow-hover card-transition animate-on-scroll">
-          <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-[var(--color-red)] mb-1 sm:mb-2">{stat.value}</div>
-          <div class="text-xs sm:text-sm text-[var(--color-roasted)]/70 font-medium">{stat.label}</div>
+    <!-- ── Stats Grid ── -->
+    <div class="ekspor-stats">
+      {achievements.map((a, i) => (
+        <div class={`ekspor-stat-card stat-card-${i + 1}`} key={a.label}>
+          <div class="ekspor-stat-top-accent"></div>
+          <div
+            class="ekspor-stat-number stat-number"
+            data-target={a.value}
+            data-suffix={a.suffix}
+          >
+            0{a.suffix}
+          </div>
+          <div class="ekspor-stat-label">{a.label}</div>
         </div>
       ))}
     </div>
 
-    <!-- Market List -->
-    <div class="max-w-4xl mx-auto mb-16">
-      <div class="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--color-red)]/10 flex items-center justify-center flex-shrink-0">
-          <TrendingUp class="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-red)]" />
-        </div>
-        <div>
-          <h3 class="text-lg sm:text-xl md:text-2xl font-display font-bold text-[var(--color-dark-brown)] leading-tight">Jangkauan Global</h3>
-          <p class="text-sm sm:text-base text-[var(--color-roasted)]/70">Mencapai 6+ negara di berbagai benua</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
-        {markets.map((market) => (
-          <div class="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white rounded-lg sm:rounded-xl shadow-md shadow-hover card-transition cursor-pointer">
-            <span class="text-xl sm:text-2xl">{market.flag}</span>
-            <div class="flex-1 min-w-0">
-              <div class="font-semibold text-[var(--color-dark-brown)] text-xs sm:text-sm truncate">{market.country}</div>
-              <div class={`text-xs font-medium ${market.status === 'Aktif' ? 'text-[var(--color-green)]' : 'text-[var(--color-blue)]'}`}>
-                {market.status}
-              </div>
+    <!-- ── Market Section ── -->
+    <div class="ekspor-market reveal-on-scroll">
+      <h3 class="ekspor-market-title">Negara Tujuan Ekspor</h3>
+      <div class="ekspor-market-grid">
+        {markets.map((m, i) => (
+          <div class={`ekspor-market-card market-card-${i + 1}`} key={m.country}>
+            <span class="ekspor-market-flag">{m.flag}</span>
+            <div class="ekspor-market-info">
+              <span class="ekspor-market-country">{m.country}</span>
+              <span class={`ekspor-market-badge ${m.status === "Aktif" ? "badge-aktif" : "badge-target"}`}>
+                {m.status}
+              </span>
             </div>
           </div>
         ))}
       </div>
+    </div>
 
-      <div class="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 bg-gradient-to-r from-[var(--color-gold)]/10 to-[var(--color-red)]/10 rounded-xl sm:rounded-2xl border border-[var(--color-gold)]/20">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[var(--color-gold)] flex items-center justify-center flex-shrink-0">
-          <Award class="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-dark-brown)]" />
+    <!-- ── Target 2026 Banner ── -->
+    <div class="ekspor-target reveal-on-scroll">
+      <div class="ekspor-target-glow" aria-hidden="true"></div>
+
+      <div class="ekspor-target-content">
+        <!-- Trophy icon -->
+        <div class="ekspor-target-icon" aria-hidden="true">🏆</div>
+
+        <!-- Text -->
+        <div class="ekspor-target-text">
+          <p class="ekspor-target-eyebrow">Target Ekspor 2026</p>
+          <h3 class="ekspor-target-heading">Rambah Pasar China &amp; Australia</h3>
+          <p class="ekspor-target-body">
+            Dalam roadmap pertumbuhan 2026, Kopi Siholta menetapkan China dan
+            Australia sebagai pasar baru strategis untuk memperluas jangkauan
+            global dan memperkenalkan cita rasa kopi Mandailing terbaik.
+          </p>
         </div>
-        <div>
-          <div class="font-display font-bold text-[var(--color-dark-brown)]">Target Ekspor 2026</div>
-          <p class="text-sm text-[var(--color-roasted)]/70">Memperluas jaringan ke China, Australia, dan negara-negara Asia Tenggara</p>
-        </div>
+
+        <!-- CTA -->
+        <a href="#kontak" class="ekspor-target-cta">
+          Hubungi Kami
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
 
-    <!-- CTA -->
-    <div class="text-center">
-      <a
-        href="#kontak"
-        class="inline-flex items-center gap-3 px-8 py-4 bg-[var(--color-roasted)] text-[var(--color-cream)] font-semibold rounded-full hover:bg-[var(--color-warm)] transition-colors group"
-      >
-        <Plane class="w-5 h-5" />
-        <span>Jadilah Mitra Ekspor Kami</span>
-        <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-      </a>
-    </div>
   </div>
 </section>
+
+<style>
+  /* ── Section ── */
+  .ekspor-section {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-cream);
+    padding: 6rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .ekspor-section { padding: 8rem 2rem; }
+  }
+
+  /* ── Decorative glow ── */
+  .ekspor-glow {
+    position: absolute;
+    top: -6rem;
+    right: -6rem;
+    width: 24rem;
+    height: 24rem;
+    background: radial-gradient(circle, rgba(243,183,0,0.08) 0%, transparent 70%);
+    border-radius: 9999px;
+    pointer-events: none;
+    filter: blur(3rem);
+  }
+
+  /* ── Container ── */
+  .ekspor-container {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .ekspor-container { padding: 0 2rem; }
+  }
+
+  /* ── Header ── */
+  .ekspor-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .ekspor-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 0.75rem;
+  }
+
+  .ekspor-title {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--color-dark-brown);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .ekspor-title-accent {
+    background: linear-gradient(135deg, var(--color-gold), var(--color-roasted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .ekspor-subtitle {
+    font-size: 1rem;
+    color: var(--color-roasted);
+    opacity: 0.8;
+    max-width: 36rem;
+    margin: 0 auto;
+    line-height: 1.75;
+  }
+
+  @media (min-width: 768px) {
+    .ekspor-subtitle { font-size: 1.125rem; }
+  }
+
+  /* ── Stats Grid ── */
+  .ekspor-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .ekspor-stats {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  .ekspor-stat-card {
+    position: relative;
+    background: var(--color-dark-brown);
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .ekspor-stat-card { padding: 2rem 1.5rem; }
+  }
+
+  /* Gold top accent — 2px gradient bar */
+  .ekspor-stat-top-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-roasted));
+  }
+
+  /* Stagger reveal delays */
+  .ekspor-stat-card.stat-card-1 { transition-delay: 0ms; }
+  .ekspor-stat-card.stat-card-2 { transition-delay: 100ms; }
+  .ekspor-stat-card.stat-card-3 { transition-delay: 200ms; }
+  .ekspor-stat-card.stat-card-4 { transition-delay: 300ms; }
+
+  .ekspor-stat-number {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-roasted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: var(--color-gold); /* fallback */
+  }
+
+  .ekspor-stat-label {
+    font-size: 0.875rem;
+    color: var(--color-cream);
+    opacity: 0.7;
+    font-weight: 500;
+  }
+
+  /* ── Market Section ── */
+  .ekspor-market {
+    margin-bottom: 4rem;
+  }
+
+  .ekspor-market-title {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-dark-brown);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .ekspor-market-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .ekspor-market-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Stagger reveal delays for market cards */
+  .ekspor-market-card.market-card-1 { transition-delay: 0ms; }
+  .ekspor-market-card.market-card-2 { transition-delay: 60ms; }
+  .ekspor-market-card.market-card-3 { transition-delay: 120ms; }
+  .ekspor-market-card.market-card-4 { transition-delay: 180ms; }
+  .ekspor-market-card.market-card-5 { transition-delay: 240ms; }
+  .ekspor-market-card.market-card-6 { transition-delay: 300ms; }
+  .ekspor-market-card.market-card-7 { transition-delay: 360ms; }
+  .ekspor-market-card.market-card-8 { transition-delay: 420ms; }
+
+  .ekspor-market-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #fff;
+    border-radius: 0.75rem;
+    padding: 1.25rem 1rem;
+    box-shadow: 0 2px 12px rgba(28,15,7,0.06);
+    border: 1px solid rgba(243,183,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ekspor-market-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(28,15,7,0.12);
+  }
+
+  .ekspor-market-flag {
+    font-size: 1.75rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .ekspor-market-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ekspor-market-country {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-dark-brown);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ekspor-market-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-radius: 9999px;
+    padding: 0.15rem 0.6rem;
+    width: fit-content;
+  }
+
+  .ekspor-market-badge.badge-aktif {
+    background: rgba(42,123,64,0.1);
+    color: var(--color-green);
+  }
+
+  .ekspor-market-badge.badge-target {
+    background: rgba(53,114,158,0.1);
+    color: var(--color-blue);
+  }
+
+  /* ── Target 2026 Banner ── */
+  .ekspor-target {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-roasted);
+    border-radius: 1.25rem;
+    padding: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .ekspor-target { padding: 3rem; }
+  }
+
+  .ekspor-target-glow {
+    position: absolute;
+    right: -5rem;
+    top: -5rem;
+    width: 16rem;
+    height: 16rem;
+    background: radial-gradient(circle, rgba(243,183,0,0.12) 0%, transparent 70%);
+    border-radius: 9999px;
+    pointer-events: none;
+  }
+
+  .ekspor-target-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .ekspor-target-content {
+      flex-direction: row;
+      gap: 3rem;
+    }
+  }
+
+  .ekspor-target-icon {
+    font-size: 3rem;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-gold), #c99800);
+    border-radius: 50%;
+    box-shadow: 0 4px 16px rgba(243,183,0,0.3);
+    font-size: 2.25rem;
+  }
+
+  .ekspor-target-text {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .ekspor-target-text { text-align: left; }
+  }
+
+  .ekspor-target-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: 0.5rem;
+  }
+
+  .ekspor-target-heading {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .ekspor-target-heading { font-size: 1.5rem; }
+  }
+
+  .ekspor-target-body {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.65;
+    max-width: 28rem;
+  }
+
+  .ekspor-target-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: var(--color-gold);
+    color: var(--color-dark-brown);
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(243,183,0,0.3);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .ekspor-target-cta:hover {
+    box-shadow: 0 6px 24px rgba(243,183,0,0.45);
+    transform: translateY(-2px);
+  }
+
+  .ekspor-target-cta:active {
+    transform: translateY(0);
+  }
+
+  /* ── Scroll Reveal ── */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+                transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stat cards use reveal-on-scroll, override transform per child */
+  .ekspor-stat-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+                transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  .ekspor-stat-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ekspor-market-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
+                transform 0.5s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  .ekspor-market-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // ── Scroll Reveal ─────────────────────────────────────────────────────────────
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -80px 0px" }
+  );
+
+  document.querySelectorAll(".reveal-on-scroll, .ekspor-stat-card, .ekspor-market-card").forEach((el) => {
+    revealObserver.observe(el);
+  });
+
+  // ── Animated Counters ─────────────────────────────────────────────────────────
+  const counterObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          const target = parseFloat(el.dataset.target || "0");
+          const suffix = el.dataset.suffix || "";
+          const isInteger = Number.isInteger(target);
+
+          let start = 0;
+          const duration = 1800;
+          const startTime = performance.now();
+
+          const animate = (currentTime: number) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Cubic ease-out
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = eased * target;
+
+            el.textContent =
+              (isInteger ? Math.round(current) : current.toFixed(1)) + suffix;
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+
+          requestAnimationFrame(animate);
+          counterObserver.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  document.querySelectorAll<HTMLElement>(".stat-number[data-target]").forEach((el) => {
+    counterObserver.observe(el);
+  });
+</script>
