@@ -5,6 +5,8 @@ import tokpedLogo from '../../images/logo/logo-tokopedia.png';
 import shopeeLogo from '../../images/logo/logo-shopee.png';
 import igLogo from '../../images/logo/logo-instagram.png';
 import waLogo from '../../images/logo/logo-whatsapp.png';
+import tiktokLogo from '../../images/logo/logo-tiktok.png';
+import linktreeLogo from '../../images/logo/logo-linktree.png';
 import { t } from '../../i18n/utils';
 
 interface Props {
@@ -16,6 +18,8 @@ const tr = t(lang);
 
 const TOKPED_URL = 'https://www.tokopedia.com/kopisiholta';
 const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
+const TIKTOK_URL = 'https://www.tiktok.com/@kopisiholta';
+const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
 const INSTAGRAM_URL = 'https://www.instagram.com/kopi_siholta.id/';
 const WHATSAPP_URL = 'https://wa.me/6281322518527';
 
@@ -24,6 +28,8 @@ const channels = [
   { nameKey: 'buyShopee'   as const, href: SHOPEE_URL,    color: '#EE4D2D', logo: shopeeLogo },
   { nameKey: 'buyInstagram' as const, href: INSTAGRAM_URL, color: '#C13584', logo: igLogo    },
   { nameKey: 'buyWhatsApp' as const, href: WHATSAPP_URL,  color: '#25D366', logo: waLogo    },
+  { nameKey: 'buyTiktok' as const, href: TIKTOK_URL,  color: '#25D366', logo: tiktokLogo    },
+  { nameKey: 'buyLinktree' as const, href: LINKTREE_URL,  color: '#25D366', logo: linktreeLogo    },
 ];
 ---
 

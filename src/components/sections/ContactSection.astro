@@ -5,6 +5,8 @@ import waLogo from '../../images/logo/logo-whatsapp.png';
 import tokpedLogo from '../../images/logo/logo-tokopedia.png';
 import shopeeLogo from '../../images/logo/logo-shopee.png';
 import igLogo from '../../images/logo/logo-instagram.png';
+import tiktokLogo from '../../images/logo/logo-tiktok.png';
+import linktreeLogo from '../../images/logo/logo-linktree.png';
 import { t } from '../../i18n/utils';
 
 interface Props {
@@ -23,6 +25,8 @@ const EMAIL = 'siholtatobaindonesia@gmail.com';
 const INSTAGRAM_URL = 'https://www.instagram.com/kopi_siholta.id/';
 const TOKPED_URL = 'https://www.tokopedia.com/kopisiholta';
 const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
+const TIKTOK_URL = 'https://www.tiktok.com/@kopisiholta';
+const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
 ---
 
 <section class="contact section" id="contact" aria-label="Contact Section">
@@ -38,6 +42,14 @@ const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
       <div class="contact__social-grid">
         <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="contact__social-card" aria-label={tr.contact.followInstagram}>
           <Image src={igLogo} alt="Instagram" width={20} height={20} />
+          <span>@kopi_siholta.id</span>
+        </a>
+        <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="contact__social-card" aria-label={tr.contact.followTiktok}>
+          <Image src={tiktokLogo} alt="Instagram" width={20} height={20} />
+          <span>@kopi_siholta.id</span>
+        </a>
+        <a href={LINKTREE_URL} target="_blank" rel="noopener noreferrer" class="contact__social-card" aria-label="Linktree">
+          <Image src={linktreeLogo} alt="Instagram" width={26} height={26} />
           <span>@kopi_siholta.id</span>
         </a>
         <a href={TOKPED_URL} target="_blank" rel="noopener noreferrer" class="contact__social-card" aria-label="Tokopedia">
