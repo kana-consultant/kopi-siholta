@@ -31,11 +31,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Alternate languages -->
-    <link rel="alternate" hreflang="id" href="/id/" />
-    <link rel="alternate" hreflang="en" href="/en/" />
-    <link rel="alternate" hreflang="fr" href="/fr/" />
-    <link rel="alternate" hreflang="x-default" href="/en/" />
+    <!-- Alternate languages — absolute URLs required per hreflang spec -->
+    <link rel="alternate" hreflang="id" href="https://kopisiholta.com/id/" />
+    <link rel="alternate" hreflang="en" href="https://kopisiholta.com/en/" />
+    <link rel="alternate" hreflang="fr" href="https://kopisiholta.com/fr/" />
+    <link rel="alternate" hreflang="x-default" href="https://kopisiholta.com/en/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -62,6 +62,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
     <!-- Font Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Async font load — prevents render-blocking, applied when ready -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" />
+    </noscript>
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({

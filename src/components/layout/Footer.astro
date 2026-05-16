@@ -49,9 +49,9 @@ const columns = [
   {
     title: 'Hubungi Kami',
     links: [
-      { label: EMAIL, href: `mailto:${EMAIL}` },
-      { label: '+62 813 2251 8527', href: WHATSAPP_URL },
-      { label: 'Lintong Nihuta, Sumatera Utara', href: WHATSAPP_URL },
+      { label: 'Email: siholtatobaindonesia@gmail.com', href: `mailto:${EMAIL}`, desc: 'Kirim email ke Kopi Siholta' },
+      { label: 'WhatsApp: +62 813 2251 8527', href: WHATSAPP_URL, desc: 'Hubungi via WhatsApp' },
+      { label: 'Kunjungi Lokasi Kami', href: WHATSAPP_URL, desc: 'Lihat lokasi kantor di Google Maps' },
     ],
   },
 ];
@@ -102,7 +102,8 @@ const columns = [
                   <a
                     href={link.href}
                     class="footer__link"
-                    target={link.href.startsWith('http') ? '_blank' : undefined}
+                    aria-label={link.desc}
+                    target={link.href.startsWith('http') || link.href.startsWith('mailto') ? '_blank' : undefined}
                     rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   >
                     {link.label}
@@ -122,9 +123,9 @@ const columns = [
     <div class="footer__bottom">
       <p class="footer__copyright">© 2025 PT. Siholta Toba Indonesia. Seluruh hak dilindungi.</p>
       <div class="footer__bottom-links">
-        <a href={`/${lang}/privacy`} class="footer__bottom-link">Kebijakan Privasi</a>
+        <a href={`/${lang}/privacy`} class="footer__bottom-link" aria-label="Kebijakan Privasi Kopi Siholta">Kebijakan Privasi</a>
         <span class="footer__bottom-sep" aria-hidden="true">·</span>
-        <a href={`/${lang}/terms`} class="footer__bottom-link">Syarat & Ketentuan</a>
+        <a href={`/${lang}/terms`} class="footer__bottom-link" aria-label="Syarat dan Ketentuan Kopi Siholta">Syarat & Ketentuan</a>
       </div>
     </div>
 

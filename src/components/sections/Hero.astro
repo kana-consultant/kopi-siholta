@@ -30,6 +30,7 @@ const slides = [
             alt={slide.alt}
             class="hero__slide-img"
             loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : undefined}
             widths={[480, 768, 1024, 1280, 1600, 1920]}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1600px"
           />
