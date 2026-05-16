@@ -1,0 +1,32 @@
+---
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const stats = [
+  { num: '6+', label: 'Countries' },
+  { num: '100T', label: 'Tons / Year' },
+  { num: '#1', label: 'Specialty Pioneer' },
+  { num: '2035', label: 'Vision' },
+  { num: '3', label: 'Business Sectors' },
+];
+---
+
+<div class="stats-ribbon" role="region" aria-label="Key Statistics">
+  <div class="stats-ribbon__inner container">
+    {stats.map((stat, i) => (
+      <>
+        <div class="stats-ribbon__item">
+          <span class="stats-ribbon__num">{stat.num}</span>
+          <span class="stats-ribbon__label">{stat.label}</span>
+        </div>
+        {i < stats.length - 1 && (
+          <div class="stats-ribbon__sep" aria-hidden="true"></div>
+        )}
+      </>
+    ))}
+  </div>
+</div>
+

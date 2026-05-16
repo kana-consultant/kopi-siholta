@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.102",
+    "@iconify-json/mdi": "^1.2.3",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.1.8",
     "astro-icon": "^1.1.5",

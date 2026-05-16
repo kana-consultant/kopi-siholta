@@ -1,0 +1,96 @@
+---
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import logo from '../images/logo/logo-kopi-siholta.png';
+
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+}
+
+const {
+  title = 'Kopi Siholta — Indonesia\'s Specialty Coffee Pioneer',
+  description = 'PT Siholta Toba Indonesia is Indonesia\'s first specialty coffee producer and exporter from Sumatera Lintong, Humbang Hasundutan, North Sumatra.',
+  lang = 'en',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiholta.com');
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Alternate languages — absolute URLs required per hreflang spec -->
+    <link rel="alternate" hreflang="id" href="https://kopisiholta.com/id/" />
+    <link rel="alternate" hreflang="en" href="https://kopisiholta.com/en/" />
+    <link rel="alternate" hreflang="fr" href="https://kopisiholta.com/fr/" />
+    <link rel="alternate" hreflang="x-default" href="https://kopisiholta.com/en/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content="https://kopisiholta.com/og.jpg" />
+    <meta property="og:locale" content={lang === 'id' ? 'id_ID' : lang === 'fr' ? 'fr_FR' : 'en_US'} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon — PNG via astro:assets (circular crop applied via border-radius) -->
+    <link rel="icon" type="image/png" href={logo.src} class="favicon-circular" />
+    <link rel="shortcut icon" type="image/x-icon" href={logo.src} class="favicon-circular" />
+    <style>
+      .favicon-circular {
+        border-radius: 50%;
+      }
+    </style>
+
+    <!-- Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Async font load — prevents render-blocking, applied when ready -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" />
+    </noscript>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "PT Siholta Toba Indonesia",
+      "alternateName": "Kopi Siholta",
+      "url": "https://kopisiholta.com",
+      "logo": "https://kopisiholta.com/logo.svg",
+      "description": "First specialty coffee producer and exporter from Sumatera Lintong, Indonesia.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Humbang Hasundutan",
+        "addressRegion": "North Sumatra",
+        "addressCountry": "ID"
+      },
+      "sameAs": [
+        "https://www.instagram.com/kopisiholta",
+        "https://www.tokopedia.com/kopisiholta",
+        "https://shopee.co.id/kopisiholta"
+      ]
+    })} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

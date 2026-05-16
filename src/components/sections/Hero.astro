@@ -1,0 +1,181 @@
+---
+import { Image } from 'astro:assets';
+import hero1 from '../../images/hero/hero-1.jpg';
+import hero2 from '../../images/hero/hero-2.jpg';
+import hero3 from '../../images/hero/hero-3.jpg';
+import hero4 from '../../images/hero/hero-4.jpg';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const slides = [
+  { img: hero1, alt: 'Kopi Siholta — Freshly harvested coffee cherries' },
+  { img: hero2, alt: 'Kopi Siholta — Sun-dried coffee beans on raised beds' },
+  { img: hero3, alt: 'Kopi Siholta — Barista crafting specialty coffee' },
+  { img: hero4, alt: 'Kopi Siholta — A warm cup of specialty coffee' },
+];
+---
+
+<section class="hero" aria-label="Hero — Kopi Siholta Introduction">
+  <!-- Background Carousel Layer -->
+  <div class="hero__carousel" aria-hidden="true">
+    <div class="hero__carousel-track" id="heroCarouselTrack">
+      {slides.map((slide, i) => (
+        <div class={`hero__slide ${i === 0 ? 'is-active' : ''}`} data-slide={i}>
+          <Image
+            src={slide.img}
+            alt={slide.alt}
+            class="hero__slide-img"
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : undefined}
+            widths={[480, 768, 1024, 1280, 1600, 1920]}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1600px"
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Dark Overlay — 28% opacity for readable content -->
+    <div class="hero__dark-overlay" aria-hidden="true"></div>
+
+    <!-- Red Brand Overlay -->
+    <div class="hero__overlay" aria-hidden="true"></div>
+
+    <!-- Dark Vignette Bottom -->
+    <div class="hero__vignette" aria-hidden="true"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="container hero__container">
+    <div class="hero__content">
+      <!-- Badge -->
+      <!-- <div class="badge badge--gold hero__badge animate-fade-in-up">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+          <path d="M5 0L6.18 3.09L9.51 3.09L6.91 5.01L7.85 8.09L5 6.2L2.15 8.09L3.09 5.01L0.49 3.09L3.82 3.09L5 0Z" fill="currentColor"/>
+        </svg>
+        Indonesia's First Specialty Coffee Producer &amp; Exporter
+      </div> -->
+
+      <!-- Title -->
+      <h1 class="hero__title animate-fade-in-up delay-100">
+        <span class="hero__title-line1">Taste the Beauty</span>
+        <span class="hero__title-line2">of <em>Lake Toba</em> in Every Cup</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="hero__subtitle animate-fade-in-up delay-200">
+        From the highlands of Sumatera Lintong to tables around the world — Kopi Siholta brings the authentic flavor of Humbang Hasundutan, North Sumatra, to your cup.
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero__ctas animate-fade-in-up delay-300">
+        <a href="#products" class="btn btn--primary hero__cta-primary">
+          Explore Products
+        </a>
+        <a href="#heritage" class="btn btn--outline hero__cta-secondary">
+          Our Story
+        </a>
+      </div>
+
+      <!-- Stats Preview -->
+      <div class="hero__stats-preview animate-fade-in-up delay-400">
+        <div class="hero__stat">
+          <span class="hero__stat-num">6+</span>
+          <span class="hero__stat-label">Countries</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">100</span>
+          <span class="hero__stat-label">Tons / Year</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">#1</span>
+          <span class="hero__stat-label">Speciality Pioneer</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">2035</span>
+          <span class="hero__stat-label">Vision</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">3</span>
+          <span class="hero__stat-label">Bussiness Sector</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide Indicators -->
+    <div class="hero__indicators" role="tablist" aria-label="Background slide navigation">
+      {slides.map((_, i) => (
+        <button
+          class={`hero__indicator ${i === 0 ? 'is-active' : ''}`}
+          data-slide={i}
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          aria-label={`Slide ${i + 1} of ${slides.length}`}
+        ></button>
+      ))}
+    </div>
+  </div>
+
+</section>
+
+<script>
+  (function() {
+    const SLIDE_INTERVAL = 5000;
+    const slides = document.querySelectorAll<HTMLElement>('.hero__slide');
+    const indicators = document.querySelectorAll<HTMLElement>('.hero__indicator');
+    let currentSlide = 0;
+    let timer: ReturnType<typeof setInterval> | null = null;
+
+    function goToSlide(index: number) {
+      slides.forEach((s, i) => {
+        s.classList.toggle('is-active', i === index);
+      });
+      indicators.forEach((ind, i) => {
+        ind.classList.toggle('is-active', i === index);
+        ind.setAttribute('aria-selected', String(i === index));
+      });
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      goToSlide((currentSlide + 1) % slides.length);
+    }
+
+    function startTimer() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(nextSlide, SLIDE_INTERVAL);
+    }
+
+    // Click indicators
+    indicators.forEach(ind => {
+      ind.addEventListener('click', () => {
+        const idx = parseInt(ind.dataset.slide ?? '0', 10);
+        goToSlide(idx);
+        startTimer();
+      });
+    });
+
+    // Keyboard accessible
+    indicators.forEach(ind => {
+      ind.addEventListener('keydown', (e: Event) => {
+        const ke = e as KeyboardEvent;
+        if (ke.key === 'ArrowRight') {
+          goToSlide((currentSlide + 1) % slides.length);
+          startTimer();
+        } else if (ke.key === 'ArrowLeft') {
+          goToSlide((currentSlide - 1 + slides.length) % slides.length);
+          startTimer();
+        }
+      });
+    });
+
+    startTimer();
+  })();
+</script>
