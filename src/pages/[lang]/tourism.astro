@@ -6,17 +6,21 @@ import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
 import tourismBg from '../../images/bg/bg-tourism.jpg';
-import h1 from '../../images/heritage/heritage-1.jpg';
-import h2 from '../../images/heritage/heritage-2.jpg';
-import h3 from '../../images/heritage/heritage-3.jpg';
-import h4 from '../../images/heritage/heritage-4.jpg';
-import h5 from '../../images/heritage/heritage-5.jpg';
+import t1Farm from '../../images/tourism/coffee-plantation.jpg';
+import t2Factory from '../../images/tourism/cup-and-test.jpg';
+import t3Cup from '../../images/tourism/menara-pandang-tele.jpg';
+import tThumb1 from '../../images/tourism/samosir-island.jpg';
+import tThumb2 from '../../images/tourism/Danau\ Toba.jpg';
+import tThumb3 from '../../images/tourism/rumah-bolon.jpg';
+import { useTranslations } from '../../i18n/utils';
 
-interface Props {
-  lang?: 'id' | 'en' | 'fr';
-}
+interface Props { lang?: 'id' | 'en' | 'fr'; }
 
 const { lang = 'id' } = Astro.props;
+const t = useTranslations(lang);
+
+/** Replace newlines with <br> tags — used with set:html */
+const nl = (s: string) => s.split('\n').join('<br>');
 
 export function getStaticPaths() {
   return [
@@ -26,62 +30,39 @@ export function getStaticPaths() {
   ];
 }
 
-const breadcrumb = {
-  id: { home: 'Beranda', company: 'Tentang Kami', page: 'Wisata Kopi' },
-  en: { home: 'Home', company: 'About Us', page: 'Coffee Tourism' },
-  fr: { home: 'Accueil', company: 'À Propos', page: 'Tourisme Café' },
-};
-const t = breadcrumb[lang] ?? breadcrumb.id;
-
 const experiences = [
   {
     num: '01',
-    label: 'Pengalaman Pertama',
-    title: 'Farm Tour',
-    subtitle: 'Dari Pohon ke Cangkir',
-    desc: 'Telusuri perkebunan kopi kami yang membentang di lereng Sumatera Utara. Ikuti tangan kami saat memetik buah merah yang matang sempurna, dan saksikan bagaimana alam bekerja sama dengan tradisi untuk menghasilkan kopi specialty.',
-    details: ['Durasi: 2–3 jam', 'Maksimal 15 tamu per sesi', 'Termasuk simulasi panen', 'Guide bersertifikat lokal'],
-    img: h1,
-    imgAlt: 'Pengunjung menelusuri perkebunan kopi di Lintong Nihuta',
-    reverse: false,
+    labelKey: 'exp1Label', titleKey: 'exp1Title', subtitleKey: 'exp1Subtitle',
+    descKey: 'exp1Desc',
+    detailsKey: ['exp1Detail1', 'exp1Detail2', 'exp1Detail3', 'exp1Detail4'],
+    img: t1Farm, imgAltKey: 'altFarm', thumb: tThumb1,
   },
   {
     num: '02',
-    label: 'Proses Inti',
-    title: 'Factory Tour',
-    subtitle: 'Giling Basah & Penjemuran',
-    desc: 'Perhatikan bagaimana biji kopi diproses menggunakan metode Giling Basah — teknik tradisional yang telah dipertahankan selama puluhan tahun dan menjadi ciri autentik Kopi Lintong.',
-    details: ['Durasi: 1.5–2 jam', 'Demonstrasi Pengolahan', 'Demonstrasi penjemuran', 'Waktu terbaik: pagi–siang'],
-    img: h2,
-    imgAlt: 'Proses pengolahan kopi Giling Basah di fasilitas PT Siholta',
-    reverse: true,
+    labelKey: 'exp2Label', titleKey: 'exp2Title', subtitleKey: 'exp2Subtitle',
+    descKey: 'exp2Desc',
+    detailsKey: ['exp2Detail1', 'exp2Detail2', 'exp2Detail3'],
+    img: t2Factory, imgAltKey: 'altFactory', thumb: tThumb2,
   },
   {
     num: '03',
-    label: 'Puncak Pengalaman',
-    title: 'Cupping & Tasting',
-    subtitle: 'Rasakan Profil Rasa',
-    desc: 'Ruang tasting kami dirancang untuk mengajak Anda menyelami kompleksitas rasa kopi specialty — dari catatan rempah hingga fruity, floral, hingga cokelat dalam satu tegukan.',
-    details: ['Durasi: 1–1.5 jam', 'Sesi kelompok maks 8 orang', '3 varian kopi berbeda', 'Sertifikat hadiah pengalaman'],
-    img: h3,
-    imgAlt: 'Tamu melakukan cupping dan tasting kopi specialty di ruang degistif Kopi Siholta',
-    reverse: false,
+    labelKey: 'exp3Label', titleKey: 'exp3Title', subtitleKey: 'exp3Subtitle',
+    descKey: 'exp3Desc',
+    detailsKey: ['exp3Detail1', 'exp3Detail2', 'exp3Detail3', 'exp3Detail4'],
+    img: t3Cup, imgAltKey: 'altCupping', thumb: tThumb3,
   },
 ];
 
 const stats = [
-  { value: '1.200 mdpl', label: 'Ketinggian Perkebunan' },
-  { value: '200+', label: 'Keluarga Petani' },
-  { value: '6+', label: 'Negara Tujuan Ekspor' },
-  { value: '2019', label: 'Tahun Berdiri' },
+  { valueKey: 'statAlt',      labelKey: 'statAlt'      },
+  { valueKey: 'statFamilies', labelKey: 'statFamilies' },
+  { valueKey: 'statCountries', labelKey: 'statCountries' },
+  { valueKey: 'statFounded',  labelKey: 'statFounded'  },
 ];
 ---
 
-<Base
-  title="Wisata Kopi — Kopi Siholta"
-  description="Rasakan pengalaman wisata kopi autentik dari perkebunan hingga cangkir di Kopi Siholta, Humbang Hasundutan, Sumatera Utara."
-  lang={lang}
->
+<Base title={t.meta.titleTourism} description={t.meta.descTourism} lang={lang}>
   <Navbar lang={lang} />
 
   <!-- ── Hero ─────────────────────────────────────────── -->
@@ -89,7 +70,7 @@ const stats = [
     <div class="page-hero__bg">
       <Image
         src={tourismBg}
-        alt="Pemandangan perkebunan kopi Siholta di lereng Sumatera Utara"
+        alt={t.tourism.images?.altFarm ?? ''}
         class="page-hero__img"
         style="object-position: center 35%"
         loading="eager"
@@ -102,35 +83,24 @@ const stats = [
     <div class="container page-hero__inner">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <ol class="breadcrumb__list">
-          <li class="breadcrumb__item">
-            <a href={`/${lang}/`} class="breadcrumb__link">{t.home}</a>
-          </li>
-          <li class="breadcrumb__sep" aria-hidden="true">
-            <Icon name="mdi:chevron-right" width="10" height="10" />
-          </li>
-          <li class="breadcrumb__item">
-            <a href={`/${lang}/company`} class="breadcrumb__link">{t.company}</a>
-          </li>
-          <li class="breadcrumb__sep" aria-hidden="true">
-            <Icon name="mdi:chevron-right" width="10" height="10" />
-          </li>
-          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">
-            {t.page}
-          </li>
+          <li class="breadcrumb__item"><a href={`/${lang}/`} class="breadcrumb__link">{t.breadcrumb.home}</a></li>
+          <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
+          <li class="breadcrumb__item"><a href={`/${lang}/company`} class="breadcrumb__link">{t.breadcrumb.company}</a></li>
+          <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
+          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">{t.tourism.page}</li>
         </ol>
       </nav>
 
       <div class="page-hero__content">
-        <p class="page-hero__label">Wisata Kopi Experience</p>
-        <h1 class="page-hero__title">Sentuh Kopi.<br />Rasakan Humbang.</h1>
-        <p class="page-hero__sub">Dari lereng Sumatera Utara, kami mengundang Anda merasakan perjalanan kopi dari pohon hingga cangkir — sebuah pengalaman yang mengubah cara Anda memandang setiap teguk.</p>
+        <p class="page-hero__label">{t.tourism.label}</p>
+        <h1 class="page-hero__title">{t.tourism.titleLine1}<br />{t.tourism.titleLine2}</h1>
+        <p class="page-hero__sub">{t.tourism.subtitle}</p>
         <div class="page-hero__ctas">
-          <a href="#experiences" class="btn btn--primary">Jelajahi Pengalaman</a>
-          <a href={`/${lang}/company`} class="btn btn--outline">Tentang Kami</a>
+          <a href="#experiences" class="btn btn--primary">{t.tourism.cta1}</a>
+          <a href={`/${lang}/company`} class="btn btn--outline">{t.tourism.cta3}</a>
         </div>
       </div>
     </div>
-
     <div class="hero-scroll-line" aria-hidden="true"></div>
   </section>
 
@@ -138,7 +108,12 @@ const stats = [
   <section class="stat-band stat-band--green" aria-label="Fakta Kopi Siholta">
     <div class="container">
       <div class="stat-band__grid">
-        {stats.map(stat => (
+        {[
+          { value: '1.200 mdpl', label: t.tourism.statAlt },
+          { value: '200+', label: t.tourism.statFamilies },
+          { value: '6+', label: t.tourism.statCountries },
+          { value: '2019', label: t.tourism.statFounded },
+        ].map(stat => (
           <div class="stat-band__item animate-on-scroll">
             <span class="stat-band__value">{stat.value}</span>
             <span class="stat-band__label">{stat.label}</span>
@@ -152,57 +127,57 @@ const stats = [
   <section class="experiences section section--cream" id="experiences" aria-labelledby="exp-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">Pengalaman Kami</p>
-        <h2 id="exp-heading" class="section-title">Tiga Cara Menikmati<br />Kopi Siholta</h2>
-        <p class="section-sub">Setiap pengalaman dirancang untuk membawa Anda lebih dekat dengan cerita di balik setiap cangkir.</p>
+        <p class="section-tag">{t.tourism.expTag}</p>
+        <h2 id="exp-heading" class="section-title">{nl(t.tourism.expTitle)}</h2>
+        <p class="section-sub">{t.tourism.expSubtitle}</p>
       </div>
 
       <div class="exp-list">
         {experiences.map((exp, i) => (
-          <article class={`exp-item ${exp.reverse ? 'exp-item--rev' : ''} animate-on-scroll`}>
+          <article class={`exp-item ${i % 2 !== 0 ? 'exp-item--rev' : ''} animate-on-scroll`}>
+            <!-- Image Panel -->
             <div class="exp-item__media">
               <div class="exp-item__img-wrap">
                 <Image
                   src={exp.img}
-                  alt={exp.imgAlt}
+                  alt={t.tourism.images?.[exp.imgAltKey as keyof typeof t.tourism.images] ?? ''}
                   loading={i === 0 ? 'eager' : 'lazy'}
                   widths={[480, 768, 1024]}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   class="exp-item__img"
                 />
               </div>
-              <!-- Number badge — overlaps bottom-right / bottom-left of image -->
               <div class="exp-item__num-badge" aria-hidden="true">
                 <span class="exp-item__num">{exp.num}</span>
               </div>
-              <!-- Accent thumbnail — overlaps top-right / top-left -->
               <div class="exp-item__thumb" aria-hidden="true">
                 <Image
-                  src={i % 3 === 0 ? h4 : i % 3 === 1 ? h5 : h1}
+                  src={exp.thumb}
                   alt=""
                   loading="lazy"
                   widths={[200, 300]}
-                  sizes="100px"
+                  sizes="80px"
                   class="exp-item__thumb-img"
                 />
               </div>
             </div>
 
+            <!-- Content Panel -->
             <div class="exp-item__content">
-              <p class="exp-item__label">{exp.label}</p>
-              <h3 class="exp-item__title">{exp.title}</h3>
-              <p class="exp-item__subtitle">{exp.subtitle}</p>
-              <p class="exp-item__desc">{exp.desc}</p>
+              <p class="exp-item__label">{t.tourism[exp.labelKey as keyof typeof t.tourism]}</p>
+              <h3 class="exp-item__title">{t.tourism[exp.titleKey as keyof typeof t.tourism]}</h3>
+              <p class="exp-item__subtitle">{t.tourism[exp.subtitleKey as keyof typeof t.tourism]}</p>
+              <p class="exp-item__desc">{t.tourism[exp.descKey as keyof typeof t.tourism]}</p>
               <ul class="exp-item__details" role="list">
-                {exp.details.map(d => (
+                {exp.detailsKey.map(dk => (
                   <li class="exp-item__detail">
                     <Icon name="mdi:check" width="12" height="12" />
-                    {d}
+                    {t.tourism[dk as keyof typeof t.tourism]}
                   </li>
                 ))}
               </ul>
-              <a href={`/${lang}/company`} class="btn btn--outline-dark exp-item__cta">
-                Pesan Sekarang
+              <a href={`/${lang}/#contact`} class="btn btn--outline-dark exp-item__cta">
+                {t.tourism.ctaPesan}
                 <Icon name="mdi:chevron-right" width="12" height="12" />
               </a>
             </div>
@@ -216,12 +191,12 @@ const stats = [
   <section class="page-cta page-cta--cream" aria-label="Pesan Pengalaman Kopi">
     <div class="container page-cta__inner">
       <div class="page-cta__text animate-on-scroll">
-        <h2 class="page-cta__title page-cta__title--earth">Siap Menikmati<br />Perjalanan Kopi?</h2>
-        <p class="page-cta__sub page-cta__sub--earth">Hubungi tim kami untuk menjadwalkan kunjungan farm tour, factory tour, atau sesi cupping di lokasi kami.</p>
+        <h2 class="page-cta__title page-cta__title--earth">{nl(t.tourism.ctaTitle)}</h2>
+        <p class="page-cta__sub page-cta__sub--earth">{t.tourism.ctaSubtitle}</p>
       </div>
       <div class="page-cta__actions animate-on-scroll">
-        <a href={`/${lang}/#contact`} class="btn btn--primary">Hubungi Kami</a>
-        <a href={`/${lang}/company`} class="btn btn--outline-dark">Pelajari Lebih Lanjut</a>
+        <a href={`/${lang}/#contact`} class="btn btn--primary">{t.tourism.cta1}</a>
+        <a href={`/${lang}/company`} class="btn btn--outline-dark">{t.tourism.cta2}</a>
       </div>
     </div>
   </section>

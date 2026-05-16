@@ -7,33 +7,24 @@ import heritage3 from '../../images/heritage/heritage-3.jpg';
 import heritage4 from '../../images/heritage/heritage-4.jpg';
 import heritage5 from '../../images/heritage/heritage-5.jpg';
 import companyLogo from '../../images/logo/logo-company.jpg';
+import { t } from '../../i18n/utils';
 
 interface Props {
   lang?: string;
 }
 
 const { lang = 'en' } = Astro.props;
+const tr = t(lang);
 
 const sectors = [
-  {
-    name: 'Coffee Farming',
-    iconName: 'mdi:coffee',
-    color: '#5C2E10',
-    desc: '200+ keluarga petani partner di Lintong & Dolok',
-  },
-  {
-    name: 'F&B',
-    iconName: 'mdi:cup',
-    color: '#1A3A5C',
-    desc: 'Minuman & makanan kopi specialty Indonesia',
-  },
-  {
-    name: 'Industry & Tourism',
-    iconName: 'mdi:office-building',
-    color: '#2A4A20',
-    desc: 'Pariwisata & pabrikasi produk kopi specialty',
-  },
+  { nameKey: 'sectorFarming' as const, iconName: 'mdi:coffee' },
+  { nameKey: 'sectorFnB' as const,       iconName: 'mdi:cup' },
+  { nameKey: 'sectorIndustry' as const,     iconName: 'mdi:office-building' },
 ];
+
+function multiline(label: string) {
+  return label.split('\n');
+}
 ---
 
 <!-- ── Company Pioneer Banner ───────────────────────── -->
@@ -42,31 +33,30 @@ const sectors = [
     <div class="company-banner__logo-wrap">
       <Image
         src={companyLogo}
-        alt="Logo PT Siholta Toba Indonesia"
+        alt={tr.companyBanner.name}
         width={72}
         height={72}
         class="company-banner__logo-img"
       />
     </div>
     <div class="company-banner__content">
-      <p class="company-banner__tag">Didirikan 2019</p>
-      <h2 class="company-banner__name">PT Siholta Toba Indonesia</h2>
-      <p class="company-banner__tagline"> Perusahaan ini lahir dari tanah Humbang Hasundutan — sebuah kawasan yang telah dikenal dunia sejak era kolonial sebagai penghasil kopi specialty paling prestisius di Nusantara.</p>
+      <p class="company-banner__tag">{tr.companyBanner.tag}</p>
+      <h2 class="company-banner__name">{tr.companyBanner.name}</h2>
+      <p class="company-banner__tagline">{tr.companyBanner.tagline}</p>
     </div>
     <div class="company-banner__divider" aria-hidden="true"></div>
     <div class="company-banner__sectors">
-      <p class="company-banner__sectors-label">3 Sektor Usaha:</p>
+      <p class="company-banner__sectors-label">{tr.companyBanner.sectorsLabel}</p>
       {sectors.map(sector => (
-        <div class="company-banner__sector" style={`--sector-color: ${sector.color}`}>
+        <div class="company-banner__sector" style={`--sector-color: ${sector.iconName === 'mdi:coffee' ? '#5C2E10' : sector.iconName === 'mdi:cup' ? '#1A3A5C' : '#2A4A20'}`}>
           <span class="company-banner__sector-icon" aria-hidden="true"><Icon name={sector.iconName} width="18" height="18" /></span>
-          <span class="company-banner__sector-name">{sector.name}</span>
+          <span class="company-banner__sector-name">{tr.companyBanner[sector.nameKey]}</span>
         </div>
       ))}
     </div>
 
-    <!-- See More CTA -->
-    <a href={`/${lang}/company`} class="company-banner__see-more" aria-label="Pelajari selengkapnya tentang PT Siholta Toba Indonesia">
-      Selengkapnya
+    <a href={`/${lang}/company`} class="company-banner__see-more" aria-label={tr.companyBanner.ctaAria}>
+      {tr.companyBanner.cta}
       <Icon name="mdi:chevron-right" width="12" height="12" />
     </a>
   </div>
@@ -74,124 +64,105 @@ const sectors = [
 
 <!-- ── Heritage Section ─────────────────────────────── -->
 <section class="heritage" aria-label="Heritage and Identity">
-
-  <!-- ── Bento Grid ──────────────────────────────────── -->
   <div class="bento">
 
-    <!-- Feature Card: Petani Lokal (large, spans 2 rows) -->
+    <!-- Feature Card -->
     <article class="bento__card bento__card--feature">
       <div class="bento__card-img-wrap">
-        <Image
-          src={heritage1}
-          alt="Petani lokal memetik buah kopi merah"
-          class="bento__card-img"
-          loading="eager"
-          widths={[480, 768, 1024]}
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
+        <Image src={heritage1} alt={tr.coffeeFarming.farmImages.altCherry} class="bento__card-img" loading="eager" widths={[480, 768, 1024]} sizes="(max-width: 768px) 100vw, 50vw" />
         <div class="bento__card-overlay"></div>
       </div>
       <div class="bento__card-content">
-        <h3 class="bento__card-title">Warisan dari<br />Lereng Sumatera</h3>
-        <p class="bento__card-desc">Lebih dari 200 keluarga petani partner tersebar di dataran tinggi Lintong dan Dolok, merawat pohon kopi tradisi sejak turun-temurun.</p>
+        <h3 class="bento__card-title">
+          {multiline(tr.heritage.card1Title).map((line, i) => (
+            <>{line}{i < multiline(tr.heritage.card1Title).length - 1 ? <br /> : null}</>
+          ))}
+        </h3>
+        <p class="bento__card-desc">{tr.heritage.card1Desc}</p>
         <div class="bento__card-stat">
           <span class="bento__card-stat-num">200+</span>
-          <span class="bento__card-stat-label">Keluarga Petani Partner</span>
+          <span class="bento__card-stat-label">{tr.heritage.card1Stat}</span>
         </div>
       </div>
     </article>
 
-    <!-- Stat Card: Proses -->
+    <!-- Stat Card -->
     <article class="bento__card bento__card--stat">
       <div class="bento__card-img-wrap">
-        <Image
-          src={heritage2}
-          alt="Proses pengolahan kopi"
-          class="bento__card-img"
-          loading="lazy"
-          widths={[480, 768]}
-          sizes="(max-width: 768px) 100vw, 25vw"
-        />
+        <Image src={heritage2} alt={tr.coffeeFarming.farmImages.altFerment} class="bento__card-img" loading="lazy" widths={[480, 768]} sizes="(max-width: 768px) 100vw, 25vw" />
         <div class="bento__card-overlay"></div>
       </div>
       <div class="bento__card-content">
-        <h3 class="bento__card-title bento__card-title--sm">Dari Kebun<br />ke Cangkir</h3>
-        <p class="bento__card-desc">Washing, honey, dan natural process — standar specialty coffee dunia.</p>
+        <h3 class="bento__card-title bento__card-title--sm">
+          {multiline(tr.heritage.card2Title).map((line, i) => (
+            <>{line}{i < multiline(tr.heritage.card2Title).length - 1 ? <br /> : null}</>
+          ))}
+        </h3>
+        <p class="bento__card-desc">{tr.heritage.card2Desc}</p>
         <div class="bento__card-stat">
           <span class="bento__card-stat-num">3</span>
-          <span class="bento__card-stat-label">Metode Proses</span>
+          <span class="bento__card-stat-label">{tr.heritage.card2Stat}</span>
         </div>
       </div>
     </article>
 
-    <!-- Text Card: sertifikasi -->
+    <!-- Text Card -->
     <article class="bento__card bento__card--text">
       <div class="bento__card-img-wrap">
-        <Image
-          src={heritage3}
-          alt="Proses pengolahan kopi"
-          class="bento__card-img"
-          loading="lazy"
-          widths={[480, 768]}
-          sizes="(max-width: 768px) 100vw, 25vw"
-        />
+        <Image src={heritage3} alt={tr.coffeeFarming.farmImages.altSorting} class="bento__card-img" loading="lazy" widths={[480, 768]} sizes="(max-width: 768px) 100vw, 25vw" />
         <div class="bento__card-overlay"></div>
       </div>
       <div class="bento__card-content">
         <span class="bento__card-num bento__card-num--gold">03</span>
-        <span class="bento__card-tag" style="color: var(--color-brand-gold); border-color: rgba(212,160,70,0.4);">Sertifikasi Internasional</span>
-        <h3 class="bento__card-title">Standar Dunia,<br />Akar Lokal</h3>
-        <p class="bento__card-desc">Lembaga verifikasi internasional telah mengakui kualitas Kopi Siholta untuk ekspor ke Amerika, Eropa, dan Asia Timur.</p>
+        <span class="bento__card-tag" style="color: var(--color-brand-gold); border-color: rgba(212,160,70,0.4);">{tr.heritage.tag}</span>
+        <h3 class="bento__card-title">
+          {multiline(tr.heritage.card3Title).map((line, i) => (
+            <>{line}{i < multiline(tr.heritage.card3Title).length - 1 ? <br /> : null}</>
+          ))}
+        </h3>
+        <p class="bento__card-desc">{tr.heritage.card3Desc}</p>
         <div class="bento__card-badges">
-          <span class="bento__badge">🌍 Amerika</span>
-          <span class="bento__badge">🌍 Eropa</span>
-          <span class="bento__badge">🌍 Asia Timur</span>
+          <span class="bento__badge">{tr.heritage.card3BadgeAmericas}</span>
+          <span class="bento__badge">{tr.heritage.card3BadgeEurope}</span>
+          <span class="bento__badge">{tr.heritage.card3BadgeEastAsia}</span>
         </div>
       </div>
     </article>
 
-    <!-- Image Card: Budaha Batak (portrait) -->
+    <!-- Portrait Card -->
     <article class="bento__card bento__card--portrait">
       <div class="bento__card-img-wrap">
-        <Image
-          src={heritage4}
-          alt="Tradisi budaya Batak Toba"
-          class="bento__card-img"
-          loading="lazy"
-          widths={[400, 600]}
-          sizes="(max-width: 768px) 100vw, 20vw"
-        />
+        <Image src={heritage4} alt={tr.coffeeFarming.farmImages.altFarm} class="bento__card-img" loading="lazy" widths={[400, 600]} sizes="(max-width: 768px) 100vw, 20vw" />
         <div class="bento__card-overlay"></div>
       </div>
       <div class="bento__card-content">
         <span class="bento__card-num bento__card-num--blue">04</span>
-        <span class="bento__card-tag" style="color: var(--color-tourism-blue); border-color: rgba(30,80,140,0.3);">Budaya Batak</span>
-        <h3 class="bento__card-title bento__card-title--sm">Pekat dengan<br />Jiwa Batak</h3>
-        <p class="bento__card-desc">Warisan budaya Batak Toba yang dijaga dan diwariskan.</p>
+        <span class="bento__card-tag" style="color: var(--color-tourism-blue); border-color: rgba(30,80,140,0.3);">{tr.tourism.page}</span>
+        <h3 class="bento__card-title bento__card-title--sm">
+          {multiline(tr.heritage.card4Title).map((line, i) => (
+            <>{line}{i < multiline(tr.heritage.card4Title).length - 1 ? <br /> : null}</>
+          ))}
+        </h3>
+        <p class="bento__card-desc">{tr.heritage.card4Desc}</p>
       </div>
     </article>
 
-    <!-- Wide Image: Gallery Horizontal -->
+    <!-- Wide Card -->
     <article class="bento__card bento__card--wide">
       <div class="bento__card-img-wrap">
-        <Image
-          src={heritage5}
-          alt="Galeri kopi Siholta"
-          class="bento__card-img"
-          loading="lazy"
-          widths={[600, 900, 1200]}
-          sizes="(max-width: 768px) 100vw, 70vw"
-        />
+        <Image src={heritage5} alt={tr.coffeeFarming.farmImages.altRoasting} class="bento__card-img" loading="lazy" widths={[600, 900, 1200]} sizes="(max-width: 768px) 100vw, 70vw" />
         <div class="bento__card-overlay"></div>
       </div>
       <div class="bento__card-content">
-        <span class="bento__card-tag" style="color: var(--color-brand-gold); border-color: rgba(212,160,70,0.4);">Galeri Warisan</span>
-        <h3 class="bento__card-title">Momen dari<br />Humbang Hasundutan</h3>
-        <p class="bento__card-desc">Keindahan alam dan tradisi pertanian kopi yang masih lestari hingga hari ini.</p>
+        <span class="bento__card-tag" style="color: var(--color-brand-gold); border-color: rgba(212,160,70,0.4);">{tr.heritage.tag}</span>
+        <h3 class="bento__card-title">
+          {multiline(tr.heritage.card5Title).map((line, i) => (
+            <>{line}{i < multiline(tr.heritage.card5Title).length - 1 ? <br /> : null}</>
+          ))}
+        </h3>
+        <p class="bento__card-desc">{tr.heritage.card5Desc}</p>
       </div>
     </article>
 
   </div>
 </section>
-
-

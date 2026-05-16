@@ -6,17 +6,24 @@ import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
 import fnbBg from '../../images/bg/bg-fnb.jpg';
-import h1 from '../../images/heritage/heritage-1.jpg';
-import h2 from '../../images/heritage/heritage-2.jpg';
-import h3 from '../../images/heritage/heritage-3.jpg';
-import h4 from '../../images/heritage/heritage-4.jpg';
-import h5 from '../../images/heritage/heritage-5.jpg';
+import fnbHero1 from '../../images/fnb/barista.jpg';
+import fnbHero2 from '../../images/fnb/coffee-cup.jpg';
+import fnbHero3 from '../../images/fnb/caffee.jpg';
+import fnbHero4 from '../../images/fnb/coffee.jpg';
+import fnbHero5 from '../../images/fnb/coffee (2).jpg';
+import fnbHero6 from '../../images/fnb/coffee (3).jpg';
+import fnbHero7 from '../../images/fnb/coffee-cup (2).jpg';
+import fnbHero8 from '../../images/fnb/caffee (2).jpg';
+import fnbHero9 from '../../images/fnb/barista (2).jpg';
+import { useTranslations } from '../../i18n/utils';
 
-interface Props {
-  lang?: 'id' | 'en' | 'fr';
-}
+interface Props { lang?: 'id' | 'en' | 'fr'; }
 
 const { lang = 'id' } = Astro.props;
+const t = useTranslations(lang);
+
+/** Replace newlines with <br> tags — used with set:html */
+const nl = (s: string) => s.split('\n').join('<br>');
 
 export function getStaticPaths() {
   return [
@@ -26,69 +33,41 @@ export function getStaticPaths() {
   ];
 }
 
-const breadcrumb = {
-  id: { home: 'Beranda', company: 'Tentang Kami', page: 'F&B' },
-  en: { home: 'Home', company: 'About Us', page: 'F&B' },
-  fr: { home: 'Accueil', company: 'À Propos', page: 'Restauration' },
-};
-const t = breadcrumb[lang] ?? breadcrumb.id;
-
+/* ── Menu Data ──────────────────────── */
 const drinks = [
   {
-    name: 'Espresso Siholta',
-    note: 'Rempah · Bold · Dark Chocolate',
-    desc: 'Espresso murni dari biji Arabika Lintong pilihan. Body penuh, aftertaste cokelat pahit yang tahan lama.',
-    price: 'Rp 28.000',
-    img: h1,
-    imgAlt: 'Espresso Siholta — espresso shot dari kopi Lintong',
-    tag: 'Signature',
-    tagColor: '#CD1222',
+    nameKey: 'drinkEspresso', noteKey: 'drinkEspressoNote', descKey: 'drinkEspressoDesc',
+    price: 'Rp 28.000', img: fnbHero1,
+    imgAltKey: 'altBarista', tag: 'Signature', tagColor: '#CD1222',
   },
   {
-    name: 'Affogato Lintong',
-    note: 'Vanila · Karamel · Kopi',
-    desc: 'Scoop es krim vanila drown dalam espresso panas. Kontras suhu yang memanjakan.',
-    price: 'Rp 35.000',
-    img: h2,
-    imgAlt: 'Affogato Lintong — es krim vanila dengan espresso Siholta',
-    tag: 'Populer',
-    tagColor: '#5C3D1E',
+    nameKey: 'drinkAffogato', noteKey: 'drinkAffogatoNote', descKey: 'drinkAffogatoDesc',
+    price: 'Rp 35.000', img: fnbHero4,
+    imgAltKey: 'altProcess', tag: 'Populer', tagColor: '#5C3D1E',
   },
   {
-    name: 'V60 Single Origin',
-    note: 'Floral · Fruity · Bright',
-    desc: 'Biji Arabika diproses manual brew V60. Menonjolkan profil bright dan fruity khas Lintong.',
-    price: 'Rp 38.000',
-    img: h3,
-    imgAlt: 'V60 Single Origin — manual brew kopi Lintong',
-    tag: 'Barista Choice',
-    tagColor: '#225522',
+    nameKey: 'drinkV60', noteKey: 'drinkV60Note', descKey: 'drinkV60Desc',
+    price: 'Rp 38.000', img: fnbHero3,
+    imgAltKey: 'altAtmosphere', tag: 'Barista Choice', tagColor: '#225522',
   },
   {
-    name: 'Kopi Susu Humbang',
-    note: 'Creamy · Hazelnut · Balanced',
-    desc: 'Espresso dicampur susu steamed dan sirup hazel. Resep rahasia yang dikembangkan tim barista kami.',
-    price: 'Rp 32.000',
-    img: h4,
-    imgAlt: 'Kopi Susu Humbang — signature milk coffee dari Kopi Siholta',
-    tag: 'Best Seller',
-    tagColor: '#D4A046',
+    nameKey: 'drinkKopiSusu', noteKey: 'drinkKopiSusuNote', descKey: 'drinkKopiSusuDesc',
+    price: 'Rp 32.000', img: fnbHero2,
+    imgAltKey: 'altCoffeeMilk', tag: 'Best Seller', tagColor: '#D4A046',
   },
 ];
 
 const food = [
-  { name: 'Roti Babi Klasik', desc: 'Pastry renyah berisi daging cincang rempah khas Sumatera.', price: 'Rp 25.000' },
-  { name: 'Nagasari Kopi', desc: 'Kue tradisional dengan infuse bubuk kopi untuk aroma khas.', price: 'Rp 18.000' },
-  { name: 'Lapis Sumatera', desc: 'Kue lapis dengan lapisan cream kopi dan cokelat.', price: 'Rp 22.000' },
-  { name: 'Banana Bread Lintong', desc: 'Banana bread dengan crumble kopi di setiap gigitan.', price: 'Rp 28.000' },
+  { nameKey: 'foodRotiBabi', descKey: 'foodRotiBabiDesc', price: 'Rp 25.000' },
+  { nameKey: 'foodNagasari', descKey: 'foodNagasariDesc', price: 'Rp 18.000' },
+  { nameKey: 'foodLapis', descKey: 'foodLapisDesc', price: 'Rp 22.000' },
+  { nameKey: 'foodBananaBread', descKey: 'foodBananaBreadDesc', price: 'Rp 28.000' },
 ];
+
+const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero6, fnbHero7, fnbHero8, fnbHero9];
 ---
 
-<Base
-  title="F&B — Kopi Siholta"
-  description="Nikmati minuman dan makanan berbasis kopi specialty di outlet F&B Kopi Siholta. Dari espresso hingga kuliner kopi lokal Sumatera."
-  lang={lang}
->
+<Base title={t.meta.titleFnb} description={t.meta.descFnb} lang={lang}>
   <Navbar lang={lang} />
 
   <!-- ── Hero ─────────────────────────────────────────── -->
@@ -96,7 +75,7 @@ const food = [
     <div class="page-hero__bg">
       <Image
         src={fnbBg}
-        alt="Suasana kafe Kopi Siholta dengan minuman kopi specialty"
+        alt={t.fnb.gallery?.altAtmosphere ?? ''}
         class="page-hero__img"
         style="object-position: center 40%"
         loading="eager"
@@ -110,88 +89,82 @@ const food = [
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <ol class="breadcrumb__list">
           <li class="breadcrumb__item">
-            <a href={`/${lang}/`} class="breadcrumb__link">{t.home}</a>
+            <a href={`/${lang}/`} class="breadcrumb__link">{t.breadcrumb.home}</a>
           </li>
-          <li class="breadcrumb__sep" aria-hidden="true">
-            <Icon name="mdi:chevron-right" width="10" height="10" />
-          </li>
+          <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
           <li class="breadcrumb__item">
-            <a href={`/${lang}/company`} class="breadcrumb__link">{t.company}</a>
+            <a href={`/${lang}/company`} class="breadcrumb__link">{t.breadcrumb.company}</a>
           </li>
-          <li class="breadcrumb__sep" aria-hidden="true">
-            <Icon name="mdi:chevron-right" width="10" height="10" />
-          </li>
-          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">
-            {t.page}
-          </li>
+          <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
+          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">{t.fnb.page}</li>
         </ol>
       </nav>
 
       <div class="fnb-hero__content">
-        <p class="page-hero__label">F&B Experience</p>
-        <h1 class="page-hero__title">Minum Kopi.<br />Cicipi Tradisi.</h1>
-        <p class="page-hero__sub">Setiap cangkir dan setiap gigitan di outlet kami dibuat dengan bahan kopi specialty pilihan dari dataran tinggi Humbang Hasundutan.</p>
+        <p class="page-hero__label">{t.fnb.label}</p>
+        <h1 class="page-hero__title">{t.fnb.titleLine1}<br />{t.fnb.titleLine2}</h1>
+        <p class="page-hero__sub">{t.fnb.subtitle}</p>
       </div>
     </div>
-
     <div class="hero-scroll-line" aria-hidden="true"></div>
   </section>
 
-  <!-- ── Drinks ───────────────────────────────────────── -->
-  <section class="drinks section section--cream" aria-labelledby="drinks-heading">
+  <!-- ── Drinks: Bento Layout ─────────────────────────── -->
+  <section class="drinks section" aria-labelledby="drinks-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">Minuman</p>
-        <h2 id="drinks-heading" class="section-title">Signature Menu</h2>
-        <p class="section-sub">Dibuat dengan الحب dan presisi oleh tim barista kami, menggunakan biji kopi specialty langsung dari sumbernya.</p>
+        <p class="section-tag">{t.fnb.drinksTag}</p>
+        <h2 id="drinks-heading" class="section-title">{t.fnb.drinksTitle}</h2>
+        <p class="section-sub">{t.fnb.drinksSubtitle}</p>
       </div>
 
-      <!-- Editorial 2-col asymmetric grid -->
-      <div class="drinks__grid">
-        <!-- Large feature card -->
+      <!-- Bento: 2-col asymmetric — large left + 3 stacked right -->
+      <div class="drinks__grid animate-on-scroll">
+
+        <!-- Feature card: espresso — large, spans 2 rows visually -->
         <article class="drink-card drink-card--feature animate-on-scroll">
           <div class="drink-card__media">
             <Image
               src={drinks[0].img}
-              alt={drinks[0].imgAlt}
+              alt={t.fnb.gallery?.[drinks[0].imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
               loading="eager"
               widths={[480, 768, 1024]}
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 768px) 100vw, 55vw"
               class="drink-card__img"
             />
             <div class="drink-card__tag" style={`background: ${drinks[0].tagColor}`}>
-              {drinks[0].tag}
+              {t.products[drinks[0].tag === 'Signature' ? 'tagSignature' : drinks[0].tag === 'Populer' ? 'tagPopular' : drinks[0].tag === 'Barista Choice' ? 'tagBaristaChoice' : 'tagBestSeller']}
             </div>
           </div>
           <div class="drink-card__body">
-            <p class="drink-card__note">{drinks[0].note}</p>
-            <h3 class="drink-card__name">{drinks[0].name}</h3>
-            <p class="drink-card__desc">{drinks[0].desc}</p>
+            <p class="drink-card__note">{t.fnb[drinks[0].noteKey as keyof typeof t.fnb]}</p>
+            <h3 class="drink-card__name">{t.fnb[drinks[0].nameKey as keyof typeof t.fnb]}</h3>
+            <p class="drink-card__desc">{t.fnb[drinks[0].descKey as keyof typeof t.fnb]}</p>
             <span class="drink-card__price">{drinks[0].price}</span>
           </div>
         </article>
 
-        <!-- 2x2 stacked cards -->
+        <!-- 3 stacked mini cards -->
         <div class="drinks__stack">
           {drinks.slice(1).map((drink, i) => (
             <article class="drink-card drink-card--mini animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>
-              <div class="drink-card__media drink-card__media--sm">
+              <div class="drink-card__media">
                 <Image
                   src={drink.img}
-                  alt={drink.imgAlt}
+                  alt={t.fnb.gallery?.[drink.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
                   loading="lazy"
                   widths={[300, 480]}
                   sizes="(max-width: 768px) 50vw, 25vw"
                   class="drink-card__img"
                 />
                 <div class="drink-card__tag drink-card__tag--sm" style={`background: ${drink.tagColor}`}>
-                  {drink.tag}
+                  {t.products[drink.tag === 'Populer' ? 'tagPopular' : drink.tag === 'Barista Choice' ? 'tagBaristaChoice' : 'tagBestSeller']}
                 </div>
               </div>
               <div class="drink-card__body drink-card__body--sm">
-                <p class="drink-card__note drink-card__note--sm">{drink.note}</p>
-                <h3 class="drink-card__name drink-card__name--sm">{drink.name}</h3>
-                <p class="drink-card__desc drink-card__desc--sm">{drink.desc}</p>
+                <p class="drink-card__note drink-card__note--sm">{t.fnb[drink.noteKey as keyof typeof t.fnb]}</p>
+                <h3 class="drink-card__name drink-card__name--sm">{t.fnb[drink.nameKey as keyof typeof t.fnb]}</h3>
+                <p class="drink-card__desc drink-card__desc--sm">{t.fnb[drink.descKey as keyof typeof t.fnb]}</p>
                 <span class="drink-card__price drink-card__price--sm">{drink.price}</span>
               </div>
             </article>
@@ -201,10 +174,10 @@ const food = [
     </div>
   </section>
 
-  <!-- ── Full-width image break ─────────────────────── -->
+  <!-- ── Full-width Image Break ─────────────────────── -->
   <div class="fnb-image-break" aria-hidden="true">
     <Image
-      src={h3}
+      src={fnbHero6}
       alt=""
       loading="lazy"
       widths={[768, 1280, 1920]}
@@ -213,19 +186,19 @@ const food = [
     />
     <div class="fnb-image-break__overlay">
       <blockquote class="fnb-quote">
-        <p>"Kopi bukan sekadar minuman — ia adalah perjumpaan antara tradisi dan modernity."</p>
-        <cite>— Tim Barista Kopi Siholta</cite>
+        <p>"{t.fnb.quote}"</p>
+        <cite>— {t.fnb.quoteAuthor}</cite>
       </blockquote>
     </div>
   </div>
 
-  <!-- ── Food ─────────────────────────────────────────── -->
-  <section class="food section" aria-labelledby="food-heading">
+  <!-- ── Food ─────────────────────────────────────── -->
+  <section class="food section section--cream" aria-labelledby="food-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">Makanan</p>
-        <h2 id="food-heading" class="section-title">Kuliner Kopi Kami</h2>
-        <p class="section-sub">Makanan ringan yang melengkapi setiap tegukan kopi. Resep warisan Sumatera dengan sentuhan modern.</p>
+        <p class="section-tag">{t.fnb.foodTag}</p>
+        <h2 id="food-heading" class="section-title">{t.fnb.foodTitle}</h2>
+        <p class="section-sub">{t.fnb.foodSubtitle}</p>
       </div>
 
       <div class="food__grid">
@@ -233,8 +206,8 @@ const food = [
           <article class="food-card animate-on-scroll" style={`transition-delay: ${i * 60}ms`}>
             <div class="food-card__dot" aria-hidden="true"></div>
             <div class="food-card__body">
-              <h3 class="food-card__name">{item.name}</h3>
-              <p class="food-card__desc">{item.desc}</p>
+              <h3 class="food-card__name">{t.fnb[item.nameKey as keyof typeof t.fnb]}</h3>
+              <p class="food-card__desc">{t.fnb[item.descKey as keyof typeof t.fnb]}</p>
             </div>
             <span class="food-card__price">{item.price}</span>
           </article>
@@ -243,21 +216,78 @@ const food = [
     </div>
   </section>
 
-  <!-- ── Gallery strip ────────────────────────────────── -->
-  <section class="gallery" aria-label="Galeri Kopi Siholta">
-    <div class="gallery__strip">
-      {[h1, h2, h4, h5, h3, h1].map((img, i) => (
-        <div class="gallery__item">
+  <!-- ── 3-Column Gallery Mosaic ────────────────────── -->
+  <section class="gallery-mosaic" aria-label="Galeri F&B Kopi Siholta">
+    <div class="gallery-mosaic__grid">
+      <!-- Left tall column -->
+      <div class="gallery-mosaic__col gallery-mosaic__col--tall">
+        <div class="gallery-mosaic__item gallery-mosaic__item--portrait">
           <Image
-            src={img}
-            alt={`Galeri Kopi Siholta ${i + 1}`}
+            src={fnbHero1}
+            alt={t.fnb.gallery?.altBarista ?? ''}
             loading="lazy"
-            widths={[300, 480]}
-            sizes="20vw"
-            class="gallery__img"
+            widths={[480, 768]}
+            sizes="(max-width: 768px) 100vw, 33vw"
+            class="gallery-mosaic__img"
           />
         </div>
-      ))}
+      </div>
+      <!-- Center 2x2 grid -->
+      <div class="gallery-mosaic__col gallery-mosaic__col--grid">
+        <div class="gallery-mosaic__item">
+          <Image
+            src={fnbHero2}
+            alt={t.fnb.gallery?.altCoffeeMilk ?? ''}
+            loading="lazy"
+            widths={[400, 600]}
+            sizes="(max-width: 768px) 50vw, 22vw"
+            class="gallery-mosaic__img"
+          />
+        </div>
+        <div class="gallery-mosaic__item">
+          <Image
+            src={fnbHero3}
+            alt={t.fnb.gallery?.altAtmosphere ?? ''}
+            loading="lazy"
+            widths={[400, 600]}
+            sizes="(max-width: 768px) 50vw, 22vw"
+            class="gallery-mosaic__img"
+          />
+        </div>
+        <div class="gallery-mosaic__item">
+          <Image
+            src={fnbHero7}
+            alt={t.fnb.gallery?.altProcess ?? ''}
+            loading="lazy"
+            widths={[400, 600]}
+            sizes="(max-width: 768px) 50vw, 22vw"
+            class="gallery-mosaic__img"
+          />
+        </div>
+        <div class="gallery-mosaic__item">
+          <Image
+            src={fnbHero8}
+            alt={t.fnb.gallery?.altVariants ?? ''}
+            loading="lazy"
+            widths={[400, 600]}
+            sizes="(max-width: 768px) 50vw, 22vw"
+            class="gallery-mosaic__img"
+          />
+        </div>
+      </div>
+      <!-- Right tall column -->
+      <div class="gallery-mosaic__col gallery-mosaic__col--tall">
+        <div class="gallery-mosaic__item gallery-mosaic__item--portrait">
+          <Image
+            src={fnbHero9}
+            alt={t.fnb.gallery?.altBaristaV60 ?? ''}
+            loading="lazy"
+            widths={[480, 768]}
+            sizes="(max-width: 768px) 100vw, 33vw"
+            class="gallery-mosaic__img"
+          />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -265,12 +295,12 @@ const food = [
   <section class="page-cta page-cta--cream" aria-label="Kunjungi Outlet Kopi Siholta">
     <div class="container page-cta__inner">
       <div class="page-cta__text animate-on-scroll">
-        <h2 class="page-cta__title page-cta__title--earth">Kunjungi<br />Outlet Kami</h2>
-        <p class="page-cta__sub page-cta__sub--earth">Datang dan rasakan sendiri pengalaman F&B kopi specialty di lokasi kami di Humbang Hasundutan.</p>
+        <h2 class="page-cta__title page-cta__title--earth">{nl(t.fnb.ctaTitle)}</h2>
+        <p class="page-cta__sub page-cta__sub--earth">{t.fnb.ctaSubtitle}</p>
       </div>
       <div class="page-cta__actions animate-on-scroll">
-        <a href={`/${lang}/#contact`} class="btn btn--primary">Hubungi Kami</a>
-        <a href={`/${lang}/tourism`} class="btn btn--outline-dark">Lihat Paket Tour</a>
+        <a href={`/${lang}/#contact`} class="btn btn--primary">{t.fnb.cta1}</a>
+        <a href={`/${lang}/tourism`} class="btn btn--outline-dark">{t.fnb.cta2}</a>
       </div>
     </div>
   </section>

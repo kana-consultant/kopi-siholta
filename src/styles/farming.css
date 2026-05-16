@@ -1,0 +1,297 @@
+/* =========================================================
+   Coffee Farming Page Specific Styles
+   ========================================================= */
+
+/* ── Bento Grid Layout ──────────────────── */
+.bento-grid--3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+/* Feature cards */
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.feature-card:hover {
+  box-shadow: 0 8px 32px rgba(92,61,30,0.10);
+  transform: translateY(-2px);
+}
+
+.feature-card--wide {
+  grid-column: span 2;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: var(--space-8);
+  gap: var(--space-6);
+}
+
+.feature-card__img-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  width: 180px;
+  height: 120px;
+}
+
+.feature-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.feature-card:hover .feature-card__img { transform: scale(1.06); }
+
+.feature-card__img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,15,8,0.50) 0%, transparent 60%);
+}
+
+.feature-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--overlay-red-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand-red);
+  flex-shrink: 0;
+}
+
+.feature-card__step {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--color-neutral-200);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  user-select: none;
+  margin: -8px 0 -4px;
+}
+
+.feature-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+}
+
+.feature-card__desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-brand-muted);
+  flex: 1;
+}
+
+/* ── Regions Grid ─────────────────────────── */
+.regions__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.region-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.region-card:hover {
+  box-shadow: 0 12px 40px rgba(92,61,30,0.12);
+  transform: translateY(-3px);
+}
+
+.region-card__media { position: relative; overflow: hidden; }
+
+.region-card__img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.region-card:hover .region-card__img { transform: scale(1.05); }
+
+.region-card__alt-badge {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 8px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(26,15,8,0.65);
+  backdrop-filter: blur(6px);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.region-card__body { padding: var(--space-5); }
+
+.region-card__name {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  margin-bottom: var(--space-2);
+  line-height: 1.2;
+}
+
+.region-card__desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-brand-muted);
+}
+
+/* ── Farmer Stories ──────────────────────── */
+.farmers__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.farmer-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  transition: box-shadow 300ms ease;
+}
+
+.farmer-card:hover { box-shadow: 0 12px 40px rgba(92,61,30,0.10); }
+
+.farmer-card--rev { direction: rtl; }
+.farmer-card--rev > * { direction: ltr; }
+
+.farmer-card__media { position: relative; overflow: hidden; min-height: 280px; }
+
+.farmer-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.farmer-card:hover .farmer-card__img { transform: scale(1.04); }
+
+.farmer-card__info-badge {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(26,15,8,0.70);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+}
+
+.farmer-card__village {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-brand-gold);
+}
+
+.farmer-card__since {
+  font-family: var(--font-label);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.60);
+}
+
+.farmer-card__content {
+  padding: var(--space-8) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.farmer-card__quote {
+  font-family: var(--font-display);
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-style: italic;
+  color: var(--color-brand-earth);
+  line-height: 1.6;
+  border-left: 3px solid var(--color-brand-red);
+  padding-left: var(--space-4);
+}
+
+.farmer-card__author { display: flex; flex-direction: column; gap: 2px; }
+
+.farmer-card__name {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-brand-earth);
+}
+
+.farmer-card__role {
+  font-family: var(--font-label);
+  font-size: 8px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted);
+}
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 1024px) {
+  .bento-grid--3col { grid-template-columns: repeat(2, 1fr); }
+  .feature-card--wide { grid-column: span 2; flex-direction: column; }
+  .feature-card__img-wrap { width: 100%; height: 160px; }
+  .regions__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .bento-grid--3col { grid-template-columns: 1fr; gap: var(--space-3); }
+  .feature-card--wide { grid-column: span 1; flex-direction: column; padding: var(--space-5); }
+  .feature-card__step { font-size: 36px; }
+  .feature-card__img-wrap { width: 100%; height: 160px; }
+  .regions__grid { grid-template-columns: 1fr; }
+  .farmers__grid { grid-template-columns: 1fr; }
+  .farmer-card { grid-template-columns: 1fr; }
+  .farmer-card--rev { direction: ltr; }
+  .farmer-card__media { min-height: 220px; }
+  .farmer-card__content { padding: var(--space-5); }
+}
+
+@media (max-width: 480px) {
+  .farmer-card__media { min-height: 180px; }
+  .feature-card { padding: var(--space-4); }
+  .feature-card__icon { width: 36px; height: 36px; }
+}
