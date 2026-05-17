@@ -1,0 +1,151 @@
+---
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/layout/Navbar.astro';
+import Footer from '../../components/layout/Footer.astro';
+import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
+import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'id' }, props: { lang: 'id' } },
+    { params: { lang: 'en' }, props: { lang: 'en' } },
+    { params: { lang: 'fr' }, props: { lang: 'fr' } },
+  ];
+}
+
+interface Props { lang?: 'id' | 'en' | 'fr'; }
+const { lang = 'en' } = Astro.props;
+const t = useTranslations(lang);
+const nf = t.notFound as Record<string, string>;
+---
+
+<Base title={nf.title} description={nf.message} lang={lang}>
+  <Navbar lang={lang} />
+
+  <main id="main-content" class="error-page">
+    <div class="error-page__inner container">
+
+      <!-- Decorative coffee bean -->
+      <div class="error-page__bean" aria-hidden="true">
+          <Icon name="mdi:coffee" width="70" height="70" />
+      </div>
+
+      <!-- 404 code -->
+      <p class="error-page__code" aria-hidden="true">{nf.code}</p>
+
+      <!-- Message -->
+      <p class="error-page__message">{nf.message}</p>
+
+      <!-- Suggestion -->
+      <p class="error-page__suggestion">{nf.suggestion}</p>
+
+      <!-- Actions -->
+      <div class="error-page__actions">
+        <a href={`/${lang}/`} class="btn btn--primary">
+          <Icon name="mdi:home" width="16" height="16" />
+          {nf.ctaHome}
+        </a>
+        <a href={`/${lang}/#products`} class="btn btn--outline-dark">
+          <Icon name="mdi:shopping-outline" width="16" height="16" />
+          {nf.ctaExplore}
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer lang={lang} />
+  <WhatsAppFAB />
+</Base>
+
+<style>
+  /* ── Error Page Layout ───────────────── */
+  .error-page {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-brand-cream);
+    padding-block: var(--space-16);
+  }
+
+  .error-page__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-5);
+    max-width: 480px;
+  }
+
+  /* ── Decorative Bean ──────────────────── */
+  .error-page__bean {
+    animation: floatBean 3s ease-in-out infinite;
+    margin-bottom: var(--space-2);
+  }
+
+  @keyframes floatBean {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%       { transform: translateY(-6px) rotate(8deg); }
+  }
+
+  /* ── 404 Code ─────────────────────────── */
+  .error-page__code {
+    font-family: var(--font-display);
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--color-brand-red);
+    line-height: 1;
+    opacity: 0.12;
+    user-select: none;
+    margin-top: calc(-1 * var(--space-6));
+  }
+
+  /* ── Title ─────────────────────────────── */
+  .error-page__title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700;
+    color: var(--color-brand-earth);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Message ──────────────────────────── */
+  .error-page__message {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-brand-muted);
+    max-width: 360px;
+  }
+
+  /* ── Suggestion ───────────────────────── */
+  .error-page__suggestion {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-brand-muted);
+    opacity: 0.75;
+    max-width: 320px;
+  }
+
+  /* ── Actions ──────────────────────────── */
+  .error-page__actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--space-3);
+  }
+
+  /* ── Responsive ─────────────────────────── */
+  @media (max-width: 480px) {
+    .error-page { min-height: 60vh; padding-block: var(--space-10); }
+    .error-page__code { font-size: 60px; }
+    .error-page__actions { flex-direction: column; width: 100%; }
+    .error-page__actions .btn { justify-content: center; }
+  }
+</style>

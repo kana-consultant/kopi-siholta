@@ -14,10 +14,8 @@ const t = useTranslations(lang);
 
 const nav = t.nav as Record<string, string>;
 
-const currentPath = Astro.url.pathname;
-
 function localeHref(targetLang: string): string {
-  const segs = currentPath.split('/');
+  const segs = Astro.url.pathname.split('/');
   if (segs[1] && ['id', 'en', 'fr'].includes(segs[1])) {
     segs[1] = targetLang;
   } else {
@@ -55,23 +53,27 @@ const mainNavItems = [
             <span>{nav.company}</span>
             <Icon name="mdi:chevron-down" width="10" height="10" />
           </button>
-          <ul class="navbar__dropdown" role="menu">
-            <li role="none"><a href={`/${lang}/company`} class="navbar__dropdown-link" role="menuitem">
-              <Icon name="mdi:domain" width="10" height="10" />
-              {nav.company}
-            </a></li>
-            <li role="none"><a href={`/${lang}/coffee-farming`} class="navbar__dropdown-link" role="menuitem">
-              <Icon name="mdi:coffee" width="10" height="10" />
-              {nav.coffeeFarming}
-            </a></li>
-            <li role="none"><a href={`/${lang}/fnb`} class="navbar__dropdown-link" role="menuitem">
-              <Icon name="mdi:glass-wine" width="10" height="10" />
-              {nav.fnb}
-            </a></li>
-            <li role="none"><a href={`/${lang}/tourism`} class="navbar__dropdown-link" role="menuitem">
-              <Icon name="mdi:store" width="10" height="10" />
-              {nav.tourism}
-            </a></li>
+          <ul class="navbar__dropdown" role="menu" aria-label="Sectors — About Us, Coffee Farming, F&amp;B, Tourism">
+            <li role="none">
+              <a href={`/${lang}/company`} class="navbar__dropdown-link" role="menuitem">
+                {nav.company}
+              </a>
+            </li>
+            <li role="none">
+              <a href={`/${lang}/coffee-farming`} class="navbar__dropdown-link" role="menuitem">
+                {nav.coffeeFarming}
+              </a>
+            </li>
+            <li role="none">
+              <a href={`/${lang}/fnb`} class="navbar__dropdown-link" role="menuitem">
+                {nav.fnb}
+              </a>
+            </li>
+            <li role="none">
+              <a href={`/${lang}/tourism`} class="navbar__dropdown-link" role="menuitem">
+                {nav.tourism}
+              </a>
+            </li>
           </ul>
         </li>
 
@@ -85,20 +87,13 @@ const mainNavItems = [
       </ul>
     </nav>
 
-    <!-- ── Right Controls ──────────────────────── -->
     <div class="navbar__right">
-
-      <!-- Language Switcher with icon + dropdown -->
       <div class="hide-mobile">
         <LanguageSwitcher currentLang={lang} />
       </div>
-
-      <!-- CTA -->
       <a href={`/${lang}/#contact`} class="btn btn--primary navbar__cta hide-mobile">
         {nav.cta}
       </a>
-
-      <!-- Mobile Hamburger -->
       <button
         class="navbar__hamburger hide-desktop"
         aria-label="Open menu"
@@ -113,7 +108,6 @@ const mainNavItems = [
     </div>
   </div>
 
-  <!-- ── Mobile Drawer ─────────────────────────── -->
   <div
     class="mobile-menu"
     id="mobile-menu"
@@ -130,34 +124,38 @@ const mainNavItems = [
 
       <ul class="mobile-menu__links">
 
-        <!-- About Us dropdown (mobile) -->
         <li class="mobile-menu__item mobile-menu__item--parent">
           <button
             class="mobile-menu__trigger"
             aria-expanded="false"
-            aria-controls="sub-about"
+            aria-controls="sub-sectors"
+            aria-label="Sectors — About Us, Coffee Farming, F&amp;B, Tourism"
             data-dropdown-toggle
           >
             <span>{nav.company}</span>
             <Icon name="mdi:chevron-down" width="16" height="16" class="mobile-menu__trigger-icon" />
           </button>
-          <ul class="mobile-menu__sub" id="sub-about" role="list" hidden>
-            <li><a href={`/${lang}/company`} class="mobile-menu__sub-link">
-              <Icon name="mdi:domain" width="11" height="11" />
-              {nav.company}
-            </a></li>
-            <li><a href={`/${lang}/coffee-farming`} class="mobile-menu__sub-link">
-              <Icon name="mdi:coffee" width="11" height="11" />
-              {nav.coffeeFarming}
-            </a></li>
-            <li><a href={`/${lang}/fnb`} class="mobile-menu__sub-link">
-              <Icon name="mdi:glass-wine" width="11" height="11" />
-              {nav.fnb}
-            </a></li>
-            <li><a href={`/${lang}/tourism`} class="mobile-menu__sub-link">
-              <Icon name="mdi:store" width="11" height="11" />
-              {nav.tourism}
-            </a></li>
+          <ul class="mobile-menu__sub" id="sub-sectors" role="list" aria-label="Sectors" hidden>
+            <li>
+              <a href={`/${lang}/company`} class="mobile-menu__sub-link">
+                {nav.company}
+              </a>
+            </li>
+            <li>
+              <a href={`/${lang}/coffee-farming`} class="mobile-menu__sub-link">
+                {nav.coffeeFarming}
+              </a>
+            </li>
+            <li>
+              <a href={`/${lang}/fnb`} class="mobile-menu__sub-link">
+                {nav.fnb}
+              </a>
+            </li>
+            <li>
+              <a href={`/${lang}/tourism`} class="mobile-menu__sub-link">
+                {nav.tourism}
+              </a>
+            </li>
           </ul>
         </li>
 
@@ -170,21 +168,10 @@ const mainNavItems = [
         ))}
       </ul>
 
-      <!-- Mobile: Lang + CTA -->
       <div class="mobile-menu__footer">
-        <!-- Language row -->
-        <div class="mobile-menu__lang">
-          {['id', 'en', 'fr'].map(code => (
-            <a
-              href={localeHref(code)}
-              class={`lang-btn ${lang === code ? 'lang-btn--active' : ''}`}
-            >
-              {code.toUpperCase()}
-            </a>
-          ))}
+        <div class="mobile-menu__lang-wrap">
+          <LanguageSwitcher currentLang={lang} />
         </div>
-
-        <!-- CTA -->
         <a href={`/${lang}/#contact`} class="mobile-menu__cta">
           {nav.cta}
         </a>
@@ -193,419 +180,13 @@ const mainNavItems = [
   </div>
 </header>
 
-<style>
-  /* ── Navbar shell ────────────────────────────── */
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: var(--z-navbar);
-    background: var(--color-brand-cream);
-    border-bottom: 0.5px solid rgba(205, 18, 34, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    height: 52px;
-  }
-
-  .navbar__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-  }
-
-  /* ── Logo ─────────────────────────────────────── */
-  .navbar__logo {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    text-decoration: none;
-    flex-shrink: 0;
-  }
-
-  .navbar__logo-img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: contain;
-  }
-
-  .navbar__wordmark {
-    font-family: var(--font-label);
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
-    color: var(--color-brand-red);
-  }
-
-  /* ── Nav links ────────────────────────────────── */
-  .navbar__links {
-    display: flex;
-    align-items: center;
-    gap: var(--space-6);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .navbar__link {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-brand-earth);
-    text-decoration: none;
-    padding-bottom: 2px;
-    border-bottom: 1.5px solid transparent;
-    transition: color 200ms ease, border-color 200ms ease;
-  }
-
-  .navbar__link:hover {
-    color: var(--color-brand-red);
-    border-bottom-color: var(--color-brand-red);
-  }
-
-  /* ── Desktop Dropdown ──────────────────── */
-  .navbar__item { display: flex; align-items: center; position: relative; }
-
-  .navbar__trigger {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-brand-earth);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding-bottom: 2px;
-    border-bottom: 1.5px solid transparent;
-    transition: color 200ms ease, border-color 200ms ease;
-  }
-
-  .navbar__trigger:hover { color: var(--color-brand-red); border-bottom-color: var(--color-brand-red); }
-
-  .navbar__trigger svg { transition: transform 200ms ease; }
-  .navbar__trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
-
-  .navbar__dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    min-width: 200px;
-    background: var(--color-brand-cream);
-    border: 0.5px solid var(--color-neutral-200);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 8px 24px rgba(92, 61, 30, 0.12);
-    list-style: none;
-    margin: 0;
-    padding: var(--space-2) 0;
-    z-index: var(--z-navbar);
-    display: none;
-  }
-
-  .navbar__dropdown.is-open { display: block; }
-
-  .navbar__dropdown-link {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--color-brand-earth);
-    text-decoration: none;
-    padding: 9px var(--space-4);
-    transition: color 200ms ease, background 200ms ease;
-  }
-
-  .navbar__dropdown-link:hover { color: var(--color-brand-red); background: rgba(205, 18, 34, 0.05); }
-  .navbar__dropdown-link svg { color: var(--color-brand-red); flex-shrink: 0; }
-
-  /* ── Right side ───────────────────────────────── */
-  .navbar__right {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-  }
-
-  .navbar__cta { padding: 7px 14px; font-size: 10px; }
-
-  /* ── Language Buttons ───────────────── */
-  .mobile-menu__lang {
-    display: flex;
-    gap: var(--space-2);
-  }
-
-  .lang-btn {
-    font-family: var(--font-label);
-    font-size: 9px;
-    font-weight: 400;
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
-    padding: 4px 8px;
-    border-radius: 3px;
-    color: var(--color-brand-earth);
-    border: 0.5px solid rgba(92, 61, 30, 0.3);
-    background: transparent;
-    text-decoration: none;
-    transition: all 200ms ease;
-    cursor: pointer;
-  }
-
-  .lang-btn--active {
-    background: var(--color-brand-red);
-    color: #fff;
-    border-color: var(--color-brand-red);
-  }
-
-  .lang-btn:not(.lang-btn--active):hover {
-    border-color: var(--color-brand-red);
-    color: var(--color-brand-red);
-  }
-
-  /* ── Hamburger ────────────────────────────────── */
-  .navbar__hamburger {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-    width: 36px;
-    height: 36px;
-    padding: 8px;
-    border-radius: var(--radius-sm);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: background 200ms ease;
-  }
-
-  .navbar__hamburger:hover { background: var(--color-neutral-200); }
-
-  .navbar__hamburger span {
-    display: block;
-    width: 100%;
-    height: 1.5px;
-    background: var(--color-brand-earth);
-    border-radius: 2px;
-    transition: all 200ms ease;
-    transform-origin: center;
-  }
-
-  .navbar__hamburger.is-open span:nth-child(1) {
-    transform: translateY(5.5px) rotate(45deg);
-  }
-
-  .navbar__hamburger.is-open span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-
-  .navbar__hamburger.is-open span:nth-child(3) {
-    transform: translateY(-5.5px) rotate(-45deg);
-  }
-
-  /* ── Mobile Menu ──────────────────────────────── */
-  .mobile-menu {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    pointer-events: none;
-    visibility: hidden;
-  }
-
-  .mobile-menu.is-open {
-    pointer-events: auto;
-    visibility: visible;
-  }
-
-  .mobile-menu__overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(26, 15, 8, 0);
-    transition: background 300ms ease;
-  }
-
-  .mobile-menu.is-open .mobile-menu__overlay {
-    background: rgba(26, 15, 8, 0.50);
-  }
-
-  .mobile-menu__panel {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: min(300px, 85vw);
-    background: var(--color-brand-cream);
-    padding: var(--space-6);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    transform: translateX(100%);
-    transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .mobile-menu.is-open .mobile-menu__panel {
-    transform: translateX(0);
-  }
-
-  .mobile-menu__close {
-    align-self: flex-end;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    color: var(--color-brand-earth);
-    padding: var(--space-2);
-    border-radius: var(--radius-sm);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: background 200ms ease;
-    margin-bottom: var(--space-2);
-  }
-
-  .mobile-menu__close:hover { background: var(--color-neutral-200); }
-
-  .mobile-menu__links {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .mobile-menu__link {
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--color-brand-earth);
-    text-decoration: none;
-    padding: var(--space-4) var(--space-2);
-    border-bottom: 0.5px solid var(--color-neutral-200);
-    transition: color 200ms ease;
-    text-transform: capitalize;
-  }
-
-  .mobile-menu__link:hover { color: var(--color-brand-red); }
-
-  /* ── Dropdown ──────────────────────────── */
-  .mobile-menu__item { display: flex; flex-direction: column; }
-
-  .mobile-menu__trigger {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: var(--space-4) var(--space-2);
-    border: none;
-    border-bottom: 0.5px solid var(--color-neutral-200);
-    background: transparent;
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--color-brand-earth);
-    cursor: pointer;
-    transition: color 200ms ease;
-    text-align: left;
-  }
-
-  .mobile-menu__trigger:hover { color: var(--color-brand-red); }
-
-  .mobile-menu__trigger-icon {
-    flex-shrink: 0;
-    transition: transform 250ms ease;
-  }
-
-  .mobile-menu__trigger[aria-expanded="true"] .mobile-menu__trigger-icon {
-    transform: rotate(180deg);
-  }
-
-  .mobile-menu__sub {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    background: rgba(92, 61, 30, 0.04);
-    border-bottom: 0.5px solid var(--color-neutral-200);
-    overflow: hidden;
-  }
-
-  .mobile-menu__sub-link {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--color-brand-muted);
-    text-decoration: none;
-    padding: 10px var(--space-4) 10px var(--space-6);
-    border-bottom: 0.5px solid rgba(92, 61, 30, 0.08);
-    transition: color 200ms ease, background 200ms ease;
-  }
-
-  .mobile-menu__sub-link:last-child { border-bottom: none; }
-
-  .mobile-menu__sub-link:hover {
-    color: var(--color-brand-red);
-    background: rgba(205, 18, 34, 0.05);
-  }
-
-  .mobile-menu__sub-link svg { color: var(--color-brand-red); flex-shrink: 0; }
-
-  .mobile-menu__footer {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    margin-top: auto;
-    padding-top: var(--space-4);
-    border-top: 0.5px solid var(--color-neutral-200);
-  }
-
-  .mobile-menu__cta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 13px 20px;
-    background: var(--color-brand-red);
-    color: #fff;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: var(--radius-md);
-    box-shadow: 0 4px 12px rgba(205, 18, 34, 0.25);
-    transition: background 200ms ease, transform 200ms ease;
-    width: 100%;
-  }
-
-  .mobile-menu__cta:hover {
-    background: #B01020;
-    transform: translateY(-1px);
-  }
-
-  /* ── Responsive ─────────────────────────────── */
-  @media (max-width: 768px) {
-    .navbar { height: 48px; }
-  }
-</style>
-
 <script>
-  /* ── Mobile Menu ─────────────────────────────── */
   const menu   = document.querySelector('[data-menu]') as HTMLElement | null;
   const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement | null;
   const closeBtns = document.querySelectorAll('[data-menu-close]');
   const navLinks = menu?.querySelectorAll('.mobile-menu__link') ?? [];
+  // Declare before functions so closeMenu can reference it (const is not hoisted)
+  const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
 
   function openMenu() {
     if (!menu || !toggle) return;
@@ -623,6 +204,12 @@ const mainNavItems = [
     toggle.classList.remove('is-open');
     toggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    // Close all open mobile sub-panels
+    dropdownToggles.forEach(btn => {
+      btn.setAttribute('aria-expanded', 'false');
+      const sub = document.getElementById(btn.getAttribute('aria-controls') ?? '');
+      if (sub) sub.setAttribute('hidden', '');
+    });
   }
 
   toggle?.addEventListener('click', () => {
@@ -632,20 +219,20 @@ const mainNavItems = [
   closeBtns.forEach(btn => btn.addEventListener('click', closeMenu));
   navLinks.forEach(link => link.addEventListener('click', closeMenu));
 
-  /* ── Dropdown toggle ─────────────────────── */
-  const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
+  /* Mobile dropdown toggle */
   dropdownToggles.forEach(btn => {
     btn.addEventListener('click', () => {
       const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const ctrlId = btn.getAttribute('aria-controls') ?? '';
+      const sub = document.getElementById(ctrlId);
       dropdownToggles.forEach(other => {
         if (other !== btn) {
           other.setAttribute('aria-expanded', 'false');
-          const sub = document.getElementById(other.getAttribute('aria-controls') ?? '');
-          if (sub) sub.setAttribute('hidden', '');
+          const otherSub = document.getElementById(other.getAttribute('aria-controls') ?? '');
+          if (otherSub) otherSub.setAttribute('hidden', '');
         }
       });
       btn.setAttribute('aria-expanded', String(!expanded));
-      const sub = document.getElementById(btn.getAttribute('aria-controls') ?? '');
       if (sub) {
         if (!expanded) sub.removeAttribute('hidden');
         else sub.setAttribute('hidden', '');
@@ -653,7 +240,7 @@ const mainNavItems = [
     });
   });
 
-  /* ── Desktop dropdown (data-nav-dropdown) ─── */
+  /* Desktop dropdown */
   const navDropdown = document.querySelector('[data-nav-dropdown]') as HTMLButtonElement | null;
   const navDropdownEl = navDropdown?.closest('.navbar__item')?.querySelector('.navbar__dropdown') as HTMLElement | null;
 
@@ -664,7 +251,6 @@ const mainNavItems = [
     navDropdownEl.classList.toggle('is-open', !expanded);
   });
 
-  // Close when clicking outside
   document.addEventListener('click', (e) => {
     if (navDropdownEl && !navDropdown?.closest('.navbar__item')?.contains(e.target as Node)) {
       navDropdown?.setAttribute('aria-expanded', 'false');
