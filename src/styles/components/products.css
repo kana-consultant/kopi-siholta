@@ -116,7 +116,7 @@
   font-family: var(--font-body);
   font-size: 13px;
   line-height: 1.7;
-  color: var(--color-text-brown-muted);
+  color: var(--color-brand-earth);
   max-width: 460px;
 }
 
@@ -154,10 +154,11 @@
 
 .product-row__detail-label {
   font-family: var(--font-label);
-  font-size: 7px;
-  letter-spacing: 0.12em;
+  font-size: 9px;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
-  color: var(--color-neutral-400);
+  color: var(--color-brand-muted);
+  /* ensure ≥4.5:1 contrast on cream bg */
 }
 
 .product-row__detail-value {
