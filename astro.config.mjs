@@ -6,7 +6,14 @@ import iconify from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [iconify()],
+  integrations: [
+    iconify({
+      include: {
+        icons: ['local:*'],
+        dirs: ['src/icons'],
+      }
+    }),
+  ],
   vite: {
     plugins: [
       tailwindcss(),
