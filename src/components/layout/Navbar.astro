@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import logoLight from '../../images/logo/logo-kopi-siholta.png';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { useTranslations } from '../../i18n/utils';
@@ -26,19 +26,17 @@ function localeHref(targetLang: string): string {
   return segs.join('/') || '/';
 }
 
-const navItems = [
-  { key: 'company',       href: `/${lang}/company` },
-  { key: 'products',      href: `/${lang}/#products` },
-  { key: 'export',        href: `/${lang}/#export` },
-  { key: 'b2b',           href: `/${lang}/#b2b` },
-  { key: 'contact',       href: `/${lang}/#contact` },
+const mainNavItems = [
+  { key: 'products', href: `/${lang}/#products` },
+  { key: 'export',   href: `/${lang}/#export` },
+  { key: 'b2b',      href: `/${lang}/#b2b` },
+  { key: 'contact',  href: `/${lang}/#contact` },
 ];
 ---
 
 <header class="navbar" role="banner">
   <div class="navbar__inner container">
 
-    <!-- ── Logo ─────────────────────────────────── -->
     <a href={`/${lang}/`} class="navbar__logo" aria-label="Kopi Siholta — Home">
       <Image
         src={logoLight}
@@ -47,16 +45,40 @@ const navItems = [
         height="32"
         class="navbar__logo-img"
       />
-      <span class="navbar__wordmark">KOPI SIHOLTA</span>
     </a>
 
-    <!-- ── Desktop Nav ─────────────────────────── -->
     <nav class="navbar__nav hide-mobile" aria-label="Main navigation">
       <ul class="navbar__links">
-        {navItems.map(item => (
+
+        <li class="navbar__item navbar__item--parent">
+          <button class="navbar__trigger" aria-expanded="false" aria-haspopup="true" data-nav-dropdown>
+            <span>{nav.company}</span>
+            <Icon name="mdi:chevron-down" width="10" height="10" />
+          </button>
+          <ul class="navbar__dropdown" role="menu">
+            <li role="none"><a href={`/${lang}/company`} class="navbar__dropdown-link" role="menuitem">
+              <Icon name="mdi:domain" width="10" height="10" />
+              {nav.company}
+            </a></li>
+            <li role="none"><a href={`/${lang}/coffee-farming`} class="navbar__dropdown-link" role="menuitem">
+              <Icon name="mdi:coffee" width="10" height="10" />
+              {nav.coffeeFarming}
+            </a></li>
+            <li role="none"><a href={`/${lang}/fnb`} class="navbar__dropdown-link" role="menuitem">
+              <Icon name="mdi:glass-wine" width="10" height="10" />
+              {nav.fnb}
+            </a></li>
+            <li role="none"><a href={`/${lang}/tourism`} class="navbar__dropdown-link" role="menuitem">
+              <Icon name="mdi:store" width="10" height="10" />
+              {nav.tourism}
+            </a></li>
+          </ul>
+        </li>
+
+        {mainNavItems.map(item => (
           <li>
             <a href={item.href} class="navbar__link">
-              {nav[item.key] ?? item.key}
+              {nav[item.key]}
             </a>
           </li>
         ))}
@@ -73,7 +95,7 @@ const navItems = [
 
       <!-- CTA -->
       <a href={`/${lang}/#contact`} class="btn btn--primary navbar__cta hide-mobile">
-        {nav.cta || 'Hubungi Kami'}
+        {nav.cta}
       </a>
 
       <!-- Mobile Hamburger -->
@@ -103,16 +125,46 @@ const navItems = [
     <div class="mobile-menu__overlay" data-menu-close></div>
     <nav class="mobile-menu__panel">
       <button class="mobile-menu__close" aria-label="Close menu" data-menu-close>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
+        <Icon name="mdi:close" width="20" height="20" />
       </button>
 
       <ul class="mobile-menu__links">
-        {navItems.map(item => (
+
+        <!-- About Us dropdown (mobile) -->
+        <li class="mobile-menu__item mobile-menu__item--parent">
+          <button
+            class="mobile-menu__trigger"
+            aria-expanded="false"
+            aria-controls="sub-about"
+            data-dropdown-toggle
+          >
+            <span>{nav.company}</span>
+            <Icon name="mdi:chevron-down" width="16" height="16" class="mobile-menu__trigger-icon" />
+          </button>
+          <ul class="mobile-menu__sub" id="sub-about" role="list" hidden>
+            <li><a href={`/${lang}/company`} class="mobile-menu__sub-link">
+              <Icon name="mdi:domain" width="11" height="11" />
+              {nav.company}
+            </a></li>
+            <li><a href={`/${lang}/coffee-farming`} class="mobile-menu__sub-link">
+              <Icon name="mdi:coffee" width="11" height="11" />
+              {nav.coffeeFarming}
+            </a></li>
+            <li><a href={`/${lang}/fnb`} class="mobile-menu__sub-link">
+              <Icon name="mdi:glass-wine" width="11" height="11" />
+              {nav.fnb}
+            </a></li>
+            <li><a href={`/${lang}/tourism`} class="mobile-menu__sub-link">
+              <Icon name="mdi:store" width="11" height="11" />
+              {nav.tourism}
+            </a></li>
+          </ul>
+        </li>
+
+        {mainNavItems.map(item => (
           <li>
             <a href={item.href} class="mobile-menu__link">
-              {nav[item.key] ?? item.key}
+              {nav[item.key]}
             </a>
           </li>
         ))}
@@ -213,6 +265,66 @@ const navItems = [
     color: var(--color-brand-red);
     border-bottom-color: var(--color-brand-red);
   }
+
+  /* ── Desktop Dropdown ──────────────────── */
+  .navbar__item { display: flex; align-items: center; position: relative; }
+
+  .navbar__trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-brand-earth);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid transparent;
+    transition: color 200ms ease, border-color 200ms ease;
+  }
+
+  .navbar__trigger:hover { color: var(--color-brand-red); border-bottom-color: var(--color-brand-red); }
+
+  .navbar__trigger svg { transition: transform 200ms ease; }
+  .navbar__trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+  .navbar__dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 200px;
+    background: var(--color-brand-cream);
+    border: 0.5px solid var(--color-neutral-200);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(92, 61, 30, 0.12);
+    list-style: none;
+    margin: 0;
+    padding: var(--space-2) 0;
+    z-index: var(--z-navbar);
+    display: none;
+  }
+
+  .navbar__dropdown.is-open { display: block; }
+
+  .navbar__dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-brand-earth);
+    text-decoration: none;
+    padding: 9px var(--space-4);
+    transition: color 200ms ease, background 200ms ease;
+  }
+
+  .navbar__dropdown-link:hover { color: var(--color-brand-red); background: rgba(205, 18, 34, 0.05); }
+  .navbar__dropdown-link svg { color: var(--color-brand-red); flex-shrink: 0; }
 
   /* ── Right side ───────────────────────────────── */
   .navbar__right {
@@ -385,6 +497,70 @@ const navItems = [
 
   .mobile-menu__link:hover { color: var(--color-brand-red); }
 
+  /* ── Dropdown ──────────────────────────── */
+  .mobile-menu__item { display: flex; flex-direction: column; }
+
+  .mobile-menu__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-4) var(--space-2);
+    border: none;
+    border-bottom: 0.5px solid var(--color-neutral-200);
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-brand-earth);
+    cursor: pointer;
+    transition: color 200ms ease;
+    text-align: left;
+  }
+
+  .mobile-menu__trigger:hover { color: var(--color-brand-red); }
+
+  .mobile-menu__trigger-icon {
+    flex-shrink: 0;
+    transition: transform 250ms ease;
+  }
+
+  .mobile-menu__trigger[aria-expanded="true"] .mobile-menu__trigger-icon {
+    transform: rotate(180deg);
+  }
+
+  .mobile-menu__sub {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(92, 61, 30, 0.04);
+    border-bottom: 0.5px solid var(--color-neutral-200);
+    overflow: hidden;
+  }
+
+  .mobile-menu__sub-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-brand-muted);
+    text-decoration: none;
+    padding: 10px var(--space-4) 10px var(--space-6);
+    border-bottom: 0.5px solid rgba(92, 61, 30, 0.08);
+    transition: color 200ms ease, background 200ms ease;
+  }
+
+  .mobile-menu__sub-link:last-child { border-bottom: none; }
+
+  .mobile-menu__sub-link:hover {
+    color: var(--color-brand-red);
+    background: rgba(205, 18, 34, 0.05);
+  }
+
+  .mobile-menu__sub-link svg { color: var(--color-brand-red); flex-shrink: 0; }
+
   .mobile-menu__footer {
     display: flex;
     flex-direction: column;
@@ -455,6 +631,46 @@ const navItems = [
 
   closeBtns.forEach(btn => btn.addEventListener('click', closeMenu));
   navLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+  /* ── Dropdown toggle ─────────────────────── */
+  const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
+  dropdownToggles.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      dropdownToggles.forEach(other => {
+        if (other !== btn) {
+          other.setAttribute('aria-expanded', 'false');
+          const sub = document.getElementById(other.getAttribute('aria-controls') ?? '');
+          if (sub) sub.setAttribute('hidden', '');
+        }
+      });
+      btn.setAttribute('aria-expanded', String(!expanded));
+      const sub = document.getElementById(btn.getAttribute('aria-controls') ?? '');
+      if (sub) {
+        if (!expanded) sub.removeAttribute('hidden');
+        else sub.setAttribute('hidden', '');
+      }
+    });
+  });
+
+  /* ── Desktop dropdown (data-nav-dropdown) ─── */
+  const navDropdown = document.querySelector('[data-nav-dropdown]') as HTMLButtonElement | null;
+  const navDropdownEl = navDropdown?.closest('.navbar__item')?.querySelector('.navbar__dropdown') as HTMLElement | null;
+
+  navDropdown?.addEventListener('click', () => {
+    if (!navDropdownEl) return;
+    const expanded = navDropdown.getAttribute('aria-expanded') === 'true';
+    navDropdown.setAttribute('aria-expanded', String(!expanded));
+    navDropdownEl.classList.toggle('is-open', !expanded);
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (navDropdownEl && !navDropdown?.closest('.navbar__item')?.contains(e.target as Node)) {
+      navDropdown?.setAttribute('aria-expanded', 'false');
+      navDropdownEl.classList.remove('is-open');
+    }
+  });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && menu?.classList.contains('is-open')) closeMenu();
