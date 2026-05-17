@@ -7,12 +7,17 @@ import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
 import companyBg from '../../images/bg/bg-company.jpg';
+import aboutFoto from '../../images/about.webp';
+import { useTranslations } from '../../i18n/utils';
 
 interface Props {
   lang?: 'id' | 'en' | 'fr';
 }
 
 const { lang = 'id' } = Astro.props;
+const t = useTranslations(lang);
+
+const nl = (s: string) => s.split('\n').join('<br>');
 
 export function getStaticPaths() {
   return [
@@ -22,96 +27,32 @@ export function getStaticPaths() {
   ];
 }
 
-// ── Content ──────────────────────────────────────────────────────────
-const milestones = [
-  {
-    year: '2019',
-    title: 'Akar Ditanam di Lintong',
-    desc: 'PT Siholta Toba Indonesia resmi didirikan. Langkah pertama dimulai dari dataran tinggi Humbang Hasundutan, bekerja langsung dengan puluhan keluarga petani kopi tradisi.',
-    iconName: 'mdi:sprout',
-  },
-  {
-    year: '2020',
-    title: 'Jaringan Petani Terbangun',
-    desc: 'Kolaborasi dengan lebih dari 200 keluarga petani di Lintong dan Dolok. Proses Giling Basah tradisional dipertahankan sebagai ciri autentik kopi specialty.',
-    iconName: 'mdi:account-group',
-  },
-  {
-    year: '2021',
-    title: 'Pasar Domestik Dikuasai',
-    desc: 'Produk Kopi Siholta hadir di Tokopedia dan Shopee. Brand kopi specialty Indonesia mulai dikenal di seluruh nusantara.',
-    iconName: 'mdi:shopping',
-  },
-  {
-    year: '2022',
-    title: 'Sertifikasi Internasional',
-    desc: 'Kopi Siholta memenuhi standar specialty coffee dunia dan mulai menjangkau pasar ekspor ke Amerika, Eropa, dan Asia Timur.',
-    iconName: 'mdi:certificate',
-  },
-  {
-    year: '2023',
-    title: 'Ekosistem Kopi Terintegrasi',
-    desc: 'Ekspansi ke sektor F&B dan wisata kopi. Pengunjung dapat merasakan langsung pengalaman kopi dari pohon hingga cangkir di lokasi kami.',
-    iconName: 'mdi:home',
-  },
-  {
-    year: '2024',
-    title: 'Visi 2035: Kopi Dunia',
-    desc: 'PT Siholta Toba Indonesia menetapkan roadmap untuk menjadi exporter kopi specialty Indonesia terkemuka yang membawa nama Sumatra ke kancah global.',
-    iconName: 'mdi:earth',
-  },
-];
-
 const hexToRgb = (hex: string) =>
   hex.replace('#', '').match(/.{2}/g)?.map(v => parseInt(v, 16)).join(',') ?? '92,61,30';
 
 const sectors = [
   {
-    name: 'Coffee Farming',
-    label: 'Agronomi & Produksi',
-    desc: '200+ keluarga petani partner di dataran tinggi Lintong dan Dolok. Proses Giling Basah tradisional menghasilkan karakter unik kopi specialty Humbang Hasundutan yang telah diakui pasar dunia.',
-    highlights: ['200+ Petani Partner', 'Lintong & Dolok Region', 'Giling Basah Tradisional', 'Arabika & Robusta Premium'],
-    iconName: 'mdi:coffee',
-    bgColor: '#F5F0EA',
-    accentColor: '#5C3D1E',
-    href: `/${lang}/coffee-farming`,
+    nameKey: 'sector1Name', labelKey: 'sector1Label', descKey: 'sector1Desc', ctaKey: 'sector1Cta',
+    highlightsKey: ['sector1H1', 'sector1H2', 'sector1H3', 'sector1H4'],
+    iconName: 'mdi:coffee', bgColor: '#F5F0EA', accentColor: '#5C3D1E', href: `/${lang}/coffee-farming`,
   },
   {
-    name: 'F&B',
-    label: 'Minuman & Kuliner',
-    desc: 'Dari minuman hingga makanan berbasis kopi specialty Indonesia. Setiap produk F&B dibuat dengan bahan kopi pilihan yang diproses dengan standar specialty coffee.',
-    highlights: ['Biji Kopi Pilihan', 'Standar Specialty', 'Varian Minuman', 'Kuliner Kopi Indonesia'],
-    iconName: 'mdi:cup',
-    bgColor: '#F0F0F5',
-    accentColor: '#1A3A5C',
-    href: `/${lang}/fnb`,
+    nameKey: 'sector2Name', labelKey: 'sector2Label', descKey: 'sector2Desc', ctaKey: 'sector2Cta',
+    highlightsKey: ['sector2H1', 'sector2H2', 'sector2H3', 'sector2H4'],
+    iconName: 'mdi:cup', bgColor: '#F0F0F5', accentColor: '#1A3A5C', href: `/${lang}/fnb`,
   },
   {
-    name: 'Industry & Tourism',
-    label: 'Industri & Pariwisata',
-    desc: 'Pengalaman wisata kopi dari kebun hingga proses produksi. Kunjungan farm dan factory tour tersedia untuk tamu yang ingin mendalami cerita di balik setiap cangkir kopi.',
-    highlights: ['Farm Tour', 'Factory Tour', 'Tasting Experience', 'Partnership B2B'],
-    iconName: 'mdi:office-building',
-    bgColor: '#EAF0EA',
-    accentColor: '#2A4A20',
-    href: `/${lang}/tourism`,
+    nameKey: 'sector3Name', labelKey: 'sector3Label', descKey: 'sector3Desc', ctaKey: 'sector3Cta',
+    highlightsKey: ['sector3H1', 'sector3H2', 'sector3H3', 'sector3H4'],
+    iconName: 'mdi:office-building', bgColor: '#EAF0EA', accentColor: '#2A4A20', href: `/${lang}/tourism`,
   },
 ];
 
-// ── Breadcrumb translations ────────────────────────────────────────────
-const breadcrumb = {
-  id: { home: 'Beranda', page: 'Tentang Kami' },
-  en: { home: 'Home', page: 'About Us' },
-  fr: { home: 'Accueil', page: 'À Propos' },
-};
-const t = breadcrumb[lang] ?? breadcrumb.id;
+const tc = t.company as Record<string, string>;
+
 ---
 
-<Base
-  title="Tentang Kami — PT Siholta Toba Indonesia"
-  description="PT Siholta Toba Indonesia: cerita, sejarah, dan tiga sektor usaha kami dalam industri kopi specialty Humbang Hasundutan."
-  lang={lang}
->
+<Base title={t.meta.titleCompany} description={t.meta.descCompany} lang={lang}>
   <Navbar lang={lang} />
 
   <!-- ── Hero ─────────────────────────────────────────── -->
@@ -133,21 +74,21 @@ const t = breadcrumb[lang] ?? breadcrumb.id;
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <ol class="breadcrumb__list">
           <li class="breadcrumb__item">
-            <a href={`/${lang}/`} class="breadcrumb__link">{t.home}</a>
+            <a href={`/${lang}/`} class="breadcrumb__link">{t.breadcrumb.home}</a>
           </li>
           <li class="breadcrumb__sep" aria-hidden="true">
             <Icon name="mdi:chevron-right" width="10" height="10" />
           </li>
           <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">
-            {t.page}
+            {tc.page}
           </li>
         </ol>
       </nav>
 
       <div class="company-hero__content page-hero__content">
-        <p class="page-hero__label">Tentang Kami</p>
-        <h1 class="page-hero__title">Warisan Kopi<br />dari Sumatera Utara</h1>
-        <p class="page-hero__sub">Dari dataran tinggi Humbang Hasundutan ke seluruh dunia — sebuah perjalanan yang dimulai dari secangkir kopi dan keyakinan bahwa kopi Indonesia pantas berada di panggung dunia.</p>
+        <p class="page-hero__label">{tc.storyTag}</p>
+        <h1 class="page-hero__title">{tc?.titleLine1}<br/>{tc?.titleLine2}</h1>
+        <p class="page-hero__sub">{tc.heroSub}</p>
       </div>
     </div>
   </section>
@@ -158,7 +99,7 @@ const t = breadcrumb[lang] ?? breadcrumb.id;
       <div class="story__grid">
 
         <div class="story__intro animate-on-scroll">
-          <p class="section-tag">Cerita Kami</p>
+          <p class="section-tag">{tc.storyTag}</p>
           <h2 id="story-heading" class="story__heading">
             <Image
               src={companyLogo}
@@ -168,22 +109,22 @@ const t = breadcrumb[lang] ?? breadcrumb.id;
               widths={[120, 180, 240]}
               sizes="120px"
             />
-            <span>PT SIHOLTA TOBA INDONESIA</span>
+            <span>{tc.storyLogo}</span>
           </h2>
-          <p class="story__body">Pada 2019, PT Siholta Toba Indonesia didirikan dengan satu misi: membawa kopi specialty Humbang Hasundutan — yang telah dikenal sejak era kolonial Belanda — ke panggung internasional. Nama "Siholta" berarti "pohon tua" dalam bahasa Batak, melambangkan akar yang dalam dan warisan yang dijaga.</p>
-          <p class="story__body">Bermula dari puluhan petani partner di Lereng Sumatera, kini kami telah bertumbuh menjadi perusahaan kopi specialty terintegrasi yang menjalankan tiga sektor usaha sekaligus — dari agronomi hingga ke meja tamu Anda.</p>
+          <p class="story__body">{tc.storyBody1}</p>
+          <p class="story__body">{tc.storyBody2}</p>
           <div class="story__stats">
             <div class="story__stat">
               <span class="story__stat-num">2019</span>
-              <span class="story__stat-label">Didirikan</span>
+              <span class="story__stat-label">{tc.founded}</span>
             </div>
             <div class="story__stat">
               <span class="story__stat-num">200+</span>
-              <span class="story__stat-label">Petani Partner</span>
+              <span class="story__stat-label">{tc.farmers}</span>
             </div>
             <div class="story__stat">
               <span class="story__stat-num">3</span>
-              <span class="story__stat-label">Sektor Usaha</span>
+              <span class="story__stat-label">{tc.sectors}</span>
             </div>
           </div>
         </div>
@@ -191,7 +132,7 @@ const t = breadcrumb[lang] ?? breadcrumb.id;
         <div class="story__image animate-on-scroll">
           <div class="story__image-frame">
             <Image
-              src={companyBg}
+              src={aboutFoto}
               alt="Perkebunan kopi PT Siholta Toba Indonesia di Humbang Hasundutan"
               class="story__img"
               loading="lazy"
@@ -209,19 +150,26 @@ const t = breadcrumb[lang] ?? breadcrumb.id;
   <section class="timeline section section--cream" aria-labelledby="timeline-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">Garis Waktu</p>
-        <h2 id="timeline-heading" class="section-title">Perjalanan Kami</h2>
-        <p class="section-sub">Enam tahun membangun ekosistem kopi specialty Indonesia — dari fondasi petani hingga standar dunia.</p>
+        <p class="section-tag">{tc.timelineTag}</p>
+        <h2 id="timeline-heading" class="section-title">{tc.timelineTitle}</h2>
+        <p class="section-sub">{tc.timelineSubtitle}</p>
       </div>
 
       <ol class="timeline__list" role="list">
-        {milestones.map((m, i) => (
+        {[
+          { year: '2019', key: 'milestone2019', iconName: 'mdi:sprout' },
+          { year: '2020', key: 'milestone2020', iconName: 'mdi:account-group' },
+          { year: '2021', key: 'milestone2021', iconName: 'mdi:shopping' },
+          { year: '2022', key: 'milestone2022', iconName: 'mdi:certificate' },
+          { year: '2023', key: 'milestone2023', iconName: 'mdi:home' },
+          { year: '2024', key: 'milestone2024', iconName: 'mdi:earth' },
+        ].map((m, i) => (
           <li class={`timeline__item animate-on-scroll ${i % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'}`}>
             <div class="timeline__card">
               <div class="timeline__card-icon" aria-hidden="true"><Icon name={m.iconName} width="16" height="16" /></div>
               <div class="timeline__card-year">{m.year}</div>
-              <h3 class="timeline__card-title">{m.title}</h3>
-              <p class="timeline__card-desc">{m.desc}</p>
+              <h3 class="timeline__card-title">{tc[m.key]}</h3>
+              <p class="timeline__card-desc">{tc[`${m.key}Desc`]}</p>
             </div>
             <div class="timeline__connector" aria-hidden="true">
               <div class="timeline__dot"></div>
@@ -236,9 +184,9 @@ const t = breadcrumb[lang] ?? breadcrumb.id;
   <section class="sectors section" aria-labelledby="sectors-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">Bidang Usaha</p>
-        <h2 id="sectors-heading" class="section-title">Tiga Pilar Operaciones</h2>
-        <p class="section-sub">PT Siholta Toba Indonesia menjalankan bisnis kopi melalui tiga sektor yang saling melengkapi — dari hulu hingga hilir.</p>
+        <p class="section-tag">{tc.sectorsTag}</p>
+        <h2 id="sectors-heading" class="section-title">{tc.sectorsTitle}</h2>
+        <p class="section-sub">{tc.sectorsSubtitle}</p>
       </div>
 
       <div class="sectors__grid">
@@ -249,21 +197,21 @@ const t = breadcrumb[lang] ?? breadcrumb.id;
             <div class="sector-card__header">
               <div class="sector-card__icon" aria-hidden="true"><Icon name={sector.iconName} width="24" height="24" /></div>
               <div>
-                <p class="sector-card__label">{sector.label}</p>
-                <h3 class="sector-card__name">{sector.name}</h3>
+                <p class="sector-card__label">{tc[sector.labelKey]}</p>
+                <h3 class="sector-card__name">{tc[sector.nameKey]}</h3>
               </div>
             </div>
-            <p class="sector-card__desc">{sector.desc}</p>
+            <p class="sector-card__desc">{tc[sector.descKey]}</p>
             <ul class="sector-card__highlights" role="list">
-              {sector.highlights.map(h => (
+              {sector.highlightsKey.map(key => (
                 <li class="sector-card__highlight">
                   <Icon name="mdi:circle-small" width="10" height="10" />
-                  {h}
+                  {tc[key]}
                 </li>
               ))}
             </ul>
             <a href={sector.href} class="sector-card__cta">
-              Jelajahi
+              {tc[sector.ctaKey]}
               <Icon name="mdi:chevron-right" width="12" height="12" />
             </a>
           </article>
@@ -276,9 +224,9 @@ const t = breadcrumb[lang] ?? breadcrumb.id;
   <section class="location section" aria-labelledby="location-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">Lokasi Kami</p>
-        <h2 id="location-heading" class="section-title">Kunjungi Kantor Kami</h2>
-        <p class="section-sub">PT Siholta Toba Indonesia berpusat di dataran tinggi Humbang Hasundutan, Sumatera Utara — dekat dengan tradisi kopi terbaik Indonesia.</p>
+        <p class="section-tag">{tc.locationTag}</p>
+        <h2 id="location-heading" class="section-title">{tc.locationTitle}</h2>
+        <p class="section-sub">{tc.locationSub}</p>
       </div>
       <div class="location__map animate-on-scroll">
         <iframe
@@ -294,21 +242,21 @@ const t = breadcrumb[lang] ?? breadcrumb.id;
       </div>
       <div class="location__address animate-on-scroll">
         <Icon name="mdi:map-marker" width="16" height="16" />
-        <span>Dusun IV, Desa/Kelurahan Sitolu Bahal, Kec. Lintong Nihuta, Kab. Humbang Hasundutan, Provinsi Sumatera Utara, Kode Pos 22475</span>
+        <span>{t.contact.address}</span>
       </div>
     </div>
   </section>
 
   <!-- ── CTA Banner ────────────────────────────────── -->
-  <section class="page-cta page-cta--red" aria-label="Hubungi PT Siholta Toba Indonesia">
+  <section class="page-cta page-cta--cream" aria-label={tc.ctaBanner}>
     <div class="container page-cta__inner">
       <div class="page-cta__text animate-on-scroll">
-        <h2 class="page-cta__title">Mari Mejangkau<br />Dunia Bersama</h2>
-        <p class="page-cta__sub">Tertarik dengan kopi specialty Humbang Hasundutan? Hubungi tim kami untuk kemitraan, kunjungan farm, atau pertanyaan bisnis.</p>
+        <h2 class="page-cta__title page-cta__title--earth" set:html={nl(tc.ctaTitle)}></h2>
+        <p class="page-cta__sub page-cta__sub--earth">{tc.ctaSubtitle}</p>
       </div>
       <div class="page-cta__actions animate-on-scroll">
-        <a href={`/${lang}/#contact`} class="btn btn--primary">Hubungi Kami</a>
-        <a href={`/${lang}/`} class="btn btn--outline-dark">Kembali ke Beranda</a>
+        <a href={`/${lang}/#contact`} class="btn btn--primary">{tc.cta1}</a>
+        <a href={`/${lang}/`} class="btn btn--outline-dark">{tc.cta2}</a>
       </div>
     </div>
   </section>

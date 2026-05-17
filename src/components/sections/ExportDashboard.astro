@@ -2,87 +2,70 @@
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import globePic from '../../images/globe-p.png';
+import { t } from '../../i18n/utils';
+
 interface Props {
   lang?: string;
 }
-
 const { lang = 'en' } = Astro.props;
+const tr = t(lang);
 
-const countries = [
-  { name: 'Amerika Serikat', code: 'US', flag: '🇺🇸', active: true },
-  { name: 'Jepang', code: 'JP', flag: '🇯🇵', active: true },
-  { name: 'Korea Selatan', code: 'KR', flag: '🇰🇷', active: true },
-  { name: 'Australia', code: 'AU', flag: '🇦🇺', active: false },
-  { name: 'Singapura', code: 'SG', flag: '🇸🇬', active: false },
-  { name: 'Malaysia', code: 'MY', flag: '🇲🇾', active: false },
+const countryKeys = ['countryUSA', 'countryJapan', 'countryKorea', 'countryAustralia', 'countrySingapore', 'countryMalaysia'] as const;
+const codes = ['US', 'JP', 'KR', 'AU', 'SG', 'MY'];
+const flags = ['🇺🇸', '🇯🇵', '🇰🇷', '🇦🇺', '🇸🇬', '🇲🇾'];
+const active = [true, true, true, false, false, false];
+
+const kpiKeys = [
+  { num: '100T', labelKey: 'kpi1' as const },
+  { num: '6+',   labelKey: 'kpi2' as const },
+  { num: '15+',  labelKey: 'kpi3' as const },
+  { num: '12+',  labelKey: 'kpi4' as const },
 ];
-
-const kpis = [
-  { num: '100T', label: 'Volume Ekspor / Tahun', icon: 'mdi:weight' },
-  { num: '6+', label: 'Negara Tujuan Ekspor', icon: 'mdi:earth' },
-  { num: '15+', label: 'Tahun Pengalaman', icon: 'mdi:calendar' },
-  { num: '12+', label: 'Partner Internasional', icon: 'mdi:handshake' },
-];
-
-const activeCountries = countries.filter(c => c.active);
-const plannedCountries = countries.filter(c => !c.active);
 ---
 
 <section class="export" id="export" aria-label="Jangkauan Internasional">
   <div class="export__wrap">
-
-    <!-- Top: Header + Globe side by side -->
     <div class="export__top">
       <div class="export__head">
         <div class="export__badge">
           <Icon name="mdi:airplane-takeoff" width="13" height="13" />
-          <span>Jangkauan Internasional</span>
+          <span>{tr.export.tag}</span>
         </div>
-        <h2 class="export__title">Dari Sumatera<br />ke Dunia</h2>
-        <p class="export__desc">Kopi Siholta dipercaya oleh importir dan distributor di berbagai belahan dunia. Komitmen kami: kualitas konsisten dan rantai pasok yang transparan dari dataran tinggi Humbang Hasundutan.</p>
-
-        <!-- Active routes mini-list -->
+        <h2 class="export__title">{tr.export.title}</h2>
+        <p class="export__desc">{tr.export.subtitle}</p>
         <div class="export__routes">
-          <p class="export__routes-label">Rute Ekspor Aktif:</p>
+          <p class="export__routes-label">{tr.export.routesLabel}</p>
           <div class="export__route-list">
-            {activeCountries.map(c => (
+            {countryKeys.slice(0, 3).map((key, i) => (
               <div class="export__route-item">
                 <Icon name="mdi:map-marker" width="10" height="10" />
-                <span>{c.name}</span>
+                <span>{tr.export[key]}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      <!-- Globe Illustration -->
       <div class="export__globe-wrap" aria-hidden="true">
-        <Image
-          src={globePic}
-          alt="Peta jangkauan ekspor Kopi Siholta ke berbagai negara"
-          class="export__globe-img"
-          loading="lazy"
-          widths={[400, 600, 800]}
-          sizes="(max-width: 1024px) 100vw, 50vw"
-        />
-        <!-- Overlay label -->
+        <Image src={globePic} alt={tr.export.mapAlt} class="export__globe-img"
+          loading="lazy" widths={[400, 600, 800]}
+          sizes="(max-width: 1024px) 100vw, 50vw" />
         <div class="export__globe-label">
           <span class="export__globe-label-dot"></span>
-          <span>Kantor Pusat Indonesia</span>
+          <span>{tr.export.officeLabel}</span>
         </div>
       </div>
     </div>
 
-
     <!-- KPI Strip -->
     <div class="export__kpi-strip">
-      {kpis.map((kpi, i) => (
+      {kpiKeys.map(kpi => (
         <div class="export__kpi-cell">
           <div class="export__kpi-icon">
-            <Icon name={kpi.icon} width="18" height="18" />
+            <Icon name={kpi.labelKey === 'kpi1' ? 'mdi:weight' : kpi.labelKey === 'kpi2' ? 'mdi:earth' : kpi.labelKey === 'kpi3' ? 'mdi:calendar' : 'mdi:handshake'} width="18" height="18" />
           </div>
           <span class="export__kpi-num">{kpi.num}</span>
-          <span class="export__kpi-label">{kpi.label}</span>
+          <span class="export__kpi-label">{tr.export[kpi.labelKey]}</span>
         </div>
       ))}
     </div>
@@ -92,15 +75,15 @@ const plannedCountries = countries.filter(c => !c.active);
       <div class="export__country-section">
         <div class="export__country-section-header">
           <span class="export__country-section-dot export__country-section-dot--active"></span>
-          <span>Pasar Aktif</span>
+          <span>{tr.export.activeMarkets}</span>
         </div>
         <div class="export__country-cards">
-          {activeCountries.map(c => (
+          {countryKeys.slice(0, 3).map((key, i) => (
             <div class="export__country-card export__country-card--active">
-              <div class="export__country-card-code">{c.code}</div>
+              <div class="export__country-card-code">{codes[i]}</div>
               <div class="export__country-card-info">
-                <span class="export__country-card-name">{c.name}</span>
-                <span class="export__country-card-status">Ekspor aktif</span>
+                <span class="export__country-card-name">{tr.export[key]}</span>
+                <span class="export__country-card-status">{tr.export.statusActive}</span>
               </div>
               <Icon name="mdi:check-circle" width="14" height="14" class="export__country-card-check" />
             </div>
@@ -111,15 +94,15 @@ const plannedCountries = countries.filter(c => !c.active);
       <div class="export__country-section">
         <div class="export__country-section-header">
           <span class="export__country-section-dot export__country-section-dot--planned"></span>
-          <span>Rencana Ekspansi</span>
+          <span>{tr.export.expansionPlan}</span>
         </div>
         <div class="export__country-cards">
-          {plannedCountries.map(c => (
+          {countryKeys.slice(3).map((key, i) => (
             <div class="export__country-card">
-              <div class="export__country-card-code">{c.code}</div>
+              <div class="export__country-card-code">{codes[i + 3]}</div>
               <div class="export__country-card-info">
-                <span class="export__country-card-name">{c.name}</span>
-                <span class="export__country-card-status">Segera hadir</span>
+                <span class="export__country-card-name">{tr.export[key]}</span>
+                <span class="export__country-card-status">{tr.export.statusSoon}</span>
               </div>
               <Icon name="mdi:clock-outline" width="14" height="14" class="export__country-card-clock" />
             </div>
