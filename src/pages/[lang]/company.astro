@@ -7,6 +7,7 @@ import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
 import companyBg from '../../images/bg/bg-company.jpg';
+import aboutFoto from '../../images/about.webp';
 import { useTranslations } from '../../i18n/utils';
 
 interface Props {
@@ -16,7 +17,6 @@ interface Props {
 const { lang = 'id' } = Astro.props;
 const t = useTranslations(lang);
 
-/** Replace newlines with <br> tags — used with set:html */
 const nl = (s: string) => s.split('\n').join('<br>');
 
 export function getStaticPaths() {
@@ -48,7 +48,6 @@ const sectors = [
   },
 ];
 
-// Cast translation object to allow dynamic string key access
 const tc = t.company as Record<string, string>;
 
 ---
@@ -88,7 +87,7 @@ const tc = t.company as Record<string, string>;
 
       <div class="company-hero__content page-hero__content">
         <p class="page-hero__label">{tc.storyTag}</p>
-        <h1 class="page-hero__title" set:html={nl(tc.heroTitle)}></h1>
+        <h1 class="page-hero__title">{tc?.titleLine1}<br/>{tc?.titleLine2}</h1>
         <p class="page-hero__sub">{tc.heroSub}</p>
       </div>
     </div>
@@ -133,7 +132,7 @@ const tc = t.company as Record<string, string>;
         <div class="story__image animate-on-scroll">
           <div class="story__image-frame">
             <Image
-              src={companyBg}
+              src={aboutFoto}
               alt="Perkebunan kopi PT Siholta Toba Indonesia di Humbang Hasundutan"
               class="story__img"
               loading="lazy"
@@ -249,11 +248,11 @@ const tc = t.company as Record<string, string>;
   </section>
 
   <!-- ── CTA Banner ────────────────────────────────── -->
-  <section class="page-cta page-cta--red" aria-label={tc.ctaBanner}>
+  <section class="page-cta page-cta--cream" aria-label={tc.ctaBanner}>
     <div class="container page-cta__inner">
       <div class="page-cta__text animate-on-scroll">
-        <h2 class="page-cta__title" set:html={nl(tc.ctaTitle)}></h2>
-        <p class="page-cta__sub">{tc.ctaSubtitle}</p>
+        <h2 class="page-cta__title page-cta__title--earth" set:html={nl(tc.ctaTitle)}></h2>
+        <p class="page-cta__sub page-cta__sub--earth">{tc.ctaSubtitle}</p>
       </div>
       <div class="page-cta__actions animate-on-scroll">
         <a href={`/${lang}/#contact`} class="btn btn--primary">{tc.cta1}</a>

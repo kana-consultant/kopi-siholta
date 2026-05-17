@@ -13,8 +13,9 @@ import fnbHero4 from '../../images/fnb/coffee.jpg';
 import fnbHero5 from '../../images/fnb/coffee (2).jpg';
 import fnbHero6 from '../../images/fnb/coffee (3).jpg';
 import fnbHero7 from '../../images/fnb/coffee-cup (2).jpg';
-import fnbHero8 from '../../images/fnb/caffee (2).jpg';
-import fnbHero9 from '../../images/fnb/barista (2).jpg';
+import fnbHero8 from '../../images/fnb/barista (2).jpg';
+import fnbHero9 from '../../images/fnb/coffee (3).jpg';
+import fnbHero10 from '../../images/hero/hero-4.jpg';
 import { useTranslations } from '../../i18n/utils';
 
 interface Props { lang?: 'id' | 'en' | 'fr'; }
@@ -37,34 +38,32 @@ export function getStaticPaths() {
 const drinks = [
   {
     nameKey: 'drinkEspresso', noteKey: 'drinkEspressoNote', descKey: 'drinkEspressoDesc',
-    price: 'Rp 28.000', img: fnbHero1,
+    priceKey: 'espressoPrice', img: fnbHero2,
     imgAltKey: 'altBarista', tag: 'Signature', tagColor: '#CD1222',
   },
   {
     nameKey: 'drinkAffogato', noteKey: 'drinkAffogatoNote', descKey: 'drinkAffogatoDesc',
-    price: 'Rp 35.000', img: fnbHero4,
+    priceKey: 'affogatoPrice', img: fnbHero4,
     imgAltKey: 'altProcess', tag: 'Populer', tagColor: '#5C3D1E',
   },
   {
     nameKey: 'drinkV60', noteKey: 'drinkV60Note', descKey: 'drinkV60Desc',
-    price: 'Rp 38.000', img: fnbHero3,
+    priceKey: 'v60Price', img: fnbHero3,
     imgAltKey: 'altAtmosphere', tag: 'Barista Choice', tagColor: '#225522',
   },
   {
     nameKey: 'drinkKopiSusu', noteKey: 'drinkKopiSusuNote', descKey: 'drinkKopiSusuDesc',
-    price: 'Rp 32.000', img: fnbHero2,
+    priceKey: 'kopiSusuPrice', img: fnbHero7,
     imgAltKey: 'altCoffeeMilk', tag: 'Best Seller', tagColor: '#D4A046',
   },
 ];
 
 const food = [
-  { nameKey: 'foodRotiBabi', descKey: 'foodRotiBabiDesc', price: 'Rp 25.000' },
-  { nameKey: 'foodNagasari', descKey: 'foodNagasariDesc', price: 'Rp 18.000' },
-  { nameKey: 'foodLapis', descKey: 'foodLapisDesc', price: 'Rp 22.000' },
-  { nameKey: 'foodBananaBread', descKey: 'foodBananaBreadDesc', price: 'Rp 28.000' },
+  { nameKey: 'foodRotiBabi',    descKey: 'foodRotiBabiDesc',    priceKey: 'rotiBabiPrice'    },
+  { nameKey: 'foodNagasari',    descKey: 'foodNagasariDesc',    priceKey: 'nagasariPrice'    },
+  { nameKey: 'foodLapis',       descKey: 'foodLapisDesc',       priceKey: 'lapisPrice'       },
+  { nameKey: 'foodBananaBread', descKey: 'foodBananaBreadDesc', priceKey: 'bananaBreadPrice' },
 ];
-
-const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero6, fnbHero7, fnbHero8, fnbHero9];
 ---
 
 <Base title={t.meta.titleFnb} description={t.meta.descFnb} lang={lang}>
@@ -106,7 +105,29 @@ const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero
         <p class="page-hero__sub">{t.fnb.subtitle}</p>
       </div>
     </div>
-    <div class="hero-scroll-line" aria-hidden="true"></div>
+  </section>
+    <!-- ── Stats Band (shared layout) ──────────────────── -->
+  <section class="stat-band stat-band--green" aria-label="F&B Statistics">
+    <div class="container">
+      <div class="stat-band__grid">
+        <div class="stat-band__item animate-on-scroll">
+          <span class="stat-band__value">{t.fnb.stats.statMenuItemsValue}{t.fnb.stats.statMenuItemsUnit}</span>
+          <span class="stat-band__label">{t.fnb.statMenuItems}</span>
+        </div>
+        <div class="stat-band__item animate-on-scroll" style="transition-delay: 80ms">
+          <span class="stat-band__value">{t.fnb.stats.statDrinksValue}</span>
+          <span class="stat-band__label">{t.fnb.statDrinks}</span>
+        </div>
+        <div class="stat-band__item animate-on-scroll" style="transition-delay: 160ms">
+          <span class="stat-band__value">{t.fnb.stats.statCupsDayValue}{t.fnb.stats.statCupsDayUnit}</span>
+          <span class="stat-band__label">{t.fnb.statCupsDay}</span>
+        </div>
+        <div class="stat-band__item animate-on-scroll" style="transition-delay: 240ms">
+          <span class="stat-band__value">{t.fnb.stats.statYearsExpValue}{t.fnb.stats.statYearsExpUnit}</span>
+          <span class="stat-band__label">{t.fnb.statYearsExp}</span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ── Drinks: Bento Layout ─────────────────────────── -->
@@ -133,14 +154,14 @@ const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero
               class="drink-card__img"
             />
             <div class="drink-card__tag" style={`background: ${drinks[0].tagColor}`}>
-              {t.products[drinks[0].tag === 'Signature' ? 'tagSignature' : drinks[0].tag === 'Populer' ? 'tagPopular' : drinks[0].tag === 'Barista Choice' ? 'tagBaristaChoice' : 'tagBestSeller']}
+              {t.products.tagSignature}
             </div>
           </div>
           <div class="drink-card__body">
             <p class="drink-card__note">{t.fnb[drinks[0].noteKey as keyof typeof t.fnb]}</p>
             <h3 class="drink-card__name">{t.fnb[drinks[0].nameKey as keyof typeof t.fnb]}</h3>
             <p class="drink-card__desc">{t.fnb[drinks[0].descKey as keyof typeof t.fnb]}</p>
-            <span class="drink-card__price">{drinks[0].price}</span>
+            <span class="drink-card__price">{t.fnb.drinks[drinks[0].priceKey as keyof typeof t.fnb.drinks]}</span>
           </div>
         </article>
 
@@ -158,14 +179,14 @@ const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero
                   class="drink-card__img"
                 />
                 <div class="drink-card__tag drink-card__tag--sm" style={`background: ${drink.tagColor}`}>
-                  {t.products[drink.tag === 'Populer' ? 'tagPopular' : drink.tag === 'Barista Choice' ? 'tagBaristaChoice' : 'tagBestSeller']}
+                  {drink.tag === 'Populer' ? t.products.tagPopular : drink.tag === 'Barista Choice' ? t.products.tagBaristaChoice : t.products.tagBestSeller}
                 </div>
               </div>
               <div class="drink-card__body drink-card__body--sm">
                 <p class="drink-card__note drink-card__note--sm">{t.fnb[drink.noteKey as keyof typeof t.fnb]}</p>
                 <h3 class="drink-card__name drink-card__name--sm">{t.fnb[drink.nameKey as keyof typeof t.fnb]}</h3>
                 <p class="drink-card__desc drink-card__desc--sm">{t.fnb[drink.descKey as keyof typeof t.fnb]}</p>
-                <span class="drink-card__price drink-card__price--sm">{drink.price}</span>
+                <span class="drink-card__price drink-card__price--sm">{t.fnb.drinks[drink.priceKey as keyof typeof t.fnb.drinks]}</span>
               </div>
             </article>
           ))}
@@ -177,7 +198,7 @@ const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero
   <!-- ── Full-width Image Break ─────────────────────── -->
   <div class="fnb-image-break" aria-hidden="true">
     <Image
-      src={fnbHero6}
+      src={fnbHero10}
       alt=""
       loading="lazy"
       widths={[768, 1280, 1920]}
@@ -209,15 +230,15 @@ const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero
               <h3 class="food-card__name">{t.fnb[item.nameKey as keyof typeof t.fnb]}</h3>
               <p class="food-card__desc">{t.fnb[item.descKey as keyof typeof t.fnb]}</p>
             </div>
-            <span class="food-card__price">{item.price}</span>
+            <span class="food-card__price">{t.fnb.food[item.priceKey as keyof typeof t.fnb.food]}</span>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ── 3-Column Gallery Mosaic ────────────────────── -->
-  <section class="gallery-mosaic" aria-label="Galeri F&B Kopi Siholta">
+  <!-- ── Gallery Mosaic ────────────────────── -->
+  <section class="gallery-mosaic" aria-label={t.fnb.galleryTitle}>
     <div class="gallery-mosaic__grid">
       <!-- Left tall column -->
       <div class="gallery-mosaic__col gallery-mosaic__col--tall">
@@ -232,45 +253,38 @@ const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero
           />
         </div>
       </div>
-      <!-- Center 2x2 grid -->
-      <div class="gallery-mosaic__col gallery-mosaic__col--grid">
-        <div class="gallery-mosaic__item">
-          <Image
-            src={fnbHero2}
-            alt={t.fnb.gallery?.altCoffeeMilk ?? ''}
-            loading="lazy"
-            widths={[400, 600]}
-            sizes="(max-width: 768px) 50vw, 22vw"
-            class="gallery-mosaic__img"
-          />
+      <!-- Center column: 2-row layout -->
+      <div class="gallery-mosaic__col gallery-mosaic__col--center">
+        <div class="gallery-mosaic__row gallery-mosaic__row--pair">
+          <div class="gallery-mosaic__item">
+            <Image
+              src={fnbHero2}
+              alt={t.fnb.gallery?.altCoffeeMilk ?? ''}
+              loading="lazy"
+              widths={[400, 600]}
+              sizes="(max-width: 768px) 50vw, 22vw"
+              class="gallery-mosaic__img"
+            />
+          </div>
+          <div class="gallery-mosaic__item">
+            <Image
+              src={fnbHero3}
+              alt={t.fnb.gallery?.altAtmosphere ?? ''}
+              loading="lazy"
+              widths={[400, 600]}
+              sizes="(max-width: 768px) 50vw, 22vw"
+              class="gallery-mosaic__img"
+            />
+          </div>
         </div>
-        <div class="gallery-mosaic__item">
-          <Image
-            src={fnbHero3}
-            alt={t.fnb.gallery?.altAtmosphere ?? ''}
-            loading="lazy"
-            widths={[400, 600]}
-            sizes="(max-width: 768px) 50vw, 22vw"
-            class="gallery-mosaic__img"
-          />
-        </div>
-        <div class="gallery-mosaic__item">
-          <Image
-            src={fnbHero7}
-            alt={t.fnb.gallery?.altProcess ?? ''}
-            loading="lazy"
-            widths={[400, 600]}
-            sizes="(max-width: 768px) 50vw, 22vw"
-            class="gallery-mosaic__img"
-          />
-        </div>
-        <div class="gallery-mosaic__item">
+        <!-- Bottom row: 1 full-width image -->
+        <div class="gallery-mosaic__item gallery-mosaic__item--wide">
           <Image
             src={fnbHero8}
-            alt={t.fnb.gallery?.altVariants ?? ''}
+            alt={t.fnb.gallery?.altProcess ?? ''}
             loading="lazy"
-            widths={[400, 600]}
-            sizes="(max-width: 768px) 50vw, 22vw"
+            widths={[600, 900]}
+            sizes="(max-width: 768px) 100vw, 44vw"
             class="gallery-mosaic__img"
           />
         </div>
@@ -279,8 +293,8 @@ const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero
       <div class="gallery-mosaic__col gallery-mosaic__col--tall">
         <div class="gallery-mosaic__item gallery-mosaic__item--portrait">
           <Image
-            src={fnbHero9}
-            alt={t.fnb.gallery?.altBaristaV60 ?? ''}
+            src={fnbHero5}
+            alt={t.fnb.gallery?.altVariants ?? ''}
             loading="lazy"
             widths={[480, 768]}
             sizes="(max-width: 768px) 100vw, 33vw"
@@ -292,7 +306,7 @@ const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero
   </section>
 
   <!-- ── CTA ─────────────────────────────────────────── -->
-  <section class="page-cta page-cta--cream" aria-label="Kunjungi Outlet Kopi Siholta">
+  <section class="page-cta page-cta--cream" aria-label={t.fnb.ctaTitle}>
     <div class="container page-cta__inner">
       <div class="page-cta__text animate-on-scroll">
         <h2 class="page-cta__title page-cta__title--earth">{nl(t.fnb.ctaTitle)}</h2>
@@ -300,7 +314,7 @@ const galleryImages = [fnbHero1, fnbHero2, fnbHero3, fnbHero4, fnbHero5, fnbHero
       </div>
       <div class="page-cta__actions animate-on-scroll">
         <a href={`/${lang}/#contact`} class="btn btn--primary">{t.fnb.cta1}</a>
-        <a href={`/${lang}/tourism`} class="btn btn--outline-dark">{t.fnb.cta2}</a>
+        <!-- <a href={`/${lang}/tourism`} class="btn btn--outline-dark">{t.fnb.cta2}</a> -->
       </div>
     </div>
   </section>

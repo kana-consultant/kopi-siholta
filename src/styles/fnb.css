@@ -9,7 +9,7 @@
   display: grid;
   grid-template-columns: 1fr 1.4fr 1fr;
   gap: 2px;
-  min-height: 480px;
+  min-height: 560px;
 }
 
 .gallery-mosaic__col {
@@ -19,18 +19,26 @@
 }
 
 .gallery-mosaic__col--tall { flex: 1; }
-.gallery-mosaic__col--grid {
+
+.gallery-mosaic__col--center {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gallery-mosaic__row--pair {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2px;
 }
 
-.gallery-mosaic__item {
-  position: relative;
-  overflow: hidden;
-}
+.gallery-mosaic__item { position: relative; overflow: hidden; }
 
 .gallery-mosaic__item--portrait { flex: 1; }
+
+.gallery-mosaic__item--wide { aspect-ratio: 2/1; }
+
+.gallery-mosaic__item--span-2 { grid-column: span 2; }
 
 .gallery-mosaic__img {
   width: 100%;
@@ -40,8 +48,10 @@
   transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.gallery-mosaic__col--tall .gallery-mosaic__img { min-height: 320px; }
-.gallery-mosaic__col--grid .gallery-mosaic__img { aspect-ratio: 1/1; }
+.gallery-mosaic__col--tall .gallery-mosaic__img { min-height: 280px; }
+.gallery-mosaic__col--center .gallery-mosaic__img { min-height: 185px; }
+.gallery-mosaic__row--pair .gallery-mosaic__img { min-height: 185px; }
+.gallery-mosaic__item--wide .gallery-mosaic__img { aspect-ratio: 2/1; }
 
 .gallery-mosaic__item:hover .gallery-mosaic__img { transform: scale(1.05); }
 
@@ -309,6 +319,12 @@
 }
 
 @media (max-width: 480px) {
+  .gallery-mosaic__grid { grid-template-columns: 1fr; min-height: auto; }
+  .gallery-mosaic__col--center { flex-direction: row; flex-wrap: wrap; }
+  .gallery-mosaic__row--pair { display: flex; flex-direction: column; flex: 1; min-width: 140px; }
+  .gallery-mosaic__item--wide { aspect-ratio: unset; }
+  .gallery-mosaic__col--tall .gallery-mosaic__img { min-height: 200px; }
+  .gallery-mosaic__col--center .gallery-mosaic__img { min-height: 140px; }
   .drinks__stack { flex-direction: column; }
   .drink-card--mini { flex-direction: row; grid-template-columns: 90px 1fr; min-height: 80px; }
   .drink-card--mini .drink-card__media { height: 80px; }

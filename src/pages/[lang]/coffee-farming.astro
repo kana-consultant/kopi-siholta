@@ -6,16 +6,24 @@ import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
 import farmingBg from '../../images/bg/bg-farming.jpg';
-import fProcess1 from '../../images/farming/coffe-cherry.jpg';
+import fProcess1 from '../../images/farming/coffee-cherry(2).jpg';
 import fProcess2 from '../../images/farming/process.jpg';
 import fProcess3 from '../../images/farming/process (2).jpg';
 import fProcess4 from '../../images/farming/process (3).jpg';
 import fProcess5 from '../../images/farming/process (4).jpg';
 import fProcess6 from '../../images/farming/process (5).jpg';
+import fProcess7b from '../../images/farming/process (7).jpg';
+import fProcess8 from '../../images/farming/process(3).jpg';
+import fProcess9 from '../../images/farming/process (6).jpg';
+import fProcess10 from '../../images/farming/sorting.jpg';
+import fGreen   from '../../images/farming/coffee-green.jpg';
+import fCup2    from '../../images/farming/cup-and-test(2).jpg';
 import fFarm from '../../images/farming/coffee-plantation.jpg';
+import fFarm2 from '../../images/farming/coffee-plantation (2).jpg';
+import fFarm3 from '../../images/farming/coffee-plantation (3).jpg';
 import fCup from '../../images/farming/cup-and-test.jpg';
-import fFarmer1 from '../../images/farming/farmer-1.jpg';
-import fFarmer2 from '../../images/farming/farmer-2.jpg';
+import fFarmer1 from '../../images/farming/farmer.jpg';
+import fFarmer2 from '../../images/farming/farmer-1.jpg';
 import { useTranslations } from '../../i18n/utils';
 
 interface Props { lang?: 'id' | 'en' | 'fr'; }
@@ -34,37 +42,10 @@ export function getStaticPaths() {
   ];
 }
 
-const process = [
-  {
-    step: '01', titleKey: 'stepCherry', iconName: 'mdi:flower', descKey: 'stepCherryDesc',
-    img: fProcess1, imgAltKey: 'altCherry',
-  },
-  {
-    step: '02', titleKey: 'stepFerment', iconName: 'mdi:flask', descKey: 'stepFermentDesc',
-    img: fProcess2, imgAltKey: 'altFerment',
-  },
-  {
-    step: '03', titleKey: 'stepWetHull', iconName: 'mdi:sprout', descKey: 'stepWetHullDesc',
-    img: fProcess3, imgAltKey: 'altWetHull',
-  },
-  {
-    step: '04', titleKey: 'stepDrying', iconName: 'mdi:white-balance-sunny', descKey: 'stepDryingDesc',
-    img: fProcess4, imgAltKey: 'altDrying',
-  },
-  {
-    step: '05', titleKey: 'stepSorting', iconName: 'mdi:filter-variant', descKey: 'stepSortingDesc',
-    img: fProcess5, imgAltKey: 'altSorting',
-  },
-  {
-    step: '06', titleKey: 'stepRoasting', iconName: 'mdi:fire', descKey: 'stepRoastingDesc',
-    img: fProcess6, imgAltKey: 'altRoasting',
-  },
-];
-
 const regions = [
   { nameKey: 'regionLintong', altKey: 'regionLintongAlt', descKey: 'regionLintongDesc', img: fFarm },
-  { nameKey: 'regionDolok',   altKey: 'regionDolokAlt',   descKey: 'regionDolokDesc',   img: fCup   },
-  { nameKey: 'regionHumbang', altKey: 'regionHumbangAlt', descKey: 'regionHumbangDesc', img: fProcess1 },
+  { nameKey: 'regionDolok',   altKey: 'regionDolokAlt',   descKey: 'regionDolokDesc',   img: fFarm2   },
+  { nameKey: 'regionHumbang', altKey: 'regionHumbangAlt', descKey: 'regionHumbangDesc', img: fFarm3 },
 ];
 
 const farmers = [
@@ -109,7 +90,6 @@ const farmers = [
         <a href="#process" class="btn btn--primary">{t.coffeeFarming.ctaHero}</a>
       </div>
     </div>
-    <div class="hero-scroll-line" aria-hidden="true"></div>
   </section>
 
   <!-- ── Stats Band ────────────────────────────────────── -->
@@ -124,8 +104,8 @@ const farmers = [
     </div>
   </section>
 
-  <!-- ── Process: 3-col Bento ──────────────────────────── -->
-  <section class="process section" id="process" aria-labelledby="process-heading">
+  <!-- ── Process: Journey Chapters ─────────────────────── -->
+  <section class="journey section section--cream" id="process" aria-labelledby="process-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
         <p class="section-tag">{t.coffeeFarming.processTag}</p>
@@ -133,31 +113,104 @@ const farmers = [
         <p class="section-sub">{t.coffeeFarming.processSubtitle}</p>
       </div>
 
-      <!-- Bento grid layout: wide cards at positions 1 and 6 -->
-      <div class="bento-grid--3col">
-        {process.map((step, i) => (
-          <article class={`feature-card animate-on-scroll ${i === 0 || i === 5 ? 'feature-card--wide' : ''}`} style={`transition-delay: ${i * 60}ms`}>
-            {step.img && (
-              <div class="feature-card__img-wrap">
-                <Image
-                  src={step.img}
-                  alt={t.coffeeFarming.farmImages?.[step.imgAltKey as keyof typeof t.coffeeFarming.farmImages] ?? ''}
-                  loading="lazy"
-                  widths={[400, 600]}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  class="feature-card__img"
-                />
-                <div class="feature-card__img-overlay" aria-hidden="true"></div>
-              </div>
-            )}
-            <div class="feature-card__icon" aria-hidden="true">
-              <Icon name={step.iconName} width="20" height="20" />
+      <div class="journey__timeline">
+
+        <div class="journey__chapter animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fFarmer2} alt={t.coffeeFarming.farmImages?.altCherry ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 42vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">01</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
             </div>
-            <div class="feature-card__step">{step.step}</div>
-            <h3 class="feature-card__title">{t.coffeeFarming[step.titleKey as keyof typeof t.coffeeFarming]}</h3>
-            <p class="feature-card__desc">{t.coffeeFarming[step.descKey as keyof typeof t.coffeeFarming]}</p>
-          </article>
-        ))}
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepCherry}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepCherryDesc}</p>
+          </div>
+        </div>
+
+        <div class="journey__chapter journey__chapter--rev animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fProcess8} alt={t.coffeeFarming.farmImages?.altFerment ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 58vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">02</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepFerment}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepFermentDesc}</p>
+          </div>
+        </div>
+
+        <div class="journey__chapter animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fProcess3} alt={t.coffeeFarming.farmImages?.altWetHull ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 42vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">03</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepWetHull}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepWetHullDesc}</p>
+          </div>
+        </div>
+
+        <div class="journey__chapter journey__chapter--rev animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fProcess9} alt={t.coffeeFarming.farmImages?.altDrying ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 58vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">04</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepDrying}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepDryingDesc}</p>
+          </div>
+        </div>
+
+        <div class="journey__chapter animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fProcess10} alt={t.coffeeFarming.farmImages?.altSorting ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 42vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">05</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepSorting}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepSortingDesc}</p>
+          </div>
+        </div>
+
+        <div class="journey__chapter journey__chapter--rev animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fProcess6} alt={t.coffeeFarming.farmImages?.altRoasting ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 58vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">06</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepRoasting}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepRoastingDesc}</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -194,6 +247,64 @@ const farmers = [
             </div>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Quality Editorial — photo + dark panel ───────── -->
+  <section class="quality-editorial section" aria-labelledby="quality-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <p class="section-tag">{t.coffeeFarming.qualityTag}</p>
+        <h2 id="quality-heading" class="section-title">{nl(t.coffeeFarming.qualityTitle)}</h2>
+        <p class="section-sub">{t.coffeeFarming.qualitySubtitle}</p>
+      </div>
+
+      <div class="quality-editorial__body">
+
+        <!-- Left: photo grid -->
+        <div class="quality-editorial__gallery">
+          <div class="quality-editorial__gallery-item">
+            <Image src={fCup2} alt={t.coffeeFarming.qualityGallery1Alt} loading="lazy" widths={[600,1200]} sizes="(max-width:768px) 100vw, 50vw" class="quality-editorial__gallery-img" />
+            <span class="quality-editorial__gallery-label">{t.coffeeFarming.qualityGallery1}</span>
+          </div>
+          <div class="quality-editorial__gallery-item">
+            <Image src={fGreen} alt={t.coffeeFarming.qualityGallery2Alt} loading="lazy" widths={[300,600]} sizes="(max-width:768px) 50vw, 25vw" class="quality-editorial__gallery-img" />
+            <span class="quality-editorial__gallery-label">{t.coffeeFarming.qualityGallery2}</span>
+          </div>
+          <div class="quality-editorial__gallery-item">
+            <Image src={fProcess7b} alt={t.coffeeFarming.qualityGallery3Alt} loading="lazy" widths={[300,600]} sizes="(max-width:768px) 50vw, 25vw" class="quality-editorial__gallery-img" />
+            <span class="quality-editorial__gallery-label">{t.coffeeFarming.qualityGallery3}</span>
+          </div>
+        </div>
+
+        <!-- Right: editorial text panel -->
+        <div class="quality-editorial__panel animate-on-scroll">
+          <div>
+            <p class="quality-editorial__panel-tag">{t.coffeeFarming.qualityTag}</p>
+            <h3 class="quality-editorial__panel-title">{nl(t.coffeeFarming.qualityPanelTitle)}</h3>
+          </div>
+          <p class="quality-editorial__panel-text">{t.coffeeFarming.qualityPanelText}</p>
+          <div class="quality-editorial__panel-stats">
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat1Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat1Label}</span>
+            </div>
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat2Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat2Label}</span>
+            </div>
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat3Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat3Label}</span>
+            </div>
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat4Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat4Label}</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -248,7 +359,7 @@ const farmers = [
       </div>
       <div class="page-cta__actions animate-on-scroll">
         <a href={`/${lang}/#contact`} class="btn btn--primary">{t.coffeeFarming.cta1}</a>
-        <a href={`/${lang}/company`} class="btn btn--outline-dark">{t.coffeeFarming.cta2}</a>
+        <!-- <a href={`/${lang}/company`} class="btn btn--outline-dark">{t.coffeeFarming.cta2}</a> -->
       </div>
     </div>
   </section>
