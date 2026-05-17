@@ -6,6 +6,9 @@ import iconify from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
+  integrations: [
+    iconify(),
+  ],
   vite: {
     plugins: [
       tailwindcss(),
@@ -21,6 +24,7 @@ export default defineConfig({
       })
     ],
     build: {
+      chunkSizeWarningLimit: 300,
       cssMinify: 'lightningcss',
       minify: 'terser',
       terserOptions: {
@@ -41,13 +45,10 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 300,
     target: 'es2020'
   },
   image: {
-    formats: ['avif', 'webp'],
-    quality: 80,
-    densities: [1, 2],
+    remotePatterns: [{ protocol: 'https' }],
     maximumLocalLength: 1024
   },
   compressHTML: true,

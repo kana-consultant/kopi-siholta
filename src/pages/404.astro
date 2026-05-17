@@ -17,10 +17,18 @@ import { Icon } from 'astro-icon/components';
 
     <div class="page-loader" role="status" aria-label="Loading, please wait" aria-live="polite">
 
+      <!-- Floating coffee bean -->
+      <div class="page-loader__bean" aria-hidden="true">
+        <Icon name="mdi:coffee" width="48" height="48" />
+      </div>
+
       <!-- Spinner -->
       <div class="page-loader__spinner" aria-hidden="true">
         <Icon name="mdi:loading" width="40" height="40" />
       </div>
+
+      <!-- Brand name -->
+      <p class="page-loader__brand">Kopi Siholta</p>
 
       <!-- Redirect text -->
       <p class="page-loader__text">Redirecting...</p>
