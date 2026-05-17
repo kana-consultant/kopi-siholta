@@ -71,14 +71,27 @@ const meta = lang === 'id'
 
   revealEls.forEach(el => revealObserver.observe(el));
 
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  document.querySelectorAll('a').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+      
       if (!href || href === '#') return;
-      const target = document.querySelector(href);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (href.includes('#')) {
+        const url = new URL(href, window.location.origin);
+        
+        if (url.pathname === window.location.pathname) {
+          const targetSelector = url.hash; // Mengambil '#products', '#export', dll.
+          const target = document.querySelector(targetSelector);
+          
+          if (target) {
+            e.preventDefault();
+            
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            history.pushState(null, '', targetSelector);
+          }
+        }
       }
     });
   });
