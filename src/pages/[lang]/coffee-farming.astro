@@ -6,18 +6,33 @@ import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
 import farmingBg from '../../images/bg/bg-farming.jpg';
-import h1 from '../../images/heritage/heritage-1.jpg';
-import h2 from '../../images/heritage/heritage-2.jpg';
-import h3 from '../../images/heritage/heritage-3.jpg';
-import h4 from '../../images/heritage/heritage-4.jpg';
-import h5 from '../../images/heritage/heritage-5.jpg';
-import h6 from '../../images/heritage/heritage-6.jpg';
+import fProcess1 from '../../images/farming/coffee-cherry(2).jpg';
+import fProcess2 from '../../images/farming/process.jpg';
+import fProcess3 from '../../images/farming/process (2).jpg';
+import fProcess4 from '../../images/farming/process (3).jpg';
+import fProcess5 from '../../images/farming/process (4).jpg';
+import fProcess6 from '../../images/farming/process (5).jpg';
+import fProcess7b from '../../images/farming/process (7).jpg';
+import fProcess8 from '../../images/farming/process(3).jpg';
+import fProcess9 from '../../images/farming/process (6).jpg';
+import fProcess10 from '../../images/farming/sorting.jpg';
+import fGreen   from '../../images/farming/coffee-green.jpg';
+import fCup2    from '../../images/farming/cup-and-test(2).jpg';
+import fFarm from '../../images/farming/coffee-plantation.jpg';
+import fFarm2 from '../../images/farming/coffee-plantation (2).jpg';
+import fFarm3 from '../../images/farming/coffee-plantation (3).jpg';
+import fCup from '../../images/farming/cup-and-test.jpg';
+import fFarmer1 from '../../images/farming/farmer.jpg';
+import fFarmer2 from '../../images/farming/farmer-1.jpg';
+import { useTranslations } from '../../i18n/utils';
 
-interface Props {
-  lang?: 'id' | 'en' | 'fr';
-}
+interface Props { lang?: 'id' | 'en' | 'fr'; }
 
 const { lang = 'id' } = Astro.props;
+const t = useTranslations(lang);
+
+/** Replace newlines with <br> tags — used with set:html */
+const nl = (s: string) => s.split('\n').join('<br>');
 
 export function getStaticPaths() {
   return [
@@ -27,69 +42,19 @@ export function getStaticPaths() {
   ];
 }
 
-const breadcrumb = {
-  id: { home: 'Beranda', company: 'Tentang Kami', page: 'Budidaya Kopi' },
-  en: { home: 'Home', company: 'About Us', page: 'Coffee Farming' },
-  fr: { home: 'Accueil', company: 'À Propos', page: 'Caféiculture' },
-};
-const t = breadcrumb[lang] ?? breadcrumb.id;
-
-const process = [
-  {
-    step: '01',
-    title: 'Panen Cherry',
-    desc: 'Buah kopi dipetik manual hanya saat merah sempurna. Satu pohon dikunjungi beberapa kali untuk memastikan kesempurnaan.',
-    iconName: 'mdi:flower',
-  },
-  {
-    step: '02',
-    title: 'Fermentasi',
-    desc: 'Biji kopi difermentasi 24–36 jam dalam tong kayu tradisional. Proses ini mengembangkan profil rasa kompleks.',
-    iconName: 'mdi:flask',
-  },
-  {
-    step: '03',
-    title: 'Giling Basah',
-    desc: 'Metode tradisional Lintong — kulit buah dikupas, lendir difermentasi, menghasilkan body khas Tanah Batak.',
-    iconName: 'mdi:sprout',
-  },
-  {
-    step: '04',
-    title: 'Penjemuran',
-    desc: 'Biji dihamparkan di atas tikar bamboo selama 7–14 hari, dibalik secara berkala di bawah sinar matahari.',
-    iconName: 'mdi:white-balance-sunny',
-  },
-  {
-    step: '05',
-    title: 'Sortasi & Grading',
-    desc: 'Biji disortir manual dan mekanis. Hanya Grade 1 yang lolos standar specialty coffee internasional.',
-    iconName: 'mdi:filter-variant',
-  },
-  {
-    step: '06',
-    title: 'Penyangraian',
-    desc: 'Dipangganglight-medium untuk menonjolkan karakter rempah dan cokelat khas Kopi Lintong. Profil roast signature.',
-    iconName: 'mdi:fire',
-  },
-];
-
 const regions = [
-  { name: 'Lintong Nihuta', alt: '1.200 – 1.500 mdpl', desc: 'Kawasan utama produksi Arabika. Tanah vulkanik dan iklim sejuk menciptakan profil rasa rempah yang diakui dunia.', img: h1 },
-  { name: 'Dolok Sijunjung', alt: '900 – 1.200 mdpl', desc: 'Wilayah Robusta dengan body bold dan aftertaste cokelat kuat. Cocok untuk espresso blend.', img: h2 },
-  { name: 'Humbangu Hasundutan', alt: '1.000 – 1.500 mdpl', desc: 'Jantung operasional PT Siholta. 200+ keluarga petani partner tersebar di 7 desa di kawasan ini.', img: h3 },
+  { nameKey: 'regionLintong', altKey: 'regionLintongAlt', descKey: 'regionLintongDesc', img: fFarm },
+  { nameKey: 'regionDolok',   altKey: 'regionDolokAlt',   descKey: 'regionDolokDesc',   img: fFarm2   },
+  { nameKey: 'regionHumbang', altKey: 'regionHumbangAlt', descKey: 'regionHumbangDesc', img: fFarm3 },
 ];
 
 const farmers = [
-  { name: 'Bapak Margondang', village: 'Desa Lintong Nihuta', since: 'Petani sejak 1987', img: h4, quote: 'Kopi sudah menjadi darah dalam tubuh keluarga kami selama tiga generasi.' },
-  { name: 'Ibu Rohani', village: 'Desa Sitalang', since: 'Petani sejak 2003', img: h5, quote: 'Setelah bermitra dengan Siholta, penghasilan kami meningkat 40% dan kami belajar standar internasional.' },
+  { nameKey: 'farmerMargondang', villageKey: 'farmerMargondangVillage', sinceKey: 'farmerMargondangSince', quoteKey: 'farmerMargondangQuote', img: fFarmer1 },
+  { nameKey: 'farmerRohani',     villageKey: 'farmerRohaniVillage',     sinceKey: 'farmerRohaniSince',     quoteKey: 'farmerRohaniQuote',     img: fFarmer2 },
 ];
 ---
 
-<Base
-  title="Budidaya Kopi — Kopi Siholta"
-  description="Pelajari proses budidaya kopi specialty PT Siholta — dari panen cherry di dataran tinggi Humbang Hasundutan hingga penyangraian."
-  lang={lang}
->
+<Base title={t.meta.titleFarming} description={t.meta.descFarming} lang={lang}>
   <Navbar lang={lang} />
 
   <!-- ── Hero ─────────────────────────────────────────── -->
@@ -97,7 +62,7 @@ const farmers = [
     <div class="page-hero__bg">
       <Image
         src={farmingBg}
-        alt="Perkebunan kopi Siholta di dataran tinggi Humbang Hasundutan"
+        alt={t.coffeeFarming.farmImages?.altFarm ?? ''}
         class="page-hero__img"
         style="object-position: center 25%"
         loading="eager"
@@ -110,88 +75,153 @@ const farmers = [
     <div class="container page-hero__inner">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <ol class="breadcrumb__list">
-          <li class="breadcrumb__item">
-            <a href={`/${lang}/`} class="breadcrumb__link">{t.home}</a>
-          </li>
-          <li class="breadcrumb__sep" aria-hidden="true">
-            <Icon name="mdi:chevron-right" width="10" height="10" />
-          </li>
-          <li class="breadcrumb__item">
-            <a href={`/${lang}/company`} class="breadcrumb__link">{t.company}</a>
-          </li>
-          <li class="breadcrumb__sep" aria-hidden="true">
-            <Icon name="mdi:chevron-right" width="10" height="10" />
-          </li>
-          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">
-            {t.page}
-          </li>
+          <li class="breadcrumb__item"><a href={`/${lang}/`} class="breadcrumb__link">{t.breadcrumb.home}</a></li>
+          <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
+          <li class="breadcrumb__item"><a href={`/${lang}/company`} class="breadcrumb__link">{t.breadcrumb.company}</a></li>
+          <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
+          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">{t.coffeeFarming.page}</li>
         </ol>
       </nav>
 
       <div class="farm-hero__content">
-        <p class="page-hero__label">Agronomi &amp; Produksi</p>
-        <h1 class="page-hero__title">Dari Tanah,<br />Datang Rasa.</h1>
-        <p class="page-hero__sub">Setiap butir kopi yang kami hasilkan dimulai dari tanah vulkanik dataran tinggi Humbang Hasundutan — dipanen dengan tangan, diproses dengan tradisi, dan dijaga dengan dedikasi.</p>
-        <a href="#process" class="btn btn--primary">Lihat Proses</a>
+        <p class="page-hero__label">{t.coffeeFarming.label}</p>
+        <h1 class="page-hero__title">{t.coffeeFarming.titleLine1}<br />{t.coffeeFarming.titleLine2}</h1>
+        <p class="page-hero__sub">{t.coffeeFarming.subtitle}</p>
+        <a href="#process" class="btn btn--primary">{t.coffeeFarming.ctaHero}</a>
       </div>
     </div>
-
-    <div class="hero-scroll-line" aria-hidden="true"></div>
   </section>
-   <!-- ── Stats Band ────────────────────────────────────── -->
+
+  <!-- ── Stats Band ────────────────────────────────────── -->
   <section class="stat-band stat-band--green" aria-label="Statistik Pertanian Kopi">
     <div class="container">
       <div class="stat-band__grid">
-        <div class="stat-band__item animate-on-scroll">
-          <span class="stat-band__value">200+</span>
-          <span class="stat-band__label">Keluarga Petani</span>
-        </div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 80ms">
-          <span class="stat-band__value">1.500 mdpl</span>
-          <span class="stat-band__label">Ketinggian Maksimum</span>
-        </div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 160ms">
-          <span class="stat-band__value">Giling Basah</span>
-          <span class="stat-band__label">Metode Utama</span>
-        </div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 240ms">
-          <span class="stat-band__value">100 ton</span>
-          <span class="stat-band__label">Kapasitas / Tahun</span>
-        </div>
+        <div class="stat-band__item animate-on-scroll"><span class="stat-band__value">200+</span><span class="stat-band__label">{t.coffeeFarming.statFamilies}</span></div>
+        <div class="stat-band__item animate-on-scroll" style="transition-delay: 80ms"><span class="stat-band__value">1.500 mdpl</span><span class="stat-band__label">{t.coffeeFarming.statMaxAlt}</span></div>
+        <div class="stat-band__item animate-on-scroll" style="transition-delay: 160ms"><span class="stat-band__value">Giling Basah</span><span class="stat-band__label">{t.coffeeFarming.statMethod}</span></div>
+        <div class="stat-band__item animate-on-scroll" style="transition-delay: 240ms"><span class="stat-band__value">100 ton</span><span class="stat-band__label">{t.coffeeFarming.statCapacity}</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ── Process ──────────────────────────────────────── -->
-  <section class="process section" id="process" aria-labelledby="process-heading">
+  <!-- ── Process: Journey Chapters ─────────────────────── -->
+  <section class="journey section section--cream" id="process" aria-labelledby="process-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">Dari Pohon ke Cangkir</p>
-        <h2 id="process-heading" class="section-title">Proses Budidaya<br />Kopi Specialty</h2>
-        <p class="section-sub">Enam tahap kritis yang mengubah buah cherry menjadi biji kopi berkualitas specialty — semuanya dilakukan dengan presisi dan hormat terhadap tradisi.</p>
+        <p class="section-tag">{t.coffeeFarming.processTag}</p>
+        <h2 id="process-heading" class="section-title">{nl(t.coffeeFarming.processTitle)}</h2>
+        <p class="section-sub">{t.coffeeFarming.processSubtitle}</p>
       </div>
 
-      <!-- Bento grid layout -->
-      <div class="bento-grid--3col">
-        {process.map((step, i) => (
-          <article class={`feature-card animate-on-scroll ${i === 0 || i === 5 ? 'feature-card--wide' : ''}`} style={`transition-delay: ${i * 60}ms`}>
-            <div class="feature-card__icon" aria-hidden="true"><Icon name={step.iconName} width="20" height="20" /></div>
-            <div class="feature-card__step">{step.step}</div>
-            <h3 class="feature-card__title">{step.title}</h3>
-            <p class="feature-card__desc">{step.desc}</p>
-          </article>
-        ))}
+      <div class="journey__timeline">
+
+        <div class="journey__chapter animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fFarmer2} alt={t.coffeeFarming.farmImages?.altCherry ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 42vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">01</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepCherry}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepCherryDesc}</p>
+          </div>
+        </div>
+
+        <div class="journey__chapter journey__chapter--rev animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fProcess8} alt={t.coffeeFarming.farmImages?.altFerment ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 58vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">02</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepFerment}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepFermentDesc}</p>
+          </div>
+        </div>
+
+        <div class="journey__chapter animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fProcess3} alt={t.coffeeFarming.farmImages?.altWetHull ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 42vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">03</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepWetHull}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepWetHullDesc}</p>
+          </div>
+        </div>
+
+        <div class="journey__chapter journey__chapter--rev animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fProcess9} alt={t.coffeeFarming.farmImages?.altDrying ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 58vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">04</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepDrying}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepDryingDesc}</p>
+          </div>
+        </div>
+
+        <div class="journey__chapter animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fProcess10} alt={t.coffeeFarming.farmImages?.altSorting ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 42vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">05</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepSorting}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepSortingDesc}</p>
+          </div>
+        </div>
+
+        <div class="journey__chapter journey__chapter--rev animate-on-scroll">
+          <div class="journey__chapter-img">
+            <Image src={fProcess6} alt={t.coffeeFarming.farmImages?.altRoasting ?? ''} loading="lazy" widths={[600,900]} sizes="(max-width:768px) 100vw, 58vw" class="journey__img" />
+          </div>
+          <div class="journey__chapter-body">
+            <span class="journey__chapter-num" aria-hidden="true">06</span>
+            <div class="journey__step">
+              <span class="journey__step-dot"></span>
+              <span class="journey__step-label">{t.coffeeFarming.processTag}</span>
+            </div>
+            <div class="journey__divider"></div>
+            <h3 class="journey__title">{t.coffeeFarming.stepRoasting}</h3>
+            <p class="journey__desc">{t.coffeeFarming.stepRoastingDesc}</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ── Regions ──────────────────────────────────────── -->
+  <!-- ── Regions ─────────────────────────────────────── -->
   <section class="regions section section--cream" aria-labelledby="regions-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">Dataran Tinggi</p>
-        <h2 id="regions-heading" class="section-title">Wilayah<br />Penghasil</h2>
-        <p class="section-sub">Tiga kawasan utama di Sumatera Utara yang masing-masing memberikan karakter unik pada kopi yang kami hasilkan.</p>
+        <p class="section-tag">{t.coffeeFarming.regionsTag}</p>
+        <h2 id="regions-heading" class="section-title">{nl(t.coffeeFarming.regionsTitle)}</h2>
+        <p class="section-sub">{t.coffeeFarming.regionsSubtitle}</p>
       </div>
 
       <div class="regions__grid">
@@ -200,7 +230,7 @@ const farmers = [
             <div class="region-card__media">
               <Image
                 src={region.img}
-                alt={`Perkebunan kopi di ${region.name}`}
+                alt={`Perkebunan kopi di ${t.coffeeFarming[region.nameKey as keyof typeof t.coffeeFarming]}`}
                 loading={i === 0 ? 'eager' : 'lazy'}
                 widths={[480, 768]}
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -208,15 +238,73 @@ const farmers = [
               />
               <div class="region-card__alt-badge">
                 <Icon name="mdi:arrow-up" width="10" height="10" />
-                {region.alt}
+                {t.coffeeFarming[region.altKey as keyof typeof t.coffeeFarming]}
               </div>
             </div>
             <div class="region-card__body">
-              <h3 class="region-card__name">{region.name}</h3>
-              <p class="region-card__desc">{region.desc}</p>
+              <h3 class="region-card__name">{t.coffeeFarming[region.nameKey as keyof typeof t.coffeeFarming]}</h3>
+              <p class="region-card__desc">{t.coffeeFarming[region.descKey as keyof typeof t.coffeeFarming]}</p>
             </div>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Quality Editorial — photo + dark panel ───────── -->
+  <section class="quality-editorial section" aria-labelledby="quality-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <p class="section-tag">{t.coffeeFarming.qualityTag}</p>
+        <h2 id="quality-heading" class="section-title">{nl(t.coffeeFarming.qualityTitle)}</h2>
+        <p class="section-sub">{t.coffeeFarming.qualitySubtitle}</p>
+      </div>
+
+      <div class="quality-editorial__body">
+
+        <!-- Left: photo grid -->
+        <div class="quality-editorial__gallery">
+          <div class="quality-editorial__gallery-item">
+            <Image src={fCup2} alt={t.coffeeFarming.qualityGallery1Alt} loading="lazy" widths={[600,1200]} sizes="(max-width:768px) 100vw, 50vw" class="quality-editorial__gallery-img" />
+            <span class="quality-editorial__gallery-label">{t.coffeeFarming.qualityGallery1}</span>
+          </div>
+          <div class="quality-editorial__gallery-item">
+            <Image src={fGreen} alt={t.coffeeFarming.qualityGallery2Alt} loading="lazy" widths={[300,600]} sizes="(max-width:768px) 50vw, 25vw" class="quality-editorial__gallery-img" />
+            <span class="quality-editorial__gallery-label">{t.coffeeFarming.qualityGallery2}</span>
+          </div>
+          <div class="quality-editorial__gallery-item">
+            <Image src={fProcess7b} alt={t.coffeeFarming.qualityGallery3Alt} loading="lazy" widths={[300,600]} sizes="(max-width:768px) 50vw, 25vw" class="quality-editorial__gallery-img" />
+            <span class="quality-editorial__gallery-label">{t.coffeeFarming.qualityGallery3}</span>
+          </div>
+        </div>
+
+        <!-- Right: editorial text panel -->
+        <div class="quality-editorial__panel animate-on-scroll">
+          <div>
+            <p class="quality-editorial__panel-tag">{t.coffeeFarming.qualityTag}</p>
+            <h3 class="quality-editorial__panel-title">{nl(t.coffeeFarming.qualityPanelTitle)}</h3>
+          </div>
+          <p class="quality-editorial__panel-text">{t.coffeeFarming.qualityPanelText}</p>
+          <div class="quality-editorial__panel-stats">
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat1Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat1Label}</span>
+            </div>
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat2Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat2Label}</span>
+            </div>
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat3Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat3Label}</span>
+            </div>
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat4Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat4Label}</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -225,9 +313,9 @@ const farmers = [
   <section class="farmers section" aria-labelledby="farmers-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">Cerita Petani</p>
-        <h2 id="farmers-heading" class="section-title">Tangan di<br />Balik Setiap Cangkir</h2>
-        <p class="section-sub">200+ keluarga petani partner di Humbang Hasundutan — mereka adalah fondasi nyata dari setiap produk Kopi Siholta.</p>
+        <p class="section-tag">{t.coffeeFarming.farmersTag}</p>
+        <h2 id="farmers-heading" class="section-title">{nl(t.coffeeFarming.farmersTitle)}</h2>
+        <p class="section-sub">{t.coffeeFarming.farmersSubtitle}</p>
       </div>
 
       <div class="farmers__grid">
@@ -236,24 +324,24 @@ const farmers = [
             <div class="farmer-card__media">
               <Image
                 src={farmer.img}
-                alt={`${farmer.name} — petani kopi partner Kopi Siholta`}
+                alt={`${t.coffeeFarming[farmer.nameKey as keyof typeof t.coffeeFarming]} — ${t.coffeeFarming.farmerRole}`}
                 loading="lazy"
                 widths={[480, 768]}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 class="farmer-card__img"
               />
-              <div class="farmer-card__info-badge" aria-label={`Petani ${farmer.name}`}>
-                <span class="farmer-card__village">{farmer.village}</span>
-                <span class="farmer-card__since">{farmer.since}</span>
+              <div class="farmer-card__info-badge">
+                <span class="farmer-card__village">{t.coffeeFarming[farmer.villageKey as keyof typeof t.coffeeFarming]}</span>
+                <span class="farmer-card__since">{t.coffeeFarming[farmer.sinceKey as keyof typeof t.coffeeFarming]}</span>
               </div>
             </div>
             <div class="farmer-card__content">
               <blockquote class="farmer-card__quote">
-                <p>"{farmer.quote}"</p>
+                <p>"{t.coffeeFarming[farmer.quoteKey as keyof typeof t.coffeeFarming]}"</p>
               </blockquote>
               <div class="farmer-card__author">
-                <span class="farmer-card__name">{farmer.name}</span>
-                <span class="farmer-card__role">Petani Partner Kopi Siholta</span>
+                <span class="farmer-card__name">{t.coffeeFarming[farmer.nameKey as keyof typeof t.coffeeFarming]}</span>
+                <span class="farmer-card__role">{t.coffeeFarming.farmerRole}</span>
               </div>
             </div>
           </article>
@@ -266,12 +354,12 @@ const farmers = [
   <section class="page-cta page-cta--cream" aria-label="Bergabung sebagai Petani Partner">
     <div class="container page-cta__inner">
       <div class="page-cta__text animate-on-scroll">
-        <h2 class="page-cta__title page-cta__title--earth">Mitra Petani<br />dan Eksportir</h2>
-        <p class="page-cta__sub page-cta__sub--earth">PT Siholta Toba Indonesia terbuka untuk kemitraan dengan petani kopi dan buyer internasional. Hubungi kami untuk diskusi lebih lanjut.</p>
+        <h2 class="page-cta__title page-cta__title--earth">{nl(t.coffeeFarming.ctaTitle)}</h2>
+        <p class="page-cta__sub page-cta__sub--earth">{t.coffeeFarming.ctaSubtitle}</p>
       </div>
       <div class="page-cta__actions animate-on-scroll">
-        <a href={`/${lang}/#contact`} class="btn btn--primary">Hubungi Kami</a>
-        <a href={`/${lang}/company`} class="btn btn--outline-dark">Tentang Perusahaan</a>
+        <a href={`/${lang}/#contact`} class="btn btn--primary">{t.coffeeFarming.cta1}</a>
+        <!-- <a href={`/${lang}/company`} class="btn btn--outline-dark">{t.coffeeFarming.cta2}</a> -->
       </div>
     </div>
   </section>

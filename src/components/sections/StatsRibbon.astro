@@ -1,16 +1,19 @@
 ---
+import { t } from '../../i18n/utils';
+
 interface Props {
   lang?: string;
 }
 
 const { lang = 'en' } = Astro.props;
+const tr = t(lang);
 
 const stats = [
-  { num: '6+', label: 'Countries' },
-  { num: '100T', label: 'Tons / Year' },
-  { num: '#1', label: 'Specialty Pioneer' },
-  { num: '2035', label: 'Vision' },
-  { num: '3', label: 'Business Sectors' },
+  { num: '6+', labelKey: 'statCountries' as const },
+  { num: '100T', labelKey: 'statTonsYear' as const },
+  { num: '#1', labelKey: 'statPioneer' as const },
+  { num: '2035', labelKey: 'statVision' as const },
+  { num: '3', labelKey: 'statSectors' as const },
 ];
 ---
 
@@ -20,7 +23,7 @@ const stats = [
       <>
         <div class="stats-ribbon__item">
           <span class="stats-ribbon__num">{stat.num}</span>
-          <span class="stats-ribbon__label">{stat.label}</span>
+          <span class="stats-ribbon__label">{tr.hero[stat.labelKey]}</span>
         </div>
         {i < stats.length - 1 && (
           <div class="stats-ribbon__sep" aria-hidden="true"></div>
@@ -29,4 +32,3 @@ const stats = [
     ))}
   </div>
 </div>
-

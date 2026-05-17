@@ -1,91 +1,63 @@
 ---
-import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
-
+import { Image } from 'astro:assets';
 import tokpedLogo from '../../images/logo/logo-tokopedia.png';
 import shopeeLogo from '../../images/logo/logo-shopee.png';
 import igLogo from '../../images/logo/logo-instagram.png';
 import waLogo from '../../images/logo/logo-whatsapp.png';
+import tiktokLogo from '../../images/logo/logo-tiktok.png';
+import linktreeLogo from '../../images/logo/logo-linktree.png';
+import { t } from '../../i18n/utils';
 
 interface Props {
   lang?: string;
 }
 
 const { lang = 'en' } = Astro.props;
+const tr = t(lang);
 
-// Correct shop links
 const TOKPED_URL = 'https://www.tokopedia.com/kopisiholta';
 const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
+const TIKTOK_URL = 'https://www.tiktok.com/@kopisiholta';
+const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
 const INSTAGRAM_URL = 'https://www.instagram.com/kopi_siholta.id/';
 const WHATSAPP_URL = 'https://wa.me/6281322518527';
 
 const channels = [
-  {
-    name: 'Tokopedia',
-    label: 'Tokopedia',
-    image: tokpedLogo,
-    href: TOKPED_URL,
-    color: '#03AC0E',
-  },
-  {
-    name: 'Shopee',
-    label: 'Shopee',
-    image: shopeeLogo,
-    href: SHOPEE_URL,
-    color: '#EE4D2D',
-  },
-  {
-    name: 'Instagram',
-    label: 'Instagram',
-    image: igLogo,
-    href: INSTAGRAM_URL,
-    color: '#C13584',
-  },
-  {
-    name: 'WhatsApp',
-    label: 'WhatsApp',
-    image: waLogo,
-    href: WHATSAPP_URL,
-    color: '#25D366',
-  },
+  { nameKey: 'buyTokopedia' as const, href: TOKPED_URL,   color: '#03AC0E', logo: tokpedLogo },
+  { nameKey: 'buyShopee'   as const, href: SHOPEE_URL,    color: '#EE4D2D', logo: shopeeLogo },
+  { nameKey: 'buyInstagram' as const, href: INSTAGRAM_URL, color: '#C13584', logo: igLogo    },
+  { nameKey: 'buyWhatsApp' as const, href: WHATSAPP_URL,  color: '#25D366', logo: waLogo    },
+  { nameKey: 'buyTiktok' as const, href: TIKTOK_URL,  color: '#25D366', logo: tiktokLogo    },
+  { nameKey: 'buyLinktree' as const, href: LINKTREE_URL,  color: '#25D366', logo: linktreeLogo    },
 ];
 ---
 
 <section class="omni section section--cream" id="omni" aria-label="Omnichannel Shopping Links">
   <div class="container">
-    <!-- Header -->
     <div class="section__header">
-      <p class="section-tag">Toko Online</p>
-      <h2 class="section-title">Beli Kopi Siholta Sekarang</h2>
-      <p class="section-sub">Temukan produk kami di platform marketplace favorit Anda.</p>
+      <p class="section-tag">{tr.omni.tag}</p>
+      <h2 class="section-title">{tr.omni.title}</h2>
+      <p class="section-sub">{tr.omni.subtitle}</p>
     </div>
 
-    <!-- Channel Links -->
-<div class="omni__channels">
-  {channels.map(channel => (
-    <a
-      href={channel.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="omni__channel"
-      style={`--channel-color: ${channel.color}`}
-      aria-label={`Hubungi via ${channel.label}`}
-    >
-      <!-- Menambahkan Ikon Gambar -->
-      <div class="omni__channel-icon">
-        <Image 
-          src={channel.image} 
-          alt={`${channel.label} logo`} 
-          width={24} 
-          height={24}
-          format="webp"
-        />
-      </div>
-
-      <span class="omni__channel-name">Beli di {channel.label}</span>
-      
-      <Icon name="mdi:arrow-top-right" class="omni__channel-arrow" width="14" height="14" />
-    </a>
-  ))}
-</div>
-
+    <div class="omni__channels">
+      {channels.map(ch => (
+        <a
+          href={ch.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="omni__channel"
+          style={`--channel-color: ${ch.color}`}
+          aria-label={tr.omni[ch.nameKey]}
+        >
+          <div class="omni__channel-icon">
+            <Image src={ch.logo} alt="" width={24} height={24} format="webp" />
+          </div>
+          <span class="omni__channel-name">{tr.omni[ch.nameKey]}</span>
+          <Icon name="mdi:arrow-top-right" class="omni__channel-arrow" width="14" height="14" />
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

@@ -97,6 +97,14 @@
   border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.8);
   border: 0.5px solid var(--color-neutral-200);
+  text-decoration: none;
+  transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.company-banner__sector:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: var(--color-brand-red);
+  box-shadow: 0 2px 8px rgba(92, 61, 30, 0.10);
 }
 
 .company-banner__sector-icon {
@@ -206,9 +214,9 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(26, 15, 8, 0.80) 0%,
-    rgba(26, 15, 8, 0.30) 50%,
-    rgba(26, 15, 8, 0.05) 100%
+    rgba(20, 10, 5, 0.92) 0%,
+    rgba(20, 10, 5, 0.65) 45%,
+    rgba(20, 10, 5, 0.18) 100%
   );
 }
 
@@ -337,7 +345,10 @@
     text-align: left;
   }
   .company-banner__divider { width: 100%; height: 0.5px; }
-  .company-banner__sectors { flex-direction: row; flex-wrap: wrap; }
+  .company-banner__sectors {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
   .company-banner__see-more { width: 100%; justify-content: center; }
   .bento {
     grid-template-columns: 1fr 1fr;
