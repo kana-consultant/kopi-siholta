@@ -86,7 +86,6 @@ const tc = t.company as Record<string, string>;
       </nav>
 
       <div class="company-hero__content page-hero__content">
-        <p class="page-hero__label">{tc.storyTag}</p>
         <h1 class="page-hero__title">{tc?.titleLine1}<br/>{tc?.titleLine2}</h1>
         <p class="page-hero__sub">{tc.heroSub}</p>
       </div>
@@ -99,7 +98,6 @@ const tc = t.company as Record<string, string>;
       <div class="story__grid">
 
         <div class="story__intro animate-on-scroll">
-          <p class="section-tag">{tc.storyTag}</p>
           <h2 id="story-heading" class="story__heading">
             <Image
               src={companyLogo}
@@ -150,7 +148,6 @@ const tc = t.company as Record<string, string>;
   <section class="timeline section section--cream" aria-labelledby="timeline-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">{tc.timelineTag}</p>
         <h2 id="timeline-heading" class="section-title">{tc.timelineTitle}</h2>
         <p class="section-sub">{tc.timelineSubtitle}</p>
       </div>
@@ -184,7 +181,6 @@ const tc = t.company as Record<string, string>;
   <section class="sectors section" aria-labelledby="sectors-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">{tc.sectorsTag}</p>
         <h2 id="sectors-heading" class="section-title">{tc.sectorsTitle}</h2>
         <p class="section-sub">{tc.sectorsSubtitle}</p>
       </div>
@@ -224,7 +220,6 @@ const tc = t.company as Record<string, string>;
   <section class="location section" aria-labelledby="location-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
-        <p class="section-tag">{tc.locationTag}</p>
         <h2 id="location-heading" class="section-title">{tc.locationTitle}</h2>
         <p class="section-sub">{tc.locationSub}</p>
       </div>
