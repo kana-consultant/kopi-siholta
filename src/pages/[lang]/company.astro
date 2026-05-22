@@ -87,7 +87,7 @@ const tc = t.company as Record<string, string>;
 
       <div class="company-hero__content page-hero__content">
         <h1 class="page-hero__title">{tc?.titleLine1}<br/>{tc?.titleLine2}</h1>
-        <p class="page-hero__sub">{tc.heroSub}</p>
+        <p class="page-hero__sub">{tc?.['subtitle']}</p>
       </div>
     </div>
   </section>
@@ -113,7 +113,7 @@ const tc = t.company as Record<string, string>;
           <p class="story__body">{tc.storyBody2}</p>
           <div class="story__stats">
             <div class="story__stat">
-              <span class="story__stat-num">2019</span>
+              <span class="story__stat-num">2021</span>
               <span class="story__stat-label">{tc.founded}</span>
             </div>
             <div class="story__stat">
@@ -144,6 +144,36 @@ const tc = t.company as Record<string, string>;
     </div>
   </section>
 
+  <!-- ── Visi & Misi ─────────────────────────────────── -->
+  <section class="visimisi section" aria-labelledby="visimisi-heading">
+    <div class="container">
+
+      <div class="visimisi__header animate-on-scroll">
+        <h2 id="visimisi-heading" class="visimisi__title">{tc.visimisiTitle}</h2>
+        <p class="visimisi__sub">{tc.visimisiHeadlineLeft}</p>
+      </div>
+
+      <div class="visimisi__grid animate-on-scroll">
+        <div class="visimisi__col visimisi__col--vision">
+          <h3 class="visimisi__col-tag">Visi</h3>
+          <p class="visimisi__col-text">{tc.visimisiVision}</p>
+        </div>
+
+        <div class="visimisi__col visimisi__col--mission">
+          <h3 class="visimisi__col-tag">Misi</h3>
+          <ul class="visimisi__list" role="list">
+            <li class="visimisi__item">{tc.visimisiMission1}</li>
+            <li class="visimisi__item">{tc.visimisiMission2}</li>
+            <li class="visimisi__item">{tc.visimisiMission3}</li>
+            <li class="visimisi__item">{tc.visimisiMission4}</li>
+            <li class="visimisi__item">{tc.visimisiMission5}</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ── Timeline ───────────────────────────────────── -->
   <section class="timeline section section--cream" aria-labelledby="timeline-heading">
     <div class="container">
@@ -154,12 +184,12 @@ const tc = t.company as Record<string, string>;
 
       <ol class="timeline__list" role="list">
         {[
-          { year: '2019', key: 'milestone2019', iconName: 'mdi:sprout' },
-          { year: '2020', key: 'milestone2020', iconName: 'mdi:account-group' },
-          { year: '2021', key: 'milestone2021', iconName: 'mdi:shopping' },
-          { year: '2022', key: 'milestone2022', iconName: 'mdi:certificate' },
-          { year: '2023', key: 'milestone2023', iconName: 'mdi:home' },
-          { year: '2024', key: 'milestone2024', iconName: 'mdi:earth' },
+          { year: '2019', label: 'Akar Ditanam di Lintong', key: 'milestone2019', iconName: 'mdi:sprout' },
+          { year: '2020', label: 'Jaringan Petani Terbangun', key: 'milestone2020', iconName: 'mdi:account-group' },
+          { year: '2021', label: 'Awal Perjalanan', key: 'milestone2021', iconName: 'mdi:shopping' },
+          { year: '14 April 2023', label: 'Legalitas Perusahaan', key: 'milestone2023', iconName: 'mdi:home' },
+          { year: '03 Agustus 2023', label: 'Sertifikat Merek', key: 'milestone2025', iconName: 'mdi:certificate' },
+          { year: '2023', label: 'Sertifikasi & Komitmen Lingkungan', key: 'milestone2024', iconName: 'mdi:earth' },
         ].map((m, i) => (
           <li class={`timeline__item animate-on-scroll ${i % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'}`}>
             <div class="timeline__card">
@@ -193,7 +223,6 @@ const tc = t.company as Record<string, string>;
             <div class="sector-card__header">
               <div class="sector-card__icon" aria-hidden="true"><Icon name={sector.iconName} width="24" height="24" /></div>
               <div>
-                <p class="sector-card__label">{tc[sector.labelKey]}</p>
                 <h3 class="sector-card__name">{tc[sector.nameKey]}</h3>
               </div>
             </div>
