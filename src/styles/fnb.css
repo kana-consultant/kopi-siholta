@@ -2,101 +2,42 @@
    F&B Page Specific Styles
    ========================================================= */
 
-/* ── Gallery Mosaic ─────────────────── */
-.gallery-mosaic { overflow: hidden; }
+/* ── Retail Coffee Collection ─────────────── */
+.retail-coffee { padding-block: var(--space-12); }
 
-.gallery-mosaic__grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr 1fr;
-  gap: 2px;
-  min-height: 560px;
-}
-
-.gallery-mosaic__col {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.gallery-mosaic__col--tall { flex: 1; }
-
-.gallery-mosaic__col--center {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.gallery-mosaic__row--pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-}
-
-.gallery-mosaic__item { position: relative; overflow: hidden; }
-
-.gallery-mosaic__item--portrait { flex: 1; }
-
-.gallery-mosaic__item--wide { aspect-ratio: 2/1; }
-
-.gallery-mosaic__item--span-2 { grid-column: span 2; }
-
-.gallery-mosaic__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.gallery-mosaic__col--tall .gallery-mosaic__img { min-height: 280px; }
-.gallery-mosaic__col--center .gallery-mosaic__img { min-height: 185px; }
-.gallery-mosaic__row--pair .gallery-mosaic__img { min-height: 185px; }
-.gallery-mosaic__item--wide .gallery-mosaic__img { aspect-ratio: 2/1; }
-
-.gallery-mosaic__item:hover .gallery-mosaic__img { transform: scale(1.05); }
-
-/* ── Responsive ─────────────────────────── */
-
-.fnb-hero__content {
-  position: relative;
-  z-index: 1;
-}
-
-/* ── Drinks Section ─────────────────────────── */
-.drinks { padding-block: var(--space-12); }
-
-/* Editorial asymmetric grid: 1 large + 3 stacked */
-.drinks__grid {
+.retail-coffee__grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: var(--space-4);
   margin-top: var(--space-8);
 }
 
-.drink-card {
+.retail-card {
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: #fff;
   border: 0.5px solid var(--color-neutral-200);
   transition: box-shadow 300ms ease, transform 300ms ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.drink-card:hover {
-  box-shadow: 0 12px 40px rgba(92,61,30,0.12);
+.retail-card:hover {
+  box-shadow: 0 12px 40px rgba(92, 61, 30, 0.12);
   transform: translateY(-2px);
 }
 
-.drink-card--feature .drink-card__media { height: 320px; }
+.retail-card--main .retail-card__media { height: 360px; }
 
-.drink-card__media {
+.retail-card__media {
   position: relative;
   overflow: hidden;
   height: 200px;
 }
 
-.drink-card__media--sm { height: 100%; }
+.retail-card__media--sm { height: 100%; }
 
-.drink-card__img {
+.retail-card__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -104,45 +45,35 @@
   transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.drink-card:hover .drink-card__img { transform: scale(1.05); }
+.retail-card:hover .retail-card__img { transform: scale(1.05); }
 
-.drink-card__tag {
+.retail-card__tag {
   position: absolute;
-  top: var(--space-3);
+  bottom: var(--space-3);
   left: var(--space-3);
   font-family: var(--font-label);
   font-size: 8px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #fff;
-  padding: 3px 10px;
+  background: rgba(26, 15, 8, 0.7);
+  backdrop-filter: blur(4px);
+  padding: 4px 12px;
   border-radius: 2px;
   font-weight: 600;
   z-index: 1;
 }
 
-.drink-card__tag--sm { font-size: 7px; padding: 2px 7px; top: var(--space-2); left: var(--space-2); }
-
-.drink-card__body {
+.retail-card__body {
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
 
-.drink-card__body--sm { padding: var(--space-3); gap: var(--space-1); }
+.retail-card__body--sm { padding: var(--space-3); gap: var(--space-1); }
 
-.drink-card__note {
-  font-family: var(--font-label);
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-brand-muted);
-}
-
-.drink-card__note--sm { font-size: 8px; }
-
-.drink-card__name {
+.retail-card__name {
   font-family: var(--font-display);
   font-size: clamp(16px, 1.8vw, 22px);
   font-weight: 700;
@@ -150,9 +81,9 @@
   line-height: 1.2;
 }
 
-.drink-card__name--sm { font-size: clamp(13px, 1.4vw, 16px); }
+.retail-card__name--sm { font-size: clamp(13px, 1.4vw, 16px); }
 
-.drink-card__desc {
+.retail-card__desc {
   font-family: var(--font-body);
   font-size: 12px;
   line-height: 1.65;
@@ -161,174 +92,445 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  
 }
 
-.drink-card__desc--sm { font-size: 11px; -webkit-line-clamp: 2; }
+.retail-card__desc--sm { font-size: 11px; -webkit-line-clamp: 2; }
 
-.drink-card__price {
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--color-brand-red);
-  margin-top: auto;
-  padding-top: var(--space-2);
+.retail-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand-earth);
+  text-decoration: none;
+  margin-top: var(--space-2);
+  transition: gap 200ms ease;
 }
 
-.drink-card__price--sm { font-size: 13px; }
+.retail-card__link:hover { gap: 10px; }
 
-/* 3 stacked mini cards */
-.drinks__stack {
+.retail-coffee__stack {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
 }
 
-.drink-card--mini {
+.retail-card--sm {
   display: grid;
-  grid-template-columns: 120px 1fr;
-  min-height: 100px;
+  grid-template-columns: 150px 1fr;
+  min-height: 150px;
 }
 
-.drink-card--mini .drink-card__media { height: 100%; }
+.retail-card--sm .retail-card__media { height: 100%; }
 
-/* ── Full-width Image Break ──────────────── */
-.fnb-image-break {
+/* ── Cafe Favorites ──────────────────────── */
+.cafe-favorites { padding-block: var(--space-12); overflow: hidden; }
+
+.cafe-favorites .section__header { margin-bottom: var(--space-6); }
+
+.cafe-carousel {
+  position: relative;
+  margin-top: var(--space-6);
+}
+
+.cafe-carousel__track {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-inline: var(--space-4);
+  padding-block: var(--space-2);
+  -webkit-overflow-scrolling: touch;
+}
+
+.cafe-carousel__track::-webkit-scrollbar { display: none; }
+
+.cafe-card {
+  flex-shrink: 0;
+  width: 240px;
+  scroll-snap-align: start;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.cafe-card:hover {
+  box-shadow: 0 8px 32px rgba(92, 61, 30, 0.10);
+  transform: translateY(-3px);
+}
+
+.cafe-card__media {
   position: relative;
   overflow: hidden;
-  height: 280px;
+  height: 180px;
 }
 
-.fnb-image-break__img {
+.cafe-card__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.fnb-image-break__overlay {
+.cafe-card:hover .cafe-card__img { transform: scale(1.05); }
+
+.cafe-card__tag {
   position: absolute;
-  inset: 0;
-  background: rgba(26,15,8,0.60);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.fnb-quote {
-  text-align: center;
-  max-width: 580px;
-  padding-inline: var(--space-6);
-}
-
-.fnb-quote p {
-  font-family: var(--font-display);
-  font-size: clamp(18px, 2.5vw, 26px);
-  font-style: italic;
+  bottom: var(--space-2);
+  left: var(--space-2);
+  font-family: var(--font-label);
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: #fff;
-  line-height: 1.4;
-  margin-bottom: var(--space-3);
+  background: rgba(26, 15, 8, 0.7);
+  backdrop-filter: blur(4px);
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-weight: 600;
 }
 
-.fnb-quote cite {
+.cafe-card__body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.cafe-card__name {
+  font-family: var(--font-display);
+  font-size: clamp(13px, 1.4vw, 15px);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+}
+
+.cafe-card__desc {
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--color-brand-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Carousel Indicators */
+.cafe-carousel__indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-bottom: var(--space-2);
+}
+
+.cafe-carousel__indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-brand-muted);
+  opacity: 0.4;
+  transition: all 300ms ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.cafe-carousel__indicator--active {
+  background: var(--color-brand-red);
+  opacity: 1;
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ── Distribution Network ────────────────── */
+.distribution { padding-block: var(--space-12); }
+
+.distribution__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.distribution-card {
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transition: box-shadow 300ms ease;
+}
+
+.distribution-card:hover {
+  box-shadow: 0 8px 32px rgba(92, 61, 30, 0.08);
+}
+
+.distribution-card__label {
   font-family: var(--font-label);
   font-size: 9px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-brand-gold);
-  font-style: normal;
+  color: var(--color-brand-muted);
+  font-weight: 600;
 }
 
-/* ── Food Grid ─────────────────────────────── */
-.food__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
-  margin-top: var(--space-8);
-}
+.distribution-card__label--olive { color: #5a6e3f; }
 
-.food-card {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-4);
-  padding: var(--space-5) var(--space-6);
-  border-radius: var(--radius-lg);
-  background: #fff;
-  border: 0.5px solid var(--color-neutral-200);
-  transition: border-color 200ms ease, box-shadow 200ms ease;
-}
-
-.food-card:hover {
-  border-color: var(--color-brand-earth);
-  box-shadow: 0 4px 16px rgba(92,61,30,0.08);
-}
-
-.food-card__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-brand-gold);
-  flex-shrink: 0;
-  margin-top: 6px;
-}
-
-.food-card__body { flex: 1; }
-
-.food-card__name {
+.distribution-card__heading {
   font-family: var(--font-display);
-  font-size: clamp(14px, 1.5vw, 18px);
+  font-size: clamp(18px, 2vw, 22px);
   font-weight: 700;
   color: var(--color-brand-earth);
-  margin-bottom: var(--space-1);
+  line-height: 1.3;
 }
 
-.food-card__desc {
+.distribution-card__desc {
   font-family: var(--font-body);
-  font-size: 12px;
-  line-height: 1.65;
+  font-size: 13px;
+  line-height: 1.7;
   color: var(--color-brand-muted);
 }
 
-.food-card__price {
+.retail-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.retail-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  height: 44px;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-neutral-100);
+  opacity: 0.6;
+  transition: opacity 200ms ease;
+}
+
+.retail-logo:hover { opacity: 0.85; }
+
+.retail-logo__name {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted);
+  text-align: center;
+}
+
+.region-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.region-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  border-radius: 50px;
+  background: var(--color-neutral-100);
   font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
+  color: var(--color-brand-earth);
+  font-weight: 500;
+}
+
+.distribution-card--cafe {
+  background: linear-gradient(145deg, #fff 0%, #fafaf8 100%);
+}
+
+.cafe-locations {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.cafe-location {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.cafe-location__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-brand-cream);
   color: var(--color-brand-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  align-self: flex-start;
-  margin-top: 2px;
 }
 
-/* ── Responsive ─────────────────────────── */
-@media (max-width: 1024px) {
-  .drinks__grid { grid-template-columns: 1fr; }
-  .drink-card--feature .drink-card__media { height: 260px; }
-  .drink-card--mini { grid-template-columns: 100px 1fr; }
+.cafe-location__info { flex: 1; }
+
+.cafe-location__city {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  margin-bottom: 4px;
 }
 
+.cafe-location__address {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-brand-muted);
+}
+
+.cafe-map-preview {
+  margin-top: auto;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-neutral-200);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.cafe-map-preview__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.cafe-map-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-brand-muted);
+}
+
+.cafe-map-dot--active {
+  background: var(--color-brand-red);
+}
+
+.cafe-map-preview__label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--color-brand-muted);
+}
+
+/* ── Sustainability Section ──────────────── */
+.section--olive {
+  padding-block: var(--space-12);
+  border-bottom: 1px solid rgba(205, 18, 34, 0.3);
+}
+
+.section-title { color: var(--color-brand-earth); }
+.section-sub { color: var(--color-brand-muted); }
+
+.sustainability__inner {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-8);
+  border: 1px solid var(--color-neutral-200);
+}
+
+.sustainability__text { max-width: 600px; }
+
+.sustainability__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sustainability__icon-wrap {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--color-brand-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand-red);
+}
+
+/* ── Hero Content ────────────────────────── */
+.fnb-hero__content { position: relative; z-index: 1; }
+
+/* ══════════════════════════════════════════════════════
+   MOBILE RESPONSIVE
+   ══════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .drinks__grid { gap: var(--space-3); }
-  .drinks__stack { flex-direction: row; overflow-x: auto; padding-bottom: var(--space-2); }
-  .drink-card--mini {
-    flex-direction: column;
+  /* Retail - keep desktop grid layout, just reduce spacing */
+  .retail-coffee { padding-block: var(--space-8); }
+  .retail-coffee__grid { gap: var(--space-3); margin-top: var(--space-6); }
+  .retail-card--main .retail-card__media { height: 200px; }
+  .retail-card--sm { grid-template-columns: 100px 1fr; min-height: 90px; }
+  .retail-card__body { padding: var(--space-3); }
+  .retail-card__name { font-size: clamp(14px, 4vw, 18px); }
+  .retail-card__desc { font-size: 11px; }
+
+  /* Cafe Favorites */
+  .cafe-favorites { padding-block: var(--space-8); }
+  .cafe-favorites .section__header { margin-bottom: var(--space-5); }
+  .cafe-carousel { margin-top: var(--space-5); }
+  .cafe-carousel__track { gap: var(--space-3); padding-inline: var(--space-4); }
+  .cafe-card { width: 200px; }
+  .cafe-card__media { height: 140px; }
+  .cafe-card__body { padding: var(--space-3); }
+  .cafe-card__name { font-size: clamp(12px, 4vw, 14px); }
+  .sustainability__icon-wrap { width: 80px; height: 80px; }
+
+  /* Distribution */
+  .distribution { padding-block: var(--space-8); }
+  .distribution__grid { grid-template-columns: 1fr; gap: var(--space-4); margin-top: var(--space-6); }
+  .distribution-card { padding: var(--space-5); gap: var(--space-4); }
+  .distribution-card__heading { font-size: clamp(16px, 4vw, 20px); }
+  .retail-logo { min-width: 64px; height: 40px; }
+  .cafe-location__icon { width: 36px; height: 36px; }
+
+  /* Sustainability */
+  .section--olive { padding-block: var(--space-8); }
+  .sustainability__inner {
     grid-template-columns: 1fr;
-    min-width: 180px;
+    gap: var(--space-6);
+    padding: var(--space-6);
   }
-  .drink-card--mini .drink-card__media { height: 140px; }
-  .fnb-image-break { height: 220px; }
-  .food__grid { grid-template-columns: 1fr; }
+  .section-tag--light { color: rgba(255, 255, 255, 0.7); }
+  .section-title--light { color: #fff; }
+  .section-sub--light { color: rgba(255, 255, 255, 0.85); }
 }
 
 @media (max-width: 480px) {
-  .gallery-mosaic__grid { grid-template-columns: 1fr; min-height: auto; }
-  .gallery-mosaic__col--center { flex-direction: row; flex-wrap: wrap; }
-  .gallery-mosaic__row--pair { display: flex; flex-direction: column; flex: 1; min-width: 140px; }
-  .gallery-mosaic__item--wide { aspect-ratio: unset; }
-  .gallery-mosaic__col--tall .gallery-mosaic__img { min-height: 200px; }
-  .gallery-mosaic__col--center .gallery-mosaic__img { min-height: 140px; }
-  .drinks__stack { flex-direction: column; }
-  .drink-card--mini { flex-direction: row; grid-template-columns: 90px 1fr; min-height: 80px; }
-  .drink-card--mini .drink-card__media { height: 80px; }
-  .fnb-image-break { height: 180px; }
-  .food__grid { gap: var(--space-3); }
-  .food-card { padding: var(--space-4); }
+  .cafe-card { width: 180px; }
+  .cafe-card__media { height: 130px; }
+  .retail-card--sm { grid-template-columns: 90px 1fr; min-height: 80px; }
+  .retail-card__desc{ display: none; }
+  .retail-logo { width: 60px; height: 36px; }
+  .region-chip { font-size: 11px; padding: var(--space-1) var(--space-3); }
+}
+
+@media (min-width: 769px) {
+  .cafe-carousel__indicators { display: none; }
+  .retail-coffee__grid {
+    grid-template-columns: 1.4fr 1fr;
+  }
+
+  .retail-coffee__stack {
+    grid-template-rows: repeat(3, 1fr); 
+  }
 }
