@@ -232,6 +232,85 @@
   font-size: 12px;
 }
 
+/* ── Form Actions (Dual Buttons) ──────── */
+.form-actions {
+  display: flex;
+  gap: var(--space-3);
+  align-items: stretch;
+}
+
+.form-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 10px var(--space-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: all 200ms ease;
+  min-height: 44px;
+}
+
+.btn--whatsapp {
+  background: var(--color-wa-green);
+  color: #fff;
+}
+
+.btn--whatsapp:hover {
+  background: #1db954;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+}
+
+.btn--whatsapp:active { transform: translateY(0); }
+
+.btn--email {
+  background: transparent;
+  color: var(--color-brand-earth);
+  border: var(--border-default);
+}
+
+.btn--email:hover {
+  background: var(--color-neutral-100);
+  border-color: var(--color-brand-red);
+  color: var(--color-brand-red);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 15, 8, 0.08);
+}
+
+.btn--email:active { transform: translateY(0); }
+
+/* ── Form Feedback ─────────────────────── */
+.form-error {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-error);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(220, 53, 69, 0.06);
+  border: 0.5px solid rgba(220, 53, 69, 0.2);
+  border-radius: var(--radius-md);
+  line-height: 1.5;
+}
+
+.form-required {
+  color: var(--color-brand-red);
+  margin-left: 2px;
+}
+
+.form-optional {
+  font-weight: 400;
+  color: var(--color-neutral-400);
+  font-size: 10px;
+  margin-left: 4px;
+}
+
 @media (max-width: 1024px) {
   .contact__inner {
     grid-template-columns: 1fr;
@@ -244,8 +323,14 @@
   .contact__social-grid { grid-template-columns: repeat(3, 1fr); }
   .contact__wa-block { flex-wrap: wrap; }
   .contact__wa-arrow { margin-left: auto; }
+  .form-actions {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .form-btn { width: 100%; }
 }
 
 @media (max-width: 480px) {
   .contact__social-grid { grid-template-columns: 1fr 1fr; }
+  .contact__form-wrap { padding: var(--space-4); }
 }

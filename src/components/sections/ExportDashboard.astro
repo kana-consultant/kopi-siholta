@@ -69,10 +69,6 @@ const kpiKeys = [
     <!-- Country Grid -->
     <div class="export__country-grid">
       <div class="export__country-section">
-        <div class="export__country-section-header">
-          <span class="export__country-section-dot export__country-section-dot--active"></span>
-          <span>{tr.export.activeMarkets}</span>
-        </div>
         <div class="export__country-cards">
           {countryKeys.slice(0, 3).map((key, i) => (
             <div class="export__country-card export__country-card--active">
@@ -88,10 +84,6 @@ const kpiKeys = [
       </div>
 
       <div class="export__country-section">
-        <div class="export__country-section-header">
-          <span class="export__country-section-dot export__country-section-dot--planned"></span>
-          <span>{tr.export.expansionPlan}</span>
-        </div>
         <div class="export__country-cards">
           {countryKeys.slice(3).map((key, i) => (
             <div class="export__country-card">
