@@ -1,6 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n/utils';
+import bgImg from '../../images/farming/process (3).jpg';
+
+
+// Import partner logos
+import logoHypermart from '../../images/logo/logo-hypermart.png';
+import logoHyfresh from '../../images/logo/logo-hyfresh.jpg';
 
 interface Props {
   lang?: string;
@@ -9,35 +16,133 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const tr = t(lang);
 
-const typeKeys = ['type1', 'type2', 'type3', 'type4'] as const;
-const iconNames = ['mdi:package-variant', 'mdi:food-fork-drink', 'mdi:label', 'mdi:gift'];
+const partnershipTypes = [
+  {
+    icon: 'mdi:package-variant',
+    title: tr.b2b.type1Label,
+    desc: tr.b2b.type1Desc,
+  },
+  {
+    icon: 'mdi:food-fork-drink',
+    title: tr.b2b.type2Label,
+    desc: tr.b2b.type2Desc,
+  },
+  {
+    icon: 'mdi:label',
+    title: tr.b2b.type3Label,
+    desc: tr.b2b.type3Desc,
+  },
+  {
+    icon: 'mdi:gift',
+    title: tr.b2b.type4Label,
+    desc: tr.b2b.type4Desc,
+  },
+];
 ---
 
-<section class="b2b section" id="b2b" aria-label="B2B Partnership">
+<section class="partnerships section" id="b2b" aria-label="Strategic Partnerships">
   <div class="container">
-    <div class="section__header">
-      <p class="section-tag">{tr.b2b.tag}</p>
-      <h2 class="section-title">{tr.b2b.title}</h2>
-      <p class="section-sub">{tr.b2b.subtitle}</p>
+
+    <!-- Header -->
+    <div class="partnerships__header">
+      <h2 class="partnerships__title">{tr.b2b.title}</h2>
+      <p class="partnerships__subtitle">{tr.b2b.subtitle}</p>
     </div>
 
-    <div class="b2b__grid">
-      {typeKeys.map((key, i) => (
-        <article class="b2b__card animate-fade-in-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
-          <div class="b2b__card-icon" aria-hidden="true">
-            <Icon name={iconNames[i]} width="20" height="20" />
+    <!-- Trust Strip (Mini Stats) -->
+    <div class="partnerships__trust-strip">
+      <div class="trust-stat">
+        <span class="trust-stat__value">{tr.b2b.stat1Value}</span>
+        <span class="trust-stat__label">{tr.b2b.stat1Label}</span>
+      </div>
+      <div class="trust-stat">
+        <span class="trust-stat__value">{tr.b2b.stat2Value}</span>
+        <span class="trust-stat__label">{tr.b2b.stat2Label}</span>
+      </div>
+      <div class="trust-stat">
+        <span class="trust-stat__value">{tr.b2b.stat3Value}</span>
+        <span class="trust-stat__label">{tr.b2b.stat3Label}</span>
+      </div>
+    </div>
+
+    <!-- Logo Cloud -->
+    <div class="partnerships__logo-cloud">
+      <div class="logo-cloud__grid">
+        <div class="logo-cloud__item">
+          <span class="logo-cloud__text">Angkasa Pura</span>
+        </div>
+        <div class="logo-cloud__item">
+          <Image src={logoHypermart} alt="Hypermart" width={100} height={40} class="logo-cloud__img" />
+        </div>
+        <div class="logo-cloud__item">
+          <span class="logo-cloud__text">Primo</span>
+        </div>
+    <div class="logo-cloud__item">
+          <Image src={logoHyfresh} alt="Hyfresh" width={100} height={40} class="logo-cloud__img" />
+        </div>
+        <div class="logo-cloud__item">
+          <span class="logo-cloud__text">Svetofor</span>
+        </div>
+        <div class="logo-cloud__item">
+          <span class="logo-cloud__text">Sendys</span>
+        </div>
+        <div class="logo-cloud__item">
+          <span class="logo-cloud__text">KPD Retail</span>
+        </div>
+      </div>
+      <p class="logo-cloud__proof">{tr.b2b.socialProof}</p>
+    </div>
+
+    <!-- Ecosystem Info -->
+    <div class="partnerships__ecosystem">
+      <h3 class="ecosystem__title">{tr.b2b.ecosystemTitle}</h3>
+      <div class="ecosystem__grid">
+        <div class="ecosystem__item">
+          <h4 class="ecosystem__item-title">{tr.b2b.eco1Title}</h4>
+          <p class="ecosystem__item-desc">{tr.b2b.eco1Desc}</p>
+        </div>
+        <div class="ecosystem__item">
+          <h4 class="ecosystem__item-title">{tr.b2b.eco2Title}</h4>
+          <p class="ecosystem__item-desc">{tr.b2b.eco2Desc}</p>
+        </div>
+        <div class="ecosystem__item">
+          <h4 class="ecosystem__item-title">{tr.b2b.eco3Title}</h4>
+          <p class="ecosystem__item-desc">{tr.b2b.eco3Desc}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partnership Cards -->
+    <div class="partnerships__cards">
+      {partnershipTypes.map((type, i) => (
+        <article class="partnership-card" style={`animation-delay: ${i * 80}ms`}>
+          <div class="partnership-card__icon">
+            <Icon name={type.icon} width={20} height={20} />
           </div>
-          <div class="b2b__card-content">
-            <p class="b2b__card-tag">{tr.b2b[`${key}Tag`]}</p>
-            <h3 class="b2b__card-title">{tr.b2b[`${key}Label`]}</h3>
-            <p class="b2b__card-desc">{tr.b2b[`${key}Desc`]}</p>
-          </div>
-          <a href="#contact" class="b2b__card-cta" aria-label={tr.b2b.ctaAria}>
-            {tr.b2b.cta}
-            <Icon name="mdi:chevron-right" width="12" height="12" />
-          </a>
+          <h3 class="partnership-card__title">{type.title}</h3>
+          <p class="partnership-card__desc">{type.desc}</p>
         </article>
       ))}
     </div>
+
+    <!-- CTA Final -->
+    <div class="partnerships__cta">
+      <div class="partnerships__cta-bg">
+        <Image
+          src={bgImg}
+          alt=""
+          loading="lazy"
+          widths={[768, 1280, 1920]}
+          sizes="100vw"
+          class="partnerships__cta-img"
+        />
+      </div>
+      <p class="partnerships__cta-text">{tr.b2b.ctaFinal}</p>
+      <a href="#contact" class="btn btn--primary partnerships__cta-btn">
+        {tr.b2b.ctaButton}
+        <Icon name="mdi:arrow-right" width={16} height={16} />
+      </a>
+    </div>
+
   </div>
 </section>

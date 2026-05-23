@@ -55,8 +55,7 @@
   --overlay-white-low:    rgba(92,61,30,0.38);
 
   /* Typography */
-  /* --font-display: 'Playfair Display', 'Georgia', serif;
-  --font-body:    'DM Sans', 'Helvetica Neue', sans-serif; */
+
   --font-heading: 'Cormorant Garamond', 'Georgia', serif;
   --font-body:    'Plus Jakarta Sans', 'Helvetica Neue', sans-serif;
   --font-label:   'DM Mono', 'Courier New', monospace;
