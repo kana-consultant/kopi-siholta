@@ -175,8 +175,8 @@
 }
 
 .ecosystem__item-title {
-  font-family: var(--font-body);
-  font-size: 12px;
+  font-family: var(--font-heading);
+  font-size: 13px;
   font-weight: 600;
   color: var(--color-brand-earth);
   text-transform: uppercase;

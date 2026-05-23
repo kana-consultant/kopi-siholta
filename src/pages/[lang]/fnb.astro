@@ -11,7 +11,7 @@ import fnbHero2 from '../../images/fnb/coffee-powder.jpg';
 import fnbHero3 from '../../images/fnb/caffee.jpg';
 import fnbHero4 from '../../images/fnb/coffee-beans.jpg';
 import fnbHero5 from '../../images/fnb/coffee-caramel.jpg';
-import fnbHero6 from '../../images/fnb/robustakapsul70g.png';
+import fnbHero6 from '../../images/fnb/caffee.jpg';
 import fnbHero7 from '../../images/fnb/gula-aren.jpg';
 import fnbHero8 from '../../images/fnb/expresso.jpg';
 import fnbHero9 from '../../images/fnb/green-beans.jpg';
@@ -242,7 +242,7 @@ const cafeLocations = [
       <div class="cafe-carousel animate-on-scroll">
         <div class="cafe-carousel__track">
           {cafeBestSellers.map((drink, i) => (
-            <article class="cafe-card">
+            <article class="cafe-card" aria-labelledby={`cafe-card-name-${i}`}>
               <div class="cafe-card__media">
                 <Image
                   src={drink.img}
@@ -255,7 +255,7 @@ const cafeLocations = [
                 <div class="cafe-card__tag">{drink.tag}</div>
               </div>
               <div class="cafe-card__body">
-                <h3 class="cafe-card__name">{t.fnb[drink.nameKey as keyof typeof t.fnb] ?? ''}</h3>
+                <h3 id={`cafe-card-name-${i}`} class="cafe-card__name">{t.fnb[drink.nameKey as keyof typeof t.fnb] ?? ''}</h3>
                 <p class="cafe-card__desc">{t.fnb[drink.descKey as keyof typeof t.fnb] ?? ''}</p>
               </div>
             </article>
@@ -337,8 +337,8 @@ const cafeLocations = [
   <section class="sustainability section section--olive" aria-labelledby="sustainability-heading">
     <div class="container sustainability__inner">
       <div class="sustainability__text animate-on-scroll">
-        <h2 id="sustainability-heading" class="section-title section-title">{t.fnb.sustainabilityTitle ?? 'Sustainability Commitment'}</h2>
-        <p class="section-sub section-sub">{t.fnb.sustainabilitySubtitle ?? 'Kopi Siholta berkomitmen pada keberlanjutan lingkungan melalui penggunaan kapsul aluminium daur ulang 80% dan dukungan untuk petani kopi lokal Sumatera.'}</p>
+        <h2 id="sustainability-heading" class="section-title">{t.fnb.sustainabilityTitle ?? 'Sustainability Commitment'}</h2>
+        <p class="section-sub">{t.fnb.sustainabilitySubtitle ?? 'Kopi Siholta berkomitmen pada keberlanjutan lingkungan melalui penggunaan kapsul aluminium daur ulang 80% dan dukungan untuk petani kopi lokal Sumatera.'}</p>
       </div>
       <div class="sustainability__visual animate-on-scroll">
         <div class="sustainability__icon-wrap" aria-hidden="true">
