@@ -63,12 +63,6 @@
   background: linear-gradient(to left, rgba(92,61,30,0.12) 0%, rgba(92,61,30,0.04) 100%);
 }
 
-.product-row__badge-wrap {
-  position: absolute;
-  top: var(--space-4);
-  left: var(--space-4);
-  z-index: 2;
-}
 
 .product-row__badge {
   font-family: var(--font-label);
@@ -166,6 +160,33 @@
   font-size: 11px;
   font-weight: 500;
   color: var(--color-brand-earth);
+}
+
+/* ── Barcode ─────────────────────────────────── */
+.product-row__barcode {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: color-mix(in srgb, var(--color-brand-red) 10%, transparent);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px 5px 8px;
+  width: fit-content;
+}
+
+.product-row__barcode-label {
+  font-family: var(--font-label);
+  font-size: 7px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-earth);
+}
+
+.product-row__barcode-num {
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.10em;
+  color: var(--color-brand-earth);
+  font-weight: 400;
 }
 
 .product-row__footer {
