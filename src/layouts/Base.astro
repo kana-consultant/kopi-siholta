@@ -54,18 +54,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
     <link rel="icon" type="image/png" href={logo.src} class="favicon-circular" />
     <link rel="shortcut icon" type="image/x-icon" href={logo.src} class="favicon-circular" />
     <style>
-      .favicon-circular {
-        border-radius: 50%;
-      }
+      .favicon-circular { border-radius: 50%; }
     </style>
 
-    <!-- Font Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Async font load — prevents render-blocking, applied when ready -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'" />
+    <!-- Font strategy: preload display font, async load body fonts -->
+    <!-- Cormorant Garamond — display font, preloaded for FCP -->
+    <link rel="preload" as="style"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+          media="print" onload="this.media='all'" />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" />
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" />
+    </noscript>
+
+    <!-- Body + label fonts — deferred, non-render-blocking -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400&display=swap"
+          media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400&display=swap" />
     </noscript>
 
     <!-- Structured Data -->

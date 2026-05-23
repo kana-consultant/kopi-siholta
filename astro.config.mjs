@@ -49,7 +49,14 @@ export default defineConfig({
   },
   image: {
     remotePatterns: [{ protocol: 'https' }],
-    maximumLocalLength: 1024
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: false,
+      }
+    },
+    domains: [],
+    formats: ['avif', 'webp']
   },
   compressHTML: true,
   inlineStylesheets: 'auto'
