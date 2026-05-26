@@ -10,10 +10,10 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const tr = t(lang);
 
-const countryKeys = ['countryUSA', 'countryJapan', 'countryKorea', 'countryAustralia', 'countrySingapore', 'countryMalaysia'] as const;
-const codes = ['US', 'JP', 'KR', 'AU', 'SG', 'MY'];
-const flags = ['🇺🇸', '🇯🇵', '🇰🇷', '🇦🇺', '🇸🇬', '🇲🇾'];
-const active = [true, true, true, false, false, false];
+const countryKeys = ['countryUSA', 'countryJapan', 'countryKorea', 'countryTimurTengah', 'countryHongkong', 'countryBelanda', 'countryAfrika'] as const;
+const codes = ['US', 'JP', 'KR', 'AE', 'HK', 'NL', 'ZA'];
+const flags = ['🇺🇸', '🇯🇵', '🇰🇷', '🇦🇪', '🇭🇰', '🇳🇱', '🇿🇦'];
+const active = [true, true, true, false, false, false, false];
 
 const kpiKeys = [
   { num: '100T', labelKey: 'kpi1' as const },
@@ -46,10 +46,6 @@ const kpiKeys = [
         <Image src={globePic} alt={tr.export.mapAlt} class="export__globe-img"
           loading="lazy" widths={[400, 600, 800]}
           sizes="(max-width: 1024px) 100vw, 50vw" />
-        <div class="export__globe-label">
-          <span class="export__globe-label-dot"></span>
-          <span>{tr.export.officeLabel}</span>
-        </div>
       </div>
     </div>
 

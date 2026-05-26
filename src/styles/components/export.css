@@ -62,7 +62,7 @@
 
 .export__title {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(28px, 3.5vw, 46px);
   font-weight: 700;
   color: var(--color-brand-earth);
   line-height: 1.1;
@@ -71,7 +71,7 @@
 
 .export__desc {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.75;
   color: var(--color-brand-muted);
   max-width: 400px;
@@ -89,7 +89,7 @@
 
 .export__routes-label {
   font-family: var(--font-label);
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-brand-muted);
@@ -106,7 +106,7 @@
   align-items: center;
   gap: 5px;
   font-family: var(--font-label);
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--color-brand-red);
@@ -202,7 +202,7 @@
 
 .export__kpi-label {
   font-family: var(--font-label);
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-brand-muted);
@@ -227,7 +227,7 @@
   align-items: center;
   gap: var(--space-2);
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-brand-muted);
@@ -303,14 +303,14 @@
 
 .export__country-card-name {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--color-brand-earth);
 }
 
 .export__country-card-status {
   font-family: var(--font-label);
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--color-brand-muted);

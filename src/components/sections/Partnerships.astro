@@ -4,8 +4,6 @@ import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n/utils';
 import bgImg from '../../images/farming/process (3).jpg';
 
-
-// Import partner logos
 import logoHypermart from '../../images/logo/logo-hypermart.png';
 import logoHyfresh from '../../images/logo/logo-hyfresh.jpg';
 
@@ -16,31 +14,44 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const tr = t(lang);
 
-const partnershipTypes = [
+const processTypes = [
   {
-    icon: 'mdi:package-variant',
-    title: tr.b2b.type1Label,
+    tag: tr.b2b.type1Tag,
+    label: tr.b2b.type1Label,
     desc: tr.b2b.type1Desc,
+    feature: tr.b2b.type1Feature,
+    flavours: ['Citrusy & Herbal', 'Sweetness', 'Bright Acidity'],
+    roast: 'Light – Medium',
+    cup: 'Clean, Bright, Floral',
+    icon: 'mdi:water',
+    accentClass: 'process-card--washed',
   },
   {
-    icon: 'mdi:food-fork-drink',
-    title: tr.b2b.type2Label,
+    tag: tr.b2b.type2Tag,
+    label: tr.b2b.type2Label,
     desc: tr.b2b.type2Desc,
+    feature: tr.b2b.type2Feature,
+    flavours: ['Chocolatey', 'Nutty', 'Spices'],
+    roast: 'Medium – Dark',
+    cup: 'Full-Bodied, Complex, Earthy',
+    icon: 'mdi:weather-sunny',
+    accentClass: 'process-card--natural',
   },
   {
-    icon: 'mdi:label',
-    title: tr.b2b.type3Label,
+    tag: tr.b2b.type3Tag,
+    label: tr.b2b.type3Label,
     desc: tr.b2b.type3Desc,
-  },
-  {
-    icon: 'mdi:gift',
-    title: tr.b2b.type4Label,
-    desc: tr.b2b.type4Desc,
+    feature: tr.b2b.type3Feature,
+    flavours: ['Intense Sweetness', 'Mellow Fruity', 'Subtle Spice & Nutty'],
+    roast: 'Medium',
+    cup: 'Balanced, Smooth, Layered',
+    icon: 'mdi:flower',
+    accentClass: 'process-card--honey',
   },
 ];
 ---
 
-<section class="partnerships section" id="b2b" aria-label="Strategic Partnerships">
+<section class="partnerships section" id="b2b" aria-label="B2B Green Bean Supply">
   <div class="container">
 
     <!-- Header -->
@@ -49,7 +60,7 @@ const partnershipTypes = [
       <p class="partnerships__subtitle">{tr.b2b.subtitle}</p>
     </div>
 
-    <!-- Trust Strip (Mini Stats) -->
+    <!-- Trust Strip -->
     <div class="partnerships__trust-strip">
       <div class="trust-stat">
         <span class="trust-stat__value">{tr.b2b.stat1Value}</span>
@@ -77,7 +88,7 @@ const partnershipTypes = [
         <div class="logo-cloud__item">
           <span class="logo-cloud__text">Primo</span>
         </div>
-    <div class="logo-cloud__item">
+        <div class="logo-cloud__item">
           <Image src={logoHyfresh} alt="Hyfresh" width={100} height={40} class="logo-cloud__img" />
         </div>
         <div class="logo-cloud__item">
@@ -93,34 +104,48 @@ const partnershipTypes = [
       <p class="logo-cloud__proof">{tr.b2b.socialProof}</p>
     </div>
 
-    <!-- Ecosystem Info -->
-    <div class="partnerships__ecosystem">
-      <h3 class="ecosystem__title">{tr.b2b.ecosystemTitle}</h3>
-      <div class="ecosystem__grid">
-        <div class="ecosystem__item">
-          <h4 class="ecosystem__item-title">{tr.b2b.eco1Title}</h4>
-          <p class="ecosystem__item-desc">{tr.b2b.eco1Desc}</p>
-        </div>
-        <div class="ecosystem__item">
-          <h4 class="ecosystem__item-title">{tr.b2b.eco2Title}</h4>
-          <p class="ecosystem__item-desc">{tr.b2b.eco2Desc}</p>
-        </div>
-        <div class="ecosystem__item">
-          <h4 class="ecosystem__item-title">{tr.b2b.eco3Title}</h4>
-          <p class="ecosystem__item-desc">{tr.b2b.eco3Desc}</p>
-        </div>
-      </div>
+    <!-- Process Section Title -->
+    <div class="process-section__header">
+      <h3 class="process-section__title">{tr.b2b.processTitle}</h3>
+      <p class="process-section__subtitle">{tr.b2b.processSubtitle}</p>
     </div>
 
-    <!-- Partnership Cards -->
-    <div class="partnerships__cards">
-      {partnershipTypes.map((type, i) => (
-        <article class="partnership-card" style={`animation-delay: ${i * 80}ms`}>
-          <div class="partnership-card__icon">
-            <Icon name={type.icon} width={20} height={20} />
+    <!-- Process Cards -->
+    <div class="process-cards">
+      {processTypes.map((type, i) => (
+        <article class={`process-card ${type.accentClass}`} style={`animation-delay: ${i * 100}ms`}>
+          <div class="process-card__top">
+            <div class="process-card__icon-wrap">
+              <Icon name={type.icon} width={24} height={24} />
+            </div>
           </div>
-          <h3 class="partnership-card__title">{type.title}</h3>
-          <p class="partnership-card__desc">{type.desc}</p>
+          <div class="process-card__body">
+            <h4 class="process-card__name">{type.label}</h4>
+            <p class="process-card__desc">{type.desc}</p>
+            <div class="process-card__divider"></div>
+            <div class="process-card__meta">
+              <div class="process-card__meta-item">
+                <span class="process-card__meta-label">Flavour Profile</span>
+                <div class="process-card__flavours">
+                  {type.flavours.map(f => <span class="flavour-chip">{f}</span>)}
+                </div>
+              </div>
+              <div class="process-card__meta-item">
+                <span class="process-card__meta-label">Cup Character</span>
+                <span class="process-card__meta-value">{type.cup}</span>
+              </div>
+              <div class="process-card__meta-item">
+                <span class="process-card__meta-label">Suitable Roast</span>
+                <span class="process-card__meta-value">{type.roast}</span>
+              </div>
+            </div>
+          </div>
+          <div class="process-card__footer">
+            <span class="process-card__feature-badge">
+              <Icon name="mdi:star" width={14} height={14} />
+              {type.feature}
+            </span>
+          </div>
         </article>
       ))}
     </div>
@@ -140,7 +165,6 @@ const partnershipTypes = [
       <p class="partnerships__cta-text">{tr.b2b.ctaFinal}</p>
       <a href="#contact" class="btn btn--primary partnerships__cta-btn">
         {tr.b2b.ctaButton}
-        <Icon name="mdi:arrow-right" width={16} height={16} />
       </a>
     </div>
 
