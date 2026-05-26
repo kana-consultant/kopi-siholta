@@ -56,7 +56,6 @@ const processTypes = [
 
     <!-- Header -->
     <div class="partnerships__header">
-      <span class="partnerships__tag">{tr.b2b.tag}</span>
       <h2 class="partnerships__title">{tr.b2b.title}</h2>
       <p class="partnerships__subtitle">{tr.b2b.subtitle}</p>
     </div>
@@ -64,17 +63,14 @@ const processTypes = [
     <!-- Trust Strip -->
     <div class="partnerships__trust-strip">
       <div class="trust-stat">
-        <Icon name="mdi:map-marker" width={20} height={20} class="trust-stat__icon" />
         <span class="trust-stat__value">{tr.b2b.stat1Value}</span>
         <span class="trust-stat__label">{tr.b2b.stat1Label}</span>
       </div>
       <div class="trust-stat">
-        <Icon name="mdi:flask" width={20} height={20} class="trust-stat__icon" />
         <span class="trust-stat__value">{tr.b2b.stat2Value}</span>
         <span class="trust-stat__label">{tr.b2b.stat2Label}</span>
       </div>
       <div class="trust-stat">
-        <Icon name="mdi:certificate" width={20} height={20} class="trust-stat__icon" />
         <span class="trust-stat__value">{tr.b2b.stat3Value}</span>
         <span class="trust-stat__label">{tr.b2b.stat3Label}</span>
       </div>
@@ -122,7 +118,6 @@ const processTypes = [
             <div class="process-card__icon-wrap">
               <Icon name={type.icon} width={24} height={24} />
             </div>
-            <span class="process-card__tag">{type.tag}</span>
           </div>
           <div class="process-card__body">
             <h4 class="process-card__name">{type.label}</h4>
@@ -170,7 +165,6 @@ const processTypes = [
       <p class="partnerships__cta-text">{tr.b2b.ctaFinal}</p>
       <a href="#contact" class="btn btn--primary partnerships__cta-btn">
         {tr.b2b.ctaButton}
-        <Icon name="mdi:arrow-right" width={16} height={16} />
       </a>
     </div>
 
