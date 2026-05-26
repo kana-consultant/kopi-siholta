@@ -13,9 +13,6 @@ export default {
         accent: '#B8860B',
       },
       fontFamily: {
-        display: ['Playfair Display', 'serif'],
-        body: ['Plus Jakarta Sans', 'sans-serif'],
-        accent: ['Cormorant Garamond', 'serif'],
       },
     },
   },
