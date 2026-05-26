@@ -17,30 +17,26 @@ const langs = [
 const current = langs.find(l => l.code === currentLang) ?? langs[0];
 ---
 
-<div class="lang-switcher" id="lang-switcher">
-  <!-- Trigger Button -->
+<div class="lang-switcher js-lang-switcher">
   <button
-    class="lang-trigger"
-    id="lang-trigger"
+    class="lang-trigger js-lang-trigger"
     aria-haspopup="listbox"
     aria-expanded="false"
     aria-label={t.selectLang ? `Bahasa dipilih: ${current.name}` : `Current language: ${current.name}. Change language`}
   >
     <span class="lang-trigger__icon" aria-hidden="true">
-      <Icon name="mdi:globe" width="16" height="16" />
+      <Icon name="mdi:globe" width="13" height="13" />
     </span>
-    <span class="lang-current-code" id="lang-current-code">
+    <span class="lang-current-code">
       {current.code.toUpperCase()}
     </span>
-    <svg class="lang-chevron" id="lang-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    <svg class="lang-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
     </svg>
   </button>
 
-  <!-- Dropdown — position switches to upward on mobile via JS -->
   <ul
-    class="lang-dropdown"
-    id="lang-dropdown"
+    class="lang-dropdown js-lang-dropdown"
     role="listbox"
     aria-label={t.selectLang ? 'Pilih bahasa' : 'Choose a language'}
     aria-orientation="vertical"
@@ -56,7 +52,7 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
       >
         <span class="lang-option__check" aria-hidden="true">
           {lang.code === currentLang && (
-            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
             </svg>
           )}
@@ -71,29 +67,27 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
 </div>
 
 <style>
-  /* ── Switcher Container ─────────────────────────── */
   .lang-switcher {
     position: relative;
     display: inline-flex;
   }
 
-  /* ── Trigger Button ──────────────────────────── */
   .lang-trigger {
     display: inline-flex;
     align-items: center;
-    gap: 0.375rem;
-    padding: 0.5rem 0.75rem;           /* min 44px touch height */
+    gap: 0.25rem;
+    padding: 0.25rem 0.625rem;       
     background: rgba(249, 246, 240, 0.1);
     border: 1px solid rgba(205, 18, 34, 0.2);
     border-radius: 9999px;
     color: rgba(92, 61, 30, 0.85);
     cursor: pointer;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;           
     font-weight: 600;
     transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     white-space: nowrap;
-    min-height: 44px;                  /* iOS min touch target */
-    min-width: 44px;
+    min-height: 32px;                
+    min-width: auto;
   }
 
   .lang-trigger:hover {
@@ -128,8 +122,8 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
   }
 
   .lang-chevron {
-    width: 0.875rem;
-    height: 0.875rem;
+    width: 0.75rem;
+    height: 0.75rem;
     transition: transform 0.2s ease;
     flex-shrink: 0;
     color: var(--color-brand-earth);
@@ -139,17 +133,15 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
     transform: rotate(180deg);
   }
 
-  /* ── Dropdown Panel ─────────────────────────── */
-  /* Desktop default: opens downward */
   .lang-dropdown {
     position: absolute;
-    top: calc(100% + 0.5rem);           /* below trigger */
+    top: calc(100% + 0.375rem);
     left: 0;
-    min-width: 11rem;
+    min-width: 10rem;
     background: #F9F6F0;
     border: 1px solid rgba(205, 18, 34, 0.15);
-    border-radius: 0.75rem;
-    padding: 0.375rem;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
     box-shadow:
       0 8px 24px rgba(92, 61, 30, 0.14),
       0 2px 8px rgba(92, 61, 30, 0.08);
@@ -157,19 +149,9 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
     margin: 0;
     z-index: 300;
     opacity: 0;
-    transform: translateY(-8px) scale(0.96);  /* slide in from above */
+    transform: translateY(-8px) scale(0.96);
     pointer-events: none;
-    transition:
-      opacity 0.2s ease,
-      transform 0.2s ease;
-  }
-
-  /* Mobile panel: opens upward */
-  .lang-switcher.lang-switcher--mobile .lang-dropdown {
-    top: auto;
-    bottom: calc(100% + 0.5rem);       /* above trigger */
-    left: 0;
-    transform: translateY(8px) scale(0.96);   /* slide in from below */
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
   .lang-switcher.open .lang-dropdown {
@@ -178,16 +160,15 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
     pointer-events: all;
   }
 
-  /* ── Individual Option ───────────────────────── */
   .lang-option {
     display: flex;
     align-items: center;
-    gap: 0.625rem;
-    padding: 0.625rem 0.75rem;       /* ≥44px touch height */
-    border-radius: 0.5rem;
+    gap: 0.5rem;
+    padding: 0.5rem 0.625rem;
+    border-radius: 0.375rem;
     cursor: pointer;
     transition: background 0.15s ease;
-    min-height: 44px;
+    min-height: 38px;
     position: relative;
   }
 
@@ -210,8 +191,8 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
     color: var(--color-brand-red);
   }
@@ -223,7 +204,7 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
   }
 
   .lang-option-code {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--color-brand-earth);
     letter-spacing: 0.04em;
@@ -231,31 +212,20 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
   }
 
   .lang-option-name {
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     color: var(--color-brand-muted);
     line-height: 1.3;
   }
 
-  /* ── Reduced Motion ─────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
-    .lang-trigger,
-    .lang-chevron,
-    .lang-dropdown {
-      transition: none;
-      animation: none;
-    }
-
-    .lang-switcher.open .lang-dropdown {
-      opacity: 1;
-      transform: none;
-    }
+    .lang-trigger, .lang-chevron, .lang-dropdown { transition: none; }
+    .lang-switcher.open .lang-dropdown { opacity: 1; transform: none; }
   }
 </style>
 
 <script>
   const VALID_LANGS = ['id', 'en', 'fr'];
 
-  /* Derive the locale href from the current URL */
   function localeHref(targetLang: string): string {
     const pathParts = window.location.pathname.split('/').filter(Boolean);
     if (pathParts[0] && VALID_LANGS.includes(pathParts[0])) {
@@ -266,157 +236,97 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
     return '/' + pathParts.join('/') || '/';
   }
 
-  /* Detect mobile panel context — parent or ancestor signals mobile usage */
-  function isMobileContext(): boolean {
-    const switcher = document.getElementById('lang-switcher');
-    return !!(
-      switcher?.closest('.mobile-menu') ||
-      switcher?.closest('.mobile-menu__footer') ||
-      document.querySelector('.mobile-menu.is-open')
-    );
-  }
-
-  /* Apply directional class based on context */
-  function applyDropdownDirection(): void {
-    const switcher = document.getElementById('lang-switcher');
-    if (!switcher) return;
-    const isMobile = isMobileContext();
-    if (isMobile) {
-      switcher.classList.add('lang-switcher--mobile');   /* upward */
-    } else {
-      switcher.classList.remove('lang-switcher--mobile'); /* downward (default) */
-    }
-  }
-
   function selectLanguage(lang: string): void {
     document.cookie = `preferred_lang=${lang}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
     window.location.href = localeHref(lang);
   }
 
-  function openDropdown(): void {
-    if (!switcher || !trigger || !dropdown) return;
-    applyDropdownDirection();
-    switcher.classList.add('open');
-    trigger.setAttribute('aria-expanded', 'true');
-    dropdown.hidden = false;
-    // Focus first option
-    const first = dropdown.querySelector<HTMLElement>('.lang-option');
-    first?.focus();
-  }
+  const switchers = document.querySelectorAll('.js-lang-switcher');
 
-  function closeDropdown(): void {
-    if (!switcher || !trigger || !dropdown) return;
-    switcher.classList.remove('open');
-    trigger.setAttribute('aria-expanded', 'false');
-    dropdown.hidden = true;
-    trigger.focus(); // return focus to trigger
-  }
+  switchers.forEach((switcher) => {
+    const trigger = switcher.querySelector('.js-lang-trigger') as HTMLButtonElement | null;
+    const dropdown = switcher.querySelector('.js-lang-dropdown') as HTMLElement | null;
 
-  function isDropdownOpen(): boolean {
-    return switcher?.classList.contains('open') ?? false;
-  }
+    if (!trigger || !dropdown) return;
 
-  const switcher = document.getElementById('lang-switcher');
-  const trigger  = document.getElementById('lang-trigger');
-  const dropdown = document.getElementById('lang-dropdown');
-
-  /* Toggle on trigger click */
-  trigger?.addEventListener('click', () => {
-    isDropdownOpen() ? closeDropdown() : openDropdown();
-  });
-
-  /* Click outside → close */
-  document.addEventListener('click', (e) => {
-    if (!switcher?.contains(e.target as Node)) {
-      if (isDropdownOpen()) closeDropdown();
-    }
-  });
-
-  /* Keyboard handler on dropdown */
-  dropdown?.addEventListener('keydown', (e: KeyboardEvent) => {
-    const options = Array.from(
-      dropdown.querySelectorAll<HTMLElement>('.lang-option:not([aria-selected="true"])')
-    );
-    const allOptions = Array.from(
-      dropdown.querySelectorAll<HTMLElement>('.lang-option')
-    );
-    const currentIndex = allOptions.findIndex(
-      (o) => o === document.activeElement
+    const isMobileContext = !!(
+      switcher.closest('.mobile-menu') || 
+      switcher.closest('.mobile-navbar-lang') ||
+      document.querySelector('.mobile-menu.is-open')
     );
 
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        if (currentIndex < allOptions.length - 1) {
-          allOptions[currentIndex + 1].focus();
-        } else {
-          allOptions[0].focus();
-        }
-        break;
-
-      case 'ArrowUp':
-        e.preventDefault();
-        if (currentIndex > 0) {
-          allOptions[currentIndex - 1].focus();
-        } else {
-          allOptions[allOptions.length - 1].focus();
-        }
-        break;
-
-      case 'Enter':
-      case ' ':
-        e.preventDefault();
-        if (document.activeElement) {
-          const lang = (document.activeElement as HTMLElement).dataset.lang ?? 'id';
-          selectLanguage(lang);
-        }
-        break;
-
-      case 'Escape':
-        e.preventDefault();
-        closeDropdown();
-        break;
-
-      case 'Tab':
-        closeDropdown();
-        break;
-
-      case 'Home':
-        e.preventDefault();
-        allOptions[0].focus();
-        break;
-
-      case 'End':
-        e.preventDefault();
-        allOptions[allOptions.length - 1].focus();
-        break;
+    if (isMobileContext) {
+      switcher.classList.add('lang-switcher--mobile');
     }
-  });
 
-  /* Keyboard: Escape globally when dropdown is open */
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
-    if (e.key === 'Escape' && isDropdownOpen()) {
-      closeDropdown();
+    function openDropdown(): void {
+      switcher.classList.add('open');
+      trigger!.setAttribute('aria-expanded', 'true');
+      dropdown!.hidden = false;
+      const first = dropdown!.querySelector<HTMLElement>('.lang-option');
+      first?.focus();
     }
-  });
 
-  /* ── Language option click ── */
-  dropdown?.querySelectorAll('.lang-option').forEach((option) => {
-    option.addEventListener('click', () => {
-      const lang = (option as HTMLElement).dataset.lang ?? 'id';
-      selectLanguage(lang);
+    function closeDropdown(): void {
+      switcher.classList.remove('open');
+      trigger!.setAttribute('aria-expanded', 'false');
+      dropdown!.hidden = true;
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = switcher.classList.contains('open');
+      document.querySelectorAll('.js-lang-switcher').forEach(s => s.classList.remove('open'));
+      isOpen ? closeDropdown() : openDropdown();
+    });
+
+    dropdown.addEventListener('keydown', (e: KeyboardEvent) => {
+      const allOptions = Array.from(dropdown.querySelectorAll<HTMLElement>('.lang-option'));
+      const currentIndex = allOptions.findIndex((o) => o === document.activeElement);
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          if (currentIndex < allOptions.length - 1) allOptions[currentIndex + 1].focus();
+          else allOptions[0].focus();
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          if (currentIndex > 0) allOptions[currentIndex - 1].focus();
+          else allOptions[allOptions.length - 1].focus();
+          break;
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          if (document.activeElement) {
+            const lang = (document.activeElement as HTMLElement).dataset.lang ?? 'id';
+            selectLanguage(lang);
+          }
+          break;
+        case 'Escape':
+        case 'Tab':
+          e.preventDefault();
+          closeDropdown();
+          trigger.focus();
+          break;
+      }
+    });
+
+    dropdown.querySelectorAll('.lang-option').forEach((option) => {
+      option.addEventListener('click', () => {
+        const lang = (option as HTMLElement).dataset.lang ?? 'id';
+        selectLanguage(lang);
+      });
     });
   });
 
-  /* Re-evaluate direction on resize */
-  window.addEventListener('resize', () => {
-    if (isDropdownOpen()) applyDropdownDirection();
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.js-lang-switcher').forEach((switcher) => {
+      switcher.classList.remove('open');
+      const trigger = switcher.querySelector('.js-lang-trigger');
+      const dropdown = switcher.querySelector('.js-lang-dropdown') as HTMLElement | null;
+      trigger?.setAttribute('aria-expanded', 'false');
+      if (dropdown) dropdown.hidden = true;
+    });
   });
-
-  /* Recalculate direction when mobile menu opens */
-  document.addEventListener('DOMContentLoaded', applyDropdownDirection);
-
-  /* ── Inline mobile usage ── */
-  /* Navbar.astro passes lang-switcher into mobile-menu via direct include;
-     we detect that context via the closest() check in isMobileContext(). */
 </script>

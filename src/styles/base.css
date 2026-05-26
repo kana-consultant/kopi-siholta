@@ -202,7 +202,7 @@ a:hover, button:hover { cursor: pointer; }
 
 /* ── Z-index Scale ───────────────────────────────────────── */
 :root {
-  --z-navbar:    50;
+  --z-navbar:    100;
   --z-overlay:   60;
   --z-modal:     80;
   --z-fab:       90;
