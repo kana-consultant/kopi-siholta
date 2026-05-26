@@ -8,9 +8,10 @@ import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
 import companyBg from '../../images/bg/bg-company.jpg';
 import aboutFoto from '../../images/about.webp';
-import certBrand from '../../images/certified/brand-certificate.png';
-import certHalal from '../../images/certified/halal-certificate.png';
-import certTraining from '../../images/certified/training-certificate.png';
+import certBrand from '../../images/certified/brand-certificate.webp';
+import certHalal from '../../images/certified/halal-certificate.webp';
+import certTraining from '../../images/certified/training-certificate.webp';
+import certPirt from '../../images/certified/P-IRT.webp';
 import { useTranslations } from '../../i18n/utils';
 
 interface Props {
@@ -52,6 +53,29 @@ const sectors = [
 ];
 
 const tc = t.company as Record<string, string>;
+
+const certs = [
+  {
+    nameKey: 'certBrandName', descKey: 'certBrandDesc',
+    img: certBrand, altKey: 'Sertifikat Merek Kopi Siholta',
+    iconName: 'mdi:certificate', pdf: '/docs/brand-certificate.pdf',
+  },
+  {
+    nameKey: 'certHalalName', descKey: 'certHalalDesc',
+    img: certHalal, altKey: 'Sertifikat Halal Kopi Siholta',
+    iconName: 'mdi:shield-check', pdf: '/docs/halal-certificate.pdf',
+  },
+  {
+    nameKey: 'certTrainingName', descKey: 'certTrainingDesc',
+    img: certTraining, altKey: 'Sertifikat Pelatihan Keamanan Pangan Kopi Siholta',
+    iconName: 'mdi:food-apple', pdf: '/docs/training-certificate.pdf',
+  },
+  {
+    nameKey: 'certPirtName', descKey: 'certPirtDesc',
+    img: certPirt, altKey: 'SPP-IRT Kopi Siholta',
+    iconName: 'mdi:food', pdf: '/docs/spp-irt.pdf',
+  },
+];
 
 ---
 
@@ -234,6 +258,13 @@ const tc = t.company as Record<string, string>;
             <div class="cert-card__icon" aria-hidden="true"><Icon name="mdi:certificate" width="28" height="28" /></div>
             <h3 class="cert-card__name">{tc.certBrandName}</h3>
             <p class="cert-card__desc">{tc.certBrandDesc}</p>
+            <button class="cert-card__btn"
+               type="button"
+               data-cert-pdf="/docs/brand-certificate.pdf"
+               data-cert-title={tc.certBrandName}>
+              <Icon name="mdi:eye" width="14" height="14" aria-hidden="true" />
+              {tc.certViewBtn}
+            </button>
           </div>
         </article>
 
@@ -252,6 +283,13 @@ const tc = t.company as Record<string, string>;
             <div class="cert-card__icon" aria-hidden="true"><Icon name="mdi:shield-check" width="28" height="28" /></div>
             <h3 class="cert-card__name">{tc.certHalalName}</h3>
             <p class="cert-card__desc">{tc.certHalalDesc}</p>
+            <button class="cert-card__btn"
+               type="button"
+               data-cert-pdf="/docs/halal-certificate.pdf"
+               data-cert-title={tc.certHalalName}>
+              <Icon name="mdi:eye" width="14" height="14" aria-hidden="true" />
+              {tc.certViewBtn}
+            </button>
           </div>
         </article>
 
@@ -270,6 +308,38 @@ const tc = t.company as Record<string, string>;
             <div class="cert-card__icon" aria-hidden="true"><Icon name="mdi:food-apple" width="28" height="28" /></div>
             <h3 class="cert-card__name">{tc.certTrainingName}</h3>
             <p class="cert-card__desc">{tc.certTrainingDesc}</p>
+            <button class="cert-card__btn"
+               type="button"
+               data-cert-pdf="/docs/training-certificate.pdf"
+               data-cert-title={tc.certTrainingName}>
+              <Icon name="mdi:eye" width="14" height="14" aria-hidden="true" />
+              {tc.certViewBtn}
+            </button>
+          </div>
+        </article>
+
+        <article class="cert-card animate-on-scroll">
+          <div class="cert-card__img-wrap">
+            <Image
+              src={certPirt}
+              alt="SPP-IRT Kopi Siholta"
+              class="cert-card__img"
+              loading="lazy"
+              widths={[320, 480]}
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          </div>
+          <div class="cert-card__body">
+            <div class="cert-card__icon" aria-hidden="true"><Icon name="mdi:food" width="28" height="28" /></div>
+            <h3 class="cert-card__name">{tc.certSppPirtName}</h3>
+            <p class="cert-card__desc">{tc.certSppPirtDesc}</p>
+            <button class="cert-card__btn"
+               type="button"
+               data-cert-pdf="/docs/spp-irt.pdf"
+               data-cert-title={tc.certSppPirtName}>
+              <Icon name="mdi:eye" width="14" height="14" aria-hidden="true" />
+              {tc.certViewBtn}
+            </button>
           </div>
         </article>
       </div>
@@ -356,6 +426,23 @@ const tc = t.company as Record<string, string>;
 
   <Footer lang={lang} />
   <WhatsAppFAB />
+
+  <!-- ── Certificate Viewer Modal ───────────────── -->
+  <div id="cert-modal" class="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title" hidden>
+    <div class="cert-modal__backdrop"></div>
+    <div class="cert-modal__panel">
+      <div class="cert-modal__header">
+        <h3 id="cert-modal-title" class="cert-modal__title"></h3>
+        <button id="cert-modal-close" class="cert-modal__close" type="button" aria-label="Close">
+          <Icon name="mdi:close" width="20" height="20" />
+        </button>
+      </div>
+      <div class="cert-modal__body">
+        <iframe id="cert-modal-iframe" class="cert-modal__iframe" title="" src="" width="100%" height="100%"></iframe>
+      </div>
+    </div>
+  </div>
+
 </Base>
 
 <script>
@@ -378,5 +465,46 @@ const tc = t.company as Record<string, string>;
   const sectorCards = document.querySelectorAll<HTMLElement>('.sector-card');
   sectorCards.forEach((card, i) => {
     (card as HTMLElement).style.transitionDelay = `${i * 80}ms`;
+  });
+
+  // ── Certificate modal ──────────────────────────────
+  const modal = document.getElementById('cert-modal') as HTMLElement;
+  const modalTitle = document.getElementById('cert-modal-title') as HTMLElement;
+  const modalIframe = document.getElementById('cert-modal-iframe') as HTMLIFrameElement;
+  const modalClose = document.getElementById('cert-modal-close') as HTMLButtonElement;
+  const modalBackdrop = modal?.querySelector('.cert-modal__backdrop') as HTMLElement;
+
+  function openCertModal(pdfPath: string, title: string) {
+    if (!modal || !modalIframe || !modalTitle) return;
+    modalTitle.textContent = title;
+    modalIframe.src = pdfPath;
+    modal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    modalClose?.focus();
+  }
+
+  function closeCertModal() {
+    if (!modal || !modalIframe) return;
+    modal.setAttribute('hidden', '');
+    modalIframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll<HTMLElement>('.cert-card__btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const pdf = btn.getAttribute('data-cert-pdf');
+      const title = btn.getAttribute('data-cert-title');
+      if (pdf && title) {
+        e.preventDefault();
+        openCertModal(pdf, title);
+      }
+    });
+  });
+
+  modalClose?.addEventListener('click', closeCertModal);
+  modalBackdrop?.addEventListener('click', closeCertModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (!modal.hasAttribute('hidden') && e.key === 'Escape') closeCertModal();
   });
 </script>

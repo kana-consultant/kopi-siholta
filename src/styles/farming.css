@@ -110,7 +110,7 @@
 
 .farmer-card__village {
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--color-brand-gold);
@@ -226,7 +226,7 @@
 
 .harvest-editorial__quote-source {
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-brand-gold);
@@ -369,7 +369,7 @@
 
 .journey__step-label {
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-brand-muted);
@@ -511,7 +511,7 @@
 
 .quality-editorial__stat-label {
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.10em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.55);
@@ -837,7 +837,7 @@
     max-width: 120px;
     border-radius: var(--radius-sm);
   }
-  .process-tab__num { font-size: 9px; }
+  .process-tab__num { font-size: 12px; }
   .process-tab__label { font-size: 8px; max-width: 70px; }
 
   /* Process step timeline */
@@ -864,7 +864,7 @@
 
 .roasting__tag {
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-brand-red);
@@ -949,7 +949,7 @@
 
 .roast-card__temp {
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-brand-red);

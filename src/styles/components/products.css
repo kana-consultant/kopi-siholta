@@ -211,7 +211,7 @@
 }
 
 @media (max-width: 540px) {
-  .product-grid { grid-template-columns: 1fr; gap: var(--space-3); }
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
   .product-card__name { font-size: 15px; }
   .product-card__body { padding: var(--space-4); }
   .product-card__footer { padding: 0 var(--space-4) var(--space-4); }
