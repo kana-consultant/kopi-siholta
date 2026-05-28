@@ -1,0 +1,100 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import t1Farm from '../../../images/tourism/coffee-plantation.jpg';
+import t2Factory from '../../../images/tourism/process (5).jpg';
+import t3Cup from '../../../images/tourism/cup-and-test(2).jpg';
+import tThumb1 from '../../../images/tourism/samosir-island.jpg';
+import tThumb2 from '../../../images/tourism/danau-toba.jpg';
+import tThumb3 from '../../../images/tourism/cup-and-test.jpg';
+
+
+const { lang , t } = Astro.props;
+const nl = (s: string) => s.split('\n').join('<br>');
+
+const experiences = [
+  {
+    num: '01',
+    labelKey: 'exp1Label', titleKey: 'exp1Title', subtitleKey: 'exp1Subtitle',
+    descKey: 'exp1Desc',
+    detailsKey: ['exp1Detail1', 'exp1Detail2', 'exp1Detail3', 'exp1Detail4'],
+    img: t1Farm, imgAltKey: 'altFarm', thumb: tThumb1,
+  },
+  {
+    num: '02',
+    labelKey: 'exp2Label', titleKey: 'exp2Title', subtitleKey: 'exp2Subtitle',
+    descKey: 'exp2Desc',
+    detailsKey: ['exp2Detail1', 'exp2Detail2', 'exp2Detail3'],
+    img: t2Factory, imgAltKey: 'altFactory', thumb: tThumb2,
+  },
+  {
+    num: '03',
+    labelKey: 'exp3Label', titleKey: 'exp3Title', subtitleKey: 'exp3Subtitle',
+    descKey: 'exp3Desc',
+    detailsKey: ['exp3Detail1', 'exp3Detail2', 'exp3Detail3', 'exp3Detail4'],
+    img: t3Cup, imgAltKey: 'altCupping', thumb: tThumb3,
+  },
+];
+---
+
+  <!-- ── Experiences ───────────────────────────────────── -->
+  <section class="experiences section section--cream" id="experiences" aria-labelledby="exp-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <h2 id="exp-heading" class="section-title">{nl(t.tourism.expTitle)}</h2>
+        <p class="section-sub">{t.tourism.expSubtitle}</p>
+      </div>
+
+      <div class="exp-list">
+        {experiences.map((exp, i) => (
+          <article class={`exp-item ${i % 2 !== 0 ? 'exp-item--rev' : ''} animate-on-scroll`}>
+            <!-- Image Panel -->
+            <div class="exp-item__media">
+              <div class="exp-item__img-wrap">
+                <Image
+                  src={exp.img}
+                  alt={t.tourism.images?.[exp.imgAltKey as keyof typeof t.tourism.images] ?? ''}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  widths={[480, 768, 1024]}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  class="exp-item__img"
+                />
+              </div>
+              <div class="exp-item__num-badge" aria-hidden="true">
+                <span class="exp-item__num">{exp.num}</span>
+              </div>
+              <div class="exp-item__thumb" aria-hidden="true">
+                <Image
+                  src={exp.thumb}
+                  alt=""
+                  loading="lazy"
+                  widths={[200, 300]}
+                  sizes="80px"
+                  class="exp-item__thumb-img"
+                />
+              </div>
+            </div>
+
+            <!-- Content Panel -->
+            <div class="exp-item__content">
+              <h3 class="exp-item__title">{t.tourism[exp.titleKey as keyof typeof t.tourism]}</h3>
+              <p class="exp-item__subtitle">{t.tourism[exp.subtitleKey as keyof typeof t.tourism]}</p>
+              <p class="exp-item__desc">{t.tourism[exp.descKey as keyof typeof t.tourism]}</p>
+              <ul class="exp-item__details" role="list">
+                {exp.detailsKey.map(dk => (
+                  <li class="exp-item__detail">
+                    <Icon name="mdi:check" width="12" height="12" />
+                    {t.tourism[dk as keyof typeof t.tourism]}
+                  </li>
+                ))}
+              </ul>
+              <a href={`/${lang}/#contact`} class="btn btn--outline-dark exp-item__cta">
+                {t.tourism.ctaPesan}
+                <Icon name="mdi:chevron-right" width="12" height="12" />
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
