@@ -1,0 +1,15 @@
+/* =========================================================
+   Kopi Siholta — Cards
+   Loaded after base.css and typography.css
+   ========================================================= */
+
+/* ── Base Card ──────────────────────────────────────────── */
+.card {
+  border: var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  background: #fff;
+  transition: border-color 200ms ease;
+}
+
+.card:hover { border-color: var(--color-brand-red); }

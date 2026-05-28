@@ -49,6 +49,46 @@
   flex-shrink: 0;
 }
 
+.hero__stats-preview {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 0.5px solid var(--color-text-muted);
+  opacity: 0.2;
+}
+
+.hero__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero__stat-num {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-brand-red);
+  line-height: 1;
+}
+
+.hero__stat-label {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.hero__stat-divider {
+  width: 0.5px;
+  height: 28px;
+  background: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+
 @media (max-width: 768px) {
   .stats-ribbon {
     height: auto;
@@ -69,4 +109,61 @@
 
 @media (max-width: 480px) {
   .stats-ribbon__item { flex: 0 0 calc(50% - var(--space-3)); }
+}
+
+
+.stat-band { padding-block: var(--space-10); }
+.stat-band--earth   { background: var(--color-brand-earth); }
+.stat-band--green   { background: var(--color-agri-green); }
+.stat-band--cream   { background: var(--color-brand-cream); }
+.stat-band--red   { background: var(--color-brand-red); }
+
+
+.stat-band__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.stat-band__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-4);
+  border-left: 1px solid rgba(255,255,255,0.15);
+}
+
+.stat-band--cream .stat-band__item { border-left-color: var(--color-neutral-200); }
+.stat-band__item:first-child { border-left: none; }
+
+.stat-band__value {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.stat-band--green .stat-band__value { color: #fff; }
+
+.stat-band__label {
+  font-family: var(--font-label);
+font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+@media (max-width: 1024px) {
+  .stat-band__grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-band__item:nth-child(odd) { border-left: none; }
+}
+
+@media (max-width: 768px) {
+  .stat-band { display: none; }
+}
+
+@media (max-width: 480px) {
+
 }

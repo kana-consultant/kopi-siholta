@@ -1,0 +1,181 @@
+/* =========================================================
+   Kopi Siholta — Company Page
+   Loaded after components/_index.css
+   ========================================================= */
+
+@import './hero.css';
+@import './company//visimisi.css';
+@import './company/timeline.css';
+@import './certificate.css';
+@import './company/sectors.css';
+
+/* ── Story Grid ───────────────────────────────────────── */
+.story__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.story__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--space-6);
+  margin-top: var(--space-2);
+}
+
+.story__logo {
+  width: 70px; height: auto;
+  border-color: var(--color-brand-red);
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.story__body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-brand-muted);
+  margin-bottom: var(--space-4);
+}
+
+.story__stats {
+  display: flex;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 0.5px solid var(--color-neutral-200);
+}
+
+.story__stat { display: flex; flex-direction: column; gap: 2px; }
+
+.story__stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 700;
+  color: var(--color-brand-red);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.story__stat-label {
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted);
+}
+
+.story__image-frame {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.story__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Location ─────────────────────────────────────────── */
+.location__map {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 0.5px solid var(--color-neutral-200);
+  margin-top: var(--space-8);
+  box-shadow: 0 4px 24px rgba(92,61,30,0.07);
+}
+
+.location__map iframe { display: block; }
+
+.location__address {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-brand-cream);
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--color-neutral-200);
+}
+
+.location__address svg { color: var(--color-brand-red); flex-shrink: 0; margin-top: 2px; }
+
+.location__address span {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-brand-earth);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .sectors__grid { grid-template-columns: 1fr; }
+  .timeline__list::before { left: 24px; }
+  .timeline__item--left,
+  .timeline__item--right {
+    padding-left: calc(48px + var(--space-4));
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+  .timeline__connector { left: 24px; }
+}
+
+@media (max-width: 768px) {
+  .page-hero--tall  { min-height: 70vh; }
+  .page-hero--mid   { min-height: 70vh; }
+  .page-hero--short { min-height: 60vh; }
+
+  .story__grid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .story__stats { gap: var(--space-6); }
+
+  .visimisi__header { margin-bottom: var(--space-10); }
+  .visimisi__grid { grid-template-columns: 1fr; gap: 0; }
+  .visimisi__grid::before {
+    left: 0; top: 50%; bottom: auto;
+    width: 100%; height: 1px;
+    transform: translateY(-50%);
+  }
+  .visimisi__col { padding: var(--space-8) 0; }
+  .visimisi__col--vision { padding-right: 0; padding-bottom: var(--space-10); }
+  .visimisi__col--mission { padding-left: 0; padding-top: var(--space-10); }
+
+  .certifications__grid { grid-template-columns: 1fr 1fr; }
+  .cert-card { min-height: 420px; }
+}
+
+@media (max-width: 640px) {
+  .certifications__grid { grid-template-columns: 1fr; }
+  .cert-card { min-height: 380px; }
+  .cert-card__body { padding: var(--space-5); }
+  .cert-modal { padding: var(--space-2); }
+  .cert-modal__panel { height: 92vh; border-radius: var(--radius-xl); }
+  .cert-modal__header { padding: var(--space-3) var(--space-4); }
+}
+
+@media (hover: hover) {
+  .cert-card__btn:hover {
+    background: rgba(205, 18, 34, 0.22);
+    border-color: rgba(205, 18, 34, 0.6);
+    transform: translateY(-1px);
+  }
+  .cert-card__btn:active { transform: translateY(0); }
+  .cert-card:hover {
+    box-shadow: 0 12px 40px rgba(92, 61, 30, 0.12);
+    transform: translateY(-3px);
+  }
+  .cert-modal__close:hover {
+    background: var(--color-neutral-100, #f5f5f5);
+    color: #1a0f08;
+  }
+}

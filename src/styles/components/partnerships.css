@@ -388,7 +388,7 @@
 }
 
 .logo-cloud__text {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
