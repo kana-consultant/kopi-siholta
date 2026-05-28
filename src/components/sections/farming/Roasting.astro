@@ -1,0 +1,90 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import fRoastProfile from '../../../images/farming/coffee-roast-profiles.png';
+
+const { t } = Astro.props;
+const nl = (s: string) => s.split('\n').join('<br>');
+---
+  <!-- ── Roasting Section ─────────────────────────────── -->
+  <section class="roasting section" id="roasting" aria-labelledby="roasting-heading">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="roasting__header animate-on-scroll">
+        <h2 id="roasting-heading" class="roasting__title">{t.coffeeFarming.roastingTitle}</h2>
+        <p class="roasting__sub">{t.coffeeFarming.roastingSubtitle}</p>
+      </div>
+
+      <!-- Roast Level Cards -->
+      <div class="roasting__levels">
+        <!-- Light -->
+        <div class="roast-card roast-card--light animate-on-scroll">
+          <div class="roast-card__stripe" aria-hidden="true"></div>
+          <div class="roast-card__body">
+            <p class="roast-card__name">{t.coffeeFarming.roastingLevelLightTitle}</p>
+            <p class="roast-card__temp">{t.coffeeFarming.roastingLevelLightTemp}</p>
+            <p class="roast-card__desc">{t.coffeeFarming.roastingLevelLightDesc}</p>
+          </div>
+        </div>
+        <!-- Medium (featured) -->
+        <div class="roast-card roast-card--medium roast-card--feature animate-on-scroll" style="transition-delay:80ms">
+          <div class="roast-card__stripe" aria-hidden="true"></div>
+          <div class="roast-card__body">
+            <p class="roast-card__name">{t.coffeeFarming.roastingLevelMediumTitle}</p>
+            <p class="roast-card__temp">{t.coffeeFarming.roastingLevelMediumTemp}</p>
+            <p class="roast-card__desc">{t.coffeeFarming.roastingLevelMediumDesc}</p>
+          </div>
+        </div>
+        <!-- Dark -->
+        <div class="roast-card roast-card--dark animate-on-scroll" style="transition-delay:160ms">
+          <div class="roast-card__stripe" aria-hidden="true"></div>
+          <div class="roast-card__body">
+            <p class="roast-card__name">{t.coffeeFarming.roastingLevelDarkTitle}</p>
+            <p class="roast-card__temp">{t.coffeeFarming.roastingLevelDarkTemp}</p>
+            <p class="roast-card__desc">{t.coffeeFarming.roastingLevelDarkDesc}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Standards & Profiles -->
+      <div class="roasting__standards animate-on-scroll">
+        <div class="roasting__std-grid">
+          <div class="roasting__std-card">
+            <div class="roasting__std-icon" aria-hidden="true"><Icon name="mdi:thermometer" width="28" height="28" /></div>
+            <div>
+              <h3 class="roasting__std-title">{t.coffeeFarming.roastingStdTempTitle}</h3>
+              <p class="roasting__std-desc">{t.coffeeFarming.roastingStdTempDesc}</p>
+            </div>
+          </div>
+          <div class="roasting__std-card">
+            <div class="roasting__std-icon" aria-hidden="true"><Icon name="mdi:palette" width="28" height="28" /></div>
+            <div>
+              <h3 class="roasting__std-title">{t.coffeeFarming.roastingStdColorTitle}</h3>
+              <p class="roasting__std-desc">{t.coffeeFarming.roastingStdColorDesc}</p>
+            </div>
+          </div>
+          <div class="roasting__std-card">
+            <div class="roasting__std-icon" aria-hidden="true"><Icon name="mdi:coffee" width="28" height="28" /></div>
+            <div>
+              <h3 class="roasting__std-title">{t.coffeeFarming.roastingStdCraftedTitle}</h3>
+              <p class="roasting__std-desc">{t.coffeeFarming.roastingStdCraftedDesc}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Collection -->
+        <div class="roasting__profiles">
+          <Image
+            src={fRoastProfile}
+            alt="Koleksi profil roasting Kopi Siholta — dari Light City hingga Dark Roast"
+            class="roasting__profiles-img"
+            loading="lazy"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+
+    </div>
+  </section>

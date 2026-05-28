@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+
+import fFarmer1 from '../../../images/farming/farmer.jpg';
+import fFarmer2 from '../../../images/farming/farmer-1.jpg';
+
+const { lang, t } = Astro.props;
+const nl = (s: string) => s.split('\n').join('<br>');
+
+const farmers = [
+  { nameKey: 'farmerMargondang', villageKey: 'farmerMargondangVillage', sinceKey: 'farmerMargondangSince', quoteKey: 'farmerMargondangQuote', img: fFarmer1 },
+  { nameKey: 'farmerRohani',     villageKey: 'farmerRohaniVillage',     sinceKey: 'farmerRohaniSince',     quoteKey: 'farmerRohaniQuote',     img: fFarmer2 },
+];
+
+---
+  <!-- ── Farmer Stories ────────────────────────────────── -->
+  <section class="farmers section" aria-labelledby="farmers-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <h2 id="farmers-heading" class="section-title">{nl(t.coffeeFarming.farmersTitle)}</h2>
+        <p class="section-sub">{t.coffeeFarming.farmersSubtitle}</p>
+      </div>
+
+      <div class="farmers__grid">
+        {farmers.map((farmer, i) => (
+          <article class={`farmer-card animate-on-scroll ${i % 2 !== 0 ? 'farmer-card--rev' : ''}`}>
+            <div class="farmer-card__media">
+              <Image
+                src={farmer.img}
+                alt={`${t.coffeeFarming[farmer.nameKey as keyof typeof t.coffeeFarming]} — ${t.coffeeFarming.farmerRole}`}
+                loading="lazy"
+                widths={[480, 768]}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                class="farmer-card__img"
+              />
+              <div class="farmer-card__info-badge">
+                <span class="farmer-card__village">{t.coffeeFarming[farmer.villageKey as keyof typeof t.coffeeFarming]}</span>
+                <span class="farmer-card__since">{t.coffeeFarming[farmer.sinceKey as keyof typeof t.coffeeFarming]}</span>
+              </div>
+            </div>
+            <div class="farmer-card__content">
+              <blockquote class="farmer-card__quote">
+                <p>"{t.coffeeFarming[farmer.quoteKey as keyof typeof t.coffeeFarming]}"</p>
+              </blockquote>
+              <div class="farmer-card__author">
+                <span class="farmer-card__name">{t.coffeeFarming[farmer.nameKey as keyof typeof t.coffeeFarming]}</span>
+                <span class="farmer-card__role">{t.coffeeFarming.farmerRole}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>

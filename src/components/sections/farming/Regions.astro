@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import fFarm from '../../../images/farming/coffee-plantation.jpg';
+import fFarm2 from '../../../images/farming/coffee-plantation (2).jpg';
+import fFarm3 from '../../../images/farming/coffee-plantation (3).jpg';
+
+const { t } = Astro.props;
+const nl = (s: string) => s.split('\n').join('<br>');
+const regions = [
+  { nameKey: 'regionLintong', altKey: 'regionLintongAlt', descKey: 'regionLintongDesc', img: fFarm },
+  { nameKey: 'regionDolok',   altKey: 'regionDolokAlt',   descKey: 'regionDolokDesc',   img: fFarm2   },
+  { nameKey: 'regionHumbang', altKey: 'regionHumbangAlt', descKey: 'regionHumbangDesc', img: fFarm3 },
+];
+---
+  <!-- ── Regions ─────────────────────────────────────── -->
+  <section class="regions section section--cream" aria-labelledby="regions-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <h2 id="regions-heading" class="section-title">{nl(t.coffeeFarming.regionsTitle)}</h2>
+        <p class="section-sub">{t.coffeeFarming.regionsSubtitle}</p>
+      </div>
+
+      <div class="regions__grid">
+        {regions.map((region, i) => (
+          <article class="region-card animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>
+            <div class="region-card__media">
+              <Image
+                src={region.img}
+                alt={`Perkebunan kopi di ${t.coffeeFarming[region.nameKey as keyof typeof t.coffeeFarming]}`}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                widths={[480, 768]}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                class="region-card__img"
+              />
+            </div>
+            <div class="region-card__body">
+              <h3 class="region-card__name">{t.coffeeFarming[region.nameKey as keyof typeof t.coffeeFarming]}</h3>
+              <p class="region-card__desc">{t.coffeeFarming[region.descKey as keyof typeof t.coffeeFarming]}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>

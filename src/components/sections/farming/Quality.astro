@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+
+import fProcess7b from '../../../images/farming/process (7).jpg';
+import fGreen   from '../../../images/farming/coffee-green.jpg';
+import fCup2    from '../../../images/farming/cup-and-test(2).jpg';
+
+const { t } = Astro.props;
+const nl = (s: string) => s.split('\n').join('<br>');
+---
+  <!-- ── Quality Editorial ───────── -->
+  <section class="quality-editorial section" aria-labelledby="quality-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <h2 id="quality-heading" class="section-title">{nl(t.coffeeFarming.qualityTitle)}</h2>
+        <p class="section-sub">{t.coffeeFarming.qualitySubtitle}</p>
+      </div>
+
+      <div class="quality-editorial__body">
+
+        <!-- Left: photo grid -->
+        <div class="quality-editorial__gallery">
+          <div class="quality-editorial__gallery-item">
+            <Image src={fCup2} alt={t.coffeeFarming.qualityGallery1Alt} loading="lazy" widths={[600,1200]} sizes="(max-width:768px) 100vw, 50vw" class="quality-editorial__gallery-img" />
+            <span class="quality-editorial__gallery-label">{t.coffeeFarming.qualityGallery1}</span>
+          </div>
+          <div class="quality-editorial__gallery-item">
+            <Image src={fGreen} alt={t.coffeeFarming.qualityGallery2Alt} loading="lazy" widths={[300,600]} sizes="(max-width:768px) 50vw, 25vw" class="quality-editorial__gallery-img" />
+            <span class="quality-editorial__gallery-label">{t.coffeeFarming.qualityGallery2}</span>
+          </div>
+          <div class="quality-editorial__gallery-item">
+            <Image src={fProcess7b} alt={t.coffeeFarming.qualityGallery3Alt} loading="lazy" widths={[300,600]} sizes="(max-width:768px) 50vw, 25vw" class="quality-editorial__gallery-img" />
+            <span class="quality-editorial__gallery-label">{t.coffeeFarming.qualityGallery3}</span>
+          </div>
+        </div>
+
+        <!-- Right: editorial text panel -->
+        <div class="quality-editorial__panel animate-on-scroll">
+          <div>
+            <h3 class="quality-editorial__panel-title">{nl(t.coffeeFarming.qualityPanelTitle)}</h3>
+          </div>
+          <p class="quality-editorial__panel-text">{t.coffeeFarming.qualityPanelText}</p>
+          <div class="quality-editorial__panel-stats">
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat1Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat1Label}</span>
+            </div>
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat2Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat2Label}</span>
+            </div>
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat3Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat3Label}</span>
+            </div>
+            <div class="quality-editorial__stat">
+              <span class="quality-editorial__stat-value">{t.coffeeFarming.qualityStat4Value}</span>
+              <span class="quality-editorial__stat-label">{t.coffeeFarming.qualityStat4Label}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>

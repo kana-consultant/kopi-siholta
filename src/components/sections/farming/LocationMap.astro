@@ -1,0 +1,32 @@
+---
+const { t } = Astro.props;
+const nl = (s: string) => s.split('\n').join('<br>');
+---
+  <!-- ── Location ────────────────────────────── -->
+  <section class="location section" aria-labelledby="location-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <h2 id="location-heading" class="section-title">{nl(t.coffeeFarming.locationTitle)}</h2>
+        <p class="section-sub">{t.coffeeFarming.locationSubtitle}</p>
+      </div>
+      <div class="location__body animate-on-scroll">
+        <div class="location__info">
+          <div class="location__address-wrap">
+            <address class="location__address">{t.coffeeFarming.locationAddress}</address>
+          </div>
+        </div>
+        <div class="location__map-wrap">
+          <div class="location__map-inner">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.6765180231273!2d98.8646577!3d2.2739400000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e1702ecca12b9%3A0xddab3e62499da70!2sKopi%20Siholta!5e0!3m2!1sid!2sid!4v1778757587057!5m2!1sid!2sid"
+              title={t.coffeeFarming.locationMapLabel}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+              class="location__iframe"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
