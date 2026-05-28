@@ -1,90 +1,13 @@
 ---
-// Client-side language detection with branded loader
-// Shows a loader animation while detecting user language and redirecting
-import { Icon } from 'astro-icon/components';
-import '../styles/error-page.css';
----
 
+---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kopi Siholta — Loading…</title>
-    <meta name="robots" content="noindex, nofollow" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
+    <title>Kopi Siholta</title>
+    <meta "robots" content="noindex, nofollow" />
   </head>
   <body>
-
-    <div class="page-loader" id="page-loader" role="status" aria-label="Loading Kopi Siholta" aria-live="polite">
-
-      <!-- Floating coffee bean -->
-      <div class="page-loader__bean" aria-hidden="true">
-        <Icon name="mdi:coffee" width="52" height="52" />
-      </div>
-
-      <!-- Spinning arc -->
-      <div class="page-loader__spinner" aria-hidden="true">
-        <Icon name="mdi:loading" width="42" height="42" />
-      </div>
-
-      <!-- Brand name -->
-      <p class="page-loader__brand">Kopi Siholta</p>
-
-      <!-- Redirect text -->
-      <p class="page-loader__text">Redirecting to your language page…</p>
-
-    </div>
-
-    <script>
-      const DEFAULT_LOCALE   = 'en';
-      const INDONESIA_LOCALE = 'id';
-      const FRANCE_LOCALE    = 'fr';
-
-      async function detectLocale(): Promise<string> {
-        // 1. Check stored preference
-        const stored = sessionStorage.getItem('ksi_locale');
-        if (stored && ['id','en','fr'].includes(stored)) return stored;
-
-        // 2. France via timezone + navigator language
-        const frTz = ['Europe/Paris','Europe/Monaco','Europe/Andorra',
-                       'Europe/Luxembourg','Europe/Switzerland','Europe/Belgium','Europe/Netherlands'];
-        const tz    = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const lang2 = (navigator.language || '').slice(0, 2).toLowerCase();
-
-        if (frTz.includes(tz) || lang2 === 'fr') return FRANCE_LOCALE;
-
-        // 3. Indonesia via IP geolocation
-        try {
-          const res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
-          if (res.ok) {
-            const d = await res.json();
-            const c  = (d.country_name || '').toLowerCase();
-            if (c === 'indonesia' || c === 'republic of indonesia') return INDONESIA_LOCALE;
-          }
-        } catch (_) {}
-
-        // 4. Browser language fallback
-        if (lang2 === 'id') return INDONESIA_LOCALE;
-        return DEFAULT_LOCALE;
-      }
-
-      async function redirect() {
-        const screen = document.getElementById('page-loader');
-        const locale = await detectLocale();
-
-        sessionStorage.setItem('ksi_locale', locale);
-
-        // Fade out then redirect
-        screen?.classList.add('fade-out');
-        setTimeout(() => {
-          window.location.replace(`/${locale}/`);
-        }, 450);
-      }
-
-      redirect();
-    </script>
   </body>
 </html>

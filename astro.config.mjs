@@ -3,9 +3,12 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import viteCompression from 'vite-plugin-compression';
 import iconify from 'astro-icon';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
+  adapter: vercel(),
   integrations: [
     iconify(),
   ],
@@ -43,9 +46,9 @@ export default defineConfig({
             }
           }
         }
-      }
-    },
-    target: 'es2020'
+      },
+      target: 'es2020' 
+    }
   },
   image: {
     remotePatterns: [{ protocol: 'https' }],
@@ -55,9 +58,7 @@ export default defineConfig({
         limitInputPixels: false,
       }
     },
-    domains: [],
-    formats: ['avif', 'webp']
+    domains: []
   },
   compressHTML: true,
-  inlineStylesheets: 'auto'
 });

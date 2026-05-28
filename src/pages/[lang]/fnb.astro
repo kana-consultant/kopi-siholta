@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
@@ -14,40 +16,30 @@ import FnbCta from '../../components/sections/fnb/FnbCta.astro';
 
 import { useTranslations } from '../../i18n/utils';
 
-interface Props { lang?: 'id' | 'en' | 'fr'; }
+const { lang } = Astro.params;
+const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
 
-const { lang = 'id' } = Astro.props;
-const t = useTranslations(lang);
-
-export function getStaticPaths() {
-  return [
-    { params: { lang: 'id' }, props: { lang: 'id' } },
-    { params: { lang: 'en' }, props: { lang: 'en' } },
-    { params: { lang: 'fr' }, props: { lang: 'fr' } },
-  ];
-}
-
-
+const t = useTranslations(currentLang);
 
 ---
 
-<Base title={t.meta.titleFnb} description={t.meta.descFnb} lang={lang}>
-  <Navbar lang={lang} />
+<Base title={t.meta.titleFnb} description={t.meta.descFnb} lang={currentLang}>
+  <Navbar lang={currentLang} />
   <header>
-    <FnbHero lang={lang} t={t} />
-    <FnbStat lang={lang} t={t} />
-    <RetailCoffee lang={lang} t={t} />
-    <CafeFavorites lang={lang} t={t} />
-    <RetailDistibution lang={lang} t={t} />
-    <Sustainability lang={lang} t={t} />
-    <FnbCta lang={lang} t={t} />
+    <FnbHero lang={currentLang} t={t} />
+    <FnbStat lang={currentLang} t={t} />
+    <RetailCoffee lang={currentLang} t={t} />
+    <CafeFavorites lang={currentLang} t={t} />
+    <RetailDistibution lang={currentLang} t={t} />
+    <Sustainability lang={currentLang} t={t} />
+    <FnbCta lang={currentLang} t={t} />
 
   </header>
   <main>
 
   </main>
 
-  <Footer lang={lang} />
+  <Footer lang={currentLang} />
   <WhatsAppFAB />
 </Base>
 

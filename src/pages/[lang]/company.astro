@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
@@ -15,20 +17,10 @@ import LocationMap from '../../components/sections/company/LocationMap.astro';
 import CertModal from '../../components/sections/company/CertModal.astro';
 import CompanyCta from '../../components/sections/company/CompanyCta.astro';
 
-interface Props {
-  lang?: 'id' | 'en' | 'fr';
-}
+const { lang } = Astro.params;
+const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
 
-const { lang = 'id' } = Astro.props;
-const t = useTranslations(lang);
-
-export function getStaticPaths() {
-  return [
-    { params: { lang: 'id' }, props: { lang: 'id' } },
-    { params: { lang: 'en' }, props: { lang: 'en' } },
-    { params: { lang: 'fr' }, props: { lang: 'fr' } },
-  ];
-}
+const t = useTranslations(currentLang);
 
 
 
@@ -38,21 +30,21 @@ const tc = t.company as Record<string, string>;
 
 ---
 
-<Base title={t.meta.titleCompany} description={t.meta.descCompany} lang={lang}>
-  <Navbar lang={lang} />
+<Base title={t.meta.titleCompany} description={t.meta.descCompany} lang={currentLang}>
+  <Navbar lang={currentLang} />
   <header>
-    <CompanyHero lang={lang} tc={tc} t={t}/>
+    <CompanyHero lang={currentLang} tc={tc} t={t}/>
   </header>
   <main>
     <CompanyStory tc={tc} />
     <VisiMisi tc={tc} />
     <Timeline tc={tc} />
     <Certifications tc={tc} />
-    <OperationSectors lang={lang} tc={tc} />
+    <OperationSectors lang={currentLang} tc={tc} />
     <LocationMap t={t} tc={tc} />
-    <CompanyCta lang={lang} tc={tc} />
+    <CompanyCta lang={currentLang} tc={tc} />
   </main>
-  <Footer lang={lang} />
+  <Footer lang={currentLang} />
   <WhatsAppFAB />
   <CertModal tc={tc} />
 </Base>

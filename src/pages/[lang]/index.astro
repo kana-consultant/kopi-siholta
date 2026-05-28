@@ -1,11 +1,5 @@
 ---
-export function getStaticPaths() {
-  return [
-    { params: { lang: 'id' }, props: { lang: 'id' } },
-    { params: { lang: 'en' }, props: { lang: 'en' } },
-    { params: { lang: 'fr' }, props: { lang: 'fr' } },
-  ];
-}
+export const prerender = false; // Mengaktifkan SSR
 
 import { Icon } from 'astro-icon/components';
 import Base from '../../layouts/Base.astro';
@@ -20,14 +14,15 @@ import B2BPartners from '../../components/sections/homepage/Partnerships.astro';
 import OmnichannelLinks from '../../components/sections/homepage/OmnichannelLinks.astro';
 import ContactSection from '../../components/sections/homepage/ContactSection.astro';
 
-const { lang = 'id' } = Astro.props;
+const { lang } = Astro.params;
+const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? lang : 'id';
 
-const meta = lang === 'id'
+const meta = currentLang === 'id'
   ? {
       title: 'Kopi Siholta — Pionir Kopi Specialty Indonesia dari Danau Toba',
       description: 'PT Siholta Toba Indonesia adalah produsen dan eksportir kopi specialty pertama di Indonesia dari Sumatera Lintong, Humbang Hasundutan, Sumatera Utara.',
     }
-  : lang === 'fr'
+  : currentLang === 'fr'
   ? {
       title: 'Kopi Siholta — Pionnier du Café Specialty Indonésien du Lac Toba',
       description: "PT Siholta Toba Indonesia est le premier producteur et exportateur de café specialty d'Indonésie, issu de Sumatera Lintong, Humbang Hasundutan, Sumatra Nord.",
@@ -38,18 +33,18 @@ const meta = lang === 'id'
     };
 ---
 
-<Base title={meta.title} description={meta.description} lang={lang}>
-  <Navbar lang={lang} />
+<Base title={meta.title} description={meta.description} lang={currentLang}>
+  <Navbar lang={currentLang} />
   <main id="main-content">
-    <Hero lang={lang} />
-    <Heritage lang={lang} />
-    <Products lang={lang} />
-    <Exports lang={lang} />
-    <B2BPartners lang={lang} />
-    <OmnichannelLinks lang={lang} />
-    <ContactSection lang={lang} />
+    <Hero lang={currentLang} />
+    <Heritage lang={currentLang} />
+    <Products lang={currentLang} />
+    <Exports lang={currentLang} />
+    <B2BPartners lang={currentLang} />
+    <OmnichannelLinks lang={currentLang} />
+    <ContactSection lang={currentLang} />
   </main>
-  <Footer lang={lang} />
+  <Footer lang={currentLang} />
   <WhatsAppFAB />
 </Base>
 

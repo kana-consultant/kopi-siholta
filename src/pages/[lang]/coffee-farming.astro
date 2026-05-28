@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
@@ -16,40 +18,32 @@ import Farmer from '../../components/sections/farming/Farmer.astro';
 import LocationMap from '../../components/sections/farming/LocationMap.astro';
 import FarmingCta from '../../components/sections/farming/FarmingCta.astro';
 
-interface Props { lang?: 'id' | 'en' | 'fr'; }
+const { lang } = Astro.params;
+const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
 
-const { lang = 'id' } = Astro.props;
-const t = useTranslations(lang);
-
-export function getStaticPaths() {
-  return [
-    { params: { lang: 'id' }, props: { lang: 'id' } },
-    { params: { lang: 'en' }, props: { lang: 'en' } },
-    { params: { lang: 'fr' }, props: { lang: 'fr' } },
-  ];
-}
+const t = useTranslations(currentLang);
 
 
 ---
 
-<Base title={t.meta.titleFarming} description={t.meta.descFarming} lang={lang}>
-  <Navbar lang={lang} />
+<Base title={t.meta.titleFarming} description={t.meta.descFarming} lang={currentLang}>
+  <Navbar lang={currentLang} />
   <header>
-    <FarmingHero lang={lang} t={t}/>
-    <FarmingStats lang={lang} t={t}/>
+    <FarmingHero lang={currentLang} t={t}/>
+    <FarmingStats lang={currentLang} t={t}/>
   </header>
   <main>
-    <HarvestingProcedure lang={lang} t={t} />
-    <Process lang={lang} t={t}/>
-    <Roasting lang={lang} t={t}/>
-    <Regions lang={lang} t={t}/>
-    <Quality lang={lang} t={t}/>
-    <Farmer lang={lang} t={t}/>
-    <LocationMap lang={lang} t={t}/>
-    <FarmingCta lang={lang} t={t}/>
+    <HarvestingProcedure lang={currentLang} t={t} />
+    <Process lang={currentLang} t={t}/>
+    <Roasting lang={currentLang} t={t}/>
+    <Regions lang={currentLang} t={t}/>
+    <Quality lang={currentLang} t={t}/>
+    <Farmer lang={currentLang} t={t}/>
+    <LocationMap lang={currentLang} t={t}/>
+    <FarmingCta lang={currentLang} t={t}/>
   </main>
 
-  <Footer lang={lang} />
+  <Footer lang={currentLang} />
   <WhatsAppFAB />
 </Base>
 

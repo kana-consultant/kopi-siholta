@@ -14,15 +14,15 @@ const t = useTranslations(lang);
 
 const nav = t.nav as Record<string, string>;
 
-function localeHref(targetLang: string): string {
-  const segs = Astro.url.pathname.split('/');
-  if (segs[1] && ['id', 'en', 'fr'].includes(segs[1])) {
-    segs[1] = targetLang;
-  } else {
-    segs.splice(1, 0, targetLang);
-  }
-  return segs.join('/') || '/';
-}
+// function localeHref(targetLang: string): string {
+//   const segs = Astro.url.pathname.split('/');
+//   if (segs[1] && ['id', 'en', 'fr'].includes(segs[1])) {
+//     segs[1] = targetLang;
+//   } else {
+//     segs.splice(1, 0, targetLang);
+//   }
+//   return segs.join('/') || '/';
+// }
 
 const mainNavItems = [
   { key: 'products', href: `/${lang}/#products` },

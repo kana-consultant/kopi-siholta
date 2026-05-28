@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
@@ -11,35 +13,27 @@ import TourismCta from '../../components/sections/tourism/TourismCta.astro';
 
 import { useTranslations } from '../../i18n/utils';
 
-interface Props { lang?: 'id' | 'en' | 'fr'; }
+const { lang } = Astro.params;
+const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
 
-const { lang = 'id' } = Astro.props;
-const t = useTranslations(lang);
+const t = useTranslations(currentLang);
 
 /** Replace newlines with <br> tags — used with set:html */
 const nl = (s: string) => s.split('\n').join('<br>');
 
-export function getStaticPaths() {
-  return [
-    { params: { lang: 'id' }, props: { lang: 'id' } },
-    { params: { lang: 'en' }, props: { lang: 'en' } },
-    { params: { lang: 'fr' }, props: { lang: 'fr' } },
-  ];
-}
-
 ---
 
-<Base title={t.meta.titleTourism} description={t.meta.descTourism} lang={lang}>
-  <Navbar lang={lang} />
+<Base title={t.meta.titleTourism} description={t.meta.descTourism} lang={currentLang}>
+  <Navbar lang={currentLang} />
   <header>
-    <TourismHero lang={lang} t={t} />
-    <TourismStat lang={lang} t={t} />
+    <TourismHero lang={currentLang} t={t} />
+    <TourismStat lang={currentLang} t={t} />
   </header>
   <main>
-    <Experiences lang={lang} t={t} />
-    <TourismCta lang={lang} t={t} />
+    <Experiences lang={currentLang} t={t} />
+    <TourismCta lang={currentLang} t={t} />
   </main>
-  <Footer lang={lang} />
+  <Footer lang={currentLang} />
   <WhatsAppFAB />
 </Base>
 
