@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import fnbHero1 from '../../../images/fnb/coffee-susu.jpg';
+import fnbHero5 from '../../../images/fnb/coffee-caramel.jpg';
+import fnbHero7 from '../../../images/fnb/gula-aren.jpg';
+import fnbHero8 from '../../../images/fnb/expresso.jpg';
+
+const { t } = Astro.props;
+
+/* ── Cafe Best Sellers Data ─────────────── */
+const cafeBestSellers = [
+  {
+    nameKey: 'cafeKopiGulaAren',
+    tag: 'SWEET • CREAMY • LOCAL FAVORITE',
+    descKey: 'cafeKopiGulaArenDesc',
+    img: fnbHero7,
+    imgAltKey: 'altCoffeeMilk',
+  },
+  {
+    nameKey: 'cafeAmericano',
+    tag: 'BOLD • CLEAN • CLASSIC',
+    descKey: 'cafeAmericanoDesc',
+    img: fnbHero8,
+    imgAltKey: 'altAtmosphere',
+  },
+  {
+    nameKey: 'cafeEsKopiCaramel',
+    tag: 'SMOOTH • CARAMEL • MODERN',
+    descKey: 'cafeEsKopiCaramelDesc',
+    img: fnbHero5,
+    imgAltKey: 'altVariants',
+  },
+  {
+    nameKey: 'cafeEsKopiSusu',
+    tag: 'MILKY • BALANCED • SIGNATURE',
+    descKey: 'cafeEsKopiSusuDesc',
+    img: fnbHero1,
+    imgAltKey: 'altBarista',
+  },
+];
+---
+
+  <section class="cafe-favorites section section--cream" aria-labelledby="cafe-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <h2 id="cafe-heading" class="section-title">{t.fnb.cafeTitle ?? 'Cafe Favorites'}</h2>
+        <p class="section-sub">{t.fnb.cafeSubtitle ?? 'Minuman favorit pelanggan kami yang dibuat dari biji kopi specialty pilihan.'}</p>
+      </div>
+
+      <div class="cafe-carousel animate-on-scroll">
+        <div class="cafe-carousel__track">
+          {cafeBestSellers.map((drink, i) => (
+            <article class="cafe-card" aria-labelledby={`cafe-card-name-${i}`}>
+              <div class="cafe-card__media">
+                <Image
+                  src={drink.img}
+                  alt={t.fnb.gallery?.[drink.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
+                  loading="lazy"
+                  widths={[320, 480]}
+                  sizes="(max-width: 768px) 80vw, 25vw"
+                  class="cafe-card__img"
+                />
+                <div class="cafe-card__tag">{drink.tag}</div>
+              </div>
+              <div class="cafe-card__body">
+                <h3 id={`cafe-card-name-${i}`} class="cafe-card__name">{t.fnb[drink.nameKey as keyof typeof t.fnb] ?? ''}</h3>
+                <p class="cafe-card__desc">{t.fnb[drink.descKey as keyof typeof t.fnb] ?? ''}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="cafe-carousel__indicators">
+          {cafeBestSellers.map((_, i) => (
+            <button class={`cafe-carousel__indicator ${i === 0 ? 'cafe-carousel__indicator--active' : ''}`} aria-label={`Go to card ${i + 1}`} data-index={i}></button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    // Carousel indicators - scroll sync
+  const track = document.querySelector('.cafe-carousel__track');
+  const indicators = document.querySelectorAll('.cafe-carousel__indicator');
+
+  if (track && indicators.length > 0) {
+    const updateIndicators = () => {
+      const scrollLeft = (track as HTMLElement).scrollLeft;
+      const cardWidth = (track as HTMLElement).children[0]?.clientWidth || 240;
+      const gap = 16;
+      const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+
+      indicators.forEach((ind, i) => {
+        ind.classList.toggle('cafe-carousel__indicator--active', i === activeIndex);
+      });
+    };
+
+    (track as HTMLElement).addEventListener('scroll', updateIndicators, { passive: true });
+
+    indicators.forEach((ind) => {
+      ind.addEventListener('click', () => {
+        const index = parseInt(ind.getAttribute('data-index') || '0');
+        const cardWidth = (track as HTMLElement).children[0]?.clientWidth || 240;
+        const gap = 16;
+        (track as HTMLElement).scrollTo({ left: index * (cardWidth + gap), behavior: 'smooth' });
+      });
+    });
+  }
+  </script>
