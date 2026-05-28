@@ -1,18 +1,19 @@
 ---
-import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
 import Base from '../../layouts/Base.astro';
-import companyLogo from '../../images/logo/logo-STI.png';
 import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
-import companyBg from '../../images/bg/bg-company.jpg';
-import aboutFoto from '../../images/about.webp';
-import certBrand from '../../images/certified/brand-certificate.webp';
-import certHalal from '../../images/certified/halal-certificate.webp';
-import certTraining from '../../images/certified/training-certificate.webp';
-import certPirt from '../../images/certified/P-IRT.webp';
 import { useTranslations } from '../../i18n/utils';
+
+import CompanyHero from '../../components/sections/company/CompanyHero.astro';
+import CompanyStory from '../../components/sections/company/CompanyStory.astro';
+import VisiMisi from '../../components/sections/company/VisiMisi.astro';
+import Timeline from '../../components/sections/company/Timeline.astro';
+import Certifications from '../../components/sections/company/Certifications.astro';
+import OperationSectors from '../../components/sections/company/OperationSectors.astro';
+import LocationMap from '../../components/sections/company/LocationMap.astro';
+import CertModal from '../../components/sections/company/CertModal.astro';
+import CompanyCta from '../../components/sections/company/CompanyCta.astro';
 
 interface Props {
   lang?: 'id' | 'en' | 'fr';
@@ -20,8 +21,6 @@ interface Props {
 
 const { lang = 'id' } = Astro.props;
 const t = useTranslations(lang);
-
-const nl = (s: string) => s.split('\n').join('<br>');
 
 export function getStaticPaths() {
   return [
@@ -31,418 +30,31 @@ export function getStaticPaths() {
   ];
 }
 
-const hexToRgb = (hex: string) =>
-  hex.replace('#', '').match(/.{2}/g)?.map(v => parseInt(v, 16)).join(',') ?? '92,61,30';
 
-const sectors = [
-  {
-    nameKey: 'sector1Name', labelKey: 'sector1Label', descKey: 'sector1Desc', ctaKey: 'sector1Cta',
-    highlightsKey: ['sector1H1', 'sector1H2', 'sector1H3', 'sector1H4'],
-    iconName: 'mdi:coffee', bgColor: '#F5F0EA', accentColor: '#5C3D1E', href: `/${lang}/coffee-farming`,
-  },
-  {
-    nameKey: 'sector2Name', labelKey: 'sector2Label', descKey: 'sector2Desc', ctaKey: 'sector2Cta',
-    highlightsKey: ['sector2H1', 'sector2H2', 'sector2H3', 'sector2H4'],
-    iconName: 'mdi:cup', bgColor: '#F0F0F5', accentColor: '#1A3A5C', href: `/${lang}/fnb`,
-  },
-  {
-    nameKey: 'sector3Name', labelKey: 'sector3Label', descKey: 'sector3Desc', ctaKey: 'sector3Cta',
-    highlightsKey: ['sector3H1', 'sector3H2', 'sector3H3', 'sector3H4'],
-    iconName: 'mdi:office-building', bgColor: '#EAF0EA', accentColor: '#2A4A20', href: `/${lang}/tourism`,
-  },
-];
 
 const tc = t.company as Record<string, string>;
 
-const certs = [
-  {
-    nameKey: 'certBrandName', descKey: 'certBrandDesc',
-    img: certBrand, altKey: 'Sertifikat Merek Kopi Siholta',
-    iconName: 'mdi:certificate', pdf: '/docs/brand-certificate.pdf',
-  },
-  {
-    nameKey: 'certHalalName', descKey: 'certHalalDesc',
-    img: certHalal, altKey: 'Sertifikat Halal Kopi Siholta',
-    iconName: 'mdi:shield-check', pdf: '/docs/halal-certificate.pdf',
-  },
-  {
-    nameKey: 'certTrainingName', descKey: 'certTrainingDesc',
-    img: certTraining, altKey: 'Sertifikat Pelatihan Keamanan Pangan Kopi Siholta',
-    iconName: 'mdi:food-apple', pdf: '/docs/training-certificate.pdf',
-  },
-  {
-    nameKey: 'certPirtName', descKey: 'certPirtDesc',
-    img: certPirt, altKey: 'SPP-IRT Kopi Siholta',
-    iconName: 'mdi:food', pdf: '/docs/spp-irt.pdf',
-  },
-];
+
 
 ---
 
 <Base title={t.meta.titleCompany} description={t.meta.descCompany} lang={lang}>
   <Navbar lang={lang} />
-
-  <!-- ── Hero ─────────────────────────────────────────── -->
-  <section class="company-hero" aria-label="Tentang PT Siholta Toba Indonesia">
-    <div class="company-hero__bg">
-      <Image
-        src={companyBg}
-        alt="Perkebunan kopi di dataran tinggi Sumatera"
-        class="company-hero__img"
-        loading="eager"
-        widths={[768, 1280, 1920]}
-        sizes="100vw"
-      />
-      <div class="page-hero__overlay page-hero__overlay--company" aria-hidden="true"></div>
-    </div>
-
-    <div class="container company-hero__inner">
-      <!-- Breadcrumb -->
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <ol class="breadcrumb__list">
-          <li class="breadcrumb__item">
-            <a href={`/${lang}/`} class="breadcrumb__link">{t.breadcrumb.home}</a>
-          </li>
-          <li class="breadcrumb__sep" aria-hidden="true">
-            <Icon name="mdi:chevron-right" width="10" height="10" />
-          </li>
-          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">
-            {tc.page}
-          </li>
-        </ol>
-      </nav>
-
-      <div class="company-hero__content page-hero__content">
-        <h1 class="page-hero__title">{tc?.titleLine1}<br/>{tc?.titleLine2}</h1>
-        <p class="page-hero__sub">{tc?.['subtitle']}</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Company Story ───────────────────────────────── -->
-  <section class="story section" aria-labelledby="story-heading">
-    <div class="container">
-      <div class="story__grid">
-
-        <div class="story__intro animate-on-scroll">
-          <h2 id="story-heading" class="story__heading">
-            <Image
-              src={companyLogo}
-              alt="PT Siholta Toba Indonesia Logo"
-              class="story__logo"
-              loading="eager"
-              widths={[120, 180, 240]}
-              sizes="120px"
-            />
-            <span>{tc.storyLogo}</span>
-          </h2>
-          <p class="story__body">{tc.storyBody1}</p>
-          <p class="story__body">{tc.storyBody2}</p>
-          <div class="story__stats">
-            <div class="story__stat">
-              <span class="story__stat-num">2021</span>
-              <span class="story__stat-label">{tc.founded}</span>
-            </div>
-            <div class="story__stat">
-              <span class="story__stat-num">200+</span>
-              <span class="story__stat-label">{tc.farmers}</span>
-            </div>
-            <div class="story__stat">
-              <span class="story__stat-num">3</span>
-              <span class="story__stat-label">{tc.sectors}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="story__image animate-on-scroll">
-          <div class="story__image-frame">
-            <Image
-              src={aboutFoto}
-              alt="Perkebunan kopi PT Siholta Toba Indonesia di Humbang Hasundutan"
-              class="story__img"
-              loading="lazy"
-              widths={[480, 768, 1024]}
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Visi & Misi ─────────────────────────────────── -->
-  <section class="visimisi section" aria-labelledby="visimisi-heading">
-    <div class="container">
-
-      <div class="visimisi__header animate-on-scroll">
-        <h2 id="visimisi-heading" class="visimisi__title">{tc.visimisiTitle}</h2>
-        <p class="visimisi__sub">{tc.visimisiHeadlineLeft}</p>
-      </div>
-
-      <div class="visimisi__grid animate-on-scroll">
-        <div class="visimisi__col visimisi__col--vision">
-          <h3 class="visimisi__col-tag">Visi</h3>
-          <p class="visimisi__col-text">{tc.visimisiVision}</p>
-        </div>
-
-        <div class="visimisi__col visimisi__col--mission">
-          <h3 class="visimisi__col-tag">Misi</h3>
-          <ul class="visimisi__list" role="list">
-            <li class="visimisi__item">{tc.visimisiMission1}</li>
-            <li class="visimisi__item">{tc.visimisiMission2}</li>
-            <li class="visimisi__item">{tc.visimisiMission3}</li>
-            <li class="visimisi__item">{tc.visimisiMission4}</li>
-            <li class="visimisi__item">{tc.visimisiMission5}</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── Timeline ───────────────────────────────────── -->
-  <section class="timeline section section--cream" aria-labelledby="timeline-heading">
-    <div class="container">
-      <div class="section__header animate-on-scroll">
-        <h2 id="timeline-heading" class="section-title">{tc.timelineTitle}</h2>
-        <p class="section-sub">{tc.timelineSubtitle}</p>
-      </div>
-
-      <ol class="timeline__list" role="list">
-        {[
-          { year: '2019', label: 'Akar Ditanam di Lintong', key: 'milestone2019', iconName: 'mdi:sprout' },
-          { year: '2020', label: 'Jaringan Petani Terbangun', key: 'milestone2020', iconName: 'mdi:account-group' },
-          { year: '2021', label: 'Awal Perjalanan', key: 'milestone2021', iconName: 'mdi:shopping' },
-          { year: '11 Maret 2022', label: 'Sertifikat Pelatihan Keamanan Pangan', key: 'milestone2022', iconName: 'mdi:food-apple' },
-          { year: '21 November 2022', label: 'Sertifikat Halal', key: 'milestone2023', iconName: 'mdi:shield-check' },
-          { year: '03 Agustus 2023', label: 'Sertifikat Merek', key: 'milestone2024', iconName: 'mdi:certificate' },
-        ].map((m, i) => (
-          <li class={`timeline__item animate-on-scroll ${i % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'}`}>
-            <div class="timeline__card">
-              <div class="timeline__card-icon" aria-hidden="true"><Icon name={m.iconName} width="16" height="16" /></div>
-              <div class="timeline__card-year">{m.year}</div>
-              <h3 class="timeline__card-title">{tc[m.key]}</h3>
-              <p class="timeline__card-desc">{tc[`${m.key}Desc`]}</p>
-            </div>
-            <div class="timeline__connector" aria-hidden="true">
-              <div class="timeline__dot"></div>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <!-- ── Trusted & Certified ─────────────────────── -->
-  <section class="certifications section" aria-labelledby="certifications-heading">
-    <div class="container">
-      <div class="section__header animate-on-scroll">
-        <h2 id="certifications-heading" class="section-title">{tc.certificationsTitle}</h2>
-        <p class="section-sub">{tc.certificationsSubtitle}</p>
-      </div>
-
-      <div class="certifications__grid">
-        <article class="cert-card animate-on-scroll">
-          <div class="cert-card__img-wrap">
-            <Image
-              src={certBrand}
-              alt="Sertifikat Merek Kopi Siholta"
-              class="cert-card__img"
-              loading="lazy"
-              widths={[320, 480]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-          </div>
-          <div class="cert-card__body">
-            <div class="cert-card__icon" aria-hidden="true"><Icon name="mdi:certificate" width="28" height="28" /></div>
-            <h3 class="cert-card__name">{tc.certBrandName}</h3>
-            <p class="cert-card__desc">{tc.certBrandDesc}</p>
-            <button class="cert-card__btn"
-               type="button"
-               data-cert-pdf="/docs/brand-certificate.pdf"
-               data-cert-title={tc.certBrandName}>
-              <Icon name="mdi:eye" width="14" height="14" aria-hidden="true" />
-              {tc.certViewBtn}
-            </button>
-          </div>
-        </article>
-
-        <article class="cert-card animate-on-scroll">
-          <div class="cert-card__img-wrap">
-            <Image
-              src={certHalal}
-              alt="Sertifikat Halal Kopi Siholta"
-              class="cert-card__img"
-              loading="lazy"
-              widths={[320, 480]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-          </div>
-          <div class="cert-card__body">
-            <div class="cert-card__icon" aria-hidden="true"><Icon name="mdi:shield-check" width="28" height="28" /></div>
-            <h3 class="cert-card__name">{tc.certHalalName}</h3>
-            <p class="cert-card__desc">{tc.certHalalDesc}</p>
-            <button class="cert-card__btn"
-               type="button"
-               data-cert-pdf="/docs/halal-certificate.pdf"
-               data-cert-title={tc.certHalalName}>
-              <Icon name="mdi:eye" width="14" height="14" aria-hidden="true" />
-              {tc.certViewBtn}
-            </button>
-          </div>
-        </article>
-
-        <article class="cert-card animate-on-scroll">
-          <div class="cert-card__img-wrap">
-            <Image
-              src={certTraining}
-              alt="Sertifikat Pelatihan Keamanan Pangan Kopi Siholta"
-              class="cert-card__img"
-              loading="lazy"
-              widths={[320, 480]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-          </div>
-          <div class="cert-card__body">
-            <div class="cert-card__icon" aria-hidden="true"><Icon name="mdi:food-apple" width="28" height="28" /></div>
-            <h3 class="cert-card__name">{tc.certTrainingName}</h3>
-            <p class="cert-card__desc">{tc.certTrainingDesc}</p>
-            <button class="cert-card__btn"
-               type="button"
-               data-cert-pdf="/docs/training-certificate.pdf"
-               data-cert-title={tc.certTrainingName}>
-              <Icon name="mdi:eye" width="14" height="14" aria-hidden="true" />
-              {tc.certViewBtn}
-            </button>
-          </div>
-        </article>
-
-        <article class="cert-card animate-on-scroll">
-          <div class="cert-card__img-wrap">
-            <Image
-              src={certPirt}
-              alt="SPP-IRT Kopi Siholta"
-              class="cert-card__img"
-              loading="lazy"
-              widths={[320, 480]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-          </div>
-          <div class="cert-card__body">
-            <div class="cert-card__icon" aria-hidden="true"><Icon name="mdi:food" width="28" height="28" /></div>
-            <h3 class="cert-card__name">{tc.certSppPirtName}</h3>
-            <p class="cert-card__desc">{tc.certSppPirtDesc}</p>
-            <button class="cert-card__btn"
-               type="button"
-               data-cert-pdf="/docs/spp-irt.pdf"
-               data-cert-title={tc.certSppPirtName}>
-              <Icon name="mdi:eye" width="14" height="14" aria-hidden="true" />
-              {tc.certViewBtn}
-            </button>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Operation Sectors ──────────────────────────── -->
-  <section class="sectors section" aria-labelledby="sectors-heading">
-    <div class="container">
-      <div class="section__header animate-on-scroll">
-        <h2 id="sectors-heading" class="section-title">{tc.sectorsTitle}</h2>
-        <p class="section-sub">{tc.sectorsSubtitle}</p>
-      </div>
-
-      <div class="sectors__grid">
-        {sectors.map((sector, i) => (
-          <article
-            class="sector-card animate-on-scroll"
-            style={`--card-bg: ${sector.bgColor}; --card-accent: ${sector.accentColor}; --card-accent-rgb: ${hexToRgb(sector.accentColor)}`}>
-            <div class="sector-card__header">
-              <div class="sector-card__icon" aria-hidden="true"><Icon name={sector.iconName} width="24" height="24" /></div>
-              <div>
-                <h3 class="sector-card__name">{tc[sector.nameKey]}</h3>
-              </div>
-            </div>
-            <p class="sector-card__desc">{tc[sector.descKey]}</p>
-            <ul class="sector-card__highlights" role="list">
-              {sector.highlightsKey.map(key => (
-                <li class="sector-card__highlight">
-                  <Icon name="mdi:circle-small" width="10" height="10" />
-                  {tc[key]}
-                </li>
-              ))}
-            </ul>
-            <a href={sector.href} class="sector-card__cta">
-              {tc[sector.ctaKey]}
-              <Icon name="mdi:chevron-right" width="12" height="12" />
-            </a>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Location & Map ───────────────────────────────── -->
-  <section class="location section" aria-labelledby="location-heading">
-    <div class="container">
-      <div class="section__header animate-on-scroll">
-        <h2 id="location-heading" class="section-title">{tc.locationTitle}</h2>
-        <p class="section-sub">{tc.locationSub}</p>
-      </div>
-      <div class="location__map animate-on-scroll">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.756309399054!2d106.9037104!3d-6.295721899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3007f623b53%3A0x118fc0912e442961!2sPT.%20Siholta%20Toba%20Indonesia!5e0!3m2!1sid!2sid!4v1778757552187!5m2!1sid!2sid"
-          width="100%"
-          height="400"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Lokasi PT Siholta Toba Indonesia"
-        ></iframe>
-      </div>
-      <div class="location__address animate-on-scroll">
-        <Icon name="mdi:map-marker" width="16" height="16" />
-        <span>{t.contact.address}</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CTA Banner ────────────────────────────────── -->
-  <section class="page-cta page-cta--cream" aria-label={tc.ctaBanner}>
-    <div class="container page-cta__inner">
-      <div class="page-cta__text animate-on-scroll">
-        <h2 class="page-cta__title page-cta__title--earth" set:html={nl(tc.ctaTitle)}></h2>
-        <p class="page-cta__sub page-cta__sub--earth">{tc.ctaSubtitle}</p>
-      </div>
-      <div class="page-cta__actions animate-on-scroll">
-        <a href={`/${lang}/#contact`} class="btn btn--primary">{tc.cta1}</a>
-        <a href={`/${lang}/`} class="btn btn--outline-dark">{tc.cta2}</a>
-      </div>
-    </div>
-  </section>
-
+  <header>
+    <CompanyHero lang={lang} tc={tc} t={t}/>
+  </header>
+  <main>
+    <CompanyStory tc={tc} />
+    <VisiMisi tc={tc} />
+    <Timeline tc={tc} />
+    <Certifications tc={tc} />
+    <OperationSectors lang={lang} tc={tc} />
+    <LocationMap t={t} tc={tc} />
+    <CompanyCta lang={lang} tc={tc} />
+  </main>
   <Footer lang={lang} />
   <WhatsAppFAB />
-
-  <!-- ── Certificate Viewer Modal ───────────────── -->
-  <div id="cert-modal" class="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title" hidden>
-    <div class="cert-modal__backdrop"></div>
-    <div class="cert-modal__panel">
-      <div class="cert-modal__header">
-        <h3 id="cert-modal-title" class="cert-modal__title"></h3>
-        <button id="cert-modal-close" class="cert-modal__close" type="button" aria-label="Close">
-          <Icon name="mdi:close" width="20" height="20" />
-        </button>
-      </div>
-      <div class="cert-modal__body">
-        <iframe id="cert-modal-iframe" class="cert-modal__iframe" title="" src="" width="100%" height="100%"></iframe>
-      </div>
-    </div>
-  </div>
-
+  <CertModal tc={tc} />
 </Base>
 
 <script>
@@ -467,44 +79,4 @@ const certs = [
     (card as HTMLElement).style.transitionDelay = `${i * 80}ms`;
   });
 
-  // ── Certificate modal ──────────────────────────────
-  const modal = document.getElementById('cert-modal') as HTMLElement;
-  const modalTitle = document.getElementById('cert-modal-title') as HTMLElement;
-  const modalIframe = document.getElementById('cert-modal-iframe') as HTMLIFrameElement;
-  const modalClose = document.getElementById('cert-modal-close') as HTMLButtonElement;
-  const modalBackdrop = modal?.querySelector('.cert-modal__backdrop') as HTMLElement;
-
-  function openCertModal(pdfPath: string, title: string) {
-    if (!modal || !modalIframe || !modalTitle) return;
-    modalTitle.textContent = title;
-    modalIframe.src = pdfPath;
-    modal.removeAttribute('hidden');
-    document.body.style.overflow = 'hidden';
-    modalClose?.focus();
-  }
-
-  function closeCertModal() {
-    if (!modal || !modalIframe) return;
-    modal.setAttribute('hidden', '');
-    modalIframe.src = '';
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll<HTMLElement>('.cert-card__btn').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      const pdf = btn.getAttribute('data-cert-pdf');
-      const title = btn.getAttribute('data-cert-title');
-      if (pdf && title) {
-        e.preventDefault();
-        openCertModal(pdf, title);
-      }
-    });
-  });
-
-  modalClose?.addEventListener('click', closeCertModal);
-  modalBackdrop?.addEventListener('click', closeCertModal);
-
-  document.addEventListener('keydown', (e) => {
-    if (!modal.hasAttribute('hidden') && e.key === 'Escape') closeCertModal();
-  });
 </script>

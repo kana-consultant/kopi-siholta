@@ -1,0 +1,64 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const { lang, tc, t } = Astro.props;
+
+const hexToRgb = (hex: string) =>
+  hex.replace('#', '').match(/.{2}/g)?.map(v => parseInt(v, 16)).join(',') ?? '92,61,30';
+
+const sectors = [
+  {
+    nameKey: 'sector1Name', labelKey: 'sector1Label', descKey: 'sector1Desc', ctaKey: 'sector1Cta',
+    highlightsKey: ['sector1H1', 'sector1H2', 'sector1H3', 'sector1H4'],
+    iconName: 'mdi:coffee', bgColor: '#F5F0EA', accentColor: '#5C3D1E', href: `/${lang}/coffee-farming`,
+  },
+  {
+    nameKey: 'sector2Name', labelKey: 'sector2Label', descKey: 'sector2Desc', ctaKey: 'sector2Cta',
+    highlightsKey: ['sector2H1', 'sector2H2', 'sector2H3', 'sector2H4'],
+    iconName: 'mdi:cup', bgColor: '#F0F0F5', accentColor: '#1A3A5C', href: `/${lang}/fnb`,
+  },
+  {
+    nameKey: 'sector3Name', labelKey: 'sector3Label', descKey: 'sector3Desc', ctaKey: 'sector3Cta',
+    highlightsKey: ['sector3H1', 'sector3H2', 'sector3H3', 'sector3H4'],
+    iconName: 'mdi:office-building', bgColor: '#EAF0EA', accentColor: '#2A4A20', href: `/${lang}/tourism`,
+  },
+];
+---
+
+  <!-- ── Operation Sectors ──────────────────────────── -->
+  <section class="sectors section" aria-labelledby="sectors-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <h2 id="sectors-heading" class="section-title">{tc.sectorsTitle}</h2>
+        <p class="section-sub">{tc.sectorsSubtitle}</p>
+      </div>
+
+      <div class="sectors__grid">
+        {sectors.map((sector, i) => (
+          <article
+            class="sector-card animate-on-scroll"
+            style={`--card-bg: ${sector.bgColor}; --card-accent: ${sector.accentColor}; --card-accent-rgb: ${hexToRgb(sector.accentColor)}`}>
+            <div class="sector-card__header">
+              <div class="sector-card__icon" aria-hidden="true"><Icon name={sector.iconName} width="24" height="24" /></div>
+              <div>
+                <h3 class="sector-card__name">{tc[sector.nameKey]}</h3>
+              </div>
+            </div>
+            <p class="sector-card__desc">{tc[sector.descKey]}</p>
+            <ul class="sector-card__highlights" role="list">
+              {sector.highlightsKey.map(key => (
+                <li class="sector-card__highlight">
+                  <Icon name="mdi:circle-small" width="10" height="10" />
+                  {tc[key]}
+                </li>
+              ))}
+            </ul>
+            <a href={sector.href} class="sector-card__cta">
+              {tc[sector.ctaKey]}
+              <Icon name="mdi:chevron-right" width="12" height="12" />
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>

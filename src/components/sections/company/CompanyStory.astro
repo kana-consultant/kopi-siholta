@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import companyLogo from '../../../images/logo/logo-STI.png';
+import aboutFoto from '../../../images/about.webp';
+
+const { lang, tc, t } = Astro.props;
+---
+
+  <!-- ── Company Story ───────────────────────────────── -->
+  <section class="story section" aria-labelledby="story-heading">
+    <div class="container">
+      <div class="story__grid">
+
+        <div class="story__intro animate-on-scroll">
+          <h2 id="story-heading" class="story__heading">
+            <Image
+              src={companyLogo}
+              alt="PT Siholta Toba Indonesia Logo"
+              class="story__logo"
+              loading="eager"
+              widths={[120, 180, 240]}
+              sizes="120px"
+            />
+            <span>{tc.storyLogo}</span>
+          </h2>
+          <p class="story__body">{tc.storyBody1}</p>
+          <p class="story__body">{tc.storyBody2}</p>
+          <div class="story__stats">
+            <div class="story__stat">
+              <span class="story__stat-num">2021</span>
+              <span class="story__stat-label">{tc.founded}</span>
+            </div>
+            <div class="story__stat">
+              <span class="story__stat-num">200+</span>
+              <span class="story__stat-label">{tc.farmers}</span>
+            </div>
+            <div class="story__stat">
+              <span class="story__stat-num">3</span>
+              <span class="story__stat-label">{tc.sectors}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="story__image animate-on-scroll">
+          <div class="story__image-frame">
+            <Image
+              src={aboutFoto}
+              alt="Perkebunan kopi PT Siholta Toba Indonesia di Humbang Hasundutan"
+              class="story__img"
+              loading="lazy"
+              widths={[480, 768, 1024]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,192 @@
+/* ── Certifications ──────────────────────────────────── */
+.certifications__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.cert-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 480px;
+}
+
+.cert-card__img-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cert-card__img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  transition: transform 500ms ease;
+}
+
+.cert-card:hover .cert-card__img { transform: scale(1.02); }
+
+.cert-card__img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(26,15,8,0.75) 0%, rgba(26,15,8,0.85) 100%);
+  pointer-events: none;
+}
+
+.cert-card__body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  justify-content: flex-end;
+}
+
+.cert-card__icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-lg);
+  background: rgba(205, 18, 34, 0.15);
+  color: var(--color-brand-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+}
+
+.cert-card__name {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.cert-card__desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.9);
+  flex: 1;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cert-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-2);
+  padding: 8px 16px;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-brand-gold, #CD1222);
+  background: rgba(205, 18, 34, 0.12);
+  border: 1px solid rgba(205, 18, 34, 0.35);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease, transform 150ms ease;
+  width: fit-content;
+}
+
+/* ── Certificate Modal ──────────────────────────────── */
+.cert-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.cert-modal[hidden] { display: none; }
+
+.cert-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 6, 3, 0.85);
+  backdrop-filter: blur(6px);
+  animation: certModalFadeIn 200ms ease forwards;
+}
+
+.cert-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(900px, 100%);
+  height: min(90vh, 720px);
+  background: #fff;
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 32px 80px rgba(10, 6, 3, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: certModalSlideIn 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes certModalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes certModalSlideIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.cert-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-neutral-100, #eee);
+  flex-shrink: 0;
+}
+
+.cert-modal__title {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 700;
+  color: var(--color-brand-earth, #3E1F0D);
+  margin: 0;
+}
+
+.cert-modal__close {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--color-neutral-200, #ddd);
+  color: var(--color-neutral-600, #555);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+  flex-shrink: 0;
+}
+
+.cert-modal__body {
+  flex: 1;
+  overflow: hidden;
+  background: #f5f3f0;
+}
+
+.cert-modal__iframe {
+  border: none;
+  width: 100%; height: 100%;
+  display: block;
+}
