@@ -60,3 +60,89 @@ const channels = [
     </div>
   </div>
 </section>
+
+<style>
+  
+.omni {
+  background: var(--color-brand-cream);
+  padding-block: var(--space-12);
+}
+
+.omni__channels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.omni__channel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: 0.5px solid var(--channel-color, var(--color-neutral-200));
+  border-radius: var(--radius-lg);
+  background: #fff;
+  text-decoration: none;
+  transition: all 200ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.omni__channel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--channel-color);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.omni__channel:hover::before { opacity: 0.04; }
+
+.omni__channel:hover {
+  border-color: var(--channel-color);
+  transform: translateY(-2px);
+}
+
+.omni__channel-icon {
+  color: var(--channel-color);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.omni__channel-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-brand-earth);
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.omni__channel-arrow {
+  color: var(--color-brand-muted);
+  flex-shrink: 0;
+  transition: transform 200ms ease, color 200ms ease;
+  position: relative;
+  z-index: 1;
+}
+
+.omni__channel:hover .omni__channel-arrow {
+  transform: translate(2px, -2px);
+  color: var(--channel-color);
+}
+
+@media (max-width: 1024px) {
+  .omni__channels { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .omni__channels { grid-template-columns: 1fr; }
+}
+
+</style>

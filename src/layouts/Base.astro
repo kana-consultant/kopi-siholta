@@ -3,7 +3,6 @@ import '../styles/global.css';
 import { Image } from 'astro:assets';
 import logo from '../images/logo/logo-kopi-siholta.png';
 
-
 interface Props {
   title?: string;
   description?: string;
@@ -23,61 +22,139 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1C0F07" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content="kopi siholta, kopi lintong, kopi danau toba, kopi kemasan premium, kopi export, kopi arabika sumatera, bisnis kopi" />
+    <meta name="author" content="PT. Siholta Toba Indonesia" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Alternate languages — absolute URLs required per hreflang spec -->
     <link rel="alternate" hreflang="id" href="https://kopisiholta.com/id/" />
     <link rel="alternate" hreflang="en" href="https://kopisiholta.com/en/" />
     <link rel="alternate" hreflang="fr" href="https://kopisiholta.com/fr/" />
     <link rel="alternate" hreflang="x-default" href="https://kopisiholta.com/en/" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content="https://kopisiholta.com/og.jpg" />
+    <meta property="og:site_name" content="Kopi Siholta" />
     <meta property="og:locale" content={lang === 'id' ? 'id_ID' : lang === 'fr' ? 'fr_FR' : 'en_US'} />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- Favicon — PNG via astro:assets (circular crop applied via border-radius) -->
     <link rel="icon" type="image/png" href={logo.src} class="favicon-circular" />
     <link rel="shortcut icon" type="image/x-icon" href={logo.src} class="favicon-circular" />
+    
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <style>
-      .favicon-circular { border-radius: 50%; }
+      /* ── Global Skeleton Page Transition ── */
+      .global-page-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #1C0F07; /* Warna gelap dasar Kopi Siholta */
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out;
+        padding: 2rem;
+        box-sizing: border-box;
+      }
+
+      .global-page-loader.is-active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .skeleton-layout {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+      }
+
+      /* Navbar Skeleton */
+      .sk-navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+      .sk-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      .sk-navitems {
+        display: flex;
+        gap: 1.5rem;
+      }
+      .sk-navitem {
+        width: 80px;
+        height: 16px;
+        border-radius: 4px;
+      }
+
+      /* Hero Content Skeleton */
+      .sk-hero {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        max-width: 600px;
+        margin-top: 2rem;
+      }
+
+      .sk-title {
+        width: 100%;
+        height: 48px;
+        border-radius: 6px;
+      }
+      .sk-title.short {
+        width: 70%;
+      }
+      .sk-text {
+        width: 90%;
+        height: 14px;
+        border-radius: 4px;
+      }
+      .sk-button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      .sk-button {
+        width: 140px;
+        height: 44px;
+        border-radius: 6px;
+      }
+
+      /* Responsive adjustment */
+      @media (max-width: 768px) {
+        .sk-navitems { display: none; }
+        .sk-hero { margin-top: 1rem; }
+      }
     </style>
 
-    <!-- Font strategy: preload display font, async load body fonts -->
-    <!-- Cormorant Garamond — display font, preloaded for FCP -->
-    <link rel="preload" as="style"
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-          media="print" onload="this.media='all'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
     <noscript>
-      <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" />
     </noscript>
 
-    <!-- Body + label fonts — deferred, non-render-blocking -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400&display=swap"
-          media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400&display=swap" />
-    </noscript>
-
-    <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -92,6 +169,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
         "addressRegion": "North Sumatra",
         "addressCountry": "ID"
       },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+6281322518527",
+        "contactType": "sales"
+      },
       "sameAs": [
         "https://www.instagram.com/kopisiholta",
         "https://www.tokopedia.com/kopisiholta",
@@ -99,7 +181,89 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
       ]
     })} />
   </head>
-  <body>
+  <body class="grain-overlay">
+    
+   <div id="global-page-loader" class="global-page-loader" aria-hidden="true">
+      <div class="skeleton-layout">
+        <div class="sk-navbar">
+          <div class="sk-logo skeleton"></div>
+          <div class="sk-navitems">
+            <div class="sk-navitem skeleton"></div>
+            <div class="sk-navitem skeleton"></div>
+            <div class="sk-navitem skeleton"></div>
+          </div>
+        </div>
+        
+        <div class="sk-hero">
+          <div class="sk-title skeleton"></div>
+          <div class="sk-title short skeleton"></div>
+          <div class="sk-text skeleton"></div>
+          <div class="sk-text skeleton"></div>
+          <div class="sk-button-group">
+            <div class="sk-button skeleton"></div>
+            <div class="sk-button skeleton"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <slot />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('.skeleton-wrapper + img, .skeleton-wrapper ~ img');
+        images.forEach(img => {
+          const imageEl = img as HTMLImageElement;
+          if (imageEl.complete) {
+            const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
+            if (skeleton) skeleton.classList.add('loaded');
+          } else {
+            img.addEventListener('load', () => {
+              const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
+              if (skeleton) skeleton.classList.add('loaded');
+            });
+          }
+        });
+
+        setTimeout(() => {
+          document.querySelectorAll('.skeleton-wrapper').forEach(el => {
+            el.classList.add('loaded');
+          });
+        }, 3000);
+      });
+    </script>
+
+    <script>
+      const pageLoader = document.getElementById('global-page-loader');
+
+      window.addEventListener('pageshow', () => {
+        pageLoader?.classList.remove('is-active');
+      });
+
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const anchor = target.closest('a');
+
+        if (!anchor) return;
+
+        const href = anchor.getAttribute('href');
+        const targetAttr = anchor.getAttribute('target');
+
+        if (
+          targetAttr === '_blank' || 
+          !href || 
+          href.startsWith('#') || 
+          href.includes('#') || 
+          href.startsWith('tel:') || 
+          href.startsWith('mailto:') ||
+          href.startsWith('https://wa.me')
+        ) {
+          return;
+        }
+
+        pageLoader?.classList.add('is-active');
+      });
+    </script>
+
   </body>
 </html>
