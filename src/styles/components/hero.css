@@ -346,6 +346,10 @@
   .hero__indicators { gap: var(--space-1); }
   .hero__indicator { width: 16px; }
   .hero__indicator.is-active { width: 28px; }
+  .page-hero--tall  { min-height: 70vh; }
+  .page-hero--mid   { min-height: 70vh; }
+  .page-hero--short { min-height: 60vh; }
+
 }
 
 @media (max-width: 480px) {
