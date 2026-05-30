@@ -50,22 +50,22 @@ const retailProducts = {
 
       <div class="retail-coffee__grid">
         <!-- Main large card -->
-        <article class="retail-card retail-card--main animate-on-scroll">
-          <div class="retail-card__media">
+        <article class="product-card retail-card--main animate-on-scroll">
+          <div class="product-card__media">
             <Image
               src={retailProducts.main.img}
               alt={t.fnb.gallery?.[retailProducts.main.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
               loading="eager"
               widths={[480, 768, 1024]}
               sizes="(max-width: 768px) 100vw, 55vw"
-              class="retail-card__img"
+              class="product-card__img"
             />
-            <div class="retail-card__tag">{retailProducts.main.tag}</div>
+            <div class="product-card__tag">{retailProducts.main.tag}</div>
           </div>
-          <div class="retail-card__body">
-            <h3 class="retail-card__name">{t.fnb[retailProducts.main.nameKey as keyof typeof t.fnb] ?? 'Coffee Beans'}</h3>
-            <p class="retail-card__desc">{t.fnb[retailProducts.main.descKey as keyof typeof t.fnb] ?? 'Biji kopi pilihan dengan karakter khas Sumatera Utara, tersedia dalam berbagai profil roasting.'}</p>
-            <a href={`/${lang}/company`} class="retail-card__link">
+          <div class="product-card__body">
+            <h3 class="product-card__name">{t.fnb[retailProducts.main.nameKey as keyof typeof t.fnb] ?? 'Coffee Beans'}</h3>
+            <p class="product-card__desc">{t.fnb[retailProducts.main.descKey as keyof typeof t.fnb] ?? 'Biji kopi pilihan dengan karakter khas Sumatera Utara, tersedia dalam berbagai profil roasting.'}</p>
+            <a href={`/${lang}/company`} class="btn btn--link-cta">
               {t.fnb.retailCta ?? 'Lihat Produk'}
               <Icon name="mdi:arrow-right" width="16" height="16" />
             </a>
@@ -75,20 +75,20 @@ const retailProducts = {
         <!-- 3 small cards stacked -->
         <div class="retail-coffee__stack">
           {retailProducts.items.map((item, i) => (
-            <article class="retail-card retail-card--sm animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>
-              <div class="retail-card__media retail-card__media--sm">
+            <article class="product-card retail-card--sm animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>
+              <div class="product-card__media">
                 <Image
                   src={item.img}
                   alt={t.fnb.gallery?.[item.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
                   loading="lazy"
                   widths={[300, 480]}
                   sizes="(max-width: 768px) 50vw, 22vw"
-                  class="retail-card__img"
+                  class="product-card__img"
                 />
               </div>
-              <div class="retail-card__body">
-                <h3 class="retail-card__name retail-card__name--sm">{t.fnb[item.nameKey as keyof typeof t.fnb] ?? ''}</h3>
-                <p class="retail-card__desc retail-card__desc--sm">{t.fnb[item.descKey as keyof typeof t.fnb] ?? ''}</p>
+              <div class="product-card__body">
+                <h3 class="product-card__name">{t.fnb[item.nameKey as keyof typeof t.fnb] ?? ''}</h3>
+                <p class="product-card__desc">{t.fnb[item.descKey as keyof typeof t.fnb] ?? ''}</p>
               </div>
             </article>
           ))}
@@ -96,3 +96,50 @@ const retailProducts = {
       </div>
     </div>
   </section>
+<style>
+.retail-coffee { padding-block: var(--space-12); }
+
+.retail-coffee__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.retail-card--sm {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  min-height: 120px;
+}
+
+.retail-card--sm .product-card__media {
+  height: 120px;
+}
+
+.retail-coffee__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+@media (max-width: 768px) {
+  .retail-coffee { padding-block: var(--space-8); }
+  .retail-coffee__grid { gap: var(--space-3); margin-top: var(--space-6); }
+  .retail-card--sm { grid-template-columns: 100px 1fr; min-height: 100px; }
+  .retail-card--sm .product-card__media { height: 100px; }
+  .retail-card--sm .product-card__body { padding: var(--space-3); }
+
+}
+
+@media (max-width: 768px) {
+  .retail-coffee__grid { grid-template-columns: 1.4fr 1fr; }
+  .retail-coffee__stack { grid-template-rows: repeat(3, 1fr); }
+
+}
+
+@media (max-width: 480px) {
+  .retail-card--sm { grid-template-columns: 90px 1fr; min-height: 80px; }
+
+}
+
+
+</style>

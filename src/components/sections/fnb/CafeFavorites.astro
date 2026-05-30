@@ -50,21 +50,21 @@ const cafeBestSellers = [
       <div class="cafe-carousel animate-on-scroll">
         <div class="cafe-carousel__track">
           {cafeBestSellers.map((drink, i) => (
-            <article class="cafe-card" aria-labelledby={`cafe-card-name-${i}`}>
-              <div class="cafe-card__media">
+            <article class="product-card cafe-card" aria-labelledby={`cafe-card-name-${i}`}>
+              <div class="product-card__media">
                 <Image
                   src={drink.img}
                   alt={t.fnb.gallery?.[drink.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
                   loading="lazy"
                   widths={[320, 480]}
                   sizes="(max-width: 768px) 80vw, 25vw"
-                  class="cafe-card__img"
+                  class="product-card__img"
                 />
-                <div class="cafe-card__tag">{drink.tag}</div>
+                <div class="product-card__tag">{drink.tag}</div>
               </div>
-              <div class="cafe-card__body">
-                <h3 id={`cafe-card-name-${i}`} class="cafe-card__name">{t.fnb[drink.nameKey as keyof typeof t.fnb] ?? ''}</h3>
-                <p class="cafe-card__desc">{t.fnb[drink.descKey as keyof typeof t.fnb] ?? ''}</p>
+              <div class="product-card__body">
+                <h3 id={`cafe-card-name-${i}`} class="product-card__name">{t.fnb[drink.nameKey as keyof typeof t.fnb] ?? ''}</h3>
+                <p class="product-card__desc">{t.fnb[drink.descKey as keyof typeof t.fnb] ?? ''}</p>
               </div>
             </article>
           ))}
@@ -77,7 +77,94 @@ const cafeBestSellers = [
       </div>
     </div>
   </section>
-  <script>
+<style>
+.cafe-favorites { padding-block: var(--space-12); overflow: hidden; }
+
+.cafe-favorites .section__header { margin-bottom: var(--space-6); }
+
+.cafe-carousel {
+  position: relative;
+  margin-top: var(--space-6);
+}
+
+.cafe-carousel__track {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-inline: var(--space-4);
+  padding-block: var(--space-2);
+  -webkit-overflow-scrolling: touch;
+}
+
+.cafe-carousel__track::-webkit-scrollbar { display: none; }
+
+/* Fixed-width carousel card */
+.cafe-card { width: 240px; }
+
+/* Body overrides for cafe cards (smaller text than retail) */
+.cafe-card .product-card__name {
+  font-size: clamp(13px, 1.4vw, 15px);
+}
+
+.cafe-card .product-card__desc {
+  font-size: 11px;
+  -webkit-line-clamp: 2;
+  line-height: 1.5;
+}
+
+/* Carousel Indicators */
+.cafe-carousel__indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-bottom: var(--space-2);
+}
+
+.cafe-carousel__indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-brand-muted);
+  opacity: 0.4;
+  transition: all 300ms ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.cafe-carousel__indicator--active {
+  background: var(--color-brand-red);
+  opacity: 1;
+  width: 24px;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .cafe-favorites { padding-block: var(--space-8); }
+  .cafe-favorites .section__header { margin-bottom: var(--space-5); }
+  .cafe-carousel { margin-top: var(--space-5); }
+  .cafe-card { width: 200px; }
+
+}
+
+@media (max-width: 480px) {
+  .cafe-card { width: 180px; }
+
+}
+
+@media (min-width: 768px) {
+  .cafe-carousel__indicators { display: none; }
+
+}
+
+
+</style>
+
+<script>
     // Carousel indicators - scroll sync
   const track = document.querySelector('.cafe-carousel__track');
   const indicators = document.querySelectorAll('.cafe-carousel__indicator');
@@ -105,4 +192,4 @@ const cafeBestSellers = [
       });
     });
   }
-  </script>
+</script>
