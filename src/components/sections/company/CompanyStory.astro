@@ -57,3 +57,60 @@ const { lang, tc, t } = Astro.props;
       </div>
     </div>
   </section>
+
+  <style>
+.story__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.story__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--space-6);
+  margin-top: var(--space-2);
+}
+
+.story__logo {
+  width: 70px; height: auto;
+  border-color: var(--color-brand-red);
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.story__body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-brand-muted);
+  margin-bottom: var(--space-4);
+}
+
+.story__image-frame {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.story__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .story__grid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .story__stats { gap: var(--space-6); }
+}
+  </style>

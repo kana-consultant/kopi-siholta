@@ -53,7 +53,7 @@ const sectors = [
                 </li>
               ))}
             </ul>
-            <a href={sector.href} class="sector-card__cta">
+            <a href={sector.href} class="btn btn--card-cta">
               {tc[sector.ctaKey]}
               <Icon name="mdi:chevron-right" width="12" height="12" />
             </a>
@@ -62,3 +62,17 @@ const sectors = [
       </div>
     </div>
   </section>
+
+  <style>
+.sectors__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}  
+
+@media (max-width: 1024px) {
+  .sectors__grid { grid-template-columns: 1fr; }
+
+}
+  </style>

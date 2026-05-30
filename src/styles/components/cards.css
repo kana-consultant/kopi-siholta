@@ -13,3 +13,362 @@
 }
 
 .card:hover { border-color: var(--color-brand-red); }
+
+/* ── Sector Card ─────────────────────────────────────────── */
+.sector-card {
+  background: var(--card-bg, var(--color-brand-cream));
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  border: 0.5px solid var(--color-neutral-200);
+  transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+}
+
+.sector-card:hover {
+  border-color: var(--card-accent, var(--color-brand-earth));
+  box-shadow: 0 8px 32px rgba(92,61,30,0.10);
+  transform: translateY(-3px);
+}
+
+.sector-card__header { display: flex; align-items: center; gap: var(--space-3); }
+
+.sector-card__icon {
+  width: 44px; height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--card-accent, var(--color-brand-earth));
+}
+
+.sector-card__label {
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted);
+  margin-bottom: 2px;
+}
+
+.sector-card__name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--card-accent, var(--color-brand-earth));
+  letter-spacing: -0.01em;
+}
+
+.sector-card__desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--color-brand-muted);
+  flex: 1;
+}
+
+.sector-card__highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sector-card__highlight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-brand-earth);
+}
+
+.sector-card__highlight svg {
+  color: var(--card-accent, var(--color-brand-red));
+  flex-shrink: 0;
+}
+
+/* ── Product Card (shared by retail & cafe carousels) ─── */
+.product-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 8px 32px rgba(92, 61, 30, 0.10);
+  transform: translateY(-3px);
+}
+
+.product-card:hover .product-card__img { transform: scale(1.05); }
+
+.product-card__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-card__media {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card__body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.product-card__tag {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  font-family: var(--font-label);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(26, 15, 8, 0.7);
+  backdrop-filter: blur(4px);
+  padding: 4px 12px;
+  border-radius: 2px;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.product-card__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+}
+
+.product-card__desc {
+  font-family: var(--font-body);
+  color: var(--color-brand-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Certification Card ─────────────────────────────────── */
+.cert-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 480px;
+}
+
+.cert-card:hover {
+  box-shadow: 0 12px 40px rgba(92, 61, 30, 0.12);
+  transform: translateY(-3px);
+}
+
+.cert-card__img-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cert-card__img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  transition: transform 500ms ease;
+}
+
+.cert-card:hover .cert-card__img { transform: scale(1.02); }
+
+.cert-card__img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(26,15,8,0.75) 0%, rgba(26,15,8,0.85) 100%);
+  pointer-events: none;
+}
+
+.cert-card__body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  justify-content: flex-end;
+}
+
+.cert-card__icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-lg);
+  background: rgba(205, 18, 34, 0.15);
+  color: var(--color-brand-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+}
+
+.cert-card__name {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.cert-card__desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.9);
+  flex: 1;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cert-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-2);
+  padding: 8px 16px;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-brand-gold);
+  background: rgba(205, 18, 34, 0.12);
+  border: 1px solid rgba(205, 18, 34, 0.35);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease, transform 150ms ease;
+  width: fit-content;
+}
+
+.cert-card__btn:hover {
+  background: rgba(205, 18, 34, 0.22);
+  border-color: rgba(205, 18, 34, 0.6);
+  transform: translateY(-1px);
+}
+
+.cert-card__btn:active { transform: translateY(0); }
+
+/* ── Flavour Chip (shared by process/menu cards) ──────────── */
+.flavour-chip {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-brand-earth);
+  background: var(--color-neutral-100);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 0.5px solid var(--color-neutral-200);
+}
+
+/* ── Timeline Card (domain-specific, but card-like) ─────── */
+.timeline__card {
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6);
+  flex: 1;
+  max-width: 420px;
+  transition: border-color 250ms ease, box-shadow 250ms ease;
+}
+
+.timeline__card:hover {
+  border-color: var(--color-brand-red);
+  box-shadow: 0 4px 20px rgba(92,61,30,0.08);
+}
+
+.timeline__card-icon { color: var(--color-brand-red); margin-bottom: var(--space-2); display: flex; }
+
+.timeline__card-year {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: var(--color-brand-red);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-1);
+}
+
+.timeline__card-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.01em;
+}
+
+.timeline__card-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-brand-muted);
+}
+
+/* ── Social Card (used in ContactSection, etc.) ──────────── */
+.social-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: #fff;
+  border: var(--border-default);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-family: var(--font-label);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand-earth);
+  transition: all 200ms ease;
+  text-align: center;
+}
+
+.social-card:hover {
+  border-color: var(--color-brand-red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 15, 8, 0.08);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .sectors__grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .cert-card { min-height: 420px; }
+}
+
+@media (max-width: 640px) {
+  .cert-card { min-height: 380px; }
+  .cert-card__body { padding: var(--space-5); }
+}
+
+@media (hover: hover) {
+  .cert-card:hover {
+    box-shadow: 0 12px 40px rgba(92, 61, 30, 0.12);
+    transform: translateY(-3px);
+  }
+}
