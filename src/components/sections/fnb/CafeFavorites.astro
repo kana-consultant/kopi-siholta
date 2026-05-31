@@ -1,0 +1,252 @@
+---
+import { Image } from 'astro:assets';
+import fnbHero1 from '../../../images/fnb/coffee-susu.jpg';
+import fnbHero5 from '../../../images/fnb/coffee-caramel.jpg';
+import fnbHero7 from '../../../images/fnb/gula-aren.jpg';
+import fnbHero8 from '../../../images/fnb/expresso.jpg';
+
+const { t } = Astro.props;
+
+/* ── Cafe Best Sellers Data ─────────────── */
+const cafeBestSellers = [
+  {
+    nameKey: 'cafeKopiGulaAren',
+    tag: 'SWEET • CREAMY • LOCAL FAVORITE',
+    descKey: 'cafeKopiGulaArenDesc',
+    img: fnbHero7,
+    imgAltKey: 'altCoffeeMilk',
+  },
+  {
+    nameKey: 'cafeAmericano',
+    tag: 'BOLD • CLEAN • CLASSIC',
+    descKey: 'cafeAmericanoDesc',
+    img: fnbHero8,
+    imgAltKey: 'altAtmosphere',
+  },
+  {
+    nameKey: 'cafeEsKopiCaramel',
+    tag: 'SMOOTH • CARAMEL • MODERN',
+    descKey: 'cafeEsKopiCaramelDesc',
+    img: fnbHero5,
+    imgAltKey: 'altVariants',
+  },
+  {
+    nameKey: 'cafeEsKopiSusu',
+    tag: 'MILKY • BALANCED • SIGNATURE',
+    descKey: 'cafeEsKopiSusuDesc',
+    img: fnbHero1,
+    imgAltKey: 'altBarista',
+  },
+];
+---
+
+  <section class="cafe-favorites section section--cream" aria-labelledby="cafe-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <h2 id="cafe-heading" class="section-title">{t.fnb.cafeTitle ?? 'Cafe Favorites'}</h2>
+        <p class="section-sub">{t.fnb.cafeSubtitle ?? 'Minuman favorit pelanggan kami yang dibuat dari biji kopi specialty pilihan.'}</p>
+      </div>
+
+      <div class="cafe-carousel animate-on-scroll">
+        <div class="cafe-carousel__track">
+          {cafeBestSellers.map((drink, i) => (
+            <article class="product-card cafe-card" aria-labelledby={`cafe-card-name-${i}`}>
+              <div class="product-card__media">
+                <Image
+                  src={drink.img}
+                  alt={t.fnb.gallery?.[drink.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
+                  loading="lazy"
+                  widths={[320, 480]}
+                  sizes="(max-width: 768px) 80vw, 25vw"
+                  class="product-card__img"
+                />
+                <div class="product-card__tag">{drink.tag}</div>
+              </div>
+              <div class="product-card__body">
+                <h3 id={`cafe-card-name-${i}`} class="product-card__name">{t.fnb[drink.nameKey as keyof typeof t.fnb] ?? ''}</h3>
+                <p class="product-card__desc">{t.fnb[drink.descKey as keyof typeof t.fnb] ?? ''}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="cafe-carousel__indicators">
+          {cafeBestSellers.map((_, i) => (
+            <button class={`cafe-carousel__indicator ${i === 0 ? 'cafe-carousel__indicator--active' : ''}`} aria-label={`Go to card ${i + 1}`} data-index={i}></button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+<style>
+.cafe-favorites { 
+  padding-block: var(--space-8); 
+  overflow: hidden; 
+}
+
+.cafe-favorites .section__header { 
+  margin-bottom: var(--space-5); 
+}
+
+.cafe-carousel {
+  position: relative;
+  margin-top: var(--space-5);
+}
+
+.cafe-carousel__track {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-inline: var(--space-4);
+  padding-block: var(--space-2);
+  -webkit-overflow-scrolling: touch;
+}
+
+.cafe-carousel__track::-webkit-scrollbar { 
+  display: none; 
+}
+
+.cafe-card { 
+  width: 180px; 
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.product-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-lg); 
+  overflow: hidden;
+}
+
+.product-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.cafe-card .product-card__name {
+  font-size: clamp(13px, 1.4vw, 15px);
+}
+
+.cafe-card .product-card__desc {
+  font-size: 11px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.cafe-carousel__indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-bottom: var(--space-2);
+}
+
+.cafe-carousel__indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-brand-muted);
+  opacity: 0.4;
+  transition: all 300ms ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.cafe-carousel__indicator--active {
+  background: var(--color-brand-red);
+  opacity: 1;
+  width: 24px;
+  border-radius: 4px;
+}
+
+@media (min-width: 480px) {
+  .cafe-card { 
+    width: 200px; 
+  }
+}
+
+@media (min-width: 768px) {
+  .cafe-favorites { 
+    padding-block: var(--space-12); 
+  }
+
+  .cafe-favorites .section__header { 
+    margin-bottom: var(--space-6); 
+  }
+
+  .cafe-carousel { 
+    margin-top: var(--space-6); 
+  }
+
+  .cafe-card { 
+    width: 240px; 
+  }
+
+  .cafe-carousel__indicators { 
+    display: none; 
+  }
+}
+
+/* Hover effects */
+@media (hover: hover) {
+  .cafe-card:hover {
+    box-shadow: 0 8px 32px rgba(92, 61, 30, 0.10);
+    transform: translateY(-2px);
+  }
+}
+</style>
+
+<script>
+  const track = document.querySelector('.cafe-carousel__track');
+  const indicators = document.querySelectorAll('.cafe-carousel__indicator');
+
+  if (track && indicators.length > 0) {
+    const updateIndicators = () => {
+      const scrollLeft = (track as HTMLElement).scrollLeft;
+      const maxScrollLeft = (track as HTMLElement).scrollWidth - (track as HTMLElement).clientWidth;
+      const cardWidth = (track as HTMLElement).children[0]?.clientWidth || 180;
+      const gap = 16;
+      
+      let activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+
+      // Jika scroll sudah mentok ke kanan, paksa dot terakhir yang aktif
+      if (scrollLeft >= maxScrollLeft - 5) { // toleransi 5px
+        activeIndex = indicators.length - 1;
+      }
+
+      indicators.forEach((ind, i) => {
+        ind.classList.toggle('cafe-carousel__indicator--active', i === activeIndex);
+      });
+    };
+
+    (track as HTMLElement).addEventListener('scroll', updateIndicators, { passive: true });
+
+    indicators.forEach((ind) => {
+      ind.addEventListener('click', () => {
+        const index = parseInt(ind.getAttribute('data-index') || '0');
+        const cardWidth = (track as HTMLElement).children[0]?.clientWidth || 180;
+        const gap = 16;
+        const maxScrollLeft = (track as HTMLElement).scrollWidth - (track as HTMLElement).clientWidth;
+        
+        // Target scroll tidak boleh melebihi batas maksimal scroll track
+        let targetScroll = index * (cardWidth + gap);
+        if (targetScroll > maxScrollLeft) {
+          targetScroll = maxScrollLeft;
+        }
+
+        (track as HTMLElement).scrollTo({ left: targetScroll, behavior: 'smooth' });
+      });
+    });
+  }
+</script>

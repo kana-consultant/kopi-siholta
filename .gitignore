@@ -6,6 +6,10 @@ dist/
 .omc/
 .playwright-mcp/
 .claude/
+tests/
+.vercel/
+scripts/
+docs/
 
 # dependencies
 node_modules/

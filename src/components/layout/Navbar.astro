@@ -14,16 +14,6 @@ const t = useTranslations(lang);
 
 const nav = t.nav as Record<string, string>;
 
-function localeHref(targetLang: string): string {
-  const segs = Astro.url.pathname.split('/');
-  if (segs[1] && ['id', 'en', 'fr'].includes(segs[1])) {
-    segs[1] = targetLang;
-  } else {
-    segs.splice(1, 0, targetLang);
-  }
-  return segs.join('/') || '/';
-}
-
 const mainNavItems = [
   { key: 'products', href: `/${lang}/#products` },
   { key: 'export',   href: `/${lang}/#export` },
@@ -204,7 +194,6 @@ const mainNavItems = [
     toggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
     
-    // Tutup semua sub-menu mobile saat menu utama ditutup
     dropdownToggles.forEach(btn => {
       btn.setAttribute('aria-expanded', 'false');
       const sub = document.getElementById(btn.getAttribute('aria-controls') ?? '');
@@ -219,16 +208,14 @@ const mainNavItems = [
   closeBtns.forEach(btn => btn.addEventListener('click', closeMenu));
   navLinks.forEach(link => link.addEventListener('click', closeMenu));
 
-  /* ── Perbaikan Dropdown Mobile ──────────────────────────── */
   dropdownToggles.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      e.preventDefault(); // Mencegah loncat halaman jika bertipe link/button
+      e.preventDefault(); 
       
       const expanded = btn.getAttribute('aria-expanded') === 'true';
       const ctrlId = btn.getAttribute('aria-controls') ?? '';
       const sub = document.getElementById(ctrlId);
       
-      // 1. Reset/Tutup dropdown mobile lain yang sedang terbuka (Accordion style)
       dropdownToggles.forEach(other => {
         if (other !== btn) {
           other.setAttribute('aria-expanded', 'false');
@@ -237,14 +224,12 @@ const mainNavItems = [
         }
       });
       
-      // 2. Toggle state tombol yang sedang diklik
       btn.setAttribute('aria-expanded', String(!expanded));
       
-      // 3. Tampilkan atau sembunyikan elemen list sub-menu
       if (sub) {
         if (!expanded) {
           sub.removeAttribute('hidden');
-          sub.style.display = 'block'; // Memastikan ter-render
+          sub.style.display = 'block';
         } else {
           sub.setAttribute('hidden', '');
           sub.style.display = 'none';
@@ -253,7 +238,6 @@ const mainNavItems = [
     });
   });
 
-  /* ── Desktop dropdown ────────────────────────────────────── */
   const navDropdown = document.querySelector('[data-nav-dropdown]') as HTMLButtonElement | null;
   const navDropdownEl = navDropdown?.closest('.navbar__item')?.querySelector('.navbar__dropdown') as HTMLElement | null;
 
@@ -278,5 +262,39 @@ const mainNavItems = [
 
   window.addEventListener('beforeunload', () => {
     document.body.style.overflow = '';
+  });
+
+  document.addEventListener('click', (e) => {
+    const anchor = (e.target as HTMLElement).closest('a');
+    if (!anchor) return;
+
+    const href = anchor.getAttribute('href');
+    if (!href || href === '#') return;
+
+    if (href.includes('#')) {
+      try {
+        const targetUrl = new URL(href, window.location.origin);
+        
+        const cleanTargetClass = targetUrl.pathname.replace(/\/$/, '');
+        const cleanCurrentClass = window.location.pathname.replace(/\/$/, '');
+
+        if (cleanTargetClass === cleanCurrentClass) {
+          const targetSelector = targetUrl.hash; 
+          const targetElement = document.querySelector(targetSelector);
+
+          if (targetElement) {
+            e.preventDefault();
+            
+            closeMenu();
+
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            history.pushState(null, '', targetSelector);
+          }
+        }
+      } catch (err) {
+        console.error('Error parsing navigation hash:', err);
+      }
+    }
   });
 </script>

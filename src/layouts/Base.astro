@@ -3,7 +3,6 @@ import '../styles/global.css';
 import { Image } from 'astro:assets';
 import logo from '../images/logo/logo-kopi-siholta.png';
 
-
 interface Props {
   title?: string;
   description?: string;
@@ -11,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = 'Kopi Siholta — Indonesia\'s Specialty Coffee Pioneer',
-  description = 'PT Siholta Toba Indonesia is Indonesia\'s first specialty coffee producer and exporter from Sumatera Lintong, Humbang Hasundutan, North Sumatra.',
+  title = "Kopi Siholta — Indonesia's Specialty Coffee Pioneer",
+  description = "PT Siholta Toba Indonesia is Indonesia's first specialty coffee producer and exporter from Sumatera Lintong, Humbang Hasundutan, North Sumatra.",
   lang = 'en',
 } = Astro.props;
 
@@ -23,61 +22,214 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1C0F07" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content="kopi siholta, kopi lintong, kopi danau toba, kopi kemasan premium, kopi export, kopi arabika sumatera, bisnis kopi" />
+    <meta name="author" content="PT. Siholta Toba Indonesia" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Alternate languages — absolute URLs required per hreflang spec -->
     <link rel="alternate" hreflang="id" href="https://kopisiholta.com/id/" />
     <link rel="alternate" hreflang="en" href="https://kopisiholta.com/en/" />
     <link rel="alternate" hreflang="fr" href="https://kopisiholta.com/fr/" />
     <link rel="alternate" hreflang="x-default" href="https://kopisiholta.com/en/" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content="https://kopisiholta.com/og.jpg" />
+    <meta property="og:site_name" content="Kopi Siholta" />
     <meta property="og:locale" content={lang === 'id' ? 'id_ID' : lang === 'fr' ? 'fr_FR' : 'en_US'} />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- Favicon — PNG via astro:assets (circular crop applied via border-radius) -->
     <link rel="icon" type="image/png" href={logo.src} class="favicon-circular" />
     <link rel="shortcut icon" type="image/x-icon" href={logo.src} class="favicon-circular" />
+    
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <style>
-      .favicon-circular { border-radius: 50%; }
+      .global-page-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #F9F9F9; /* Warna terang sesuai gambar */
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease-in-out;
+        padding: 1rem;
+        box-sizing: border-box;
+        overflow-y: auto;
+      }
+
+      .global-page-loader.is-active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .skeleton-placeholder {
+        background: linear-gradient(90deg, #EBEBEB 25%, #F5F5F5 50%, #EBEBEB 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite linear;
+        border-radius: 4px;
+      }
+
+      @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      .skeleton-layout {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      .sk-navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #EAEAEA;
+      }
+      .sk-logo-group {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .sk-logo-text {
+        width: 120px;
+        height: 20px;
+      }
+      .sk-navitems {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      .sk-cart {
+        width: 80px;
+        height: 32px;
+        border-radius: 6px;
+      }
+      .sk-btn-save {
+        width: 65px;
+        height: 32px;
+        border-radius: 6px;
+      }
+
+      .sk-subnav {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+      .sk-subnav-item {
+        width: 90px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+
+      .sk-hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        text-align: center;
+        margin: 1rem auto 0 auto;
+        width: 100%;
+        max-width: 600px;
+      }
+      .sk-title-large {
+        width: 40%;
+        height: 24px;
+      }
+      .sk-title-sub {
+        width: 80%;
+        height: 14px;
+      }
+
+      .sk-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .sk-card {
+        background: #FFFFFF;
+        border: 1px solid #EAEAEA;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .sk-card-image {
+        width: 100%;
+        height: 200px;
+        border-radius: 0;
+      }
+      .sk-card-body {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .sk-line-long {
+        width: 70%;
+        height: 14px;
+      }
+      .sk-line-medium {
+        width: 85%;
+        height: 12px;
+      }
+      .sk-line-short {
+        width: 50%;
+        height: 12px;
+      }
+      .sk-card-footer {
+        height: 40px;
+        margin-top: 0.5rem;
+        width: 100%;
+        border-radius: 0;
+      }
+
+      @media (min-width: 768px) {
+        .global-page-loader {
+          padding: 2rem;
+        }
+        .sk-subnav {
+          gap: 2.5rem;
+        }
+        .sk-subnav-item {
+          width: 110px;
+        }
+        .sk-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+        }
+      }
     </style>
 
-    <!-- Font strategy: preload display font, async load body fonts -->
-    <!-- Cormorant Garamond — display font, preloaded for FCP -->
-    <link rel="preload" as="style"
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-          media="print" onload="this.media='all'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
     <noscript>
-      <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" />
     </noscript>
 
-    <!-- Body + label fonts — deferred, non-render-blocking -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400&display=swap"
-          media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400&display=swap" />
-    </noscript>
-
-    <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -92,6 +244,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
         "addressRegion": "North Sumatra",
         "addressCountry": "ID"
       },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+6281322518527",
+        "contactType": "sales"
+      },
       "sameAs": [
         "https://www.instagram.com/kopisiholta",
         "https://www.tokopedia.com/kopisiholta",
@@ -99,7 +256,159 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
       ]
     })} />
   </head>
-  <body>
+  <body class="grain-overlay">
+    
+    <div id="global-page-loader" class="global-page-loader is-active" aria-hidden="true">
+      <div class="skeleton-layout">
+        
+        <div class="sk-navbar">
+          <div class="sk-logo-group">
+            <div class="sk-logo-text skeleton-placeholder"></div>
+          </div>
+          <div class="sk-navitems">
+            <div class="sk-cart skeleton-placeholder"></div>
+            <div class="sk-btn-save skeleton-placeholder"></div>
+          </div>
+        </div>
+
+        <div class="sk-subnav">
+          <div class="sk-subnav-item skeleton-placeholder"></div>
+          <div class="sk-subnav-item skeleton-placeholder"></div>
+          <div class="sk-subnav-item skeleton-placeholder"></div>
+          <div class="sk-subnav-item skeleton-placeholder"></div>
+        </div>
+        
+        <div class="sk-hero">
+          <div class="sk-title-large skeleton-placeholder"></div>
+          <div class="sk-title-sub skeleton-placeholder"></div>
+        </div>
+
+        <div class="sk-grid">
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <slot />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('.skeleton-wrapper + img, .skeleton-wrapper ~ img');
+        images.forEach(img => {
+          const imageEl = img as HTMLImageElement;
+          if (imageEl.complete) {
+            const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
+            if (skeleton) skeleton.classList.add('loaded');
+          } else {
+            img.addEventListener('load', () => {
+              const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
+              if (skeleton) skeleton.classList.add('loaded');
+            });
+          }
+        });
+
+        setTimeout(() => {
+          document.querySelectorAll('.skeleton-wrapper').forEach(el => {
+            el.classList.add('loaded');
+          });
+        }, 3000);
+      });
+    </script>
+
+    <script>
+      const pageLoader = document.getElementById('global-page-loader');
+
+      window.addEventListener('load', () => {
+        pageLoader?.classList.remove('is-active');
+      });
+
+      window.addEventListener('pageshow', () => {
+        pageLoader?.classList.remove('is-active');
+      });
+
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const anchor = target.closest('a');
+
+        if (!anchor) return;
+
+        const href = anchor.getAttribute('href');
+        const targetAttr = anchor.getAttribute('target');
+
+        if (
+          targetAttr === '_blank' || 
+          !href || 
+          href.startsWith('#') || 
+          href.includes('#') || 
+          href.startsWith('tel:') || 
+          href.startsWith('mailto:') ||
+          href.startsWith('https://wa.me')
+        ) {
+          return;
+        }
+
+        pageLoader?.classList.add('is-active');
+      });
+    </script>
+
   </body>
 </html>

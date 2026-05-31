@@ -1,369 +1,45 @@
 ---
-import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
+export const prerender = false;
+
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
-import fnbBg from '../../images/bg/bg-fnb.jpg';
-import fnbHero1 from '../../images/fnb/coffee-susu.jpg';
-import fnbHero2 from '../../images/fnb/coffee-powder.jpg';
-import fnbHero3 from '../../images/fnb/caffee.jpg';
-import fnbHero4 from '../../images/fnb/coffee-beans.jpg';
-import fnbHero5 from '../../images/fnb/coffee-caramel.jpg';
-import fnbHero6 from '../../images/fnb/caffee.jpg';
-import fnbHero7 from '../../images/fnb/gula-aren.jpg';
-import fnbHero8 from '../../images/fnb/expresso.jpg';
-import fnbHero9 from '../../images/fnb/green-beans.jpg';
-import fnbHero10 from '../../images/hero/hero-4.jpg';
+
+import FnbHero from '../../components/sections/fnb/FnbHero.astro';
+import FnbStat from '../../components/sections/fnb/FnbStat.astro';
+import RetailCoffee from '../../components/sections/fnb/RetailCoffee.astro';
+import CafeFavorites from '../../components/sections/fnb/CafeFavorites.astro';
+import RetailDistibution from '../../components/sections/fnb/RetailDistibution.astro';
+import Sustainability from '../../components/sections/fnb/Sustainability.astro';
+import FnbCta from '../../components/sections/fnb/FnbCta.astro';
+
 import { useTranslations } from '../../i18n/utils';
 
-interface Props { lang?: 'id' | 'en' | 'fr'; }
+const { lang } = Astro.params;
+const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
 
-const { lang = 'id' } = Astro.props;
-const t = useTranslations(lang);
+const t = useTranslations(currentLang);
 
-/** Replace newlines with <br> tags — used with set:html */
-const nl = (s: string) => s.split('\n').join('<br>');
-
-export function getStaticPaths() {
-  return [
-    { params: { lang: 'id' }, props: { lang: 'id' } },
-    { params: { lang: 'en' }, props: { lang: 'en' } },
-    { params: { lang: 'fr' }, props: { lang: 'fr' } },
-  ];
-}
-
-/* ── Retail Product Data ─────────────────── */
-const retailProducts = {
-  main: {
-    nameKey: 'retailCoffeeBeans',
-    tag: 'ARABIKA • ROBUSTA • SPECIALTY GRADE',
-    descKey: 'retailCoffeeBeansDesc',
-    img: fnbHero4,
-    imgAltKey: 'altCoffeeBeans',
-  },
-  items: [
-    {
-      nameKey: 'retailCoffeePowder',
-      descKey: 'retailCoffeePowderDesc',
-      img: fnbHero2,
-      imgAltKey: 'altCoffeePowder',
-    },
-    {
-      nameKey: 'retailGreenBeans',
-      descKey: 'retailGreenBeansDesc',
-      img: fnbHero9,
-      imgAltKey: 'altGreenBeans',
-    },
-    {
-      nameKey: 'retailCoffeeCapsule',
-      descKey: 'retailCoffeeCapsuleDesc',
-      img: fnbHero6,
-      imgAltKey: 'altCoffeeCapsule',
-    },
-  ],
-};
-
-/* ── Cafe Best Sellers Data ─────────────── */
-const cafeBestSellers = [
-  {
-    nameKey: 'cafeKopiGulaAren',
-    tag: 'SWEET • CREAMY • LOCAL FAVORITE',
-    descKey: 'cafeKopiGulaArenDesc',
-    img: fnbHero7,
-    imgAltKey: 'altCoffeeMilk',
-  },
-  {
-    nameKey: 'cafeAmericano',
-    tag: 'BOLD • CLEAN • CLASSIC',
-    descKey: 'cafeAmericanoDesc',
-    img: fnbHero8,
-    imgAltKey: 'altAtmosphere',
-  },
-  {
-    nameKey: 'cafeEsKopiCaramel',
-    tag: 'SMOOTH • CARAMEL • MODERN',
-    descKey: 'cafeEsKopiCaramelDesc',
-    img: fnbHero5,
-    imgAltKey: 'altVariants',
-  },
-  {
-    nameKey: 'cafeEsKopiSusu',
-    tag: 'MILKY • BALANCED • SIGNATURE',
-    descKey: 'cafeEsKopiSusuDesc',
-    img: fnbHero1,
-    imgAltKey: 'altBarista',
-  },
-];
-
-/* ── Distribution Data ─────────────────── */
-const retailNetworks = ['Hypermart', 'Sendys', 'KPD'];
-const regions = ['Jabodetabek', 'Palangka Raya', 'Bali'];
-
-const cafeLocations = [
-  {
-    cityKey: 'locationPalangkaRaya',
-    addressKey: 'locationPalangkaRayaAddress',
-  },
-  {
-    cityKey: 'locationJakarta',
-    addressKey: 'locationJakartaAddress',
-  },
-];
 ---
 
-<Base title={t.meta.titleFnb} description={t.meta.descFnb} lang={lang}>
-  <Navbar lang={lang} />
+<Base title={t.meta.titleFnb} description={t.meta.descFnb} lang={currentLang}>
+  <Navbar lang={currentLang} />
+  <header>
+    <FnbHero lang={currentLang} t={t} />
+    <FnbStat lang={currentLang} t={t} />
+    <RetailCoffee lang={currentLang} t={t} />
+    <CafeFavorites lang={currentLang} t={t} />
+    <RetailDistibution lang={currentLang} t={t} />
+    <Sustainability lang={currentLang} t={t} />
+    <FnbCta lang={currentLang} t={t} />
 
-  <section class="page-hero page-hero--mid" aria-label="F&B Kopi Siholta">
-    <div class="page-hero__bg">
-      <Image
-        src={fnbBg}
-        alt={t.fnb.gallery?.altAtmosphere ?? ''}
-        class="page-hero__img"
-        style="object-position: center 40%"
-        loading="eager"
-        widths={[768, 1280, 1920]}
-        sizes="100vw"
-      />
-      <div class="page-hero__overlay page-hero__overlay--fnb" aria-hidden="true"></div>
-    </div>
+  </header>
+  <main>
 
-    <div class="container page-hero__inner">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <ol class="breadcrumb__list">
-          <li class="breadcrumb__item">
-            <a href={`/${lang}/`} class="breadcrumb__link">{t.breadcrumb.home}</a>
-          </li>
-          <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
-          <li class="breadcrumb__item">
-            <a href={`/${lang}/company`} class="breadcrumb__link">{t.breadcrumb.company}</a>
-          </li>
-          <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
-          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">{t.fnb.page}</li>
-        </ol>
-      </nav>
+  </main>
 
-      <div class="fnb-hero__content">
-        <h1 class="page-hero__title">{t.fnb.titleLine1}<br />{t.fnb.titleLine2}</h1>
-        <p class="page-hero__sub">{t.fnb['subtitle']}</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="stat-band stat-band--green" aria-label="F&B Statistics">
-    <div class="container">
-      <div class="stat-band__grid">
-        <div class="stat-band__item animate-on-scroll">
-          <span class="stat-band__value">{t.fnb.stats.statMenuItemsValue}{t.fnb.stats.statMenuItemsUnit}</span>
-          <span class="stat-band__label">{t.fnb.stats.statMenuItems}</span>
-        </div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 80ms">
-          <span class="stat-band__value">{t.fnb.stats.statDrinksValue}</span>
-          <span class="stat-band__label">{t.fnb.stats.statDrinks}</span>
-        </div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 160ms">
-          <span class="stat-band__value">{t.fnb.stats.statCupsDayValue}{t.fnb.stats.statCupsDayUnit}</span>
-          <span class="stat-band__label">{t.fnb.stats.statCupsDay}</span>
-        </div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 240ms">
-          <span class="stat-band__value">{t.fnb.stats.statYearsExpValue}{t.fnb.stats.statYearsExpUnit}</span>
-          <span class="stat-band__label">{t.fnb.stats.statYearsExp}</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="retail-coffee section" aria-labelledby="retail-heading">
-    <div class="container">
-      <div class="section__header animate-on-scroll">
-        <h2 id="retail-heading" class="section-title">{t.fnb.retailTitle ?? 'Retail Coffee Collection'}</h2>
-        <p class="section-sub">{t.fnb.retailSubtitle ?? 'Diproses dari biji kopi pilihan dataran tinggi Sumatera untuk kebutuhan retail, horeca, dan specialty coffee market.'}</p>
-      </div>
-
-      <div class="retail-coffee__grid">
-        <!-- Main large card -->
-        <article class="retail-card retail-card--main animate-on-scroll">
-          <div class="retail-card__media">
-            <Image
-              src={retailProducts.main.img}
-              alt={t.fnb.gallery?.[retailProducts.main.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
-              loading="eager"
-              widths={[480, 768, 1024]}
-              sizes="(max-width: 768px) 100vw, 55vw"
-              class="retail-card__img"
-            />
-            <div class="retail-card__tag">{retailProducts.main.tag}</div>
-          </div>
-          <div class="retail-card__body">
-            <h3 class="retail-card__name">{t.fnb[retailProducts.main.nameKey as keyof typeof t.fnb] ?? 'Coffee Beans'}</h3>
-            <p class="retail-card__desc">{t.fnb[retailProducts.main.descKey as keyof typeof t.fnb] ?? 'Biji kopi pilihan dengan karakter khas Sumatera Utara, tersedia dalam berbagai profil roasting.'}</p>
-            <a href={`/${lang}/company`} class="retail-card__link">
-              {t.fnb.retailCta ?? 'Lihat Produk'}
-              <Icon name="mdi:arrow-right" width="16" height="16" />
-            </a>
-          </div>
-        </article>
-
-        <!-- 3 small cards stacked -->
-        <div class="retail-coffee__stack">
-          {retailProducts.items.map((item, i) => (
-            <article class="retail-card retail-card--sm animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>
-              <div class="retail-card__media retail-card__media--sm">
-                <Image
-                  src={item.img}
-                  alt={t.fnb.gallery?.[item.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
-                  loading="lazy"
-                  widths={[300, 480]}
-                  sizes="(max-width: 768px) 50vw, 22vw"
-                  class="retail-card__img"
-                />
-              </div>
-              <div class="retail-card__body">
-                <h3 class="retail-card__name retail-card__name--sm">{t.fnb[item.nameKey as keyof typeof t.fnb] ?? ''}</h3>
-                <p class="retail-card__desc retail-card__desc--sm">{t.fnb[item.descKey as keyof typeof t.fnb] ?? ''}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cafe-favorites section section--cream" aria-labelledby="cafe-heading">
-    <div class="container">
-      <div class="section__header animate-on-scroll">
-        <h2 id="cafe-heading" class="section-title">{t.fnb.cafeTitle ?? 'Cafe Favorites'}</h2>
-        <p class="section-sub">{t.fnb.cafeSubtitle ?? 'Minuman favorit pelanggan kami yang dibuat dari biji kopi specialty pilihan.'}</p>
-      </div>
-
-      <div class="cafe-carousel animate-on-scroll">
-        <div class="cafe-carousel__track">
-          {cafeBestSellers.map((drink, i) => (
-            <article class="cafe-card" aria-labelledby={`cafe-card-name-${i}`}>
-              <div class="cafe-card__media">
-                <Image
-                  src={drink.img}
-                  alt={t.fnb.gallery?.[drink.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
-                  loading="lazy"
-                  widths={[320, 480]}
-                  sizes="(max-width: 768px) 80vw, 25vw"
-                  class="cafe-card__img"
-                />
-                <div class="cafe-card__tag">{drink.tag}</div>
-              </div>
-              <div class="cafe-card__body">
-                <h3 id={`cafe-card-name-${i}`} class="cafe-card__name">{t.fnb[drink.nameKey as keyof typeof t.fnb] ?? ''}</h3>
-                <p class="cafe-card__desc">{t.fnb[drink.descKey as keyof typeof t.fnb] ?? ''}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div class="cafe-carousel__indicators">
-          {cafeBestSellers.map((_, i) => (
-            <button class={`cafe-carousel__indicator ${i === 0 ? 'cafe-carousel__indicator--active' : ''}`} aria-label={`Go to card ${i + 1}`} data-index={i}></button>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="distribution section" aria-labelledby="distribution-heading">
-    <div class="container">
-      <div class="section__header animate-on-scroll">
-        <h2 id="distribution-heading" class="section-title">{t.fnb.distributionTitle ?? 'Distribusi &amp; Lokasi'}</h2>
-      </div>
-
-      <div class="distribution__grid animate-on-scroll">
-
-        <!-- LEFT: Retail Distribution -->
-        <div class="distribution-card distribution-card--retail">
-          <h3 class="distribution-card__heading">{t.fnb.retailNetworkHeading ?? 'Tersedia di Jaringan Retail Modern'}</h3>
-          <p class="distribution-card__desc">{t.fnb.retailNetworkDesc ?? 'Produk Kopi Siholta telah hadir di berbagai retail modern dan swalayan regional di Indonesia.'}</p>
-
-          <!-- Logo Grid -->
-          <div class="retail-logos">
-            {retailNetworks.map((brand) => (
-              <div class="retail-logo">
-                <span class="retail-logo__name">{brand}</span>
-              </div>
-            ))}
-          </div>
-
-          <!-- Regional Chips -->
-          <div class="region-chips">
-            {regions.map((region) => (
-              <span class="region-chip">{region}</span>
-            ))}
-          </div>
-        </div>
-
-        <!-- RIGHT: Cafe Locations -->
-        <div class="distribution-card distribution-card--cafe">
-          <h3 class="distribution-card__heading">{t.fnb.cafeLocationsHeading ?? 'Kunjungi Gerai Kami'}</h3>
-
-          <div class="cafe-locations">
-            {cafeLocations.map((loc) => (
-              <div class="cafe-location">
-                <div class="cafe-location__icon" aria-hidden="true">
-                  <Icon name="mdi:map-marker" width="18" height="18" />
-                </div>
-                <div class="cafe-location__info">
-                  <p class="cafe-location__city">{t.fnb[loc.cityKey as keyof typeof t.fnb] ?? ''}</p>
-                  <p class="cafe-location__address">{t.fnb[loc.addressKey as keyof typeof t.fnb] ?? ''}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <!-- Mini Map Preview -->
-          <div class="cafe-map-preview" aria-hidden="true">
-            <div class="cafe-map-preview__dots">
-              <div class="cafe-map-dot cafe-map-dot--active"></div>
-              <div class="cafe-map-dot"></div>
-            </div>
-            <p class="cafe-map-preview__label">{t.fnb.mapPreviewLabel ?? '2 Lokasi Tersedia'}</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-<!-- SUSTAINABILITY -->
-  <section class="sustainability section section--olive" aria-labelledby="sustainability-heading">
-    <div class="container sustainability__inner">
-      <div class="sustainability__text animate-on-scroll">
-        <h2 id="sustainability-heading" class="section-title">{t.fnb.sustainabilityTitle ?? 'Sustainability Commitment'}</h2>
-        <p class="section-sub">{t.fnb.sustainabilitySubtitle ?? 'Kopi Siholta berkomitmen pada keberlanjutan lingkungan melalui penggunaan kapsul aluminium daur ulang 80% dan dukungan untuk petani kopi lokal Sumatera.'}</p>
-      </div>
-      <div class="sustainability__visual animate-on-scroll">
-        <div class="sustainability__icon-wrap" aria-hidden="true">
-          <Icon name="mdi:leaf" width="64" height="64" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════
-       6. CTA
-  ════════════════════════════════════════════════ -->
-  <section class="page-cta page-cta--cream" aria-label={t.fnb.ctaTitle}>
-    <div class="container page-cta__inner">
-      <div class="page-cta__text animate-on-scroll">
-        <h2 class="page-cta__title page-cta__title--earth">{nl(t.fnb.ctaTitle)}</h2>
-        <p class="page-cta__sub page-cta__sub--earth">{t.fnb.ctaSubtitle}</p>
-      </div>
-      <div class="page-cta__actions animate-on-scroll">
-        <a href={`/${lang}/#contact`} class="btn btn--primary">{t.fnb.cta1}</a>
-      </div>
-    </div>
-  </section>
-
-  <Footer lang={lang} />
+  <Footer lang={currentLang} />
   <WhatsAppFAB />
 </Base>
 
@@ -379,31 +55,4 @@ const cafeLocations = [
   );
   els.forEach(el => observer.observe(el));
 
-  // Carousel indicators - scroll sync
-  const track = document.querySelector('.cafe-carousel__track');
-  const indicators = document.querySelectorAll('.cafe-carousel__indicator');
-
-  if (track && indicators.length > 0) {
-    const updateIndicators = () => {
-      const scrollLeft = (track as HTMLElement).scrollLeft;
-      const cardWidth = (track as HTMLElement).children[0]?.clientWidth || 240;
-      const gap = 16;
-      const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
-
-      indicators.forEach((ind, i) => {
-        ind.classList.toggle('cafe-carousel__indicator--active', i === activeIndex);
-      });
-    };
-
-    (track as HTMLElement).addEventListener('scroll', updateIndicators, { passive: true });
-
-    indicators.forEach((ind) => {
-      ind.addEventListener('click', () => {
-        const index = parseInt(ind.getAttribute('data-index') || '0');
-        const cardWidth = (track as HTMLElement).children[0]?.clientWidth || 240;
-        const gap = 16;
-        (track as HTMLElement).scrollTo({ left: index * (cardWidth + gap), behavior: 'smooth' });
-      });
-    });
-  }
 </script>

@@ -1,21 +1,18 @@
-/* =========================================================
-   Kopi Siholta — Global Stylesheet
-   Import order:
-     1. base.css         — reset, tokens, base element styles
-     2. typography.css    — type tokens & section helpers
-     3. utilities.css     — shared component utilities
-     4. components/_index — per-component scoped styles
-     5. page.css          — shared page-level layouts (hero, breadcrumb, stat, CTA, gallery)
-     6. fnb.css           — F&B page
-     7. export.css        — Tourism page
-     8. farming.css       — Coffee farming page
-   ========================================================= */
 
 @import './base.css';
+@import './animations.css';
 @import './typography.css';
+@import './components/buttons.css';
+@import './components/cards.css';
 @import './utilities.css';
-@import './components/_index.css';
 @import './page.css';
-@import './fnb.css';
-@import './export.css';
-@import './farming.css';
+
+@import './components/hero.css';
+@import './components/heritage.css';
+@import './components/stats.css';
+@import './components/partnerships.css';
+@import './components/navbar.css';
+@import './components/footer.css';
+@import './components/products.css';
+@import './components/location-map.css';
+

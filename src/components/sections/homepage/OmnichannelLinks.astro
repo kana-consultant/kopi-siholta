@@ -1,0 +1,148 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import tokpedLogo from '../../../images/logo/logo-tokopedia.webp';
+import shopeeLogo from '../../../images/logo/logo-shopee.webp';
+import igLogo from '../../../images/logo/logo-instagram.webp';
+import waLogo from '../../../images/logo/logo-whatsapp.webp';
+import tiktokLogo from '../../../images/logo/logo-tiktok.webp';
+import linktreeLogo from '../../../images/logo/logo-linktree.webp';
+import { t } from '../../../i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+const tr = t(lang);
+
+const TOKPED_URL = 'https://www.tokopedia.com/kopisiholta';
+const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
+const TIKTOK_URL = 'https://www.tiktok.com/@kopisiholta';
+const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
+const INSTAGRAM_URL = 'https://www.instagram.com/kopi_siholta.id/';
+const WHATSAPP_URL = 'https://wa.me/6281322518527';
+
+const channels = [
+  { nameKey: 'buyTokopedia' as const, href: TOKPED_URL,   color: '#03AC0E', logo: tokpedLogo },
+  { nameKey: 'buyShopee'   as const, href: SHOPEE_URL,    color: '#EE4D2D', logo: shopeeLogo },
+  { nameKey: 'buyInstagram' as const, href: INSTAGRAM_URL, color: '#C13584', logo: igLogo    },
+  { nameKey: 'buyWhatsApp' as const, href: WHATSAPP_URL,  color: '#25D366', logo: waLogo    },
+  { nameKey: 'buyTiktok' as const, href: TIKTOK_URL,  color: '#25D366', logo: tiktokLogo    },
+  { nameKey: 'buyLinktree' as const, href: LINKTREE_URL,  color: '#25D366', logo: linktreeLogo    },
+];
+---
+
+<section class="omni section section--cream" id="omni" aria-label="Omnichannel Shopping Links">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section-title">{tr.omni.title}</h2>
+      <p class="section-sub">{tr.omni.subtitle}</p>
+    </div>
+
+    <div class="omni__channels">
+      {channels.map(ch => (
+        <a
+          href={ch.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="omni__channel"
+          style={`--channel-color: ${ch.color}`}
+          aria-label={tr.omni[ch.nameKey]}
+        >
+          <div class="omni__channel-icon">
+            <Image src={ch.logo} alt="" width={24} height={24} format="webp" />
+          </div>
+          <span class="omni__channel-name">{tr.omni[ch.nameKey]}</span>
+          <Icon name="mdi:arrow-top-right" class="omni__channel-arrow" width="14" height="14" />
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  
+.omni {
+  background: var(--color-brand-cream);
+  padding-block: var(--space-12);
+}
+
+.omni__channels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.omni__channel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: 0.5px solid var(--channel-color, var(--color-neutral-200));
+  border-radius: var(--radius-lg);
+  background: #fff;
+  text-decoration: none;
+  transition: all 200ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.omni__channel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--channel-color);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.omni__channel:hover::before { opacity: 0.04; }
+
+.omni__channel:hover {
+  border-color: var(--channel-color);
+  transform: translateY(-2px);
+}
+
+.omni__channel-icon {
+  color: var(--channel-color);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.omni__channel-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-brand-earth);
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.omni__channel-arrow {
+  color: var(--color-brand-muted);
+  flex-shrink: 0;
+  transition: transform 200ms ease, color 200ms ease;
+  position: relative;
+  z-index: 1;
+}
+
+.omni__channel:hover .omni__channel-arrow {
+  transform: translate(2px, -2px);
+  color: var(--channel-color);
+}
+
+@media (max-width: 1024px) {
+  .omni__channels { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .omni__channels { grid-template-columns: 1fr; }
+}
+
+</style>

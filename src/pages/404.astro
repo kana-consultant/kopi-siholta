@@ -1,68 +1,9 @@
 ---
-// Root 404 handler — redirects to the best locale 404 page
-// This file MUST be at src/pages/404.astro for Astro to use it as the 404 handler
-import '../styles/error-page.css';
-import { Icon } from 'astro-icon/components';
+import { onRequest } from '../middleware';
+
+export const prerender = false;
+
+const preferredLang = Astro.cookies.get('preferred_lang')?.value || 'id';
+
+return Astro.redirect(`/${preferredLang}/404`);
 ---
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Loading…</title>
-    <meta name="robots" content="noindex, nofollow" />
-  </head>
-  <body>
-
-    <div class="page-loader" role="status" aria-label="Loading, please wait" aria-live="polite">
-
-      <!-- Floating coffee bean -->
-      <div class="page-loader__bean" aria-hidden="true">
-        <Icon name="mdi:coffee" width="48" height="48" />
-      </div>
-
-      <!-- Spinner -->
-      <div class="page-loader__spinner" aria-hidden="true">
-        <Icon name="mdi:loading" width="40" height="40" />
-      </div>
-
-      <!-- Brand name -->
-      <p class="page-loader__brand">Kopi Siholta</p>
-
-      <!-- Redirect text -->
-      <p class="page-loader__text">Redirecting...</p>
-
-    </div>
-
-    <script>
-      const DEFAULT = '/en/';
-
-      async function detectLocale(): Promise<string> {
-        const stored = sessionStorage.getItem('ksi_locale');
-        if (stored && ['id','en','fr'].includes(stored)) return stored;
-
-        try {
-          const res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
-          if (res.ok) {
-            const d = await res.json();
-            const c = (d.country_name || '').toLowerCase();
-            if (c === 'indonesia' || c === 'republic of indonesia') return '/id/';
-          }
-        } catch (_) {}
-
-        const tz   = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const lang2 = (navigator.language || '').slice(0, 2).toLowerCase();
-        const frTz  = ['Europe/Paris','Europe/Monaco','Europe/Andorra','Europe/Luxembourg',
-                        'Europe/Switzerland','Europe/Belgium','Europe/Netherlands'];
-        if (frTz.includes(tz) || lang2 === 'fr') return '/fr/';
-        if (lang2 === 'id') return '/id/';
-        return DEFAULT;
-      }
-
-      detectLocale().then(locale => {
-        window.location.replace(`${locale}404`);
-      });
-    </script>
-  </body>
-</html>
