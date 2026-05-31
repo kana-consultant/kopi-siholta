@@ -251,22 +251,6 @@
   inset: 0;
 }
 
-.page-hero__overlay--earth {
-  background: linear-gradient(135deg, rgba(92,61,30,0.60) 0%, rgba(92,61,30,0.30) 50%, rgba(205,18,34,0.22) 100%);
-}
-
-.page-hero__overlay--farm {
-  background: linear-gradient(135deg, rgba(42,74,32,0.70) 0%, rgba(92,61,30,0.40) 60%, rgba(26,15,8,0.55) 100%);
-}
-
-.page-hero__overlay--fnb {
-  background: linear-gradient(160deg, rgba(92,61,30,0.65) 0%, rgba(205,18,34,0.30) 60%, rgba(92,61,30,0.75) 100%);
-}
-
-.page-hero__overlay--company {
-  background: linear-gradient(to bottom, rgba(92,61,30,0.20) 0%, rgba(92,61,30,0.65) 60%, rgba(92,61,30,0.80) 100%);
-}
-
 .page-hero__inner {
   position: relative;
   z-index: 2;
