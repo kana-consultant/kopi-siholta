@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
+// import tailwindcss from '@tailwindcss/vite';
 import viteCompression from 'vite-plugin-compression';
 import iconify from 'astro-icon';
 import vercel from '@astrojs/vercel';
@@ -14,7 +14,7 @@ export default defineConfig({
   ],
   vite: {
     plugins: [
-      tailwindcss(),
+      // tailwindcss(),
       viteCompression({
         algorithm: 'brotliCompress',
         threshold: 1024,
