@@ -8,6 +8,8 @@ dist/
 .claude/
 tests/
 .vercel/
+scripts/
+docs/
 
 # dependencies
 node_modules/

@@ -6,10 +6,9 @@ import fnbHero4 from '../../../images/fnb/coffee-beans.jpg';
 import fnbHero6 from '../../../images/fnb/caffee.jpg';
 import fnbHero9 from '../../../images/fnb/green-beans.jpg';
 
-
-
 const { lang, t } = Astro.props;
 const nl = (s: string) => s.split('\n').join('<br>');
+
 /* ── Retail Product Data ─────────────────── */
 const retailProducts = {
   main: {
@@ -49,7 +48,6 @@ const retailProducts = {
       </div>
 
       <div class="retail-coffee__grid">
-        <!-- Main large card -->
         <article class="product-card retail-card--main animate-on-scroll">
           <div class="product-card__media">
             <Image
@@ -95,24 +93,17 @@ const retailProducts = {
       </div>
     </div>
   </section>
+
 <style>
-.retail-coffee { padding-block: var(--space-12); }
+.retail-coffee { 
+  padding-block: var(--space-8); 
+}
 
 .retail-coffee__grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: 1fr;
   gap: var(--space-4);
-  margin-top: var(--space-8);
-}
-
-.retail-card--sm {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  min-height: 120px;
-}
-
-.retail-card--sm .product-card__media {
-  height: 120px;
+  margin-top: var(--space-6);
 }
 
 .retail-coffee__stack {
@@ -120,25 +111,68 @@ const retailProducts = {
   flex-direction: column;
   gap: var(--space-4);
 }
-@media (max-width: 768px) {
-  .retail-coffee { padding-block: var(--space-8); }
-  .retail-coffee__grid { gap: var(--space-3); margin-top: var(--space-6); }
-  .retail-card--sm { grid-template-columns: 100px 1fr; min-height: 100px; }
-  .retail-card--sm .product-card__media { height: 100px; }
-  .retail-card--sm .product-card__body { padding: var(--space-3); }
 
+.retail-card--main .product-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .retail-coffee__grid { grid-template-columns: 1.4fr 1fr; }
-  .retail-coffee__stack { grid-template-rows: repeat(3, 1fr); }
-
+.retail-card--main .product-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-@media (max-width: 480px) {
-  .retail-card--sm { grid-template-columns: 90px 1fr; min-height: 80px; }
+.retail-card--sm {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  min-height: 90px;
+}
 
+.retail-card--sm .product-card__media {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.retail-card--sm .product-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.retail-card--sm .product-card__body {
+  padding: var(--space-3);
 }
 
 
+@media (min-width: 480px) {
+  .retail-card--sm { 
+    grid-template-columns: 110px 1fr; 
+  }
+}
+
+@media (min-width: 768px) {
+  .retail-coffee { 
+    padding-block: var(--space-12); 
+  }
+
+  .retail-coffee__grid {
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .retail-card--main .product-card__media {
+    aspect-ratio: auto;
+  }
+
+  .retail-card--sm { 
+    grid-template-columns: 140px 1fr; 
+    min-height: 120px; 
+  }
+}
 </style>

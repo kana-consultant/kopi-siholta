@@ -4,38 +4,42 @@ import { Icon } from "astro-icon/components";
 const { lang, t } = Astro.props;
 const nl = (s: string) => s.split('\n').join('<br>');
 ---
-<!-- SUSTAINABILITY -->
-  <section class="sustainability section section--olive" aria-labelledby="sustainability-heading">
-    <div class="container sustainability__inner">
-      <div class="sustainability__text animate-on-scroll">
-        <h2 id="sustainability-heading" class="section-title">{t.fnb.sustainabilityTitle ?? 'Sustainability Commitment'}</h2>
-        <p class="section-sub">{t.fnb.sustainabilitySubtitle ?? 'Kopi Siholta berkomitmen pada keberlanjutan lingkungan melalui penggunaan kapsul aluminium daur ulang 80% dan dukungan untuk petani kopi lokal Sumatera.'}</p>
-      </div>
-      <div class="sustainability__visual animate-on-scroll">
-        <div class="sustainability__icon-wrap" aria-hidden="true">
-          <Icon name="mdi:leaf" width="64" height="64" />
+<section class="sustainability section section--olive" aria-labelledby="sustainability-heading">
+    <div class="container">
+      <div class="container sustainability__inner">
+        <div class="sustainability__text animate-on-scroll">
+          <h2 id="sustainability-heading" class="section-title">{t.fnb.sustainabilityTitle ?? 'Sustainability Commitment'}</h2>
+          <p class="section-sub">{t.fnb.sustainabilitySubtitle ?? 'Kopi Siholta berkomitmen pada keberlanjutan lingkungan melalui penggunaan kapsul aluminium daur ulang 80% dan dukungan untuk petani kopi lokal Sumatera.'}</p>
+        </div>
+        <div class="sustainability__visual animate-on-scroll">
+          <div class="sustainability__icon-wrap" aria-hidden="true">
+            <Icon name="mdi:leaf" width="64" height="64" />
+          </div>
         </div>
       </div>
     </div>
   </section>
-  <style>
+
+<style>
 .section--olive {
-  padding-block: var(--space-12);
+  padding-block: var(--space-8);
   border-bottom: 1px solid rgba(205, 18, 34, 0.3);
 }
 
 .sustainability__inner {
   background: rgba(255, 255, 255, 0.85);
   border-radius: var(--radius-xl);
-  padding: var(--space-8);
+  padding: var(--space-6);
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-6);
   border: 1px solid var(--color-neutral-200);
 }
 
-.sustainability__text { max-width: 600px; }
+.sustainability__text { 
+  max-width: 100%; 
+}
 
 .sustainability__visual {
   display: flex;
@@ -54,22 +58,20 @@ const nl = (s: string) => s.split('\n').join('<br>');
   justify-content: center;
   color: var(--color-brand-red);
 }
-
-@media (max-width: 768px) {
-  .section--olive { padding-block: var(--space-8); }
-  .sustainability__inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-    padding: var(--space-6);
+@media (min-width: 768px) {
+  .section--olive { 
+    padding-block: var(--space-12); 
   }
 
-  .location__iframe { height: 260px; }
+  .sustainability__inner {
+    /* Desktop layout: Menjadi 2 kolom (teks kiri, ikon kanan) */
+    grid-template-columns: 1fr auto;
+    gap: var(--space-8);
+    padding: var(--space-8);
+  }
+
+  .sustainability__text { 
+    max-width: 600px; 
+  }
 }
-
-@media (max-width: 480px) {
-  .region-chip { font-size: 11px; padding: var(--space-1) var(--space-3); }
-  .retail-logo { width: 60px; height: 36px; }
-
-}
-
-  </style>
+</style>
