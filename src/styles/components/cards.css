@@ -184,14 +184,17 @@
 }
 
 .cert-card__img {
-  width: 100%; height: 100%;
+  width: 100%; 
+  height: 100%;
   object-fit: contain;
   object-position: center;
   display: block;
   transition: transform 500ms ease;
 }
 
-.cert-card:hover .cert-card__img { transform: scale(1.02); }
+.cert-card:hover .cert-card__img { 
+  transform: scale(1.02); 
+}
 
 .cert-card__img-wrap::after {
   content: '';
@@ -207,13 +210,14 @@
   flex-direction: column;
   gap: var(--space-3);
   flex: 1;
+  justify-content: flex-end;
   position: relative;
   z-index: 1;
-  justify-content: flex-end;
 }
 
 .cert-card__icon {
-  width: 48px; height: 48px;
+  width: 48px; 
+  height: 48px;
   border-radius: var(--radius-lg);
   background: rgba(205, 18, 34, 0.15);
   color: var(--color-brand-gold);
@@ -231,6 +235,9 @@
   color: #fff;
   line-height: 1.2;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .cert-card__desc {
@@ -240,6 +247,9 @@
   color: rgba(255, 255, 255, 0.9);
   flex: 1;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .cert-card__btn {
@@ -268,7 +278,9 @@
   transform: translateY(-1px);
 }
 
-.cert-card__btn:active { transform: translateY(0); }
+.cert-card__btn:active { 
+  transform: translateY(0); 
+}
 
 /* ── Flavour Chip (shared by process/menu cards) ──────────── */
 .flavour-chip {
@@ -312,7 +324,7 @@
 
 .timeline__card-title {
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: clamp(16px, 1.8vw, 22px);
   font-weight: 700;
   color: var(--color-brand-earth);
   margin-bottom: var(--space-2);
@@ -321,7 +333,7 @@
 
 .timeline__card-desc {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: clamp(13px, 1.5vw, 15px);
   line-height: 1.7;
   color: var(--color-brand-muted);
 }

@@ -33,7 +33,7 @@ const certs = [
 ---
 
  <!-- ── Trusted & Certified ─────────────────────── -->
-  <section class="certifications section" aria-labelledby="certifications-heading">
+<section class="certifications section" aria-labelledby="certifications-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
         <h2 id="certifications-heading" class="section-title">{tc.certificationsTitle}</h2>
@@ -147,18 +147,14 @@ const certs = [
   <style>
 .certifications__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--space-6);
   margin-top: var(--space-8);
 }
 
-@media (max-width: 768px) {
-  .certifications__grid { grid-template-columns: 1fr 1fr; }
-
-}
-
-@media (max-width: 640px) {
-  .certifications__grid { grid-template-columns: 1fr; }
-
+@media (min-width: 640px) {
+  .certifications__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
   </style>

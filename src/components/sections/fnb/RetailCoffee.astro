@@ -65,14 +65,13 @@ const retailProducts = {
           <div class="product-card__body">
             <h3 class="product-card__name">{t.fnb[retailProducts.main.nameKey as keyof typeof t.fnb] ?? 'Coffee Beans'}</h3>
             <p class="product-card__desc">{t.fnb[retailProducts.main.descKey as keyof typeof t.fnb] ?? 'Biji kopi pilihan dengan karakter khas Sumatera Utara, tersedia dalam berbagai profil roasting.'}</p>
-            <a href={`/${lang}/company`} class="btn btn--link-cta">
+            <a href={`/${lang}/#products`} class="btn btn--link-cta" aria-label="Products">
               {t.fnb.retailCta ?? 'Lihat Produk'}
               <Icon name="mdi:arrow-right" width="16" height="16" />
             </a>
           </div>
         </article>
 
-        <!-- 3 small cards stacked -->
         <div class="retail-coffee__stack">
           {retailProducts.items.map((item, i) => (
             <article class="product-card retail-card--sm animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>

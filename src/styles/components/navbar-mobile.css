@@ -301,6 +301,7 @@
     align-items: center;
     justify-content: center;
     padding: 13px 20px;
+    margin-bottom: var(--space-6);
     background: var(--color-brand-red);
     color: #fff;
     font-family: var(--font-body);

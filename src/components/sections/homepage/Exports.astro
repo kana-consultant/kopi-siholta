@@ -1,7 +1,5 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
-import globePic from '../../../images/globe-p.png';
 import { t } from '../../../i18n/utils';
 
 interface Props {
@@ -29,27 +27,9 @@ const kpiKeys = [
       <div class="export__head">
         <h2 class="export__title">{tr.export.title}</h2>
         <p class="export__desc">{tr.export.subtitle}</p>
-        <div class="export__routes">
-          <p class="export__routes-label">{tr.export.routesLabel}</p>
-          <div class="export__route-list">
-            {countryKeys.slice(0, 3).map((key, i) => (
-              <div class="export__route-item">
-                <Icon name="mdi:map-marker" width="10" height="10" />
-                <span>{tr.export[key]}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+      </div>
       </div>
 
-      <div class="export__globe-wrap" aria-hidden="true">
-        <Image src={globePic} alt={tr.export.mapAlt} class="export__globe-img"
-          loading="lazy" widths={[400, 600, 800]}
-          sizes="(max-width: 1024px) 100vw, 50vw" />
-      </div>
-    </div>
-
-    <!-- KPI Strip -->
     <div class="export__kpi-strip">
       {kpiKeys.map(kpi => (
         <div class="export__kpi-cell">
@@ -62,7 +42,6 @@ const kpiKeys = [
       ))}
     </div>
 
-    <!-- Country Grid -->
     <div class="export__country-grid">
       <div class="export__country-section">
         <div class="export__country-cards">
@@ -129,8 +108,8 @@ const kpiKeys = [
 
 .export__top {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-10);
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
   align-items: center;
 }
 
@@ -138,6 +117,7 @@ const kpiKeys = [
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  width: 100%;
 }
 
 .export__title {
@@ -154,26 +134,9 @@ const kpiKeys = [
   font-size: 16px;
   line-height: 1.75;
   color: var(--color-brand-muted);
-  max-width: 400px;
+  max-width: 100%;
 }
 
-.export__routes {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-4) var(--space-5);
-  background: rgba(205,18,34,0.05);
-  border: 0.5px solid rgba(205,18,34,0.12);
-  border-radius: var(--radius-xl);
-}
-
-.export__routes-label {
-  font-family: var(--font-label);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-brand-muted);
-}
 
 .export__route-list {
   display: flex;
@@ -193,21 +156,6 @@ const kpiKeys = [
   opacity: 0.9;
 }
 
-/* ── Globe ─────────────────────────────── */
-.export__globe-wrap {
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
-
-.export__globe-img {
-  width: 100%;
-  max-width: 420px;
-  height: auto;
-  border-radius: var(--radius-xl);
-}
-
-/* ── KPI Strip ─────────────────────────── */
 .export__kpi-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -270,34 +218,6 @@ const kpiKeys = [
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-}
-
-.export__country-section-header {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-label);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-brand-muted);
-}
-
-.export__country-section-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.export__country-section-dot--active {
-  background: var(--color-brand-red);
-  box-shadow: 0 0 8px rgba(205,18,34,0.5);
-}
-
-.export__country-section-dot--planned {
-  background: var(--color-brand-earth);
-  opacity: 0.4;
 }
 
 .export__country-cards {
@@ -373,7 +293,6 @@ const kpiKeys = [
 
 @media (max-width: 1024px) {
   .export__top { grid-template-columns: 1fr; }
-  .export__globe-wrap { order: -1; max-width: 320px; margin-inline: auto; }
   .export__kpi-strip { grid-template-columns: repeat(2, 1fr); }
   .export__country-grid { grid-template-columns: 1fr; }
 }
@@ -381,9 +300,4 @@ const kpiKeys = [
 @media (max-width: 640px) {
   .export__kpi-strip { grid-template-columns: 1fr 1fr; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .export__globe-label-dot { animation: none; }
-}
-
 </style>
