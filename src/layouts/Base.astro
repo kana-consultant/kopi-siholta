@@ -10,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = 'Kopi Siholta — Indonesia\'s Specialty Coffee Pioneer',
-  description = 'PT Siholta Toba Indonesia is Indonesia\'s first specialty coffee producer and exporter from Sumatera Lintong, Humbang Hasundutan, North Sumatra.',
+  title = "Kopi Siholta — Indonesia's Specialty Coffee Pioneer",
+  description = "PT Siholta Toba Indonesia is Indonesia's first specialty coffee producer and exporter from Sumatera Lintong, Humbang Hasundutan, North Sumatra.",
   lang = 'en',
 } = Astro.props;
 
@@ -58,20 +58,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <style>
-      /* ── Global Skeleton Page Transition ── */
       .global-page-loader {
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: #1C0F07; /* Warna gelap dasar Kopi Siholta */
+        background-color: #F9F9F9; /* Warna terang sesuai gambar */
         z-index: 9999;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.2s ease-in-out;
-        padding: 2rem;
+        transition: opacity 0.25s ease-in-out;
+        padding: 1rem;
         box-sizing: border-box;
+        overflow-y: auto;
       }
 
       .global-page-loader.is-active {
@@ -79,73 +79,148 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
         pointer-events: auto;
       }
 
+      .skeleton-placeholder {
+        background: linear-gradient(90deg, #EBEBEB 25%, #F5F5F5 50%, #EBEBEB 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite linear;
+        border-radius: 4px;
+      }
+
+      @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
       .skeleton-layout {
         max-width: 1200px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 4rem;
+        gap: 2.5rem;
       }
 
-      /* Navbar Skeleton */
       .sk-navbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #EAEAEA;
       }
-      .sk-logo {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
+      .sk-logo-group {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .sk-logo-text {
+        width: 120px;
+        height: 20px;
       }
       .sk-navitems {
         display: flex;
-        gap: 1.5rem;
+        gap: 1rem;
+        align-items: center;
       }
-      .sk-navitem {
+      .sk-cart {
         width: 80px;
-        height: 16px;
-        border-radius: 4px;
+        height: 32px;
+        border-radius: 6px;
+      }
+      .sk-btn-save {
+        width: 65px;
+        height: 32px;
+        border-radius: 6px;
       }
 
-      /* Hero Content Skeleton */
+      .sk-subnav {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+      .sk-subnav-item {
+        width: 90px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+
       .sk-hero {
         display: flex;
         flex-direction: column;
-        gap: 1.2rem;
-        max-width: 600px;
-        margin-top: 2rem;
-      }
-
-      .sk-title {
+        align-items: center;
+        gap: 0.75rem;
+        text-align: center;
+        margin: 1rem auto 0 auto;
         width: 100%;
-        height: 48px;
-        border-radius: 6px;
+        max-width: 600px;
       }
-      .sk-title.short {
-        width: 70%;
+      .sk-title-large {
+        width: 40%;
+        height: 24px;
       }
-      .sk-text {
-        width: 90%;
+      .sk-title-sub {
+        width: 80%;
         height: 14px;
-        border-radius: 4px;
-      }
-      .sk-button-group {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-      .sk-button {
-        width: 140px;
-        height: 44px;
-        border-radius: 6px;
       }
 
-      /* Responsive adjustment */
-      @media (max-width: 768px) {
-        .sk-navitems { display: none; }
-        .sk-hero { margin-top: 1rem; }
+      .sk-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .sk-card {
+        background: #FFFFFF;
+        border: 1px solid #EAEAEA;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .sk-card-image {
+        width: 100%;
+        height: 200px;
+        border-radius: 0;
+      }
+      .sk-card-body {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .sk-line-long {
+        width: 70%;
+        height: 14px;
+      }
+      .sk-line-medium {
+        width: 85%;
+        height: 12px;
+      }
+      .sk-line-short {
+        width: 50%;
+        height: 12px;
+      }
+      .sk-card-footer {
+        height: 40px;
+        margin-top: 0.5rem;
+        width: 100%;
+        border-radius: 0;
+      }
+
+      @media (min-width: 768px) {
+        .global-page-loader {
+          padding: 2rem;
+        }
+        .sk-subnav {
+          gap: 2.5rem;
+        }
+        .sk-subnav-item {
+          width: 110px;
+        }
+        .sk-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+        }
       }
     </style>
 
@@ -183,27 +258,93 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
   </head>
   <body class="grain-overlay">
     
-   <div id="global-page-loader" class="global-page-loader" aria-hidden="true">
+    <div id="global-page-loader" class="global-page-loader is-active" aria-hidden="true">
       <div class="skeleton-layout">
+        
         <div class="sk-navbar">
-          <div class="sk-logo skeleton"></div>
-          <div class="sk-navitems">
-            <div class="sk-navitem skeleton"></div>
-            <div class="sk-navitem skeleton"></div>
-            <div class="sk-navitem skeleton"></div>
+          <div class="sk-logo-group">
+            <div class="sk-logo-text skeleton-placeholder"></div>
           </div>
+          <div class="sk-navitems">
+            <div class="sk-cart skeleton-placeholder"></div>
+            <div class="sk-btn-save skeleton-placeholder"></div>
+          </div>
+        </div>
+
+        <div class="sk-subnav">
+          <div class="sk-subnav-item skeleton-placeholder"></div>
+          <div class="sk-subnav-item skeleton-placeholder"></div>
+          <div class="sk-subnav-item skeleton-placeholder"></div>
+          <div class="sk-subnav-item skeleton-placeholder"></div>
         </div>
         
         <div class="sk-hero">
-          <div class="sk-title skeleton"></div>
-          <div class="sk-title short skeleton"></div>
-          <div class="sk-text skeleton"></div>
-          <div class="sk-text skeleton"></div>
-          <div class="sk-button-group">
-            <div class="sk-button skeleton"></div>
-            <div class="sk-button skeleton"></div>
+          <div class="sk-title-large skeleton-placeholder"></div>
+          <div class="sk-title-sub skeleton-placeholder"></div>
+        </div>
+
+        <div class="sk-grid">
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
+          </div>
+
+          <div class="sk-card">
+            <div class="sk-card-image skeleton-placeholder"></div>
+            <div class="sk-card-body">
+              <div class="sk-line-long skeleton-placeholder"></div>
+              <div class="sk-line-medium skeleton-placeholder"></div>
+              <div class="sk-line-short skeleton-placeholder"></div>
+            </div>
+            <div class="sk-card-footer skeleton-placeholder"></div>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -235,6 +376,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
 
     <script>
       const pageLoader = document.getElementById('global-page-loader');
+
+      window.addEventListener('load', () => {
+        pageLoader?.classList.remove('is-active');
+      });
 
       window.addEventListener('pageshow', () => {
         pageLoader?.classList.remove('is-active');
