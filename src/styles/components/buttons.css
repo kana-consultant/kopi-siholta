@@ -1,0 +1,268 @@
+/* =========================================================
+   Kopi Siholta — Buttons
+   Loaded after base.css and typography.css
+   ========================================================= */
+
+/* ── Base Button ─────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 200ms ease;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ── Button Variants ─────────────────────────────────── */
+.btn--primary {
+  background: var(--color-brand-red);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: #B01020;
+  transform: translateY(-1px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--overlay-white-high);
+  border: 0.5px solid rgba(249,246,240,0.4);
+}
+
+.btn--outline:hover {
+  background: rgba(249,246,240,0.08);
+  border-color: rgba(249,246,240,0.7);
+}
+
+.btn--outline-dark {
+  background: transparent;
+  color: var(--color-brand-earth);
+  border: 0.5px solid rgba(92,61,30,0.4);
+}
+
+.btn--outline-dark:hover {
+  background: var(--color-brand-red);
+  color: var(--color-text-main);
+}
+
+/* ── Card CTA Button (used in sector cards) ───────────── */
+.btn--card-cta {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 9px 16px;
+  font-size: 12px;
+  gap: var(--space-2);
+  color: var(--color-brand-earth);
+  background: rgba(92, 61, 30, 0.12);
+  border: 0.5px solid rgba(92, 61, 30, 0.30);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.btn--card-cta:hover {
+  color: var(--color-text-main);
+  background: var(--color-brand-red);
+  transform: translateY(-1px);
+}
+
+.btn--card-cta svg { transition: transform 200ms ease; }
+.btn--card-cta:hover svg { transform: translateX(3px); }
+
+/* ── Link CTA (animated gap on hover, used in retail cards) ── */
+.btn--link-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand-earth);
+  text-decoration: none;
+  margin-top: var(--space-2);
+  transition: gap 200ms ease;
+}
+
+.btn--link-cta:hover { gap: 10px; }
+
+/* ── Badges ────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+.badge--gold {
+  color: var(--color-brand-gold);
+  border: 0.5px solid rgba(212,160,70,0.5);
+  background: rgba(212,160,70,0.08);
+}
+
+.badge--red {
+  color: var(--color-brand-red);
+  border: 0.5px solid rgba(205,18,34,0.3);
+  background: rgba(205,18,34,0.06);
+}
+
+.badge--green {
+  color: var(--color-agri-green);
+  border: 0.5px solid rgba(34,85,34,0.3);
+  background: rgba(34,85,34,0.06);
+}
+
+/* ── Shared CTA Banner ────────────────────────────────── */
+.page-cta {
+  padding-block: var(--space-16);
+}
+
+.page-cta--dark  { background: var(--color-brand-earth); }
+.page-cta--cream {
+  background: var(--color-brand-cream);
+  border-top: 0.5px solid var(--color-neutral-200);
+}
+.page-cta--red   { background: var(--color-brand-red); }
+
+.page-cta__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  flex-wrap: wrap;
+}
+
+.page-cta__title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 48px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.page-cta__title--earth { color: var(--color-brand-earth); }
+
+.page-cta__sub {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.65);
+  max-width: 460px;
+}
+
+.page-cta__sub--earth { color: var(--color-brand-muted); }
+
+.page-cta__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.page-cta__actions .btn--primary { background: var(--color-brand-red); }
+.page-cta__actions .btn--primary:hover { background: #B01020; }
+
+.page-cta__actions .btn--outline-light {
+  color: rgba(255,255,255,0.80);
+  border: 0.5px solid rgba(255,255,255,0.30);
+}
+
+.page-cta__actions .btn--outline-light:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.60);
+}
+
+.page-cta--red .btn--primary {
+  background: #fff;
+  color: var(--color-brand-red);
+}
+.page-cta--red .btn--primary:hover { background: rgba(255,255,255,0.88); }
+.page-cta--red .btn--outline-dark {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.35);
+}
+.page-cta--red .btn--outline-dark:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.65);
+}
+
+/* ── Form Action Buttons ──────────────────────────────── */
+.form-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 10px var(--space-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: all 200ms ease;
+  min-height: 44px;
+}
+
+.btn--whatsapp {
+  background: var(--color-wa-green);
+  color: #fff;
+}
+
+.btn--whatsapp:hover {
+  background: #1db954;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+}
+
+.btn--whatsapp:active { transform: translateY(0); }
+
+.btn--email {
+  background: transparent;
+  color: var(--color-brand-earth);
+  border: var(--border-default);
+}
+
+.btn--email:hover {
+  background: var(--color-neutral-100);
+  border-color: var(--color-brand-red);
+  color: var(--color-brand-red);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 15, 8, 0.08);
+}
+
+.btn--email:active { transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .page-cta__inner { flex-direction: column; align-items: flex-start; }
+}

@@ -6,25 +6,35 @@ const LANG_MAP: Record<string, string> = {
   FR: 'fr', BE: 'fr', CH: 'fr', CA: 'fr',
 };
 const DEFAULT_LANG = 'id';
+const SUPPORTED_LANGS = ['id', 'en', 'fr'];
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  const country =
-    context.request.headers.get('CF-IPCountry') ??
-    context.request.headers.get('X-Vercel-IP-Country') ??
-    'ID';
+  const url = new URL(context.request.url);
 
-  const detectedLang = LANG_MAP[country] ?? DEFAULT_LANG;
-  const cookies = context.cookies;
+  // 1. Ambil bahasa dari cookie atau deteksi dari header CDN (Cloudflare/Vercel)
+  let preferredLang = context.cookies.get('preferred_lang')?.value;
 
-  if (!cookies.has('preferred_lang')) {
-    cookies.set('preferred_lang', detectedLang, {
-      maxAge: 60 * 60 * 24 * 365,
+  if (!preferredLang) {
+    const country =
+      context.request.headers.get('CF-IPCountry') ??
+      context.request.headers.get('X-Vercel-IP-Country') ??
+      'ID';
+
+    preferredLang = LANG_MAP[country.toUpperCase()] ?? DEFAULT_LANG;
+
+    // Set cookie agar kunjungan berikutnya langsung terbaca
+    context.cookies.set('preferred_lang', preferredLang, {
+      maxAge: 60 * 60 * 24 * 365, // 1 tahun
       path: '/',
       sameSite: 'lax',
     });
-    context.locals.lang = detectedLang;
-  } else {
-    context.locals.lang = cookies.get('preferred_lang')!.value;
+  }
+
+(context.locals as any).lang = preferredLang;
+
+  // 2. JIKA USER MENGAKSES ROOT '/' -> LANGSUNG REDIRECT DI SERVER SIDE
+  if (url.pathname === '/') {
+    return context.redirect(`/${preferredLang}/`, 302);
   }
 
   return next();

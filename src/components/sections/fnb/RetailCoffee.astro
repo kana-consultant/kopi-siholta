@@ -1,0 +1,178 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import fnbHero2 from '../../../images/fnb/coffee-powder.jpg';
+import fnbHero4 from '../../../images/fnb/coffee-beans.jpg';
+import fnbHero6 from '../../../images/fnb/caffee.jpg';
+import fnbHero9 from '../../../images/fnb/green-beans.jpg';
+
+const { lang, t } = Astro.props;
+const nl = (s: string) => s.split('\n').join('<br>');
+
+/* ── Retail Product Data ─────────────────── */
+const retailProducts = {
+  main: {
+    nameKey: 'retailCoffeeBeans',
+    tag: 'ARABIKA • ROBUSTA • SPECIALTY GRADE',
+    descKey: 'retailCoffeeBeansDesc',
+    img: fnbHero4,
+    imgAltKey: 'altCoffeeBeans',
+  },
+  items: [
+    {
+      nameKey: 'retailCoffeePowder',
+      descKey: 'retailCoffeePowderDesc',
+      img: fnbHero2,
+      imgAltKey: 'altCoffeePowder',
+    },
+    {
+      nameKey: 'retailGreenBeans',
+      descKey: 'retailGreenBeansDesc',
+      img: fnbHero9,
+      imgAltKey: 'altGreenBeans',
+    },
+    {
+      nameKey: 'retailCoffeeCapsule',
+      descKey: 'retailCoffeeCapsuleDesc',
+      img: fnbHero6,
+      imgAltKey: 'altCoffeeCapsule',
+    },
+  ],
+};
+---
+  <section class="retail-coffee section" aria-labelledby="retail-heading">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <h2 id="retail-heading" class="section-title">{t.fnb.retailTitle ?? 'Retail Coffee Collection'}</h2>
+        <p class="section-sub">{t.fnb.retailSubtitle ?? 'Diproses dari biji kopi pilihan dataran tinggi Sumatera untuk kebutuhan retail, horeca, dan specialty coffee market.'}</p>
+      </div>
+
+      <div class="retail-coffee__grid">
+        <article class="product-card retail-card--main animate-on-scroll">
+          <div class="product-card__media">
+            <Image
+              src={retailProducts.main.img}
+              alt={t.fnb.gallery?.[retailProducts.main.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
+              loading="eager"
+              widths={[480, 768, 1024]}
+              sizes="(max-width: 768px) 100vw, 55vw"
+              class="product-card__img"
+            />
+            <div class="product-card__tag">{retailProducts.main.tag}</div>
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">{t.fnb[retailProducts.main.nameKey as keyof typeof t.fnb] ?? 'Coffee Beans'}</h3>
+            <p class="product-card__desc">{t.fnb[retailProducts.main.descKey as keyof typeof t.fnb] ?? 'Biji kopi pilihan dengan karakter khas Sumatera Utara, tersedia dalam berbagai profil roasting.'}</p>
+            <a href={`/${lang}/#products`} class="btn btn--link-cta" aria-label="Products">
+              {t.fnb.retailCta ?? 'Lihat Produk'}
+              <Icon name="mdi:arrow-right" width="16" height="16" />
+            </a>
+          </div>
+        </article>
+
+        <div class="retail-coffee__stack">
+          {retailProducts.items.map((item, i) => (
+            <article class="product-card retail-card--sm animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>
+              <div class="product-card__media">
+                <Image
+                  src={item.img}
+                  alt={t.fnb.gallery?.[item.imgAltKey as keyof typeof t.fnb.gallery] ?? ''}
+                  loading="lazy"
+                  widths={[300, 480]}
+                  sizes="(max-width: 768px) 50vw, 22vw"
+                  class="product-card__img"
+                />
+              </div>
+              <div class="product-card__body">
+                <h3 class="product-card__name">{t.fnb[item.nameKey as keyof typeof t.fnb] ?? ''}</h3>
+                <p class="product-card__desc">{t.fnb[item.descKey as keyof typeof t.fnb] ?? ''}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+<style>
+.retail-coffee { 
+  padding-block: var(--space-8); 
+}
+
+.retail-coffee__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.retail-coffee__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.retail-card--main .product-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.retail-card--main .product-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.retail-card--sm {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  min-height: 90px;
+}
+
+.retail-card--sm .product-card__media {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.retail-card--sm .product-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.retail-card--sm .product-card__body {
+  padding: var(--space-3);
+}
+
+
+@media (min-width: 480px) {
+  .retail-card--sm { 
+    grid-template-columns: 110px 1fr; 
+  }
+}
+
+@media (min-width: 768px) {
+  .retail-coffee { 
+    padding-block: var(--space-12); 
+  }
+
+  .retail-coffee__grid {
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .retail-card--main .product-card__media {
+    aspect-ratio: auto;
+  }
+
+  .retail-card--sm { 
+    grid-template-columns: 140px 1fr; 
+    min-height: 120px; 
+  }
+}
+</style>

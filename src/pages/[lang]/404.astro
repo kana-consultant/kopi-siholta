@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
@@ -6,22 +8,15 @@ import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
 import { Icon } from 'astro-icon/components';
 import { useTranslations } from '../../i18n/utils';
 
-export function getStaticPaths() {
-  return [
-    { params: { lang: 'id' }, props: { lang: 'id' } },
-    { params: { lang: 'en' }, props: { lang: 'en' } },
-    { params: { lang: 'fr' }, props: { lang: 'fr' } },
-  ];
-}
+const { lang } = Astro.params;
+const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
 
-interface Props { lang?: 'id' | 'en' | 'fr'; }
-const { lang = 'en' } = Astro.props;
-const t = useTranslations(lang);
+const t = useTranslations(currentLang);
 const nf = t.notFound as Record<string, string>;
 ---
 
-<Base title={nf.title} description={nf.message} lang={lang}>
-  <Navbar lang={lang} />
+<Base title={nf.title} description={nf.message} lang={currentLang}>
+  <Navbar lang={currentLang} />
 
   <main id="main-content" class="error-page">
     <div class="error-page__inner container">
@@ -42,11 +37,11 @@ const nf = t.notFound as Record<string, string>;
 
       <!-- Actions -->
       <div class="error-page__actions">
-        <a href={`/${lang}/`} class="btn btn--primary">
+        <a href={`/${currentLang}/`} class="btn btn--primary">
           <Icon name="mdi:home" width="16" height="16" />
           {nf.ctaHome}
         </a>
-        <a href={`/${lang}/#products`} class="btn btn--outline-dark">
+        <a href={`/${currentLang}/#products`} class="btn btn--outline-dark">
           <Icon name="mdi:shopping-outline" width="16" height="16" />
           {nf.ctaExplore}
         </a>
@@ -55,7 +50,7 @@ const nf = t.notFound as Record<string, string>;
     </div>
   </main>
 
-  <Footer lang={lang} />
+  <Footer lang={currentLang} />
   <WhatsAppFAB />
 </Base>
 

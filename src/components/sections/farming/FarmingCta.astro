@@ -1,0 +1,18 @@
+---
+
+const { lang, t } = Astro.props;
+const nl = (s: string) => s.split('\n').join('<br>');
+---
+  <!-- ── CTA ─────────────────────────────────────────── -->
+  <section class="page-cta page-cta--cream" aria-label="Bergabung sebagai Petani Partner">
+    <div class="container page-cta__inner">
+      <div class="page-cta__text animate-on-scroll">
+        <h2 class="page-cta__title page-cta__title--earth">{nl(t.coffeeFarming.ctaTitle)}</h2>
+        <p class="page-cta__sub page-cta__sub--earth">{t.coffeeFarming.ctaSubtitle}</p>
+      </div>
+      <div class="page-cta__actions animate-on-scroll">
+        <a href={`/${lang}/#contact`} class="btn btn--primary">{t.coffeeFarming.cta1}</a>
+        <!-- <a href={`/${lang}/company`} class="btn btn--outline-dark">{t.coffeeFarming.cta2}</a> -->
+      </div>
+    </div>
+  </section>

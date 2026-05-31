@@ -1,0 +1,116 @@
+---
+import { Image } from 'astro:assets';
+import companyLogo from '../../../images/logo/logo-STI.png';
+import aboutFoto from '../../../images/about.webp';
+
+const { lang, tc, t } = Astro.props;
+---
+
+  <!-- ── Company Story ───────────────────────────────── -->
+  <section class="story section" aria-labelledby="story-heading">
+    <div class="container">
+      <div class="story__grid">
+
+        <div class="story__intro animate-on-scroll">
+          <h2 id="story-heading" class="story__heading">
+            <Image
+              src={companyLogo}
+              alt="PT Siholta Toba Indonesia Logo"
+              class="story__logo"
+              loading="eager"
+              widths={[120, 180, 240]}
+              sizes="120px"
+            />
+            <span>{tc.storyLogo}</span>
+          </h2>
+          <p class="story__body">{tc.storyBody1}</p>
+          <p class="story__body">{tc.storyBody2}</p>
+          <div class="story__stats">
+            <div class="story__stat">
+              <span class="story__stat-num">2021</span>
+              <span class="story__stat-label">{tc.founded}</span>
+            </div>
+            <div class="story__stat">
+              <span class="story__stat-num">200+</span>
+              <span class="story__stat-label">{tc.farmers}</span>
+            </div>
+            <div class="story__stat">
+              <span class="story__stat-num">3</span>
+              <span class="story__stat-label">{tc.sectors}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="story__image animate-on-scroll">
+          <div class="story__image-frame">
+            <Image
+              src={aboutFoto}
+              alt="Perkebunan kopi PT Siholta Toba Indonesia di Humbang Hasundutan"
+              class="story__img"
+              loading="lazy"
+              widths={[480, 768, 1024]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <style>
+.story__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.story__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--space-6);
+  margin-top: var(--space-2);
+}
+
+.story__logo {
+  width: 70px; height: auto;
+  border-color: var(--color-brand-red);
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.story__body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-brand-muted);
+  margin-bottom: var(--space-4);
+}
+
+.story__image-frame {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.story__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .story__grid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .story__stats { gap: var(--space-6); }
+}
+  </style>
