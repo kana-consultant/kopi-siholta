@@ -2,39 +2,60 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import farmingBg from '../../../images/bg/bg-farming.jpg';
+import { useTranslations } from '../../../i18n/utils';
 
-const { lang, t } = Astro.props;
+interface Props {
+  lang: 'id' | 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
-  <!-- ── Hero ─────────────────────────────────────────── -->
-  <section class="page-hero page-hero--tall" aria-label="Budidaya Kopi Kopi Siholta">
-    <div class="page-hero__bg">
-      <Image
-        src={farmingBg}
-        alt={t.coffeeFarming.farmImages?.altFarm ?? ''}
-        class="page-hero__img"
-        style="object-position: center 25%"
-        loading="eager"
-        widths={[768, 1280, 1920]}
-        sizes="100vw"
-      />
-      <div class="page-hero__overlay" aria-hidden="true"></div>
-    </div>
+<!-- ── Hero ─────────────────────────────────────────── -->
+<section class="page-hero page-hero--tall" aria-label="Budidaya Kopi Kopi Siholta">
+  <div class="page-hero__bg">
+    <Image
+      src={farmingBg}
+      alt={t.coffeeFarming.farmImages?.altFarm ?? 'Perkebunan Kopi Kopi Siholta'}
+      class="page-hero__img"
+      style="object-position: center 25%"
+      loading="eager"
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+    />
+    <div class="page-hero__overlay" aria-hidden="true"></div>
+  </div>
 
-    <div class="container page-hero__inner">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <ol class="breadcrumb__list">
-          <li class="breadcrumb__item"><a href={`/${lang}/`} class="breadcrumb__link">{t.breadcrumb.home}</a></li>
-          <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
-          <li class="breadcrumb__item"><a href={`/${lang}/company`} class="breadcrumb__link">{t.breadcrumb.company}</a></li>
-          <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
-          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">{t.coffeeFarming.page}</li>
-        </ol>
-      </nav>
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href={`/${lang}/`} class="breadcrumb__link" itemprop="item">
+            <span itemprop="name">{t.breadcrumb.home}</span>
+          </a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
+        
+        <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href={`/${lang}/company`} class="breadcrumb__link" itemprop="item">
+            <span itemprop="name">{t.breadcrumb.company}</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
+        
+        <li class="breadcrumb__item breadcrumb__item--current" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span itemprop="name">{t.coffeeFarming.page}</span>
+          <meta itemprop="position" content="3" />
+        </li>
+      </ol>
+    </nav>
 
-      <div class="farm-hero__content">
-        <h1 class="page-hero__title">{t.coffeeFarming.titleLine1}<br />{t.coffeeFarming.titleLine2}</h1>
-        <p class="page-hero__sub">{t.coffeeFarming.subtitle}</p>
-        <a href="#process" class="btn btn--primary">{t.coffeeFarming.ctaHero}</a>
-      </div>
+    <div class="farm-hero__content">
+      <h1 class="page-hero__title">{t.coffeeFarming.titleLine1}<br />{t.coffeeFarming.titleLine2}</h1>
+      <p class="page-hero__sub">{t.coffeeFarming.subtitle}</p>
+      <a href="#process" class="btn btn--primary">{t.coffeeFarming.ctaHero}</a>
     </div>
-  </section>
+  </div>
+</section>

@@ -7,6 +7,7 @@ import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
 import { useTranslations } from '../../i18n/utils';
 
+// Import Sections
 import FarmingHero from '../../components/sections/farming/FarmingHero.astro';
 import FarmingStats from '../../components/sections/farming/FarmingStats.astro';
 import HarvestingProcedure from '../../components/sections/farming/HarvestingProcedure.astro';
@@ -19,28 +20,29 @@ import LocationMap from '../../components/sections/farming/LocationMap.astro';
 import FarmingCta from '../../components/sections/farming/FarmingCta.astro';
 
 const { lang } = Astro.params;
+
 const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
 
 const t = useTranslations(currentLang);
-
-
 ---
 
 <Base title={t.meta.titleFarming} description={t.meta.descFarming} lang={currentLang}>
   <Navbar lang={currentLang} />
+  
   <header>
-    <FarmingHero lang={currentLang} t={t}/>
-    <FarmingStats lang={currentLang} t={t}/>
+    <FarmingHero lang={currentLang} />
+    <FarmingStats lang={currentLang} />
   </header>
+  
   <main>
-    <HarvestingProcedure lang={currentLang} t={t} />
-    <Process lang={currentLang} t={t}/>
-    <Roasting lang={currentLang} t={t}/>
-    <Regions lang={currentLang} t={t}/>
-    <Quality lang={currentLang} t={t}/>
-    <Farmer lang={currentLang} t={t}/>
-    <LocationMap lang={currentLang} t={t}/>
-    <FarmingCta lang={currentLang} t={t}/>
+    <HarvestingProcedure lang={currentLang} />
+    <Process lang={currentLang} />
+    <Roasting lang={currentLang} />
+    <Regions lang={currentLang} />
+    <Quality lang={currentLang} />
+    <Farmer lang={currentLang} />
+    <LocationMap lang={currentLang} />
+    <FarmingCta lang={currentLang} />
   </main>
 
   <Footer lang={currentLang} />
@@ -48,13 +50,14 @@ const t = useTranslations(currentLang);
 </Base>
 
 <script>
-
-  /* ── Scroll-triggered animations ─────────────── */
   const els = document.querySelectorAll<HTMLElement>('.animate-on-scroll');
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); }
+        if (e.isIntersecting) { 
+          e.target.classList.add('is-visible'); 
+          observer.unobserve(e.target); 
+        }
       });
     },
     { threshold: 0.10, rootMargin: '0px 0px -40px 0px' }
