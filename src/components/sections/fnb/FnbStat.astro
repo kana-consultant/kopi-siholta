@@ -1,26 +1,33 @@
 ---
-const { t } = Astro.props;
+import { useTranslations } from '../../../i18n/utils';
+
+interface Props {
+  lang: 'id' | 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
-  <section class="stat-band stat-band--green" aria-label="F&B Statistics">
-    <div class="container">
-      <div class="stat-band__grid">
-        <div class="stat-band__item animate-on-scroll">
-          <span class="stat-band__value">{t.fnb.stats.statMenuItemsValue}{t.fnb.stats.statMenuItemsUnit}</span>
-          <span class="stat-band__label">{t.fnb.stats.statMenuItems}</span>
-        </div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 80ms">
-          <span class="stat-band__value">{t.fnb.stats.statDrinksValue}</span>
-          <span class="stat-band__label">{t.fnb.stats.statDrinks}</span>
-        </div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 160ms">
-          <span class="stat-band__value">{t.fnb.stats.statCupsDayValue}{t.fnb.stats.statCupsDayUnit}</span>
-          <span class="stat-band__label">{t.fnb.stats.statCupsDay}</span>
-        </div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 240ms">
-          <span class="stat-band__value">{t.fnb.stats.statYearsExpValue}{t.fnb.stats.statYearsExpUnit}</span>
-          <span class="stat-band__label">{t.fnb.stats.statYearsExp}</span>
-        </div>
+<section class="stat-band stat-band--green" aria-label="Statistik F&B Kopi Siholta">
+  <div class="container">
+    <div class="stat-band__grid">
+      <div class="stat-band__item animate-on-scroll">
+        <span class="stat-band__value">{t.fnb.stats.statMenuItemsValue}{t.fnb.stats.statMenuItemsUnit}</span>
+        <span class="stat-band__label">{t.fnb.stats.statMenuItems}</span>
+      </div>
+      <div class="stat-band__item animate-on-scroll" style="transition-delay: 80ms">
+        <span class="stat-band__value">{t.fnb.stats.statDrinksValue}</span>
+        <span class="stat-band__label">{t.fnb.stats.statDrinks}</span>
+      </div>
+      <div class="stat-band__item animate-on-scroll" style="transition-delay: 160ms">
+        <span class="stat-band__value">{t.fnb.stats.statCupsDayValue}{t.fnb.stats.statCupsDayUnit}</span>
+        <span class="stat-band__label">{t.fnb.stats.statCupsDay}</span>
+      </div>
+      <div class="stat-band__item animate-on-scroll" style="transition-delay: 240ms">
+        <span class="stat-band__value">{t.fnb.stats.statYearsExpValue}{t.fnb.stats.statYearsExpUnit}</span>
+        <span class="stat-band__label">{t.fnb.stats.statYearsExp}</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
