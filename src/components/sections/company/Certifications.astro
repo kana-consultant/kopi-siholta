@@ -5,9 +5,11 @@ import certBrand from '../../../images/certified/brand-certificate.webp';
 import certHalal from '../../../images/certified/halal-certificate.webp';
 import certTraining from '../../../images/certified/training-certificate.webp';
 import certPirt from '../../../images/certified/P-IRT.webp';
+import { useTranslations } from '../../../i18n/utils';
 
-
-const { tc } = Astro.props;
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tc = t.company;
 const certs = [
   {
     nameKey: 'certBrandName', descKey: 'certBrandDesc',

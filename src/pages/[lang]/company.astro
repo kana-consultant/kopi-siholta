@@ -22,31 +22,25 @@ const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'e
 
 const t = useTranslations(currentLang);
 
-
-
-const tc = t.company as Record<string, string>;
-
-
-
 ---
 
 <Base title={t.meta.titleCompany} description={t.meta.descCompany} lang={currentLang}>
   <Navbar lang={currentLang} />
   <header>
-    <CompanyHero lang={currentLang} tc={tc} t={t}/>
+    <CompanyHero lang={currentLang} />
   </header>
-  <main>
-    <CompanyStory tc={tc} />
-    <VisiMisi tc={tc} />
-    <Timeline tc={tc} />
-    <Certifications tc={tc} />
-    <OperationSectors lang={currentLang} tc={tc} />
-    <LocationMap t={t} tc={tc} />
-    <CompanyCta lang={currentLang} tc={tc} />
+  <main id="main-content">
+    <CompanyStory lang={currentLang} />
+    <VisiMisi lang={currentLang} />
+    <Timeline lang={currentLang} />
+    <Certifications lang={currentLang} />
+    <OperationSectors lang={currentLang} />
+    <LocationMap lang={currentLang} />
+    <CompanyCta lang={currentLang} />
   </main>
   <Footer lang={currentLang} />
   <WhatsAppFAB />
-  <CertModal tc={tc} />
+  <CertModal lang={currentLang} />
 </Base>
 
 <script>
