@@ -17,22 +17,18 @@ const { lang } = Astro.params;
 const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
 
 const t = useTranslations(currentLang);
-
-/** Replace newlines with <br> tags — used with set:html */
-const nl = (s: string) => s.split('\n').join('<br>');
-
 ---
 
 <Base title={t.meta.titleTourism} description={t.meta.descTourism} lang={currentLang}>
   <Navbar lang={currentLang} />
-  <header>
-    <TourismHero lang={currentLang} t={t} />
-    <TourismStat lang={currentLang} t={t} />
-  </header>
-  <main>
-    <Experiences lang={currentLang} t={t} />
-    <TourismCta lang={currentLang} t={t} />
+  
+  <main id="main-content">
+    <TourismHero lang={currentLang} />
+    <TourismStat lang={currentLang} />
+    <Experiences lang={currentLang} />
+    <TourismCta lang={currentLang} />
   </main>
+
   <Footer lang={currentLang} />
   <WhatsAppFAB />
 </Base>
@@ -42,7 +38,10 @@ const nl = (s: string) => s.split('\n').join('<br>');
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); }
+        if (e.isIntersecting) { 
+          e.target.classList.add('is-visible'); 
+          observer.unobserve(e.target); 
+        }
       });
     },
     { threshold: 0.10, rootMargin: '0px 0px -40px 0px' }

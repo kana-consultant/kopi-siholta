@@ -1,70 +1,74 @@
 ---
 import { Image } from 'astro:assets';
-
 import fFarmer1 from '../../../images/farming/farmer.jpg';
 import fFarmer2 from '../../../images/farming/farmer-1.jpg';
+import { useTranslations } from '../../../i18n/utils';
 
-const { lang, t } = Astro.props;
+interface Props {
+  lang: 'id' | 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 const nl = (s: string) => s.split('\n').join('<br>');
 
 const farmers = [
   { nameKey: 'farmerMargondang', villageKey: 'farmerMargondangVillage', sinceKey: 'farmerMargondangSince', quoteKey: 'farmerMargondangQuote', img: fFarmer1 },
   { nameKey: 'farmerRohani',     villageKey: 'farmerRohaniVillage',     sinceKey: 'farmerRohaniSince',     quoteKey: 'farmerRohaniQuote',     img: fFarmer2 },
 ];
-
 ---
-  <!-- ── Farmer Stories ────────────────────────────────── -->
-  <section class="farmers section" aria-labelledby="farmers-heading">
-    <div class="container">
-      <div class="section__header animate-on-scroll">
-        <h2 id="farmers-heading" class="section-title">{nl(t.coffeeFarming.farmersTitle)}</h2>
-        <p class="section-sub">{t.coffeeFarming.farmersSubtitle}</p>
-      </div>
 
-      <div class="farmers__grid">
-        {farmers.map((farmer, i) => (
-          <article class={`farmer-card animate-on-scroll ${i % 2 !== 0 ? 'farmer-card--rev' : ''}`}>
-            <div class="farmer-card__media">
-              <Image
-                src={farmer.img}
-                alt={`${t.coffeeFarming[farmer.nameKey as keyof typeof t.coffeeFarming]} — ${t.coffeeFarming.farmerRole}`}
-                loading="lazy"
-                widths={[480, 768]}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                class="farmer-card__img"
-              />
-              <div class="farmer-card__info-badge">
-                <span class="farmer-card__village">{t.coffeeFarming[farmer.villageKey as keyof typeof t.coffeeFarming]}</span>
-                <span class="farmer-card__since">{t.coffeeFarming[farmer.sinceKey as keyof typeof t.coffeeFarming]}</span>
-              </div>
+<section class="farmers section" aria-labelledby="farmers-heading">
+  <div class="container">
+    <header class="section__header animate-on-scroll">
+      <h2 id="farmers-heading" class="section-title" set:html={nl(t.coffeeFarming.farmersTitle)}></h2>
+      <p class="section-sub">{t.coffeeFarming.farmersSubtitle}</p>
+    </header>
+
+    <div class="farmers__grid">
+      {farmers.map((farmer, i) => (
+        <article class="farmer-card animate-on-scroll">
+          <div class={`farmer-card__media ${i % 2 !== 0 ? 'desktop-order-2' : ''}`}>
+            <Image
+              src={farmer.img}
+              alt={`${t.coffeeFarming[farmer.nameKey as keyof typeof t.coffeeFarming]} — ${t.coffeeFarming.farmerRole}`}
+              loading="lazy"
+              widths={[480, 768]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              class="farmer-card__img"
+            />
+            <div class="farmer-card__info-badge">
+              <span class="farmer-card__village">{t.coffeeFarming[farmer.villageKey as keyof typeof t.coffeeFarming]}</span>
+              <span class="farmer-card__since">{t.coffeeFarming[farmer.sinceKey as keyof typeof t.coffeeFarming]}</span>
             </div>
-            <div class="farmer-card__content">
-              <blockquote class="farmer-card__quote">
-                <p>"{t.coffeeFarming[farmer.quoteKey as keyof typeof t.coffeeFarming]}"</p>
-              </blockquote>
-              <div class="farmer-card__author">
-                <span class="farmer-card__name">{t.coffeeFarming[farmer.nameKey as keyof typeof t.coffeeFarming]}</span>
-                <span class="farmer-card__role">{t.coffeeFarming.farmerRole}</span>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
+          </div>
+          
+          <div class="farmer-card__content">
+            <blockquote class="farmer-card__quote">
+              <p>"{t.coffeeFarming[farmer.quoteKey as keyof typeof t.coffeeFarming]}"</p>
+            </blockquote>
+            <footer class="farmer-card__author">
+              <span class="farmer-card__name">{t.coffeeFarming[farmer.nameKey as keyof typeof t.coffeeFarming]}</span>
+              <cite class="farmer-card__role">{t.coffeeFarming.farmerRole}</cite>
+            </footer>
+          </div>
+        </article>
+      ))}
     </div>
-  </section>
+  </div>
+</section>
 
-  <style>
+<style>
 .farmers__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--space-6);
   margin-top: var(--space-8);
 }
 
 .farmer-card {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
+  grid-template-columns: 1fr;
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: #fff;
@@ -72,12 +76,11 @@ const farmers = [
   transition: box-shadow 300ms ease;
 }
 
-.farmer-card:hover { box-shadow: 0 12px 40px rgba(92,61,30,0.10); }
-
-.farmer-card--rev { direction: rtl; }
-.farmer-card--rev > * { direction: ltr; }
-
-.farmer-card__media { position: relative; overflow: hidden; min-height: 280px; }
+.farmer-card__media { 
+  position: relative; 
+  overflow: hidden; 
+  min-height: 180px; 
+}
 
 .farmer-card__img {
   width: 100%;
@@ -88,10 +91,8 @@ const farmers = [
   transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.farmer-card:hover .farmer-card__img { transform: scale(1.04); }
-
 .farmer-card__content {
-  padding: var(--space-8) var(--space-6);
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,11 +100,7 @@ const farmers = [
 }
 
 .farmer-card__quote {
-  font-family: var(--font-display);
-  font-size: clamp(14px, 1.5vw, 18px);
-  font-style: italic;
-  color: var(--color-brand-earth);
-  line-height: 1.6;
+  margin: 0;
   border-left: 3px solid var(--color-brand-red);
   padding-left: var(--space-4);
 }
@@ -116,34 +113,71 @@ const farmers = [
   line-height: 1.45;
   letter-spacing: -0.01em;
   font-style: italic;
+  margin: 0;
 }
 
-.farmer-card__author { display: flex; flex-direction: column; gap: 2px; }
+.farmer-card__author { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 2px; 
+  font-style: normal;
+}
 
 .farmer-card__name {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--color-brand-earth);
 }
 
 .farmer-card__role {
   font-family: var(--font-label);
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--color-brand-muted);
+  font-style: normal;
 }
 
-@media (max-width: 768px) {
-  .farmers__grid { grid-template-columns: 1fr; }
-  .farmer-card { grid-template-columns: 1fr; }
-  .farmer-card--rev { direction: ltr; }
+/* Info badge styling */
+.farmer-card__info-badge {
+  position: absolute;
+  bottom: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: rgba(26,15,8,0.75);
+  backdrop-filter: blur(4px);
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  color: #fff;
+}
+.farmer-card__village { font-size: 16px; font-weight: 600; }
+.farmer-card__since { font-size: 12px; opacity: 0.8; }
+
+/* ── Media Queries Mobile First ── */
+@media (min-width: 481px) {
   .farmer-card__media { min-height: 220px; }
-  .farmer-card__content { padding: var(--space-5); }
 }
 
-@media (max-width: 480px) {
-  .farmer-card__media { min-height: 180px; }
+@media (min-width: 769px) {
+  .farmer-card { grid-template-columns: 1fr 1fr; }
+  .farmer-card__media { min-height: 280px; }
+  .farmer-card__content { padding: var(--space-8) var(--space-6); }
+  
+  /* Modern CSS Order menggantikan direction: RTL */
+  .desktop-order-2 {
+    order: 2;
+  }
 }
-  </style>
+
+@media (min-width: 1025px) {
+  .farmers__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (hover: hover) {
+  .farmer-card:hover { box-shadow: 0 12px 40px rgba(92,61,30,0.10); }
+  .farmer-card:hover .farmer-card__img { transform: scale(1.04); }
+}
+</style>

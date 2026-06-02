@@ -5,13 +5,17 @@ const LANG_MAP: Record<string, string> = {
   SG: 'en', MY: 'en', AU: 'en', US: 'en', GB: 'en',
   FR: 'fr', BE: 'fr', CH: 'fr', CA: 'fr',
 };
-const DEFAULT_LANG = 'id';
+const DEFAULT_LANG = 'en';
 const SUPPORTED_LANGS = ['id', 'en', 'fr'];
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const url = new URL(context.request.url);
 
-  // 1. Ambil bahasa dari cookie atau deteksi dari header CDN (Cloudflare/Vercel)
+  // Abaikan middleware untuk aset statis dan API
+  if (url.pathname.startsWith('/_astro') || url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg|ico)$/)) {
+    return next();
+  }
+
   let preferredLang = context.cookies.get('preferred_lang')?.value;
 
   if (!preferredLang) {
@@ -22,7 +26,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
     preferredLang = LANG_MAP[country.toUpperCase()] ?? DEFAULT_LANG;
 
-    // Set cookie agar kunjungan berikutnya langsung terbaca
     context.cookies.set('preferred_lang', preferredLang, {
       maxAge: 60 * 60 * 24 * 365, // 1 tahun
       path: '/',
@@ -34,7 +37,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // 2. JIKA USER MENGAKSES ROOT '/' -> LANGSUNG REDIRECT DI SERVER SIDE
   if (url.pathname === '/') {
-    return context.redirect(`/${preferredLang}/`, 302);
+    return context.redirect(`/${preferredLang}`, 302);
   }
 
   return next();

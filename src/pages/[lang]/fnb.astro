@@ -10,7 +10,7 @@ import FnbHero from '../../components/sections/fnb/FnbHero.astro';
 import FnbStat from '../../components/sections/fnb/FnbStat.astro';
 import RetailCoffee from '../../components/sections/fnb/RetailCoffee.astro';
 import CafeFavorites from '../../components/sections/fnb/CafeFavorites.astro';
-import RetailDistibution from '../../components/sections/fnb/RetailDistibution.astro';
+import RetailDistribution from '../../components/sections/fnb/RetailDistibution.astro';
 import Sustainability from '../../components/sections/fnb/Sustainability.astro';
 import FnbCta from '../../components/sections/fnb/FnbCta.astro';
 
@@ -20,23 +20,19 @@ const { lang } = Astro.params;
 const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
 
 const t = useTranslations(currentLang);
-
 ---
 
 <Base title={t.meta.titleFnb} description={t.meta.descFnb} lang={currentLang}>
   <Navbar lang={currentLang} />
-  <header>
-    <FnbHero lang={currentLang} t={t} />
-    <FnbStat lang={currentLang} t={t} />
-    <RetailCoffee lang={currentLang} t={t} />
-    <CafeFavorites lang={currentLang} t={t} />
-    <RetailDistibution lang={currentLang} t={t} />
-    <Sustainability lang={currentLang} t={t} />
-    <FnbCta lang={currentLang} t={t} />
-
-  </header>
-  <main>
-
+  
+  <main id="main-content">
+    <FnbHero lang={currentLang} />
+    <FnbStat lang={currentLang} />
+    <RetailCoffee lang={currentLang} />
+    <CafeFavorites lang={currentLang} />
+    <RetailDistribution lang={currentLang} />
+    <Sustainability lang={currentLang} />
+    <FnbCta lang={currentLang} />
   </main>
 
   <Footer lang={currentLang} />
@@ -48,11 +44,13 @@ const t = useTranslations(currentLang);
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); }
+        if (e.isIntersecting) { 
+          e.target.classList.add('is-visible'); 
+          observer.unobserve(e.target); 
+        }
       });
     },
     { threshold: 0.10, rootMargin: '0px 0px -40px 0px' }
   );
   els.forEach(el => observer.observe(el));
-
 </script>
