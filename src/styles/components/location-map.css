@@ -42,7 +42,7 @@
 
 .location__address {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 0.75rem;
   line-height: 1.7;
   color: var(--color-brand-earth);
   font-style: normal;
@@ -74,7 +74,7 @@
 
 .location__address span {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.7;
   color: var(--color-brand-earth);
 }

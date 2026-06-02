@@ -25,7 +25,7 @@
 
 .story__stat-label {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-brand-muted);
@@ -50,7 +50,7 @@
 
 .hero__stat-num {
   font-family: var(--font-display);
-  font-size: 18px; /* Lebih proporsional untuk mobile */
+  font-size: 1.125rem; /* Lebih proporsional untuk mobile */
   font-weight: 700;
   color: var(--color-brand-red);
   line-height: 1;
@@ -58,7 +58,7 @@
 
 .hero__stat-label {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 0.625rem;
   text-transform: uppercase;
   color: var(--color-text-main);
   letter-spacing: 0.05em;
@@ -104,7 +104,7 @@
 
 .stat-band__label {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.55);
@@ -128,7 +128,7 @@
 
 .editorial-stat__label {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.10em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.55);
@@ -157,7 +157,7 @@
 
 .trust-stat__value {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 700;
   color: #fff;
   line-height: 1;
@@ -165,7 +165,7 @@
 
 .trust-stat__label {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
 }
@@ -202,6 +202,6 @@
     background: var(--color-text-muted);
   }
 
-  .hero__stat-num { font-size: 22px; }
-  .hero__stat-label { font-size: 12px; }
+  .hero__stat-num { font-size: 1.375rem; }
+  .hero__stat-label { font-size: 0.75rem; }
 }

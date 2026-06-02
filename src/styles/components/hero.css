@@ -120,7 +120,7 @@
 .hero__cta-primary {
   position: relative;
   padding: 12px 28px;
-  font-size: 11px;
+  font-size: 0.75rem;
   background: var(--color-brand-red);
   color: #fff;
   border-radius: var(--radius-md);
@@ -168,7 +168,7 @@
 .hero__cta-secondary {
   position: relative;
   padding: 11px 28px;
-  font-size: 11px;
+  font-size: 0.75rem;
   background: #ffffff;
   color: #B01020;
   border: 1.5px solid #B01020;
@@ -261,7 +261,7 @@
 
 .page-hero__label {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-brand-gold);

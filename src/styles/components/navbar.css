@@ -40,7 +40,7 @@
 
 .navbar__wordmark {
   font-family: var(--font-label);
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.10em;
   text-transform: uppercase;
@@ -55,7 +55,7 @@
 
 .navbar__link {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -77,14 +77,14 @@
   gap: var(--space-3);
 }
 
-.navbar__cta { padding: 7px 14px; font-size: 12px; }
+.navbar__cta { padding: 7px 14px; font-size: 0.75rem; }
 
 /* Language Switcher */
 .lang-switcher { display: flex; gap: 2px; }
 
 .lang-btn {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.10em;
   text-transform: uppercase;
@@ -117,7 +117,7 @@
     align-items: center;
     gap: 4px;
     font-family: var(--font-body);
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -153,7 +153,7 @@
   .navbar__dropdown-link {
     display: block;
     font-family: var(--font-body);
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 500;
     color: var(--color-brand-earth);
     text-decoration: none;
@@ -187,7 +187,7 @@
   align-items: center;
   gap: var(--space-2);
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--color-brand-earth);
   text-decoration: none;
