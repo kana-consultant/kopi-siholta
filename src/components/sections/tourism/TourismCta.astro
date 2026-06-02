@@ -1,19 +1,24 @@
 ---
+import { useTranslations } from '../../../i18n/utils';
 
-const { lang , t} = Astro.props;
+interface Props {
+  lang: 'id' | 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
 const nl = (s: string) => s.split('\n').join('<br>');
-
 ---
-  <!-- ── CTA Banner ─────────────────────────────────────── -->
-  <section class="page-cta page-cta--cream" aria-label="Pesan Pengalaman Kopi">
-    <div class="container page-cta__inner">
-      <div class="page-cta__text animate-on-scroll">
-        <h2 class="page-cta__title page-cta__title--earth">{nl(t.tourism.ctaTitle)}</h2>
-        <p class="page-cta__sub page-cta__sub--earth">{t.tourism.ctaSubtitle}</p>
-      </div>
-      <div class="page-cta__actions animate-on-scroll">
-        <a href={`/${lang}/#contact`} class="btn btn--primary">{t.tourism.cta1}</a>
-        <!-- <a href={`/${lang}/company`} class="btn btn--outline-dark">{t.tourism.cta2}</a> -->
-      </div>
+
+<section class="page-cta page-cta--cream" aria-label="Pesan Pengalaman Kopi">
+  <div class="container page-cta__inner">
+    <div class="page-cta__text animate-on-scroll">
+      <h2 class="page-cta__title page-cta__title--earth" set:html={nl(t.tourism.ctaTitle)} />
+      <p class="page-cta__sub page-cta__sub--earth">{t.tourism.ctaSubtitle}</p>
     </div>
-  </section>
+    <div class="page-cta__actions animate-on-scroll">
+      <a href={`/${lang}/#contact`} class="btn btn--primary">{t.tourism.cta1}</a>
+    </div>
+  </div>
+</section>

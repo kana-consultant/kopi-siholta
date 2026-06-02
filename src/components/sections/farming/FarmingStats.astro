@@ -1,15 +1,33 @@
 ---
+import { useTranslations } from '../../../i18n/utils';
 
-const { t } = Astro.props;
+interface Props {
+  lang: 'id' | 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
-  <!-- ── Stats Band ────────────────────────────────────── -->
-  <section class="stat-band stat-band--green" aria-label="Statistik Pertanian Kopi">
-    <div class="container">
-      <div class="stat-band__grid">
-        <div class="stat-band__item animate-on-scroll"><span class="stat-band__value">20+</span><span class="stat-band__label">{t.coffeeFarming.statFamilies}</span></div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 80ms"><span class="stat-band__value">1.500 mdpl</span><span class="stat-band__label">{t.coffeeFarming.statMaxAlt}</span></div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 160ms"><span class="stat-band__value">Giling Basah</span><span class="stat-band__label">{t.coffeeFarming.statMethod}</span></div>
-        <div class="stat-band__item animate-on-scroll" style="transition-delay: 240ms"><span class="stat-band__value">100 ton</span><span class="stat-band__label">{t.coffeeFarming.statCapacity}</span></div>
-      </div>
-    </div>
-  </section>
+<!-- ── Stats Band ────────────────────────────────────── -->
+<section class="stat-band stat-band--green" aria-label="Statistik Pertanian Kopi">
+  <div class="container">
+    <ul class="stat-band__grid">
+      <li class="stat-band__item animate-on-scroll">
+        <span class="stat-band__value">20+</span>
+        <span class="stat-band__label">{t.coffeeFarming.statFamilies}</span>
+      </li>
+      <li class="stat-band__item animate-on-scroll" style="transition-delay: 80ms">
+        <span class="stat-band__value">1.500 mdpl</span>
+        <span class="stat-band__label">{t.coffeeFarming.statMaxAlt}</span>
+      </li>
+      <li class="stat-band__item animate-on-scroll" style="transition-delay: 160ms">
+        <span class="stat-band__value">Giling Basah</span>
+        <span class="stat-band__label">{t.coffeeFarming.statMethod}</span>
+      </li>
+      <li class="stat-band__item animate-on-scroll" style="transition-delay: 240ms">
+        <span class="stat-band__value">100 ton</span>
+        <span class="stat-band__label">{t.coffeeFarming.statCapacity}</span>
+      </li>
+    </ul>
+  </div>
+</section>

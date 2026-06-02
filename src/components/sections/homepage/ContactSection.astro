@@ -7,13 +7,14 @@ import shopeeLogo from '../../../images/logo/logo-shopee.png';
 import igLogo from '../../../images/logo/logo-instagram.png';
 import tiktokLogo from '../../../images/logo/logo-tiktok.png';
 import linktreeLogo from '../../../images/logo/logo-linktree.png';
-import { t } from '../../../i18n/utils';
+import { useTranslations } from '../../../i18n/utils';
 
 interface Props {
-  lang?: string;
+  lang: 'id' | 'en' | 'fr';
 }
-const { lang = 'en' } = Astro.props;
-const tr = t(lang);
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 
 const WHATSAPP_NUMBER = '6281322518527';
 const WHATSAPP_MSG_ID = 'Halo, saya tertarik dengan Kopi Siholta. Bisa info lengkap lebih lanjut?';
@@ -32,18 +33,18 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
 <section class="contact section" id="contact" aria-label="Contact Section">
   <div class="container contact__inner">
 
-    <div class="contact__info">
-      <div class="section__header">
-        <h2 class="section-title">{tr.contact.title}</h2>
-        <p class="section-sub">{tr.contact.subtitle}</p>
-      </div>
+    <aside class="contact__info">
+      <header class="section__header">
+        <h2 class="section-title">{t.contact.title}</h2>
+        <p class="section-sub">{t.contact.subtitle}</p>
+      </header>
 
-      <div class="contact__social-grid">
-        <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label={tr.contact.followInstagram}>
+      <nav class="contact__social-grid" aria-label="Social Media">
+        <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label={t.contact.followInstagram}>
           <Image src={igLogo} alt="Instagram" width={20} height={20} />
           <span>@kopi_siholta.id</span>
         </a>
-        <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label={tr.contact.followTiktok}>
+        <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label={t.contact.followTiktok}>
           <Image src={tiktokLogo} alt="Tiktok" width={20} height={20} />
           <span>@kopi_siholta.id</span>
         </a>
@@ -57,14 +58,14 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
         </a>
         <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Shopee">
           <Image src={shopeeLogo} alt="Shopee" width={20} height={20} />
-          <span>@kopi_siholta</span>
+          <span>@kopisiholta</span>
         </a>
-      </div>
+      </nav>
 
-      <div class="contact__details">
+      <address class="contact__details">
         <div class="contact__detail-item">
           <Icon name="mdi:map-marker" width="14" height="14" />
-          <span>{tr.contact.address}</span>
+          <span>{t.contact.address}</span>
         </div>
         <div class="contact__detail-item">
           <Icon name="mdi:email" width="14" height="14" />
@@ -74,7 +75,7 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
           <Icon name="mdi:phone" width="14" height="14" />
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="contact__link">+62 813 2251 8527</a>
         </div>
-      </div>
+      </address>
 
       <div class="contact__maps">
         <iframe
@@ -83,7 +84,7 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
           style="border:0; border-radius: var(--radius-lg);"
           allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title={tr.contact.mapsLabel}
+          title={t.contact.mapsLabel}
         ></iframe>
       </div>
     </div>
@@ -95,7 +96,7 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
         <div class="form-row">
           <div class="form-group">
             <label for="fullName" class="form-label">
-              {tr.contact.formFullName}
+              {t.contact.formFullName}
               <span class="form-required" aria-hidden="true">*</span>
             </label>
             <input
@@ -103,14 +104,14 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
               id="fullName"
               name="fullName"
               class="form-input"
-              placeholder={tr.contact.formFullNamePlaceholder}
+              placeholder={t.contact.formFullNamePlaceholder}
               required
               autocomplete="name"
             />
           </div>
           <div class="form-group">
             <label for="email" class="form-label">
-              {tr.contact.formEmail}
+              {t.contact.formEmail}
               <span class="form-required" aria-hidden="true">*</span>
             </label>
             <input
@@ -118,7 +119,7 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
               id="email"
               name="email"
               class="form-input"
-              placeholder={tr.contact.formEmailPlaceholder}
+              placeholder={t.contact.formEmailPlaceholder}
               required
               autocomplete="email"
             />
@@ -129,7 +130,7 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
         <div class="form-row">
           <div class="form-group">
             <label for="phone" class="form-label">
-              {tr.contact.formPhone}
+              {t.contact.formPhone}
               <span class="form-required" aria-hidden="true">*</span>
             </label>
             <input
@@ -137,22 +138,22 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
               id="phone"
               name="phone"
               class="form-input"
-              placeholder={tr.contact.formPhonePlaceholder}
+              placeholder={t.contact.formPhonePlaceholder}
               required
               autocomplete="tel"
             />
           </div>
           <div class="form-group">
             <label for="company" class="form-label">
-              {tr.contact.formCompany}
-              <span class="form-optional">({tr.contact.optional})</span>
+              {t.contact.formCompany}
+              <span class="form-optional">({t.contact.optional})</span>
             </label>
             <input
               type="text"
               id="company"
               name="company"
               class="form-input"
-              placeholder={tr.contact.formCompanyPlaceholder}
+              placeholder={t.contact.formCompanyPlaceholder}
               autocomplete="organization"
             />
           </div>
@@ -161,30 +162,30 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
         <!-- Row 3: Inquiry Type -->
         <div class="form-group">
           <label for="inquiryType" class="form-label">
-            {tr.contact.formInquiryType}
+            {t.contact.formInquiryType}
             <span class="form-required" aria-hidden="true">*</span>
           </label>
           <select id="inquiryType" name="inquiryType" class="form-input form-select" required>
-            <option value="" disabled selected>{tr.contact.formInquiryTypePlaceholder}</option>
-            <option value={tr.contact.formInquiryOpt1}>{tr.contact.formInquiryOpt1}</option>
-            <option value={tr.contact.formInquiryOpt2}>{tr.contact.formInquiryOpt2}</option>
-            <option value={tr.contact.formInquiryOpt3}>{tr.contact.formInquiryOpt3}</option>
-            <option value={tr.contact.formInquiryOpt4}>{tr.contact.formInquiryOpt4}</option>
+            <option value="" disabled selected>{t.contact.formInquiryTypePlaceholder}</option>
+            <option value={t.contact.formInquiryOpt1}>{t.contact.formInquiryOpt1}</option>
+            <option value={t.contact.formInquiryOpt2}>{t.contact.formInquiryOpt2}</option>
+            <option value={t.contact.formInquiryOpt3}>{t.contact.formInquiryOpt3}</option>
+            <option value={t.contact.formInquiryOpt4}>{t.contact.formInquiryOpt4}</option>
           </select>
         </div>
 
         <!-- Row 4: Message -->
         <div class="form-group">
           <label for="message" class="form-label">
-            {tr.contact.formMessage}
+            {t.contact.formMessage}
             <span class="form-required" aria-hidden="true">*</span>
           </label>
           <textarea
             id="message"
             name="message"
             class="form-input form-textarea"
-            rows="4"
-            placeholder={tr.contact.formMessagePlaceholder}
+            rows="7"
+            placeholder={t.contact.formMessagePlaceholder}
             required
           ></textarea>
         </div>
@@ -195,19 +196,19 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
             type="button"
             id="btnWhatsApp"
             class="btn btn--whatsapp form-btn"
-            aria-label={tr.contact.formSendWaAria}
+            aria-label={t.contact.formSendWaAria}
           >
             <Image src={waLogo} alt="WhatsApp" width={18} height={18} />
-            {tr.contact.formSendWa}
+            {t.contact.formSendWa}
           </button>
           <button
             type="button"
             id="btnEmail"
             class="btn btn--email form-btn"
-            aria-label={tr.contact.formSendEmailAria}
+            aria-label={t.contact.formSendEmailAria}
           >
             <Icon name="mdi:email-outline" width={18} height={18} />
-            {tr.contact.formSendEmail}
+            {t.contact.formSendEmail}
           </button>
         </div>
 
@@ -226,9 +227,8 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
 
 .contact__inner {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: var(--space-12);
-  align-items: start;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
 }
 
 .contact__info {
@@ -237,9 +237,13 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
   gap: var(--space-6);
 }
 
+.section__header {
+  margin-bottom: var(--space-2);
+}
+
 .contact__social-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1fr 1fr; 
   gap: var(--space-2);
 }
 
@@ -291,10 +295,11 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
   flex-direction: column;
   gap: var(--space-4);
 }
+
 .form-actions {
   display: flex;
-  gap: var(--space-3);
-  align-items: stretch;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 /* ── Form Feedback ─────────────────────── */
@@ -316,32 +321,28 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
 
 .form-optional {
   font-weight: 400;
-  color: var(--color-neutral-400);
+  color: var(--color-brand-muted);
   font-size: 10px;
   margin-left: 4px;
 }
 
-/* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .contact__inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-  }
-}
-
-@media (max-width: 640px) {
+@media (min-width: 481px) {
   .contact__social-grid { grid-template-columns: repeat(3, 1fr); }
-  .form-actions {
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-  .form-btn { width: 100%; }
 }
 
-@media (max-width: 480px) {
-  .contact__social-grid { grid-template-columns: 1fr 1fr; }
-  .contact__form-wrap { padding: var(--space-4); }
+@media (min-width: 1025px) {
+  .contact__inner {
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-12);
+  }
+  .contact__social-grid { grid-template-columns: repeat(5, 1fr); }
+  .form-actions {
+    flex-direction: row; /* Kembali ke side-by-side */
+  }
 }
+
+
+
 </style>
 
 <script define:vars={{ WHATSAPP_NUMBER, EMAIL }}>

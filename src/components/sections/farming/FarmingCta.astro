@@ -1,6 +1,13 @@
 ---
 
-const { lang, t } = Astro.props;
+import { useTranslations } from '../../../i18n/utils';
+
+interface Props {
+  lang: 'id' | 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 const nl = (s: string) => s.split('\n').join('<br>');
 ---
   <!-- ── CTA ─────────────────────────────────────────── -->

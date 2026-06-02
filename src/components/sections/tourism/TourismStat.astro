@@ -1,29 +1,28 @@
 ---
+import { useTranslations } from '../../../i18n/utils';
 
-const { t } = Astro.props;
+interface Props {
+  lang: 'id' | 'en' | 'fr';
+}
 
-const stats = [
-  { valueKey: 'statAlt',      labelKey: 'statAlt'      },
-  { valueKey: 'statFamilies', labelKey: 'statFamilies' },
-  { valueKey: 'statCountries', labelKey: 'statCountries' },
-  { valueKey: 'statFounded',  labelKey: 'statFounded'  },
-];
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
-  <!-- ── Intro Stats ───────────────────────────────────── -->
-  <section class="stat-band stat-band--green" aria-label="Fakta Kopi Siholta">
-    <div class="container">
-      <div class="stat-band__grid">
-        {[
-          { value: '1.200 mdpl', label: t.tourism.statAlt },
-          { value: '200+', label: t.tourism.statFamilies },
-          { value: '6+', label: t.tourism.statCountries },
-          { value: '2019', label: t.tourism.statFounded },
-        ].map(stat => (
-          <div class="stat-band__item animate-on-scroll">
-            <span class="stat-band__value">{stat.value}</span>
-            <span class="stat-band__label">{stat.label}</span>
-          </div>
-        ))}
-      </div>
+
+<section class="stat-band stat-band--green" aria-label="Statistik Pariwisata Kopi Siholta">
+  <div class="container">
+    <div class="stat-band__grid">
+      {[
+        { value: '1.200 mdpl', label: t.tourism.statAlt },
+        { value: '200+', label: t.tourism.statFamilies },
+        { value: '6+', label: t.tourism.statCountries },
+        { value: '2019', label: t.tourism.statFounded },
+      ].map(stat => (
+        <div class="stat-band__item animate-on-scroll">
+          <span class="stat-band__value">{stat.value}</span>
+          <span class="stat-band__label">{stat.label}</span>
+        </div>
+      ))}
     </div>
-  </section>
+  </div>
+</section>
