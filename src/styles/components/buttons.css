@@ -235,14 +235,12 @@
 }
 
 .btn--whatsapp {
-  background: var(--color-wa-green);
-  color: #fff;
+  background: var(--color-brand-red);
+  color: var(--color-text-main);
 }
 
 .btn--whatsapp:hover {
-  background: #1db954;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+  background: #7a0b14;
 }
 
 .btn--whatsapp:active { transform: translateY(0); }

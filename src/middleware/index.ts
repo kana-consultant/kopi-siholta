@@ -11,6 +11,11 @@ const SUPPORTED_LANGS = ['id', 'en', 'fr'];
 export const onRequest = defineMiddleware(async (context, next) => {
   const url = new URL(context.request.url);
 
+  // Abaikan middleware untuk aset statis dan API
+  if (url.pathname.startsWith('/_astro') || url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg|ico)$/)) {
+    return next();
+  }
+
   let preferredLang = context.cookies.get('preferred_lang')?.value;
 
   if (!preferredLang) {
@@ -32,7 +37,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // 2. JIKA USER MENGAKSES ROOT '/' -> LANGSUNG REDIRECT DI SERVER SIDE
   if (url.pathname === '/') {
-    return context.redirect(`/${preferredLang}/`, 302);
+    return context.redirect(`/${preferredLang}`, 302);
   }
 
   return next();

@@ -13,8 +13,12 @@ import B2BPartners from '../../components/sections/homepage/Partnerships.astro';
 import OmnichannelLinks from '../../components/sections/homepage/OmnichannelLinks.astro';
 import ContactSection from '../../components/sections/homepage/ContactSection.astro';
 
+import { useTranslations } from '../../i18n/utils';
+
 const { lang } = Astro.params;
-const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? lang : 'id';
+const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
+
+const t = useTranslations(currentLang);
 
 const meta = currentLang === 'id'
   ? {

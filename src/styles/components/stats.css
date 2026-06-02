@@ -33,23 +33,24 @@
 
 /* ── Hero Stats Preview ──────────────────────────────────── */
 .hero__stats-preview {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Mobile: Grid 2 kolom */
+  gap: var(--space-4);
   padding-top: var(--space-4);
   border-top: 0.5px solid var(--color-text-muted);
-  opacity: 0.2;
+  opacity: 0.8; /* Ditingkatkan agar lebih jelas */
 }
 
 .hero__stat {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  justify-content: center;
 }
 
 .hero__stat-num {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 18px; /* Lebih proporsional untuk mobile */
   font-weight: 700;
   color: var(--color-brand-red);
   line-height: 1;
@@ -57,19 +58,14 @@
 
 .hero__stat-label {
   font-family: var(--font-label);
-  font-size: 9px;
-  font-weight: 400;
-  letter-spacing: 0.10em;
+  font-size: 10px;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-text-main);
+  letter-spacing: 0.05em;
 }
 
-.hero__stat-divider {
-  width: 0.5px;
-  height: 28px;
-  background: var(--color-text-muted);
-  flex-shrink: 0;
-}
+/* Sembunyikan divider di mobile karena sudah pakai grid */
+.hero__stat-divider { display: none; }
 
 /* ── Stat Band ──────────────────────────────────────────── */
 .stat-band { padding-block: var(--space-10); }
@@ -190,5 +186,22 @@
   .trust-stat + .trust-stat::before { display: none; }
 }
 
-@media (max-width: 480px) {
+
+/* ── Tablet & Desktop (min-width) ───────────────────────── */
+@media (min-width: 640px) {
+  .hero__stats-preview {
+    display: flex;
+    grid-template-columns: none;
+    gap: var(--space-6);
+  }
+
+  .hero__stat-divider {
+    display: block; 
+    width: 0.5px;
+    height: 28px;
+    background: var(--color-text-muted);
+  }
+
+  .hero__stat-num { font-size: 22px; }
+  .hero__stat-label { font-size: 12px; }
 }
