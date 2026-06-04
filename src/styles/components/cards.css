@@ -1,5 +1,5 @@
 /* =========================================================
-   Kopi Siholta — Cards
+   Kopi Siholta — Cards (Refactored: Mobile-First)
    Loaded after base.css and typography.css
    ========================================================= */
 
@@ -12,7 +12,9 @@
   transition: border-color 200ms ease;
 }
 
-.card:hover { border-color: var(--color-brand-red); }
+.card:hover { 
+  border-color: var(--color-brand-red); 
+}
 
 /* ── Sector Card ─────────────────────────────────────────── */
 .sector-card {
@@ -32,10 +34,15 @@
   transform: translateY(-3px);
 }
 
-.sector-card__header { display: flex; align-items: center; gap: var(--space-3); }
+.sector-card__header { 
+  display: flex; 
+  align-items: center; 
+  gap: var(--space-3); 
+}
 
 .sector-card__icon {
-  width: 44px; height: 44px;
+  width: 44px; 
+  height: 44px;
   border-radius: var(--radius-md);
   background: rgba(255,255,255,0.7);
   display: flex;
@@ -105,10 +112,13 @@
   transform: translateY(-3px);
 }
 
-.product-card:hover .product-card__img { transform: scale(1.05); }
+.product-card:hover .product-card__img { 
+  transform: scale(1.05); 
+}
 
 .product-card__img {
-  width: 100%; height: 100%;
+  width: 100%; 
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -169,7 +179,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: 480px;
+  min-height: 380px; 
 }
 
 .cert-card:hover {
@@ -205,7 +215,7 @@
 }
 
 .cert-card__body {
-  padding: var(--space-6);
+  padding: var(--space-5); 
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -282,7 +292,6 @@
   transform: translateY(0); 
 }
 
-/* ── Flavour Chip (shared by process/menu cards) ──────────── */
 .flavour-chip {
   font-family: var(--font-body);
   font-size: 0.75rem;
@@ -294,7 +303,6 @@
   border: 0.5px solid var(--color-neutral-200);
 }
 
-/* ── Timeline Card (domain-specific, but card-like) ─────── */
 .timeline__card {
   background: #fff;
   border: 0.5px solid var(--color-neutral-200);
@@ -310,7 +318,11 @@
   box-shadow: 0 4px 20px rgba(92,61,30,0.08);
 }
 
-.timeline__card-icon { color: var(--color-brand-red); margin-bottom: var(--space-2); display: flex; }
+.timeline__card-icon { 
+  color: var(--color-brand-red); 
+  margin-bottom: var(--space-2); 
+  display: flex; 
+}
 
 .timeline__card-year {
   font-family: var(--font-display);
@@ -338,7 +350,6 @@
   color: var(--color-brand-muted);
 }
 
-/* ── Social Card (used in ContactSection, etc.) ──────────── */
 .social-card {
   display: flex;
   flex-direction: column;
@@ -364,18 +375,24 @@
   box-shadow: 0 4px 12px rgba(26, 15, 8, 0.08);
 }
 
-/* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .sectors__grid { grid-template-columns: 1fr; }
+.sectors__grid { 
+  grid-template-columns: 1fr; 
 }
 
-@media (max-width: 768px) {
-  .cert-card { min-height: 420px; }
+
+@media (min-width: 641px) {
+  .cert-card { 
+    min-height: 420px; 
+  }
+  .cert-card__body { 
+    padding: var(--space-6); 
+  }
 }
 
-@media (max-width: 640px) {
-  .cert-card { min-height: 380px; }
-  .cert-card__body { padding: var(--space-5); }
+@media (min-width: 769px) {
+  .cert-card { 
+    min-height: 480px; 
+  }
 }
 
 @media (hover: hover) {
