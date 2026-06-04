@@ -10,6 +10,7 @@ tests/
 .vercel/
 scripts/
 docs/
+design-system/
 
 # dependencies
 node_modules/
