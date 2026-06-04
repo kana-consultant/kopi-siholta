@@ -140,7 +140,7 @@
 
 @keyframes logoMarquee {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to   { transform: translateX(calc(-50% - (var(--space-8) / 2))); }
 }
 
 @media (prefers-reduced-motion: reduce) {

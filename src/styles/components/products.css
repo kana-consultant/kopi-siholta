@@ -131,7 +131,11 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.75) 100%);
+    background: linear-gradient(
+    to top, 
+    rgba(92, 61, 30, 0.98) 0%, 
+    rgba(92, 61, 30, 0.8) 100%  
+  );
     
     opacity: 0;
     transition: opacity 0.3s ease;

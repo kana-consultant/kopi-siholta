@@ -2,11 +2,15 @@
 /* ── Location Section ──────────────────────── */
 .location { background: var(--color-neutral-50); }
 
+.section__header {
+  margin-bottom: 0.5rem;
+}
+
 .location__body {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  margin-top: var(--space-8);
+  margin-top: var(--space-2);
 }
 
 .location__map-wrap {
