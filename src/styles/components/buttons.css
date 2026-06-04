@@ -1,9 +1,3 @@
-/* =========================================================
-   Kopi Siholta — Buttons
-   Loaded after base.css and typography.css
-   ========================================================= */
-
-/* ── Base Button ─────────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -12,7 +6,7 @@
   padding: 10px 20px;
   border-radius: var(--radius-md);
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 0.75rem;
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0.08em;
@@ -24,7 +18,7 @@
   white-space: nowrap;
 }
 
-/* ── Button Variants ─────────────────────────────────── */
+
 .btn--primary {
   background: var(--color-brand-red);
   color: #fff;
@@ -62,7 +56,7 @@
   margin-top: auto;
   align-self: flex-start;
   padding: 9px 16px;
-  font-size: 12px;
+  font-size: 0.75rem;
   gap: var(--space-2);
   color: var(--color-brand-earth);
   background: rgba(92, 61, 30, 0.12);
@@ -88,13 +82,13 @@
 .btn--card-cta svg { transition: transform 200ms ease; }
 .btn--card-cta:hover svg { transform: translateX(3px); }
 
-/* ── Link CTA (animated gap on hover, used in retail cards) ── */
+
 .btn--link-cta {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -106,7 +100,7 @@
 
 .btn--link-cta:hover { gap: 10px; }
 
-/* ── Badges ────────────────────────────────────────────── */
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -114,7 +108,7 @@
   padding: 4px 10px;
   border-radius: 2px;
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.10em;
   text-transform: uppercase;
@@ -138,7 +132,7 @@
   background: rgba(34,85,34,0.06);
 }
 
-/* ── Shared CTA Banner ────────────────────────────────── */
+
 .page-cta {
   padding-block: var(--space-16);
 }
@@ -152,8 +146,8 @@
 
 .page-cta__inner {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column; 
+  align-items: flex-start;
   gap: var(--space-12);
   flex-wrap: wrap;
 }
@@ -172,7 +166,7 @@
 
 .page-cta__sub {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.75;
   color: rgba(255,255,255,0.65);
   max-width: 460px;
@@ -214,7 +208,6 @@
   border-color: rgba(255,255,255,0.65);
 }
 
-/* ── Form Action Buttons ──────────────────────────────── */
 .form-btn {
   flex: 1;
   display: flex;
@@ -224,7 +217,7 @@
   padding: 10px var(--space-4);
   border-radius: var(--radius-md);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -261,6 +254,10 @@
 
 .btn--email:active { transform: translateY(0); }
 
-@media (max-width: 768px) {
-  .page-cta__inner { flex-direction: column; align-items: flex-start; }
+@media (min-width: 769px) {
+  .page-cta__inner {
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-between;
+  }
 }

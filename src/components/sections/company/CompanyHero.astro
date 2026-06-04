@@ -3,7 +3,11 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import companyBg from '../../../images/bg/bg-company.jpg';
 
-const { lang, tc, t } = Astro.props;
+import { useTranslations } from '../../../i18n/utils';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tc = t.company;
 ---
   
   <!-- ── Hero ─────────────────────────────────────────── -->

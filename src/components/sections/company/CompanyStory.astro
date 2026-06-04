@@ -2,12 +2,15 @@
 import { Image } from 'astro:assets';
 import companyLogo from '../../../images/logo/logo-STI.png';
 import aboutFoto from '../../../images/about.webp';
+import { useTranslations } from '../../../i18n/utils';
 
-const { lang, tc, t } = Astro.props;
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tc = t.company;
 ---
 
   <!-- ── Company Story ───────────────────────────────── -->
-  <section class="story section" aria-labelledby="story-heading">
+  <section id="about" class="story section" aria-labelledby="story-heading">
     <div class="container">
       <div class="story__grid">
 
@@ -58,11 +61,11 @@ const { lang, tc, t } = Astro.props;
     </div>
   </section>
 
-  <style>
+<style>
 .story__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-16);
+  grid-template-columns: 1fr;
+  gap: var(--space-8);     
   align-items: center;
 }
 
@@ -81,7 +84,8 @@ const { lang, tc, t } = Astro.props;
 }
 
 .story__logo {
-  width: 70px; height: auto;
+  width: 70px; 
+  height: auto;
   border-color: var(--color-brand-red);
   border-radius: var(--radius-sm);
   object-fit: contain;
@@ -90,10 +94,14 @@ const { lang, tc, t } = Astro.props;
 
 .story__body {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.8;
   color: var(--color-brand-muted);
   margin-bottom: var(--space-4);
+}
+
+.story__stats {
+  gap: var(--space-6); 
 }
 
 .story__image-frame {
@@ -104,13 +112,17 @@ const { lang, tc, t } = Astro.props;
 }
 
 .story__img {
-  width: 100%; height: 100%;
+  width: 100%; 
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 
-@media (max-width: 768px) {
-  .story__grid { grid-template-columns: 1fr; gap: var(--space-8); }
-  .story__stats { gap: var(--space-6); }
+@media (min-width: 769px) {
+  .story__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+  }
+  
 }
-  </style>
+</style>

@@ -1,13 +1,3 @@
-/* =========================================================
-   Kopi Siholta — Utilities
-   Shared BEM components and utility helpers.
-   Loaded after base.css, typography.css, animations.css, components/
-   ========================================================= */
-
-@import './base.css';
-@import './typography.css';
-
-/* ── Visibility ────────────────────────────────────────── */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -20,13 +10,12 @@
   border: 0;
 }
 
-@media (max-width: 768px)  { .hide-mobile { display: none !important; } }
-@media (min-width: 769px)  { .hide-desktop { display: none !important; } }
+.hide-mobile { display: none !important; }
+.hide-desktop { display: initial !important; }
 
-/* ── Form Components ────────────────────────────────────── */
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr; 
   gap: var(--space-4);
 }
 
@@ -38,7 +27,7 @@
 
 .form-label {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--color-brand-earth);
   letter-spacing: 0.04em;
@@ -50,7 +39,7 @@
   border-radius: var(--radius-md);
   padding: 0 var(--space-3);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 0.75rem;
   color: var(--color-brand-earth);
   background: #fff;
   transition: border-color 200ms ease, box-shadow 200ms ease;
@@ -68,7 +57,6 @@
 .form-select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%237A6A5A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   padding-right: 32px;
@@ -84,7 +72,7 @@
 
 .form-error {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--color-error);
   padding: var(--space-2) var(--space-3);
   background: rgba(220, 53, 69, 0.06);
@@ -101,12 +89,17 @@
 .form-optional {
   font-weight: 400;
   color: var(--color-neutral-400);
-  font-size: 10px;
+  font-size: 0.75rem;
   margin-left: 4px;
 }
 
-@media (max-width: 640px) {
-  .form-row { grid-template-columns: 1fr; }
+@media (min-width: 641px) {
+  .form-row { 
+    grid-template-columns: 1fr 1fr; 
+  }
 }
 
-
+@media (min-width: 769px) {
+  .hide-mobile { display: initial !important; }
+  .hide-desktop { display: none !important; }
+}

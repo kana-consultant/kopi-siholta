@@ -1,7 +1,16 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../../../i18n/utils';
 
-const { lang, tc, t } = Astro.props;
+interface Props {
+  lang: 'id' | 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tc = t.company;
+
+const nl = (s: string) => s.split('\n').join('<br>');
 
 const hexToRgb = (hex: string) =>
   hex.replace('#', '').match(/.{2}/g)?.map(v => parseInt(v, 16)).join(',') ?? '92,61,30';
@@ -25,54 +34,57 @@ const sectors = [
 ];
 ---
 
-  <!-- ── Operation Sectors ──────────────────────────── -->
-  <section class="sectors section" aria-labelledby="sectors-heading">
-    <div class="container">
-      <div class="section__header animate-on-scroll">
-        <h2 id="sectors-heading" class="section-title">{tc.sectorsTitle}</h2>
-        <p class="section-sub">{tc.sectorsSubtitle}</p>
-      </div>
-
-      <div class="sectors__grid">
-        {sectors.map((sector, i) => (
-          <article
-            class="sector-card animate-on-scroll"
-            style={`--card-bg: ${sector.bgColor}; --card-accent: ${sector.accentColor}; --card-accent-rgb: ${hexToRgb(sector.accentColor)}`}>
-            <div class="sector-card__header">
-              <div class="sector-card__icon" aria-hidden="true"><Icon name={sector.iconName} width="24" height="24" /></div>
-              <div>
-                <h3 class="sector-card__name">{tc[sector.nameKey]}</h3>
-              </div>
-            </div>
-            <p class="sector-card__desc">{tc[sector.descKey]}</p>
-            <ul class="sector-card__highlights" role="list">
-              {sector.highlightsKey.map(key => (
-                <li class="sector-card__highlight">
-                  <Icon name="mdi:circle-small" width="10" height="10" />
-                  {tc[key]}
-                </li>
-              ))}
-            </ul>
-            <a href={sector.href} class="btn btn--card-cta">
-              {tc[sector.ctaKey]}
-              <Icon name="mdi:chevron-right" width="12" height="12" />
-            </a>
-          </article>
-        ))}
-      </div>
+<!-- ── Operation Sectors ──────────────────────────── -->
+<section class="sectors section" aria-labelledby="sectors-heading">
+  <div class="container">
+    <div class="section__header animate-on-scroll">
+      <h2 id="sectors-heading" class="section-title" set:html={nl(tc.sectorsTitle)} />
+      <p class="section-sub">{tc.sectorsSubtitle}</p>
     </div>
-  </section>
 
-  <style>
+    <div class="sectors__grid">
+      {sectors.map((sector) => (
+        <article
+          class="sector-card animate-on-scroll"
+          style={`--card-bg: ${sector.bgColor}; --card-accent: ${sector.accentColor}; --card-accent-rgb: ${hexToRgb(sector.accentColor)}`}>
+          <div class="sector-card__header">
+            <div class="sector-card__icon" aria-hidden="true">
+              <Icon name={sector.iconName} width="24" height="24" />
+            </div>
+            <div>
+              <h3 class="sector-card__name">{tc[sector.nameKey as keyof typeof tc]}</h3>
+            </div>
+          </div>
+          <p class="sector-card__desc">{tc[sector.descKey as keyof typeof tc]}</p>
+          <ul class="sector-card__highlights" role="list">
+            {sector.highlightsKey.map(key => (
+              <li class="sector-card__highlight">
+                <Icon name="mdi:circle-small" width="10" height="10" />
+                {tc[key as keyof typeof tc]}
+              </li>
+            ))}
+          </ul>
+          <a href={sector.href} class="btn btn--card-cta">
+            {tc[sector.ctaKey as keyof typeof tc]}
+            <Icon name="mdi:chevron-right" width="12" height="12" />
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
 .sectors__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--space-6);
   margin-top: var(--space-10);
 }  
 
-@media (max-width: 1024px) {
-  .sectors__grid { grid-template-columns: 1fr; }
-
+@media (min-width: 1025px) {
+  .sectors__grid { 
+    grid-template-columns: repeat(3, 1fr); 
+  }
 }
-  </style>
+</style>

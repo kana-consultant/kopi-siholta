@@ -1,8 +1,3 @@
-/* =========================================================
-   Stats Component
-   Scoped styles for StatsRibbon.astro
-   ========================================================= */
-
 /* ── Story Stats ──────────────────────────────────────────── */
 .story__stats {
   display: flex;
@@ -25,7 +20,7 @@
 
 .story__stat-label {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-brand-muted);
@@ -34,11 +29,11 @@
 /* ── Hero Stats Preview ──────────────────────────────────── */
 .hero__stats-preview {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Mobile: Grid 2 kolom */
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-4);
   padding-top: var(--space-4);
   border-top: 0.5px solid var(--color-text-muted);
-  opacity: 0.8; /* Ditingkatkan agar lebih jelas */
+  opacity: 0.8;
 }
 
 .hero__stat {
@@ -50,7 +45,7 @@
 
 .hero__stat-num {
   font-family: var(--font-display);
-  font-size: 18px; /* Lebih proporsional untuk mobile */
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--color-brand-red);
   line-height: 1;
@@ -58,17 +53,21 @@
 
 .hero__stat-label {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 0.625rem;
   text-transform: uppercase;
   color: var(--color-text-main);
   letter-spacing: 0.05em;
 }
 
-/* Sembunyikan divider di mobile karena sudah pakai grid */
-.hero__stat-divider { display: none; }
+.hero__stat-divider { 
+  display: none; 
+}
 
 /* ── Stat Band ──────────────────────────────────────────── */
-.stat-band { padding-block: var(--space-10); }
+.stat-band { 
+  display: none; 
+  padding-block: var(--space-10); 
+}
 .stat-band--earth { background: var(--color-brand-earth); }
 .stat-band--green { background: var(--color-agri-green); }
 .stat-band--cream { background: var(--color-brand-cream); }
@@ -76,7 +75,7 @@
 
 .stat-band__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr); 
   gap: var(--space-6);
 }
 
@@ -89,6 +88,8 @@
 }
 
 .stat-band--cream .stat-band__item { border-left-color: var(--color-neutral-200); }
+
+.stat-band__item:nth-child(odd) { border-left: none; }
 .stat-band__item:first-child { border-left: none; }
 
 .stat-band__value {
@@ -104,7 +105,7 @@
 
 .stat-band__label {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.55);
@@ -128,7 +129,7 @@
 
 .editorial-stat__label {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.10em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.55);
@@ -145,6 +146,7 @@
 }
 
 .trust-stat + .trust-stat::before {
+  display: none;
   content: '';
   position: absolute;
   left: calc(-1 * var(--space-4) - 1px);
@@ -157,7 +159,7 @@
 
 .trust-stat__value {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 700;
   color: #fff;
   line-height: 1;
@@ -165,7 +167,7 @@
 
 .trust-stat__label {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
 }
@@ -175,19 +177,8 @@
   margin-bottom: 4px;
 }
 
-/* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .stat-band__grid { grid-template-columns: repeat(2, 1fr); }
-  .stat-band__item:nth-child(odd) { border-left: none; }
-}
 
-@media (max-width: 768px) {
-  .stat-band { display: none; }
-  .trust-stat + .trust-stat::before { display: none; }
-}
-
-
-/* ── Tablet & Desktop (min-width) ───────────────────────── */
+/* ── Small Tablet (Lebar >= 640px) ───────────────────────── */
 @media (min-width: 640px) {
   .hero__stats-preview {
     display: flex;
@@ -202,6 +193,34 @@
     background: var(--color-text-muted);
   }
 
-  .hero__stat-num { font-size: 22px; }
-  .hero__stat-label { font-size: 12px; }
+  .hero__stat-num { font-size: 1.375rem; }
+  .hero__stat-label { font-size: 0.75rem; }
+}
+
+/* ── Large Tablet / MD Breakpoint (Lebar >= 769px) ────────── */
+@media (min-width: 769px) {
+  .stat-band { 
+    display: block;
+  }
+  
+  .trust-stat + .trust-stat::before { 
+    display: block; 
+  }
+}
+
+@media (min-width: 1025px) {
+  .stat-band__grid { 
+    grid-template-columns: repeat(4, 1fr); 
+  }
+  
+  .stat-band__item:nth-child(odd) { 
+    border-left: 1px solid rgba(255,255,255,0.15); 
+  }
+  .stat-band--cream .stat-band__item:nth-child(odd) { 
+    border-left-color: var(--color-neutral-200); 
+  }
+  
+  .stat-band__item:first-child { 
+    border-left: none; 
+  }
 }

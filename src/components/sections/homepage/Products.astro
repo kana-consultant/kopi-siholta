@@ -10,9 +10,9 @@ import robustaBubuk250 from '../../../images/products/robusta-bubuk-250g.webp';
 import robustaBubuk70 from '../../../images/products/robusta-bubuk-70g.webp';
 import robustaRosbeans70 from '../../../images/products/robusta-rosbeans-70g.webp';
 import robustaKapsul70 from '../../../images/products/robusta-kapsul-70g.webp';
-import shopeeLogo from '../../../images/logo/logo-shopee.webp';
-import tokopediaLogo from '../../../images/logo/logo-tokopedia.webp';
-import halalLogo from '../../../images/logo/logo-halal(1).png';
+import shopeeLogo from '../../../images/logo/logo-shopee.png';
+import tokopediaLogo from '../../../images/logo/logo-tokopedia.png';
+import halalLogo from '../../../images/logo/logo-halal.png';
 import bpomLogo from '../../../images/logo/logo-bpom.png';
 
 interface Props {
@@ -183,14 +183,14 @@ const companyLink = lang === 'id' ? '/id/company' : '/en/company';
       <div class="cert-card">
         <div class="cert-item">
           <div class="cert-logo">
-            <Image src={bpomLogo} alt="Logo BPOM" width={48} height={48} loading="lazy" />
+            <Image src={bpomLogo} alt="Logo BPOM" height={36} loading="lazy" />
           </div>
           <span class="cert-name">{p.certBpomName}</span>
         </div>
         <div class="cert-divider" aria-hidden="true"></div>
         <div class="cert-item">
           <div class="cert-logo">
-            <Image src={halalLogo} alt="Logo Halal" width={48} height={48} loading="lazy" />
+            <Image src={halalLogo} alt="Logo Halal" height={36} loading="lazy" />
           </div>
           <span class="cert-name">{p.certHalalName}</span>
         </div>

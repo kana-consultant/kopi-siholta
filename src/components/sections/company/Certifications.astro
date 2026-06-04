@@ -5,9 +5,11 @@ import certBrand from '../../../images/certified/brand-certificate.webp';
 import certHalal from '../../../images/certified/halal-certificate.webp';
 import certTraining from '../../../images/certified/training-certificate.webp';
 import certPirt from '../../../images/certified/P-IRT.webp';
+import { useTranslations } from '../../../i18n/utils';
 
-
-const { tc } = Astro.props;
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tc = t.company;
 const certs = [
   {
     nameKey: 'certBrandName', descKey: 'certBrandDesc',
@@ -33,7 +35,7 @@ const certs = [
 ---
 
  <!-- ── Trusted & Certified ─────────────────────── -->
-<section class="certifications section" aria-labelledby="certifications-heading">
+<section id="certificates" class="certifications section" aria-labelledby="certifications-heading">
     <div class="container">
       <div class="section__header animate-on-scroll">
         <h2 id="certifications-heading" class="section-title">{tc.certificationsTitle}</h2>

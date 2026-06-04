@@ -1,6 +1,9 @@
 ---
+import { useTranslations } from '../../../i18n/utils';
 
-const { lang, tc } = Astro.props;
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tc = t.company;
 const nl = (s: string) => s.split('\n').join('<br>');
 ---
   <!-- ── CTA Banner ────────────────────────────────── -->

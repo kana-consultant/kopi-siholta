@@ -58,7 +58,9 @@ export default defineConfig({
         limitInputPixels: false,
       }
     },
-    domains: []
+    domains: [],
+    // @ts-ignore - Memaksa TypeScript mengabaikan validasi tipe data pada properti ini
+    quality: 75,
   },
   compressHTML: true,
 });

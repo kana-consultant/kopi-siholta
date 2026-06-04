@@ -18,7 +18,7 @@
 
 .partnerships__subtitle {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.75;
   color: var(--color-brand-muted);
   max-width: 580px;
@@ -110,7 +110,7 @@
 
 .logo-cloud__text {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -133,14 +133,14 @@
 
 .logo-cloud__proof {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--color-brand-muted);
   margin-top: 1.5rem;
 }
 
 @keyframes logoMarquee {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to   { transform: translateX(calc(-50% - (var(--space-8) / 2))); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -163,7 +163,7 @@
 
 .process-section__subtitle {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 1.7;
   color: var(--color-brand-muted);
   max-width: 520px;
@@ -247,7 +247,7 @@
 
 .process-card__name {
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--color-brand-earth);
   line-height: 1.2;
@@ -255,7 +255,7 @@
 
 .process-card__desc {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 0.75rem;
   line-height: 1.65;
   color: var(--color-brand-muted);
 }
@@ -274,7 +274,7 @@
 
 .process-card__meta-label {
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -289,7 +289,7 @@
 
 .process-card__meta-value {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--color-brand-earth);
   font-weight: 500;
 }
@@ -356,6 +356,6 @@
 @media (min-width: 1024px) {
   .process-cards { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
   .process-card__body { padding: var(--space-5); }
-  .process-card__name { font-size: 17px; }
+  .process-card__name { font-size: 1rem; }
   .partnerships__cta { padding: var(--space-12) var(--space-8); }
 }

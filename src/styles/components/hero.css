@@ -1,12 +1,6 @@
-/* =========================================================
-   Hero Section Component
-   Scoped styles for Hero.astro
-   ========================================================= */
-
 .hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 600px; 
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -69,7 +63,7 @@
 }
 
 .hero__content {
-  max-width: 640px;
+  max-width: 100%; 
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
@@ -77,7 +71,7 @@
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(36px, 5.5vw, 58px);
+  font-size: clamp(32px, 8vw, 48px); 
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -110,7 +104,8 @@
 
 .hero__ctas {
   display: flex;
-  align-items: center;
+  flex-direction: column; 
+  align-items: stretch; 
   gap: var(--space-3);
   flex-wrap: wrap;
   opacity: 0;
@@ -120,7 +115,7 @@
 .hero__cta-primary {
   position: relative;
   padding: 12px 28px;
-  font-size: 11px;
+  font-size: 0.75rem;
   background: var(--color-brand-red);
   color: #fff;
   border-radius: var(--radius-md);
@@ -140,6 +135,8 @@
               background 200ms ease;
   box-shadow: 0 2px 8px rgba(205, 18, 34, 0.30),
               0 0 0 0 rgba(205, 18, 34, 0);
+  text-align: center; 
+  justify-content: center; 
 }
 
 .hero__cta-primary::before {
@@ -168,7 +165,7 @@
 .hero__cta-secondary {
   position: relative;
   padding: 11px 28px;
-  font-size: 11px;
+  font-size: 0.75rem;
   background: #ffffff;
   color: #B01020;
   border: 1.5px solid #B01020;
@@ -187,6 +184,8 @@
               border-color 200ms ease,
               box-shadow 250ms ease,
               color 200ms ease;
+  text-align: center;
+  justify-content: center; 
 }
 
 .hero__cta-secondary:hover {
@@ -197,17 +196,18 @@
               0 0 0 1px rgba(255, 0, 0, 0.1);
 }
 
+.hero__cta-secondary:hover { background: #B01020; }
 .hero__cta-secondary:active { background: #ff0000; }
 
 .hero__indicators {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-1); 
   padding-bottom: var(--space-2);
 }
 
 .hero__indicator {
-  width: 24px;
+  width: 16px;
   height: 3px;
   border-radius: var(--radius-full);
   background: rgba(92, 61, 30, 0.20);
@@ -219,11 +219,15 @@
 
 .hero__indicator.is-active {
   background: var(--color-brand-red);
-  width: 40px;
+  width: 28px; 
 }
 
 .hero__indicator:hover { background: rgba(92, 61, 30, 0.20); }
 .hero__indicator.is-active:hover { background: var(--color-brand-red); }
+
+.hero__scroll {
+  display: none;
+}
 
 /* ── Shared Page Hero ──────────────────────────────────── */
 .page-hero {
@@ -234,9 +238,10 @@
   overflow: hidden;
 }
 
-.page-hero--tall  { min-height: 88vh; min-height: 88dvh; }
-.page-hero--mid   { min-height: 82vh; min-height: 82dvh; }
-.page-hero--short { min-height: 72vh; }
+/* Default mobile value dari max-width: 768px */
+.page-hero--tall  { min-height: 70vh; }
+.page-hero--mid   { min-height: 70vh; }
+.page-hero--short { min-height: 60vh; }
 
 .page-hero__bg { position: absolute; inset: 0; }
 
@@ -261,7 +266,7 @@
 
 .page-hero__label {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-brand-gold);
@@ -306,7 +311,8 @@
 .company-hero__bg { position: absolute; inset: 0; }
 
 .company-hero__img {
-  width: 100%; height: 100%;
+  width: 100%; 
+  height: 100%;
   object-fit: cover;
 }
 
@@ -321,23 +327,45 @@
 .company-hero__content { display: flex; flex-direction: column; }
 
 
-
-@media (max-width: 768px) {
-  .hero { min-height: 600px; }
-  .hero__content { max-width: 100%; }
-  .hero__title { font-size: clamp(32px, 8vw, 48px); }
-  .hero__scroll { display: none; }
-  .hero__indicators { gap: var(--space-1); }
-  .hero__indicator { width: 16px; }
-  .hero__indicator.is-active { width: 28px; }
-  .page-hero--tall  { min-height: 70vh; }
-  .page-hero--mid   { min-height: 70vh; }
-  .page-hero--short { min-height: 60vh; }
-
+/* ── Phablet / Menengah (Lebar > 480px) ─────────────────── */
+@media (min-width: 481px) {
+  .hero__ctas { 
+    flex-direction: row; 
+    align-items: center; 
+  }
+  .hero__cta-primary,
+  .hero__cta-secondary { 
+    text-align: left; 
+    justify-content: flex-start; 
+  }
 }
 
-@media (max-width: 480px) {
-  .hero__ctas { flex-direction: column; align-items: stretch; }
-  .hero__cta-primary,
-  .hero__cta-secondary { text-align: center; justify-content: center; }
+/* ── Tablet & Desktop (Lebar > 768px) ───────────────────── */
+@media (min-width: 769px) {
+  .hero { 
+    min-height: 100vh; 
+    min-height: 100dvh; 
+  }
+  .hero__content { 
+    max-width: 640px; 
+  }
+  .hero__title { 
+    font-size: clamp(36px, 5.5vw, 58px); 
+  }
+  .hero__scroll { 
+    display: flex; 
+  }
+  .hero__indicators { 
+    gap: var(--space-2); 
+  }
+  .hero__indicator { 
+    width: 24px; 
+  }
+  .hero__indicator.is-active { 
+    width: 40px; 
+  }
+  
+  .page-hero--tall  { min-height: 88vh; min-height: 88dvh; }
+  .page-hero--mid   { min-height: 82vh; min-height: 82dvh; }
+  .page-hero--short { min-height: 72vh; }
 }
