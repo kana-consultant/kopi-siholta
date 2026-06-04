@@ -19,24 +19,9 @@ const { lang } = Astro.params;
 const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
 
 const t = useTranslations(currentLang);
-
-const meta = currentLang === 'id'
-  ? {
-      title: 'Kopi Siholta — Pionir Kopi Specialty Indonesia dari Danau Toba',
-      description: 'PT Siholta Toba Indonesia adalah produsen dan eksportir kopi specialty pertama di Indonesia dari Sumatera Lintong, Humbang Hasundutan, Sumatera Utara.',
-    }
-  : currentLang === 'fr'
-  ? {
-      title: 'Kopi Siholta — Pionnier du Café Specialty Indonésien du Lac Toba',
-      description: "PT Siholta Toba Indonesia est le premier producteur et exportateur de café specialty d'Indonésie, issu de Sumatera Lintong, Humbang Hasundutan, Sumatra Nord.",
-    }
-  : {
-      title: "Kopi Siholta — Indonesia's Specialty Coffee Pioneer from Lake Toba",
-      description: "PT Siholta Toba Indonesia is Indonesia's first specialty coffee producer and exporter from Sumatera Lintong, Humbang Hasundutan, North Sumatra.",
-    };
 ---
 
-<Base title={meta.title} description={meta.description} lang={currentLang}>
+<Base title={t.meta.titleHome} description={t.meta.descHome} lang={currentLang}>
   <Navbar lang={currentLang} />
   <main id="main-content">
     <Hero lang={currentLang} />

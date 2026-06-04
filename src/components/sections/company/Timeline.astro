@@ -1,43 +1,56 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../../../i18n/utils';
 
-const { lang, tc, t } = Astro.props;
+interface Props {
+  lang: 'id' | 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tc = t.company;
+
+const nl = (s: string) => s.split('\n').join('<br>');
+
+const timelineData = [
+  { year: '2019', label: 'Akar Ditanam di Lintong', key: 'milestone2019', iconName: 'mdi:sprout' },
+  { year: '2020', label: 'Jaringan Petani Terbangun', key: 'milestone2020', iconName: 'mdi:account-group' },
+  { year: '2021', label: 'Awal Perjalanan', key: 'milestone2021', iconName: 'mdi:shopping' },
+  { year: '11 Maret 2022', label: 'Sertifikat Pelatihan Keamanan Pangan', key: 'milestone2022', iconName: 'mdi:food-apple' },
+  { year: '21 November 2022', label: 'Sertifikat Halal', key: 'milestone2023', iconName: 'mdi:shield-check' },
+  { year: '03 Agustus 2023', label: 'Sertifikat Merek', key: 'milestone2024', iconName: 'mdi:certificate' },
+];
 ---
 
-  <!-- ── Timeline ───────────────────────────────────── -->
-  <section class="timeline section section--cream" aria-labelledby="timeline-heading">
-    <div class="container">
-      <div class="section__header animate-on-scroll">
-        <h2 id="timeline-heading" class="section-title">{tc.timelineTitle}</h2>
-        <p class="section-sub">{tc.timelineSubtitle}</p>
-      </div>
-
-      <ol class="timeline__list" role="list">
-        {[
-          { year: '2019', label: 'Akar Ditanam di Lintong', key: 'milestone2019', iconName: 'mdi:sprout' },
-          { year: '2020', label: 'Jaringan Petani Terbangun', key: 'milestone2020', iconName: 'mdi:account-group' },
-          { year: '2021', label: 'Awal Perjalanan', key: 'milestone2021', iconName: 'mdi:shopping' },
-          { year: '11 Maret 2022', label: 'Sertifikat Pelatihan Keamanan Pangan', key: 'milestone2022', iconName: 'mdi:food-apple' },
-          { year: '21 November 2022', label: 'Sertifikat Halal', key: 'milestone2023', iconName: 'mdi:shield-check' },
-          { year: '03 Agustus 2023', label: 'Sertifikat Merek', key: 'milestone2024', iconName: 'mdi:certificate' },
-        ].map((m, i) => (
-          <li class={`timeline__item animate-on-scroll ${i % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'}`}>
-            <div class="timeline__card">
-              <div class="timeline__card-icon" aria-hidden="true"><Icon name={m.iconName} width="16" height="16" /></div>
-              <div class="timeline__card-year">{m.year}</div>
-              <h3 class="timeline__card-title">{tc[m.key]}</h3>
-              <p class="timeline__card-desc">{tc[`${m.key}Desc`]}</p>
-            </div>
-            <div class="timeline__connector" aria-hidden="true">
-              <div class="timeline__dot"></div>
-            </div>
-          </li>
-        ))}
-      </ol>
+<!-- ── Timeline ───────────────────────────────────── -->
+<section id="timeline" class="timeline section section--cream" aria-labelledby="timeline-heading">
+  <div class="container">
+    <div class="section__header animate-on-scroll">
+      <h2 id="timeline-heading" class="section-title" set:html={nl(tc.timelineTitle)} />
+      <p class="section-sub">{tc.timelineSubtitle}</p>
     </div>
-  </section>
 
-  <style>
+    <ol class="timeline__list" role="list">
+      {timelineData.map((m, i) => (
+        <li class={`timeline__item ${i % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'} animate-on-scroll`}>
+          <div class="timeline__card">
+            <div class="timeline__card-icon" aria-hidden="true">
+              <Icon name={m.iconName} width="16" height="16" />
+            </div>
+            <div class="timeline__card-year">{m.year}</div>
+            <h3 class="timeline__card-title">{tc[m.key as keyof typeof tc]}</h3>
+            <p class="timeline__card-desc">{tc[`${m.key}Desc` as keyof typeof tc]}</p>
+          </div>
+          <div class="timeline__connector" aria-hidden="true">
+            <div class="timeline__dot"></div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
 .timeline__list {
   list-style: none;
   position: relative;
@@ -47,10 +60,11 @@ const { lang, tc, t } = Astro.props;
 .timeline__list::before {
   content: '';
   position: absolute;
-  left: 50%; top: 0; bottom: 0;
+  left: 24px; 
+  top: 0; 
+  bottom: 0;
   width: 0.5px;
   background: var(--color-neutral-200);
-  transform: translateX(-50%);
 }
 
 .timeline__item {
@@ -58,45 +72,51 @@ const { lang, tc, t } = Astro.props;
   align-items: flex-start;
   margin-bottom: var(--space-10);
   position: relative;
-}
-
-.timeline__item--left {
+  padding-left: calc(48px + var(--space-4));
+  padding-right: 0;
   justify-content: flex-start;
-  padding-right: calc(50% + var(--space-10));
-}
-
-.timeline__item--right {
-  justify-content: flex-end;
-  padding-left: calc(50% + var(--space-10));
 }
 
 .timeline__connector {
   position: absolute;
-  left: 50%; top: var(--space-5);
+  left: 24px; 
+  top: var(--space-5);
   transform: translateX(-50%);
   z-index: 2;
 }
 
 .timeline__dot {
-  width: 10px; height: 10px;
+  width: 10px; 
+  height: 10px;
   border-radius: 50%;
   background: var(--color-brand-red);
   border: 2px solid var(--color-brand-cream);
   box-shadow: 0 0 0 3px rgba(205,18,34,0.15);
 }
 
-/* ── Responsive ───────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .timeline__list::before { left: 24px; }
-  .timeline__item--left,
-  .timeline__item--right {
-    padding-left: calc(48px + var(--space-4));
-    padding-right: 0;
-    justify-content: flex-start;
+/* ── Responsive Desktop (min-width: 1025px) ──────────────── */
+@media (min-width: 1025px) {
+  .timeline__list::before { 
+    left: 50%; 
+    transform: translateX(-50%);
   }
-  .timeline__connector { left: 24px; }
 
+  .timeline__item {
+    padding-left: 0;
+  }
+
+  .timeline__item--left {
+    justify-content: flex-start;
+    padding-right: calc(50% + var(--space-10));
+  }
+
+  .timeline__item--right {
+    justify-content: flex-end;
+    padding-left: calc(50% + var(--space-10));
+  }
+
+  .timeline__connector { 
+    left: 50%; 
+  }
 }
-
-
-  </style>
+</style>

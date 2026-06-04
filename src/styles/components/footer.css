@@ -49,7 +49,7 @@
 
 .footer__wordmark {
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -58,7 +58,7 @@
 
 .footer__tagline {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 0.75rem;
   line-height: 1.7;
   color: rgba(255,255,255,0.92);
   max-width: 280px;
@@ -72,7 +72,7 @@
 
 .footer__shop-label {
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text-main);
@@ -119,7 +119,7 @@
 
 .footer__col-title {
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text-main);
@@ -135,7 +135,7 @@
 
 .footer__link {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 0.75rem;
   color: rgba(255,255,255,0.90);
   text-decoration: none;
   transition: color 150ms ease;
@@ -159,7 +159,7 @@
 
 .footer__copyright {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--color-text-main);
 }
 
@@ -171,7 +171,7 @@
 
 .footer__bottom-link {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--color-text-main);
   text-decoration: none;
   transition: color 150ms ease;
@@ -182,7 +182,7 @@
 
 .footer__bottom-sep {
   color: rgba(255,255,255,0.25);
-  font-size: 11px;
+  font-size: 0.75rem;
 }
 
 /* ── Responsive ─────────────────────────── */

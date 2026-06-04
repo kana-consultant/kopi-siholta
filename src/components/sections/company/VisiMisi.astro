@@ -1,5 +1,9 @@
 ---
-const { lang, tc, t } = Astro.props;
+import { useTranslations } from '../../../i18n/utils';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tc = t.company;
 ---
 
   <section class="visimisi section" aria-labelledby="visimisi-heading">
@@ -89,7 +93,7 @@ const { lang, tc, t } = Astro.props;
 
 .visimisi__col-text {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.8;
   color: var(--color-brand-earth);
   margin: 0;
@@ -106,7 +110,7 @@ const { lang, tc, t } = Astro.props;
 
 .visimisi__item {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.7;
   color: var(--color-brand-muted);
   padding-left: var(--space-5);

@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { Image } from 'astro:assets';
-import logo from '../images/logo/logo-kopi-siholta.png';
+import logo from '../images/logo/logo-siholta.png';
 
 interface Props {
   title?: string;
@@ -64,7 +64,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: #F9F9F9; /* Warna terang sesuai gambar */
+        background-color: #F9F9F9; 
         z-index: 9999;
         opacity: 0;
         pointer-events: none;
@@ -224,7 +224,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
       }
     </style>
 
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" />
@@ -351,39 +352,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
     <slot />
 
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const images = document.querySelectorAll('.skeleton-wrapper + img, .skeleton-wrapper ~ img');
-        images.forEach(img => {
-          const imageEl = img as HTMLImageElement;
-          if (imageEl.complete) {
-            const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
-            if (skeleton) skeleton.classList.add('loaded');
-          } else {
-            img.addEventListener('load', () => {
-              const skeleton = img.parentElement?.querySelector('.skeleton-wrapper');
-              if (skeleton) skeleton.classList.add('loaded');
-            });
-          }
-        });
-
-        setTimeout(() => {
-          document.querySelectorAll('.skeleton-wrapper').forEach(el => {
-            el.classList.add('loaded');
-          });
-        }, 3000);
-      });
-    </script>
-
-    <script>
       const pageLoader = document.getElementById('global-page-loader');
 
-      window.addEventListener('load', () => {
+      const hideLoader = () => {
         pageLoader?.classList.remove('is-active');
-      });
+      };
 
-      window.addEventListener('pageshow', () => {
-        pageLoader?.classList.remove('is-active');
-      });
+      window.addEventListener('load', hideLoader);
+      window.addEventListener('pageshow', hideLoader);
 
       document.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
