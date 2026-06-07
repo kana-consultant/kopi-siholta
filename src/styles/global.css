@@ -8,12 +8,9 @@
 @import './page.css';
 
 @import './components/hero.css';
-@import './components/heritage.css';
 @import './components/stats.css';
 @import './components/partnerships.css';
 @import './components/navbar.css';
-@import './components/footer.css';
 @import './components/products.css';
 @import './components/location-map.css';
-@import './components/error.css';
 
