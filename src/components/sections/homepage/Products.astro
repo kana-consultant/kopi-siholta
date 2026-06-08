@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { useTranslations } from '../../../i18n/utils';
+import '../../../styles/components/products.css';
 
 import arabicaBubuk250 from '../../../images/products/arabica-bubuk-250g.webp';
 import arabicaBubuk70 from '../../../images/products/arabica-bubuk-70g.webp';
@@ -166,10 +167,10 @@ const companyLink = lang === 'id' ? '/id/company' : '/en/company';
                 <p class="shop-available-label">{p.tersediaDi}</p>
                 <div class="shop-logos">
                   <a href={product.shopeeLink} target="_blank" rel="noopener noreferrer" class="shop-logo-btn" aria-label="Beli di Shopee">
-                    <Image src={shopeeLogo} alt="Shopee" width={24} height={24} />
+                    <Image src={shopeeLogo} alt="Shopee" width={96} height={96} quality="max" class="shop-logo-img" />                  
                   </a>
                   <a href={product.tokpedLink} target="_blank" rel="noopener noreferrer" class="shop-logo-btn" aria-label="Beli di Tokopedia">
-                    <Image src={tokopediaLogo} alt="Tokopedia" width={24} height={24} />
+                    <Image src={tokopediaLogo} alt="Tokopedia" width={96} height={96} quality="max" class="shop-logo-img" />
                   </a>
                 </div>
               </div>
@@ -181,17 +182,14 @@ const companyLink = lang === 'id' ? '/id/company' : '/en/company';
 
     <div class="certificates">
       <div class="cert-card">
+        
         <div class="cert-item">
-          <div class="cert-logo">
-            <Image src={bpomLogo} alt="Logo BPOM" height={36} loading="lazy" />
-          </div>
+          <Image src={bpomLogo} alt="Logo BPOM" width={120} quality="max" class="cert-img" loading="lazy" />
           <span class="cert-name">{p.certBpomName}</span>
         </div>
         <div class="cert-divider" aria-hidden="true"></div>
         <div class="cert-item">
-          <div class="cert-logo">
-            <Image src={halalLogo} alt="Logo Halal" height={36} loading="lazy" />
-          </div>
+          <Image src={halalLogo} alt="Logo Halal" width={120} quality="max" class="cert-img" loading="lazy" />
           <span class="cert-name">{p.certHalalName}</span>
         </div>
       </div>

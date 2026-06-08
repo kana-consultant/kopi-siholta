@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
-import bgImg from '../../../images/farming/process (3).jpg';
 import { t } from '../../../i18n/utils';
+import '../../../styles/components/stats.css';
+import '../../../styles/page.css';
 
 import logoHypermart from '../../../images/logo/logo-hypermart.webp';
 import logoHyfresh from '../../../images/logo/logo-hyfresh.webp';
@@ -16,6 +17,7 @@ interface Props {
 
 const { lang = 'en' } = Astro.props;
 const tr = t(lang);
+const nl = (s: string) => s.split('\n').join('<br>');
 
 const processTypes = [
   {
@@ -85,9 +87,9 @@ const processTypes = [
         
         <div class="logo-cloud__track-inner">
           <div class="logo-cloud__item"><span class="logo-cloud__text">Angkasa Pura</span></div>
-          <div class="logo-cloud__item"><Image src={logoHypermart} alt="Hypermart" width={100} height={40} class="logo-cloud__img" /></div>
+          <div class="logo-cloud__item"><Image src={logoHypermart} alt="Hypermart" width={400} height={160} quality="max" class="logo-cloud__img" /></div>
           <div class="logo-cloud__item"><span class="logo-cloud__text">Primo</span></div>
-          <div class="logo-cloud__item"><Image src={logoHyfresh} alt="Hyfresh" width={100} height={40} class="logo-cloud__img" /></div>
+          <div class="logo-cloud__item"><Image src={logoHyfresh} alt="Hyfresh" width={400} height={160} quality="max" class="logo-cloud__img" /></div>
           <div class="logo-cloud__item"><span class="logo-cloud__text">Svetofor</span></div>
           <div class="logo-cloud__item"><span class="logo-cloud__text">Sendys</span></div>
           <div class="logo-cloud__item"><span class="logo-cloud__text">KPD Retail</span></div>
@@ -95,9 +97,9 @@ const processTypes = [
 
         <div class="logo-cloud__track-inner" aria-hidden="true">
           <div class="logo-cloud__item"><span class="logo-cloud__text">Angkasa Pura</span></div>
-          <div class="logo-cloud__item"><Image src={logoHypermart} alt="Hypermart" width={100} height={40} class="logo-cloud__img" /></div>
+          <div class="logo-cloud__item"><Image src={logoHypermart} alt="Hypermart" width={400} height={160} quality="max" class="logo-cloud__img" /></div>
           <div class="logo-cloud__item"><span class="logo-cloud__text">Primo</span></div>
-          <div class="logo-cloud__item"><Image src={logoHyfresh} alt="Hyfresh" width={100} height={40} class="logo-cloud__img" /></div>
+          <div class="logo-cloud__item"><Image src={logoHyfresh} alt="Hyfresh" width={400} height={160} quality="max" class="logo-cloud__img" /></div>
           <div class="logo-cloud__item"><span class="logo-cloud__text">Svetofor</span></div>
           <div class="logo-cloud__item"><span class="logo-cloud__text">Sendys</span></div>
           <div class="logo-cloud__item"><span class="logo-cloud__text">KPD Retail</span></div>
@@ -150,13 +152,392 @@ const processTypes = [
       </div>
     </section>
 
-    <div class="partnerships__cta">
-      <div class="partnerships__cta-bg">
-        <Image src={bgImg} alt="" loading="lazy" widths={[768, 1280, 1920]} sizes="100vw" class="partnerships__cta-img" />
-      </div>
-      <p class="partnerships__cta-text">{tr.b2b.ctaFinal}</p>
-      <a href="#contact" class="btn btn--primary partnerships__cta-btn">{tr.b2b.ctaButton}</a>
-    </div>
+      <div class="partnerships-cta partnerships-cta--cream" aria-label={tr.b2b.ctaBanner}>
+          <div class="partnerships-cta__inner">
+            <div class="partnerships-cta__text">
+              <h2 class="partnerships-cta__title" set:html={nl(tr.b2b.ctaTitle)}></h2>
+              <p class="partnerships-cta__sub">{tr.b2b.ctaSubtitle}</p>
+            </div>
+            <div class="partnerships-cta__actions">
+              <a href={`/${lang}/#contact`} class="btn btn--primary">{tr.b2b.ctaButton}</a>
+            </div>
+          </div>
+        </div>
 
   </div>
 </section>
+
+<style>
+.partnerships { background: var(--color-neutral-100); }
+
+/* ── Header ─────────────────────────── */
+.partnerships__header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.partnerships__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 46px);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-4);
+}
+
+.partnerships__subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-brand-muted);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ── Trust Strip ─────────────────────── */
+.partnerships__trust-strip {
+  display: flex;
+  flex-direction: column; 
+  gap: var(--space-3);
+  background: transparent; 
+  padding: 0;
+  margin-bottom: var(--space-10);
+}
+
+.trust-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-brand-red); 
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+}
+
+.trust-stat__value {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--space-1);
+  line-height: 1;
+}
+
+.trust-stat__label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Logo Cloud ─────────────────────────── */
+.partnerships__logo-cloud {
+  text-align: center;
+  margin-bottom: var(--space-10);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+.logo-cloud__track {
+  display: flex;
+  gap: var(--space-8);
+  width: max-content;
+  animation: logoMarquee 28s linear infinite;
+}
+
+.logo-cloud__track-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  flex-shrink: 0;
+}
+
+.logo-cloud__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+}
+
+.logo-cloud__text {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted);
+  transition: opacity 200ms ease;
+  white-space: nowrap;
+}
+
+.logo-cloud__img {
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 200ms ease, opacity 200ms ease;
+  height: 36px;
+  width: auto;
+}
+
+.logo-cloud__item:hover .logo-cloud__img {
+  filter: grayscale(0%);
+}
+
+.logo-cloud__proof {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-brand-muted);
+  margin-top: 1.5rem;
+}
+
+/* ── Process Section ─────────────────── */
+.process-section__header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.process-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  margin-bottom: var(--space-3);
+}
+
+.process-section__subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-brand-muted);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── Process Cards (mobile-first) ───── */
+.process-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin-bottom: var(--space-10);
+}
+
+.process-card {
+  background: #fff;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  animation: fadeInUp 400ms ease forwards;
+  transition: transform 260ms ease, box-shadow 260ms ease;
+}
+
+
+.process-card:hover {
+  transform: translateY(-5px);
+}
+
+.process-card--washed:hover,
+.process-card--natural:hover,
+.process-card--honey:hover { 
+  box-shadow: 0 20px 48px rgba(154, 0, 2, 0.28); 
+}
+.process-card__img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.process-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 480ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.process-card:hover .process-card__img {
+  transform: scale(1.06);
+}
+
+.process-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+.process-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.process-card__icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.process-card--washed .process-card__icon-wrap  { background: rgba(107, 168, 146, 0.12); color: #4A8A6C; }
+.process-card--natural .process-card__icon-wrap { background: rgba(196, 122, 61, 0.12); color: #A05C22; }
+.process-card--honey .process-card__icon-wrap   { background: rgba(212, 160, 42, 0.12); color: #B07B10; }
+
+.process-card__name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+}
+
+.process-card__desc {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1.65;
+  color: var(--color-brand-muted);
+}
+
+.process-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.process-card__meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.process-card__meta-label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted);
+}
+
+.process-card__flavours {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.process-card__meta-value {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-brand-earth);
+  font-weight: 500;
+}
+
+.partnerships-cta {
+  padding-block: var(--space-10);
+  padding-inline: var(--space-6);
+  margin-top: var(--space-12);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-neutral-200);
+}
+
+.partnerships-cta--cream { 
+  background: var(--color-brand-cream);
+
+}
+
+.partnerships-cta__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  text-align: left; 
+}
+
+.partnerships-cta__title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-3);
+  color: var(--color-brand-earth); 
+}
+
+.partnerships-cta__sub {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.7;
+  max-width: 480px;
+  color: var(--color-brand-muted);
+}
+
+.partnerships-cta__actions {
+  display: flex;
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  gap: var(--space-3);
+  align-items: center; 
+}
+
+@keyframes logoMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - (var(--space-8) / 2))); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-cloud__track { animation: none; }
+}
+
+/* ── Responsive ────────────────────────── */
+@media (min-width: 640px) {
+  .partnerships__trust-strip {
+    flex-direction: row;
+    gap: var(--space-8);
+    text-align: left;
+  }
+  .process-cards { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
+}
+
+@media (min-width: 768px) {
+  .partnerships__trust-strip {
+    flex-direction: row; 
+    justify-content: center;
+    gap: var(--space-8);
+    background: var(--color-brand-red);
+    padding: var(--space-6) var(--space-10);
+    border-radius: var(--radius-xl);
+  }
+
+  .trust-stat {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+  .partnerships-cta {
+    padding-block: var(--space-12);
+    padding-inline: var(--space-10);
+  }
+  
+  .partnerships-cta__inner {
+    grid-template-columns: 1fr auto; 
+    align-items: center;
+    gap: var(--space-10);
+  }
+}
+
+@media (min-width: 1024px) {
+  .process-cards { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+  .process-card__body { padding: var(--space-5); }
+  .process-card__name { font-size: 1rem; }
+  .partnerships__cta { padding: var(--space-12) var(--space-8); }
+}
+
+</style>

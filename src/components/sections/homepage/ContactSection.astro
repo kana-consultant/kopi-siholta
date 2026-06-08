@@ -38,27 +38,26 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
         <h2 class="section-title">{t.contact.title}</h2>
         <p class="section-sub">{t.contact.subtitle}</p>
       </header>
-
       <nav class="contact__social-grid" aria-label="Social Media">
         <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label={t.contact.followInstagram}>
-          <Image src={igLogo} alt="Instagram" width={20} height={20} />
+          <Image src={igLogo} alt="Instagram" width={80} height={80} quality="max" class="social-img" />
           <span>@kopi_siholta.id</span>
         </a>
         <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label={t.contact.followTiktok}>
-          <Image src={tiktokLogo} alt="Tiktok" width={20} height={20} />
-          <span>@kopi_siholta.id</span>
+          <Image src={tiktokLogo} alt="Tiktok" width={80} height={80} quality="max" class="social-img" />
+          <span>@kopisiholta</span>
         </a>
         <a href={LINKTREE_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Linktree">
-          <Image src={linktreeLogo} alt="Linktree" width={26} height={26} />
-          <span>@kopi_siholta.id</span>
+          <Image src={linktreeLogo} alt="Linktree" width={104} height={104} quality="max" class="social-img linktree-adjust" />
+          <span>@kopisiholta</span>
         </a>
         <a href={TOKPED_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Tokopedia">
-          <Image src={tokpedLogo} alt="Tokopedia" width={20} height={20} />
+          <Image src={tokpedLogo} alt="Tokopedia" width={80} height={80} quality="max" class="social-img" />
           <span>@kopisiholta</span>
         </a>
         <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Shopee">
-          <Image src={shopeeLogo} alt="Shopee" width={20} height={20} />
-          <span>@kopisiholta</span>
+          <Image src={shopeeLogo} alt="Shopee" width={80} height={80} quality="max" class="social-img" />
+          <span>@kopi_siholta</span>
         </a>
       </nav>
 
@@ -192,7 +191,7 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
             class="btn btn--whatsapp form-btn"
             aria-label={t.contact.formSendWaAria}
           >
-            <Image src={waLogo} alt="WhatsApp" width={18} height={18} />
+            <Image src={waLogo} alt="WhatsApp" width={72} height={72} quality="max" class="button-wa-img"/>
             {t.contact.formSendWa}
           </button>
           <button
@@ -237,8 +236,47 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
 
 .contact__social-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
+  grid-template-columns: repeat(2, 1fr); 
   gap: var(--space-2);
+  width: 100%;
+}
+
+.social-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: #fff;
+  border: var(--border-default);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--color-brand-earth);
+  transition: all 200ms ease;
+  text-align: center;
+}
+
+.social-card:hover {
+  border-color: var(--color-brand-red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 15, 8, 0.08);
+}
+
+.social-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.social-img.linktree-adjust {
+  width: 24px;
+  height: 24px;
 }
 
 .contact__details {
@@ -269,7 +307,9 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
   transition: color 200ms ease;
 }
 
-.contact__link:hover { color: var(--color-brand-red); }
+.contact__link:hover { 
+  color: var(--color-brand-red); 
+}
 
 .contact__maps {
   display: flex;
@@ -281,11 +321,12 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
   background: #fff;
   border: var(--border-default);
   border-radius: var(--radius-xl);
-  padding: var(--space-6);
+  padding: 1.25rem;
 }
 
 .contact__form {
   display: flex;
+  padding: 0;
   flex-direction: column;
   gap: var(--space-4);
 }
@@ -294,7 +335,30 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  width: 100%;
 }
+
+.form-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;     
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.button-wa-img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
 
 /* ── Form Feedback ─────────────────────── */
 .form-error {
@@ -324,6 +388,12 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
   .contact__social-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+@media (min-width: 641px) {
+  .form-row { 
+    grid-template-columns: 1fr 1fr; 
+  }
+}
+
 @media (min-width: 1025px) {
   .contact__inner {
     grid-template-columns: 1fr 1.2fr;
@@ -331,7 +401,7 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
   }
   .contact__social-grid { grid-template-columns: repeat(5, 1fr); }
   .form-actions {
-    flex-direction: row; /* Kembali ke side-by-side */
+    flex-direction: row;
   }
 }
 
