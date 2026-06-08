@@ -19,10 +19,11 @@ const tc = t.company;
             <Image
               src={companyLogo}
               alt="PT Siholta Toba Indonesia Logo"
-              class="story__logo"
+              width={120}         
+              densities={[1, 2, 3]}
+              quality="max"        
               loading="eager"
-              widths={[120, 180, 240]}
-              sizes="120px"
+              class="story__logo object-contain"
             />
             <span>{tc.storyLogo}</span>
           </h2>

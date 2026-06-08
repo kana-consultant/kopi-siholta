@@ -36,6 +36,8 @@ function multiline(label: string) {
         alt={tr.companyBanner.name}
         width={72}
         height={72}
+        densities={[1, 2, 3]} 
+        quality="max"
         class="company-banner__logo-img"
       />
     </div>
@@ -83,7 +85,7 @@ function multiline(label: string) {
     <!-- Stat Card -->
     <article class="bento__card bento__card--stat">
       <div class="bento__card-img-wrap">
-        <Image src={heritage2} alt={tr.coffeeFarming.farmImages.altFerment} class="bento__card-img" loading="lazy" format="webp" quality={75} quality={70}  widths={[360, 540]} sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 320px" />
+        <Image src={heritage2} alt={tr.coffeeFarming.farmImages.altFerment} class="bento__card-img" loading="lazy" format="webp" quality={75} widths={[360, 540]} sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 320px" />
         <div class="bento__card-overlay"></div>
       </div>
       <div class="bento__card-content">
