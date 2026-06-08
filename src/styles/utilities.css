@@ -93,6 +93,389 @@
   margin-left: 4px;
 }
 
+/* buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 200ms ease;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+
+.btn--primary {
+  background: var(--color-brand-red);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: #B01020;
+  transform: translateY(-1px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--overlay-white-high);
+  border: 0.5px solid rgba(249,246,240,0.4);
+}
+
+.btn--outline:hover {
+  background: rgba(249,246,240,0.08);
+  border-color: rgba(249,246,240,0.7);
+}
+
+.btn--outline-dark {
+  background: transparent;
+  color: var(--color-brand-earth);
+  border: 0.5px solid rgba(92,61,30,0.4);
+}
+
+.btn--outline-dark:hover {
+  background: var(--color-brand-red);
+  color: var(--color-text-main);
+}
+
+/* ── Card CTA Button (used in sector cards) ───────────── */
+.btn--card-cta {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 9px 16px;
+  font-size: 0.75rem;
+  gap: var(--space-2);
+  color: var(--color-brand-earth);
+  background: rgba(92, 61, 30, 0.12);
+  border: 0.5px solid rgba(92, 61, 30, 0.30);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.btn--card-cta:hover {
+  color: var(--color-text-main);
+  background: var(--color-brand-red);
+  transform: translateY(-1px);
+}
+
+.btn--card-cta svg { transition: transform 200ms ease; }
+.btn--card-cta:hover svg { transform: translateX(3px); }
+
+
+.btn--link-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand-earth);
+  text-decoration: none;
+  margin-top: var(--space-2);
+  transition: gap 200ms ease;
+}
+
+.btn--link-cta:hover { gap: 10px; }
+
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+.badge--gold {
+  color: var(--color-brand-gold);
+  border: 0.5px solid rgba(212,160,70,0.5);
+  background: rgba(212,160,70,0.08);
+}
+
+.badge--red {
+  color: var(--color-brand-red);
+  border: 0.5px solid rgba(205,18,34,0.3);
+  background: rgba(205,18,34,0.06);
+}
+
+.badge--green {
+  color: var(--color-agri-green);
+  border: 0.5px solid rgba(34,85,34,0.3);
+  background: rgba(34,85,34,0.06);
+}
+
+
+.page-cta {
+  padding-block: var(--space-16);
+}
+
+.page-cta--dark  { background: var(--color-brand-earth); }
+.page-cta--cream {
+  background: var(--color-brand-cream);
+  border-top: 0.5px solid var(--color-neutral-200);
+}
+.page-cta--red   { background: var(--color-brand-red); }
+
+.page-cta__inner {
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start;
+  gap: var(--space-12);
+  flex-wrap: wrap;
+}
+
+.page-cta__title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 48px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.page-cta__title--earth { color: var(--color-brand-earth); }
+
+.page-cta__sub {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.65);
+  max-width: 460px;
+}
+
+.page-cta__sub--earth { color: var(--color-brand-muted); }
+
+.page-cta__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.page-cta__actions .btn--primary { background: var(--color-brand-red); }
+.page-cta__actions .btn--primary:hover { background: #B01020; }
+
+.page-cta__actions .btn--outline-light {
+  color: rgba(255,255,255,0.80);
+  border: 0.5px solid rgba(255,255,255,0.30);
+}
+
+.page-cta__actions .btn--outline-light:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.60);
+}
+
+.page-cta--red .btn--primary {
+  background: #fff;
+  color: var(--color-brand-red);
+}
+.page-cta--red .btn--primary:hover { background: rgba(255,255,255,0.88); }
+.page-cta--red .btn--outline-dark {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.35);
+}
+.page-cta--red .btn--outline-dark:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.65);
+}
+
+.form-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 10px var(--space-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: none;
+  transition: all 200ms ease;
+  min-height: 44px;
+}
+
+.btn--whatsapp {
+  background: var(--color-brand-red);
+  color: var(--color-text-main);
+}
+
+.btn--whatsapp:hover {
+  background: #7a0b14;
+}
+
+.btn--whatsapp:active { transform: translateY(0); }
+
+.btn--email {
+  background: transparent;
+  color: var(--color-brand-earth);
+  border: var(--border-default);
+}
+
+.btn--email:hover {
+  background: var(--color-neutral-100);
+  border-color: var(--color-brand-red);
+  color: var(--color-brand-red);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 15, 8, 0.08);
+}
+
+.btn--email:active { transform: translateY(0); }
+
+/* =========================================================
+   Kopi Siholta — Cards (Refactored: Mobile-First)
+   Loaded after base.css and typography.css
+   ========================================================= */
+
+/* ── Base Card ──────────────────────────────────────────── */
+.card {
+  border: var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  background: #fff;
+  transition: border-color 200ms ease;
+}
+
+.card:hover { 
+  border-color: var(--color-brand-red); 
+}
+
+
+/* ── Product Card (shared by retail & cafe carousels) ─── */
+.product-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 8px 32px rgba(92, 61, 30, 0.10);
+  transform: translateY(-3px);
+}
+
+.product-card:hover .product-card__img { 
+  transform: scale(1.05); 
+}
+
+.product-card__img {
+  width: 100%; 
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-card__media {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card__body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.product-card__tag {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(26, 15, 8, 0.7);
+  backdrop-filter: blur(4px);
+  padding: 4px 12px;
+  border-radius: 2px;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.product-card__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+}
+
+.product-card__desc {
+  font-family: var(--font-body);
+  color: var(--color-brand-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.flavour-chip {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-brand-earth);
+  background: var(--color-neutral-100);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 0.5px solid var(--color-neutral-200);
+}
+
+.social-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: #fff;
+  border: var(--border-default);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand-earth);
+  transition: all 200ms ease;
+  text-align: center;
+}
+
+.social-card:hover {
+  border-color: var(--color-brand-red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 15, 8, 0.08);
+}
+
+
 @media (min-width: 641px) {
   .form-row { 
     grid-template-columns: 1fr 1fr; 
@@ -102,4 +485,9 @@
 @media (min-width: 769px) {
   .hide-mobile { display: initial !important; }
   .hide-desktop { display: none !important; }
+  .page-cta__inner {
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-between;
+  }
 }
