@@ -69,39 +69,44 @@ const columns = [
     <div class="footer__top">
 
       <!-- Brand -->
-      <div class="footer__brand">
-        <div class="footer__brand-logo">
-          <Image src={logo} alt="Kopi Siholta" width={40} height={40} class="footer__logo-img" />
-          <span class="footer__wordmark">KOPI SIHOLTA</span>
-        </div>
-        <p class="footer__tagline">{t.footer.tagline}</p>
+    <div class="footer__brand">
+      <div class="footer__brand-logo">
+        <Image src={logo} alt="Kopi Siholta" width={160} height={160} quality="max" class="footer__logo-img" />
+        <span class="footer__wordmark">KOPI SIHOLTA</span>
+      </div>
+      <p class="footer__tagline">{t.footer.tagline}</p>
 
-        <!-- Shop + Social buttons -->
-        <div class="footer__shop-row">
-          <p class="footer__shop-label">{t.footer.shopLabel}</p>
-          <div class="footer__shop-btns">
-            <a href={TOKPED_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Tokopedia">
-              <Image src={tokpedLogo} alt="Tokopedia" height={26} class="footer__shop-logo" />
-            </a>
-            <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Shopee">
-              <Image src={shopeeLogo} alt="Shopee" width={24} height={24} class="footer__shop-logo" />
-            </a>
-            
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Instagram">
-              <Image src={igLogo} alt="Instagram" width={24} height={24} />
-            </a>
-            <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="TikTok">
-              <Image src={tiktokLogo} alt="TikTok" width={24} height={24} />
-            </a>
-            <a href={LINKTREE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Linktree">
-              <Image src={linktreeLogo} alt="Linktree" width={24} height={24} />
-            </a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="WhatsApp">
-              <Image src={waLogo} alt="WhatsApp" width={24} height={24} />
-            </a>
-          </div>
+      <div class="footer__shop-row">
+        <p class="footer__shop-label">{t.footer.shopLabel}</p>
+        <div class="footer__shop-btns">
+          <a href={TOKPED_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Tokopedia">
+            {/* Diubah: width & height diseragamkan ke 96, densities dihapus */}
+            <Image src={tokpedLogo} alt="Tokopedia" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Shopee">
+            {/* Diubah: width & height naik ke 96, densities dihapus */}
+            <Image src={shopeeLogo} alt="Shopee" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Instagram">
+            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
+            <Image src={igLogo} alt="Instagram" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="TikTok">
+            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
+            <Image src={tiktokLogo} alt="TikTok" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={LINKTREE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Linktree">
+            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
+            <Image src={linktreeLogo} alt="Linktree" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="WhatsApp">
+            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
+            <Image src={waLogo} alt="WhatsApp" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
         </div>
       </div>
+    </div>
 
       <!-- Link Columns -->
       <div class="footer__cols">
@@ -143,4 +148,270 @@ const columns = [
 
   </div>
 </footer>
+<style>
+
+.footer {
+  background: var(--color-brand-red);
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-6);
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+.footer__top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.footer__brand-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.footer__logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.footer__shop-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer__shop-btns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;   
+}
+
+.footer__shop-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer__shop-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.footer__shop-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+  image-rendering: -webkit-optimize-contrast;
+}
+.footer__wordmark {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.footer__tagline {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.92);
+  max-width: 280px;
+}
+
+.footer__shop-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__shop-label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+}
+
+.footer__shop-btns {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.footer__shop-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  background: rgba(255,255,255,0.15);
+  border: 0.5px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-md);
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+  text-decoration: none;
+}
+
+.footer__shop-btn:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.35);
+  transform: translateY(-1px);
+}
+
+.footer__shop-logo {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+
+.footer__cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.footer__col-title {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+  margin-bottom: var(--space-4);
+}
+
+.footer__col-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer__link {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.90);
+  text-decoration: none;
+  transition: color 150ms ease;
+  line-height: 1.5;
+}
+
+.footer__link:hover { color: #fff; }
+.footer__link:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 2px; border-radius: 2px; }
+
+.footer__divider {
+  height: 0.5px;
+  background: rgba(255,255,255,0.12);
+}
+
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.footer__copyright {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-text-main);
+}
+
+.footer__bottom-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.footer__bottom-link {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-text-main);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.footer__bottom-link:hover { color: #fff; }
+.footer__bottom-link:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 2px; border-radius: 2px; }
+
+.footer__bottom-sep {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.75rem;
+}
+
+/* ── Responsive ─────────────────────────── */
+@media (min-width: 640px) {
+  .footer {
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-8);
+  }
+  .footer__inner {
+    padding-inline: var(--space-8);
+    gap: var(--space-8);
+  }
+  .footer__top {
+    grid-template-columns: 1.3fr 2fr;
+    gap: var(--space-10);
+  }
+  .footer__cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__brand {
+    gap: var(--space-5);
+  }
+
+  .footer__shop-btns {
+    flex-wrap: nowrap;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer {
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-8);
+  }
+  .footer__inner {
+    padding-inline: var(--section-padding-x);
+    gap: var(--space-8);
+  }
+  .footer__top { gap: var(--space-12); }
+  .footer__cols {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .footer__bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+</style>
 

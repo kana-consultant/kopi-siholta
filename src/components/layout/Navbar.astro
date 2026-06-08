@@ -4,6 +4,8 @@ import { Image } from 'astro:assets';
 import logoLight from '../../images/logo/logo-siholta.png';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { useTranslations } from '../../i18n/utils';
+import '../../styles/components/navbar.css';
+import '../../styles/components/navbar-mobile.css';
 
 interface Props {
   lang?: string;
@@ -29,8 +31,9 @@ const mainNavItems = [
       <Image
         src={logoLight}
         alt="Kopi Siholta"
-        width="32"
-        height="32"
+        width={128}
+        height={128}
+        quality="max"
         class="navbar__logo-img"
       />
     </a>

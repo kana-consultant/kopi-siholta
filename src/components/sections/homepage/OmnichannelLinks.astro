@@ -53,10 +53,10 @@ const channels = [
           aria-label={tr.omni[ch.nameKey as keyof typeof tr.omni]}
         >
           <div class="omni__channel-icon">
-            <Image src={ch.logo} alt="" width={24} height={24} format="webp" />
+            <Image src={ch.logo} alt="" width={96} height={96} quality="max" format="webp" class="omni__channel-img" />
           </div>
           <span class="omni__channel-name">{tr.omni[ch.nameKey as keyof typeof tr.omni]}</span>
-          <Icon name="mdi:arrow-top-right" class="omni__channel-arrow" width="14" height="14" />
+          <Icon name="mdi:open-in-new" class="omni__channel-arrow" width="14" height="14" />
         </a>
       ))}
     </div>
@@ -115,6 +115,11 @@ const channels = [
   justify-content: center;
   position: relative;
   z-index: 1;
+}
+
+.omni__channel-img {
+  width: 24px;
+  height: 24px;
 }
 
 .omni__channel-name {

@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import companyLogo from '../../../images/logo/logo-STI.png';
 import aboutFoto from '../../../images/about.webp';
 import { useTranslations } from '../../../i18n/utils';
+import '../../../styles/components/stats.css';
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
@@ -19,10 +20,11 @@ const tc = t.company;
             <Image
               src={companyLogo}
               alt="PT Siholta Toba Indonesia Logo"
-              class="story__logo"
+              width={480}         
+              height={480}
+              quality="max"        
               loading="eager"
-              widths={[120, 180, 240]}
-              sizes="120px"
+              class="story__logo object-contain"
             />
             <span>{tc.storyLogo}</span>
           </h2>
@@ -90,6 +92,7 @@ const tc = t.company;
   border-radius: var(--radius-sm);
   object-fit: contain;
   flex-shrink: 0;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .story__body {
