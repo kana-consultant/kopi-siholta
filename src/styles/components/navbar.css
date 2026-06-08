@@ -30,6 +30,7 @@
   height: 32px;
   border-radius: 50%;
   object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .navbar__wordmark {

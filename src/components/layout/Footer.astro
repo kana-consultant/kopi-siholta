@@ -69,39 +69,44 @@ const columns = [
     <div class="footer__top">
 
       <!-- Brand -->
-      <div class="footer__brand">
-        <div class="footer__brand-logo">
-          <Image src={logo} alt="Kopi Siholta" width={40} height={40} densities={[1, 2, 3]} quality="max" class="footer__logo-img" />
-          <span class="footer__wordmark">KOPI SIHOLTA</span>
-        </div>
-        <p class="footer__tagline">{t.footer.tagline}</p>
+    <div class="footer__brand">
+      <div class="footer__brand-logo">
+        <Image src={logo} alt="Kopi Siholta" width={160} height={160} quality="max" class="footer__logo-img" />
+        <span class="footer__wordmark">KOPI SIHOLTA</span>
+      </div>
+      <p class="footer__tagline">{t.footer.tagline}</p>
 
-        <!-- Shop + Social buttons -->
-        <div class="footer__shop-row">
-          <p class="footer__shop-label">{t.footer.shopLabel}</p>
-          <div class="footer__shop-btns">
-            <a href={TOKPED_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Tokopedia">
-              <Image src={tokpedLogo} alt="Tokopedia" height={26} densities={[1, 2, 3]} quality="max" class="footer__shop-logo" />
-            </a>
-            <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Shopee">
-              <Image src={shopeeLogo} alt="Shopee" width={24} height={24} densities={[1, 2, 3]} quality="max" class="footer__shop-logo" />
-            </a>
-            
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Instagram">
-              <Image src={igLogo} alt="Instagram" width={24} height={24} densities={[1, 2, 3]} quality="max" />
-            </a>
-            <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="TikTok">
-              <Image src={tiktokLogo} alt="TikTok" width={24} height={24} densities={[1, 2, 3]} quality="max" />
-            </a>
-            <a href={LINKTREE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Linktree">
-              <Image src={linktreeLogo} alt="Linktree" width={24} height={24} densities={[1, 2, 3]} quality="max" />
-            </a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="WhatsApp">
-              <Image src={waLogo} alt="WhatsApp" width={24} height={24} densities={[1, 2, 3]} quality="max" />
-            </a>
-          </div>
+      <div class="footer__shop-row">
+        <p class="footer__shop-label">{t.footer.shopLabel}</p>
+        <div class="footer__shop-btns">
+          <a href={TOKPED_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Tokopedia">
+            {/* Diubah: width & height diseragamkan ke 96, densities dihapus */}
+            <Image src={tokpedLogo} alt="Tokopedia" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Shopee">
+            {/* Diubah: width & height naik ke 96, densities dihapus */}
+            <Image src={shopeeLogo} alt="Shopee" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Instagram">
+            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
+            <Image src={igLogo} alt="Instagram" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="TikTok">
+            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
+            <Image src={tiktokLogo} alt="TikTok" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={LINKTREE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Linktree">
+            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
+            <Image src={linktreeLogo} alt="Linktree" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="WhatsApp">
+            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
+            <Image src={waLogo} alt="WhatsApp" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
         </div>
       </div>
+    </div>
 
       <!-- Link Columns -->
       <div class="footer__cols">
@@ -171,7 +176,7 @@ const columns = [
 .footer__brand {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-4);
 }
 
 .footer__brand-logo {
@@ -186,13 +191,46 @@ const columns = [
   border-radius: var(--radius-md);
   object-fit: cover;
   flex-shrink: 0;
-  border: 0.5px solid rgba(255,255,255,0.2);
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  image-rendering: -webkit-optimize-contrast;
 }
 
+.footer__shop-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer__shop-btns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;   
+}
+
+.footer__shop-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer__shop-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.footer__shop-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+  image-rendering: -webkit-optimize-contrast;
+}
 .footer__wordmark {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.75rem;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #fff;
@@ -343,6 +381,15 @@ const columns = [
   }
   .footer__cols {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__brand {
+    gap: var(--space-5);
+  }
+
+  .footer__shop-btns {
+    flex-wrap: nowrap;
+    gap: 1rem;
   }
 }
 
