@@ -6,7 +6,7 @@ import heritage2 from '../../../images/farming/farmer-1.jpg';
 import heritage3 from '../../../images/heritage/heritage-1.jpg';
 import heritage4 from '../../../images/heritage/batak-people.jpg';
 import heritage5 from '../../../images/heritage/heritage-5.jpg';
-import companyLogo from '../../../images/logo/logo-STI.png';
+import companyLogo from '../../../images/logo/logo-sti.png';
 import { t } from '../../../i18n/utils';
 
 interface Props {
@@ -34,9 +34,8 @@ function multiline(label: string) {
       <Image
         src={companyLogo}
         alt={tr.companyBanner.name}
-        width={72}
-        height={72}
-        densities={[1, 2, 3]} 
+        width={288}
+        height={288}
         quality="max"
         class="company-banner__logo-img"
       />
@@ -181,10 +180,12 @@ function multiline(label: string) {
 }
 
 .company-banner__logo-img {
-  width: 100%;
-  height: 100%;
+  width: 72px;
+  height: 72px;
   object-fit: cover;
   object-position: center;
+  image-rendering: -webkit-optimize-contrast;
+
 }
 
 .company-banner__content { flex: 1; min-width: 180px; }

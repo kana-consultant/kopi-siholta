@@ -23,7 +23,7 @@ const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
   aria-label="Chat via WhatsApp"
   title="Chat via WhatsApp"
 >
-  <Image src={waLogo} alt="WhatsApp" width={32} height={32} densities={[1, 2, 3]} quality="max" class="whatsapp-fab__img" />
+  <Image src={waLogo} alt="WhatsApp" width={128} height={128} quality="max" class="whatsapp-fab__img" />
 </a>
 
 <style>
@@ -40,23 +40,23 @@ const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 4px 20px rgba(118, 131, 123, 0.4);
   z-index: 90;
   transition: transform 200ms ease, box-shadow 200ms ease;
   overflow: hidden;
 }
 
 .whatsapp-fab__img {
-  width: 30px !important;
-  height: 30px !important;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% !important;
   display: block;
   object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .whatsapp-fab:hover {
   transform: scale(1.08) translateY(-2px);
-  box-shadow: 0 6px 28px rgba(37, 211, 102, 0.55);
 }
 
 .whatsapp-fab:active { 
