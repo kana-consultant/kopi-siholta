@@ -167,10 +167,10 @@ const companyLink = lang === 'id' ? '/id/company' : '/en/company';
                 <p class="shop-available-label">{p.tersediaDi}</p>
                 <div class="shop-logos">
                   <a href={product.shopeeLink} target="_blank" rel="noopener noreferrer" class="shop-logo-btn" aria-label="Beli di Shopee">
-                    <Image src={shopeeLogo} alt="Shopee" width={24} height={24} densities={[1, 2, 3]} quality="max" />
+                    <Image src={shopeeLogo} alt="Shopee" width={96} height={96} quality="max" />                  
                   </a>
                   <a href={product.tokpedLink} target="_blank" rel="noopener noreferrer" class="shop-logo-btn" aria-label="Beli di Tokopedia">
-                    <Image src={tokopediaLogo} alt="Tokopedia" width={24} height={24} densities={[1, 2, 3]} quality="max" />
+                    <Image src={tokopediaLogo} alt="Tokopedia" width={96} height={96} quality="max" />
                   </a>
                 </div>
               </div>
@@ -182,17 +182,14 @@ const companyLink = lang === 'id' ? '/id/company' : '/en/company';
 
     <div class="certificates">
       <div class="cert-card">
+        
         <div class="cert-item">
-          <div class="cert-logo">
-            <Image src={bpomLogo} alt="Logo BPOM" height={36} densities={[1, 2, 3]} quality="max" loading="lazy" />
-          </div>
+          <Image src={bpomLogo} alt="Logo BPOM" width={120} quality="max" class="cert-img" loading="lazy" />
           <span class="cert-name">{p.certBpomName}</span>
         </div>
         <div class="cert-divider" aria-hidden="true"></div>
         <div class="cert-item">
-          <div class="cert-logo">
-            <Image src={halalLogo} alt="Logo Halal" height={36} densities={[1, 2, 3]} quality="max" loading="lazy" />
-          </div>
+          <Image src={halalLogo} alt="Logo Halal" width={120} quality="max" class="cert-img" loading="lazy" />
           <span class="cert-name">{p.certHalalName}</span>
         </div>
       </div>
