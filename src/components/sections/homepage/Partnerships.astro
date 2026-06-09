@@ -1,18 +1,18 @@
 ---
 import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
 import { useTranslations } from '../../../i18n/utils';
-import '../../../styles/components/stats.css';
 import '../../../styles/page.css';
+import '../../../styles/components/stats.css';
 
 import logoHypermart from '../../../images/logo/logo-hypermart.webp';
 import logoHyfresh from '../../../images/logo/logo-hyfresh.webp';
-import logoAngkasaPura from '../../../images/logo/logo-angkasapura.webp';
-import logoSendys from '../../../images/logo/logo-sendys.webp';
-import logoPrimo from '../../../images/logo/logo-primo.webp';
 import logoAngkasaPura from '../../../images/logo/logo-angkasapura.png';
 import logoSendys from '../../../images/logo/logo-sendys.png';
 import logoPrimo from '../../../images/logo/logo-primo.png';
+
+import imgGreenBeans from '../../../images/partnerships/green-beans.jpg';
+import imgProcess from '../../../images/farming/process (2).jpg';
+import imgCoffeeBeans from '../../../images/fnb/coffee-beans.jpg';
 
 interface Props {
   lang: 'id' | 'en' | 'fr';
@@ -25,21 +25,21 @@ const partnerCategories = [
   {
     label: t.b2b.categoryModernRetail,
     brands: [
-      { type: 'img', src: logoHypermart, alt: 'Hypermart' },
-      { type: 'img', src: logoHyfresh, alt: 'Hyfresh' },
+      { src: logoHypermart, alt: 'Hypermart' },
+      { src: logoHyfresh, alt: 'Hyfresh' },
     ],
   },
   {
     label: t.b2b.categoryCorporate,
     brands: [
-      { type: 'img', src: logoAngkasaPura, alt: 'Angkasa Pura' },
+      { src: logoAngkasaPura, alt: 'Angkasa Pura' },
     ],
   },
   {
     label: t.b2b.categoryHoreca,
     brands: [
-      { type: 'img', src: logoSendys, alt: 'Sendys' },
-      { type: 'img', src: logoPrimo, alt: 'Primo' },
+      { src: logoSendys, alt: 'Sendys' },
+      { src: logoPrimo, alt: 'Primo' },
     ],
   },
 ];
@@ -47,7 +47,8 @@ const partnerCategories = [
 const solutions = [
   {
     id: 'green-bean',
-    icon: 'mdi:coffee',
+    image: imgGreenBeans,
+    imageAlt: t.b2b.cardGreenBeanImageAlt,
     headline: t.b2b.cardGreenBeanTitle,
     tagline: t.b2b.cardGreenBeanTagline,
     body: t.b2b.cardGreenBeanBody,
@@ -57,12 +58,12 @@ const solutions = [
       t.b2b.chipExport,
     ],
     cta: t.b2b.cardGreenBeanCta,
-    accentClass: 'solution-card--green-bean',
-    iconColor: '#225522',
+    variant: 'cream',
   },
   {
     id: 'private-label',
-    icon: 'mdi:tag-outline',
+    image: imgProcess,
+    imageAlt: t.b2b.cardPrivateLabelImageAlt,
     headline: t.b2b.cardPrivateLabelTitle,
     tagline: t.b2b.cardPrivateLabelTagline,
     body: t.b2b.cardPrivateLabelBody,
@@ -72,12 +73,12 @@ const solutions = [
       t.b2b.chipFreeSample,
     ],
     cta: t.b2b.cardPrivateLabelCta,
-    accentClass: 'solution-card--private-label',
-    iconColor: '#cd1222',
+    variant: 'highlight',
   },
   {
     id: 'horeca',
-    icon: 'mdi:coffee-outline',
+    image: imgCoffeeBeans,
+    imageAlt: t.b2b.cardHorecaImageAlt,
     headline: t.b2b.cardHorecaTitle,
     tagline: t.b2b.cardHorecaTagline,
     body: t.b2b.cardHorecaBody,
@@ -87,8 +88,7 @@ const solutions = [
       t.b2b.chipFreeConsultation,
     ],
     cta: t.b2b.cardHorecaCta,
-    accentClass: 'solution-card--horeca',
-    iconColor: '#5C3D1E',
+    variant: 'cream',
   },
 ];
 
@@ -115,44 +115,26 @@ const benefits = [
           <span class="brand-cloud__pill">{cat.label}</span>
           <div class="brand-cloud__row">
             {cat.brands.map(brand => (
-              brand.type === 'img' ? (
-                <Image src={brand.src} alt={brand.alt} width={120} height={48} quality={75} class="partner-logo" loading="lazy" />
-              ) : (
-                <span class="brand-cloud__text">{brand.text}</span>
-              )
+              <Image src={brand.src} alt={brand.alt} width={120} height={48} quality={75} class="partner-logo" loading="lazy" />
             ))}
           </div>
         </div>
       ))}
     </div>
 
+    <!-- Component 1b: Trust Strip (stats consistency) -->
     <ul class="partnerships__trust-strip" role="list">
       <li class="trust-stat reveal">
-        <span class="trust-stat__icon" aria-hidden="true">
-          <Icon name="mdi:account-group" width={24} height={24} />
-        </span>
-        <div>
-          <p class="trust-stat__value">{t.b2b.stat1Value}</p>
-          <p class="trust-stat__label">{t.b2b.stat1Label}</p>
-        </div>
+        <p class="trust-stat__value">{t.b2b.stat1Value}</p>
+        <p class="trust-stat__label">{t.b2b.stat1Label}</p>
       </li>
       <li class="trust-stat reveal">
-        <span class="trust-stat__icon" aria-hidden="true">
-          <Icon name="mdi:star-outline" width={24} height={24} />
-        </span>
-        <div>
-          <p class="trust-stat__value">{t.b2b.stat2Value}</p>
-          <p class="trust-stat__label">{t.b2b.stat2Label}</p>
-        </div>
+        <p class="trust-stat__value">{t.b2b.stat2Value}</p>
+        <p class="trust-stat__label">{t.b2b.stat2Label}</p>
       </li>
       <li class="trust-stat reveal">
-        <span class="trust-stat__icon" aria-hidden="true">
-          <Icon name="mdi:shield-check-outline" width={24} height={24} />
-        </span>
-        <div>
-          <p class="trust-stat__value">{t.b2b.stat3Value}</p>
-          <p class="trust-stat__label">{t.b2b.stat3Label}</p>
-        </div>
+        <p class="trust-stat__value">{t.b2b.stat3Value}</p>
+        <p class="trust-stat__label">{t.b2b.stat3Label}</p>
       </li>
     </ul>
 
@@ -164,19 +146,21 @@ const benefits = [
 
     <div class="solutions-grid">
       {solutions.map((s, i) => (
-        <article class={`solution-card ${s.accentClass} reveal`} style={`transition-delay: ${i * 100}ms`}>
-          <div class="solution-card__icon-wrap" style={`color: ${s.iconColor}`}>
-            <Icon name={s.icon} width={36} height={36} aria-hidden="true" />
+        <article class={`solution-card solution-card--${s.variant} reveal`} style={`transition-delay: ${i * 100}ms`}>
+          <div class="solution-card__media">
+            <Image src={s.image} alt={s.imageAlt} width={400} height={300} quality={75} class="solution-card__image" loading="lazy" />
           </div>
-          <h4 class="solution-card__headline">{s.headline}</h4>
-          <p class="solution-card__tagline">{s.tagline}</p>
-          <p class="solution-card__body">{s.body}</p>
-          <div class="solution-card__chips">
-            {s.chips.map(chip => <span class="spec-chip">{chip}</span>)}
+          <div class="solution-card__content">
+            <h4 class="solution-card__headline">{s.headline}</h4>
+            <p class="solution-card__tagline">{s.tagline}</p>
+            <p class="solution-card__body">{s.body}</p>
+            <div class="solution-card__chips">
+              {s.chips.map(chip => <span class="spec-chip">{chip}</span>)}
+            </div>
+            <a href={`/${lang}/#contact`} class="solution-card__cta">
+              {s.cta} <span aria-hidden="true">→</span>
+            </a>
           </div>
-          <a href={`/${lang}/#contact`} class="solution-card__cta">
-            {s.cta} <Icon name="mdi:arrow-right" width={16} height={16} aria-hidden="true" />
-          </a>
         </article>
       ))}
     </div>
@@ -184,7 +168,6 @@ const benefits = [
     <!-- Component 3: Benefits Strip -->
     <div class="benefits-strip reveal">
       <div class="benefits-headline-wrap">
-        <span class="eyebrow">{t.b2b.benefitsEyebrow}</span>
         <h3 class="benefits-headline">{t.b2b.benefitsHeadline}</h3>
         <p class="benefits-micro">{t.b2b.benefitsMicro}</p>
       </div>
@@ -192,7 +175,7 @@ const benefits = [
         {benefits.map((b, i) => (
           <li class="benefit-item reveal" style={`transition-delay: ${i * 80}ms`}>
             <span class="benefit-item__check" aria-hidden="true">
-              <Icon name="mdi:check" width={20} height={20} />
+              <span class="benefit-check-mark">✓</span>
             </span>
             <div>
               <h4 class="benefit-item__title">{b.title}</h4>
@@ -203,41 +186,24 @@ const benefits = [
       </ul>
     </div>
 
-    <!-- Bottom CTA Bar -->
-    <div class="b2b-cta reveal" aria-label={t.b2b.ctaBanner}>
-      <div class="b2b-cta__inner">
-        <div class="b2b-cta__text">
-          <h3 class="b2b-cta__title">{t.b2b.ctaTitle}</h3>
-          <p class="b2b-cta__sub">{t.b2b.ctaSubtitle}</p>
+    <!-- Bottom CTA Bar (uses shared page-cta--cream pattern for consistency) -->
+    <section class="page-cta page-cta--cream" aria-label={t.b2b.ctaBanner}>
+      <div class="container page-cta__inner">
+        <div class="page-cta__text animate-on-scroll">
+          <h2 class="page-cta__title page-cta__title--earth">{t.b2b.ctaTitle}</h2>
+          <p class="page-cta__sub page-cta__sub--earth">{t.b2b.ctaSubtitle}</p>
         </div>
-        <div class="b2b-cta__actions">
-          <a href={`/${lang}/#contact`} class="b2b-cta__btn b2b-cta__btn--primary">
-            {t.b2b.ctaPrimary} <Icon name="mdi:arrow-right" width={16} height={16} aria-hidden="true" />
-          </a>
-          <a href={`/${lang}/#contact`} class="b2b-cta__btn b2b-cta__btn--secondary">
-            {t.b2b.ctaSecondary}
-          </a>
+        <div class="page-cta__actions animate-on-scroll">
+          <a href={`/${lang}/#contact`} class="btn btn--primary">{t.b2b.ctaPrimary}</a>
         </div>
       </div>
-    </div>
+    </section>
 
   </div>
 </section>
 
 <style>
-.b2b { background: var(--color-neutral-100); }
-
-/* ── Eyebrow (shared) ─────────────────── */
-.eyebrow {
-  display: inline-block;
-  font-family: var(--font-label);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-brand-red);
-  margin-bottom: var(--space-3);
-}
+.b2b { background: var(--color-neutral-100); padding-block: var(--space-12); }
 
 /* ── Header ─────────────────────────── */
 .b2b__header {
@@ -258,58 +224,54 @@ const benefits = [
 .b2b__subtitle {
   font-family: var(--font-body);
   font-size: clamp(1rem, 1.25vw, 1.125rem);
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--color-brand-muted);
-  max-width: 560px;
-  margin: 0 auto 0;
+  max-width: 620px;
+  margin: var(--space-3) auto 0;
+  letter-spacing: 0.01em;
 }
 
+/* ── Trust Strip (consistency with story__stats) ── */
 .partnerships__trust-strip {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(1, 1fr);
   gap: var(--space-6);
   list-style: none;
-  padding: 0;
-  margin: 0;
-  margin-bottom: var(--space-12);
+  padding: var(--space-8) 0 0;
+  margin: 0 0 var(--space-12);
+  border-top: 0.5px solid var(--color-neutral-200);
 }
 
 .trust-stat {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 24px 20px;
-  border-radius: 12px;
-  background: #fff;
-  border: 1px solid rgba(92, 61, 30, 0.10);
+  flex-direction: column;
+  gap: 4px;
+  border-left: 1px solid var(--color-neutral-200);
+  padding-left: var(--space-5);
 }
 
-.trust-stat__icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
-  background: rgba(34, 85, 34, 0.10);
-  color: #225522;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+.trust-stat:first-child {
+  border-left: none;
+  padding-left: 0;
 }
 
 .trust-stat__value {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: clamp(32px, 3.5vw, 44px);
   font-weight: 700;
-  color: var(--color-brand-earth);
+  color: var(--color-brand-red);
   line-height: 1;
-  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+  margin: 0;
 }
 
 .trust-stat__label {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--color-brand-muted);
-  line-height: 1.4;
+  margin: 0;
 }
 
 /* ── Brand Cloud ──────────────────────── */
@@ -363,24 +325,6 @@ const benefits = [
   filter: grayscale(0) opacity(1);
 }
 
-.brand-cloud__text {
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-brand-muted);
-  white-space: nowrap;
-  transition: color 200ms ease, opacity 200ms ease;
-  opacity: 0.65;
-  cursor: default;
-}
-
-.brand-cloud__text:hover {
-  color: var(--color-brand-earth);
-  opacity: 1;
-}
-
 /* ── Solutions Header ───────────────── */
 .solutions__header {
   text-align: center;
@@ -401,8 +345,9 @@ const benefits = [
   font-size: 1rem;
   line-height: 1.7;
   color: var(--color-brand-muted);
-  max-width: 560px;
+  max-width: 620px;
   margin: 0 auto;
+  letter-spacing: 0.01em;
 }
 
 /* ── Solutions Grid ──────────────────── */
@@ -413,45 +358,58 @@ const benefits = [
   margin-bottom: var(--space-16);
 }
 
+/* Card variants: cream (subtle) and highlight (white with shadow to pop) */
 .solution-card {
-  background: #fff;
-  border: 1px solid rgba(92, 61, 30, 0.10);
   border-radius: 20px;
-  padding: 32px 28px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 14px;
   position: relative;
-  overflow: hidden;
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-.solution-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  border-radius: 20px 20px 0 0;
+.solution-card--cream {
+  background: #F5EFE2;
+  border: 1px solid rgba(92, 61, 30, 0.08);
 }
 
-.solution-card--green-bean::before  { background: #225522; }
-.solution-card--private-label::before { background: #cd1222; }
-.solution-card--horeca::before      { background: #5C3D1E; }
+.solution-card--highlight {
+  background: #fff;
+  border: 1px solid rgba(92, 61, 30, 0.08);
+  box-shadow: 0 8px 24px rgba(92, 61, 30, 0.10);
+}
 
 .solution-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 36px rgba(92, 61, 30, 0.12);
+  box-shadow: 0 16px 40px rgba(92, 61, 30, 0.14);
 }
 
-.solution-card__icon-wrap {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+.solution-card__media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
   background: rgba(92, 61, 30, 0.06);
   flex-shrink: 0;
+}
+
+.solution-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 400ms ease;
+}
+
+.solution-card:hover .solution-card__image {
+  transform: scale(1.04);
+}
+
+.solution-card__content {
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
 }
 
 .solution-card__headline {
@@ -459,8 +417,9 @@ const benefits = [
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-brand-earth);
-  line-height: 1.2;
-  margin-top: 2px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
 .solution-card__tagline {
@@ -470,32 +429,36 @@ const benefits = [
   color: var(--color-brand-red);
   line-height: 1.4;
   margin: 0;
+  letter-spacing: 0.01em;
 }
 
 .solution-card__body {
   font-family: var(--font-body);
-  font-size: 0.875rem;
-  line-height: 1.65;
-  color: var(--color-brand-muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  color: #6b6359;
   margin: 0;
+  text-align: left;
 }
 
 .solution-card__chips {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 .spec-chip {
   display: inline-block;
-  background: var(--color-neutral);
-  color: var(--color-text-brown);
+  background: #f3f0ea;
+  color: #6b5a47;
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(92, 61, 30, 0.15);
+  border: none;
+  letter-spacing: 0.02em;
 }
 
 .solution-card__cta {
@@ -503,12 +466,14 @@ const benefits = [
   align-items: center;
   gap: 6px;
   align-self: flex-start;
-  margin-top: var(--space-2);
+  margin-top: 8px;
   color: var(--color-brand-red);
   font-family: var(--font-label);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   font-weight: 700;
   text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   transition: gap 150ms ease, color 150ms ease;
 }
 
@@ -542,6 +507,7 @@ const benefits = [
   line-height: 1.2;
   letter-spacing: -0.01em;
   margin-bottom: var(--space-4);
+  white-space: pre-line;
 }
 
 .benefits-micro {
@@ -550,6 +516,7 @@ const benefits = [
   line-height: 1.7;
   color: var(--color-brand-muted);
   max-width: 460px;
+  letter-spacing: 0.01em;
 }
 
 .benefit-list {
@@ -579,6 +546,8 @@ const benefits = [
   justify-content: center;
   flex-shrink: 0;
   transition: background 200ms ease, color 200ms ease, transform 200ms ease;
+  font-weight: 700;
+  font-size: 0.9rem;
 }
 
 .benefit-item:hover .benefit-item__check {
@@ -602,84 +571,7 @@ const benefits = [
   color: rgba(92, 61, 30, 0.70);
   line-height: 1.6;
   margin: 0;
-}
-
-/* ── Bottom CTA ──────────────────────── */
-.b2b-cta {
-  background: #a80e1a;
-  border-radius: 20px;
-  padding: var(--space-10) var(--space-6);
-  color: #fff;
-  margin-bottom: var(--space-8);
-}
-
-.b2b-cta__inner {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  align-items: center;
-}
-
-.b2b-cta__title {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 3vw, 30px);
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: var(--space-2);
-  color: #fff;
-}
-
-.b2b-cta__sub {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 520px;
-  margin: 0;
-}
-
-.b2b-cta__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  align-items: center;
-}
-
-.b2b-cta__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-label);
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  padding: 12px 22px;
-  border-radius: 999px;
-  text-decoration: none;
-  transition: background 200ms ease, color 200ms ease, gap 200ms ease;
-  white-space: nowrap;
-}
-
-.b2b-cta__btn--primary {
-  background: #fff;
-  color: #cd1222;
-}
-
-.b2b-cta__btn--primary:hover {
-  background: var(--color-neutral);
-  gap: 10px;
-}
-
-.b2b-cta__btn--secondary {
-  background: transparent;
-  color: #fff;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-}
-
-.b2b-cta__btn--secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #fff;
-  gap: 10px;
+  letter-spacing: 0.01em;
 }
 
 /* ── Reveal Animation ────────────────── */
@@ -694,12 +586,29 @@ const benefits = [
   transform: translateY(0);
 }
 
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal,
+  .animate-on-scroll { opacity: 1; transform: none; transition: none; }
 }
 
 /* ── Responsive ──────────────────────── */
 @media (min-width: 640px) {
+  .partnerships__trust-strip {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+  }
+
   .solutions-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -709,19 +618,13 @@ const benefits = [
     gap: 64px;
     padding: 80px 0;
   }
-  .b2b-cta {
-    padding: var(--space-12) var(--space-10);
-  }
-  .b2b-cta__inner {
-    grid-template-columns: 1fr auto;
-    gap: var(--space-10);
-  }
 }
 
 @media (min-width: 1024px) {
   .solutions-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-6);
+    align-items: stretch;
   }
   .brand-cloud {
     flex-direction: row;
@@ -754,5 +657,21 @@ const benefits = [
     reveals.forEach(el => io.observe(el));
   } else {
     reveals.forEach(el => el.classList.add('visible'));
+  }
+
+  // Scroll-triggered animations for the page-cta shared class
+  const animOnScroll = document.querySelectorAll<HTMLElement>('.animate-on-scroll');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    animOnScroll.forEach(el => observer.observe(el));
+  } else {
+    animOnScroll.forEach(el => el.classList.add('is-visible'));
   }
 </script>
