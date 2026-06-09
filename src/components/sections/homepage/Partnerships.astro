@@ -1,543 +1,684 @@
 ---
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
-import { t } from '../../../i18n/utils';
+import { useTranslations } from '../../../i18n/utils';
 import '../../../styles/components/stats.css';
 import '../../../styles/page.css';
 
 import logoHypermart from '../../../images/logo/logo-hypermart.webp';
 import logoHyfresh from '../../../images/logo/logo-hyfresh.webp';
-import washImg from '../../../images/partnerships/wash-process.jpg';
-import naturalImg from '../../../images/partnerships/natural-process.jpg';
-import honeyImg from '../../../images/partnerships/honey-process.jpg';
 
 interface Props {
-  lang?: string;
+  lang: 'id' | 'en' | 'fr';
 }
 
-const { lang = 'en' } = Astro.props;
-const tr = t(lang);
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 const nl = (s: string) => s.split('\n').join('<br>');
 
-const processTypes = [
+const partnerCategories = [
   {
-    label: tr.b2b.type1Label,
-    desc: tr.b2b.type1Desc,
-    feature: tr.b2b.type1Feature,
-    flavours: tr.b2b.type1Flavours,
-    roast: tr.b2b.type1Roast,
-    cup: tr.b2b.type1Cup,
-    icon: 'mdi:water',
-    accentClass: 'process-card--washed',
-    img: washImg,
-    imgAlt: 'Washed process: fermented coffee beans soaking in water tanks',
+    label: t.b2b.categoryModernRetail,
+    brands: [
+      { type: 'img', src: logoHypermart, alt: 'Hypermart' },
+      { type: 'text', text: 'Hyfresh' },
+    ],
   },
   {
-    label: tr.b2b.type2Label,
-    desc: tr.b2b.type2Desc,
-    feature: tr.b2b.type2Feature,
-    flavours: tr.b2b.type2Flavours,
-    roast: tr.b2b.type2Roast,
-    cup: tr.b2b.type2Cup,
-    icon: 'mdi:weather-sunny',
-    accentClass: 'process-card--natural',
-    img: naturalImg,
-    imgAlt: 'Natural process: coffee cherries drying under the sun on raised beds',
+    label: t.b2b.categoryCorporate,
+    brands: [
+      { type: 'text', text: 'Angkasa Pura' },
+    ],
   },
   {
-    label: tr.b2b.type3Label,
-    desc: tr.b2b.type3Desc,
-    feature: tr.b2b.type3Feature,
-    flavours: tr.b2b.type3Flavours,
-    roast: tr.b2b.type3Roast,
-    cup: tr.b2b.type3Cup,
-    icon: 'mdi:flower',
-    accentClass: 'process-card--honey',
-    img: honeyImg,
-    imgAlt: 'Honey process: coffee cherries with mucilage drying on drying beds',
+    label: t.b2b.categoryHoreca,
+    brands: [
+      { type: 'text', text: 'Sendys' },
+      { type: 'text', text: 'Primo' },
+    ],
   },
+];
+
+const solutions = [
+  {
+    id: 'green-bean',
+    icon: 'mdi:coffee',
+    headline: t.b2b.cardGreenBeanTitle,
+    tagline: t.b2b.cardGreenBeanTagline,
+    body: t.b2b.cardGreenBeanBody,
+    chips: [
+      t.b2b.chipLintong,
+      t.b2b.chipMoq,
+      t.b2b.chipExport,
+    ],
+    cta: t.b2b.cardGreenBeanCta,
+    accentClass: 'solution-card--green-bean',
+    iconColor: '#225522',
+  },
+  {
+    id: 'private-label',
+    icon: 'mdi:tag-outline',
+    headline: t.b2b.cardPrivateLabelTitle,
+    tagline: t.b2b.cardPrivateLabelTagline,
+    body: t.b2b.cardPrivateLabelBody,
+    chips: [
+      t.b2b.chipCustomRoast,
+      t.b2b.chipFlexiblePackaging,
+      t.b2b.chipFreeSample,
+    ],
+    cta: t.b2b.cardPrivateLabelCta,
+    accentClass: 'solution-card--private-label',
+    iconColor: '#cd1222',
+  },
+  {
+    id: 'horeca',
+    icon: 'mdi:coffee-outline',
+    headline: t.b2b.cardHorecaTitle,
+    tagline: t.b2b.cardHorecaTagline,
+    body: t.b2b.cardHorecaBody,
+    chips: [
+      t.b2b.chipRoastedToOrder,
+      t.b2b.chipScheduledDelivery,
+      t.b2b.chipFreeConsultation,
+    ],
+    cta: t.b2b.cardHorecaCta,
+    accentClass: 'solution-card--horeca',
+    iconColor: '#5C3D1E',
+  },
+];
+
+const benefits = [
+  { title: t.b2b.benefit1Title, body: t.b2b.benefit1Body },
+  { title: t.b2b.benefit2Title, body: t.b2b.benefit2Body },
+  { title: t.b2b.benefit3Title, body: t.b2b.benefit3Body },
+  { title: t.b2b.benefit4Title, body: t.b2b.benefit4Body },
 ];
 ---
 
-<section class="partnerships section" id="b2b" aria-labelledby="b2b-heading">
+<section class="b2b section" id="b2b" aria-labelledby="b2b-heading">
   <div class="container">
 
-    <header class="partnerships__header">
-      <h2 id="b2b-heading" class="partnerships__title">{tr.b2b.title}</h2>
-      <p class="partnerships__subtitle">{tr.b2b.subtitle}</p>
+    <!-- Component 1: Brand Cloud with Partnership Categories -->
+    <header class="b2b__header reveal">
+      <span class="eyebrow">{t.b2b.eyebrow}</span>
+      <h2 id="b2b-heading" class="b2b__title">{t.b2b.title}</h2>
     </header>
 
-    <ul class="partnerships__trust-strip" role="list">
-      <li class="trust-stat">
-        <span class="trust-stat__value">{tr.b2b.stat1Value}</span>
-        <span class="trust-stat__label">{tr.b2b.stat1Label}</span>
-      </li>
-      <li class="trust-stat">
-        <span class="trust-stat__value">{tr.b2b.stat2Value}</span>
-        <span class="trust-stat__label">{tr.b2b.stat2Label}</span>
-      </li>
-      <li class="trust-stat">
-        <span class="trust-stat__value">{tr.b2b.stat3Value}</span>
-        <span class="trust-stat__label">{tr.b2b.stat3Label}</span>
-      </li>
-    </ul>
-
-    <div class="partnerships__logo-cloud" aria-label="Our Trusted Partners">
-      <div class="logo-cloud__track">
-        
-        <div class="logo-cloud__track-inner">
-          <div class="logo-cloud__item"><span class="logo-cloud__text">Angkasa Pura</span></div>
-          <div class="logo-cloud__item"><Image src={logoHypermart} alt="Hypermart" width={400} height={160} quality="max" class="logo-cloud__img" /></div>
-          <div class="logo-cloud__item"><span class="logo-cloud__text">Primo</span></div>
-          <div class="logo-cloud__item"><Image src={logoHyfresh} alt="Hyfresh" width={400} height={160} quality="max" class="logo-cloud__img" /></div>
-          <div class="logo-cloud__item"><span class="logo-cloud__text">Svetofor</span></div>
-          <div class="logo-cloud__item"><span class="logo-cloud__text">Sendys</span></div>
-          <div class="logo-cloud__item"><span class="logo-cloud__text">KPD Retail</span></div>
-        </div>
-
-        <div class="logo-cloud__track-inner" aria-hidden="true">
-          <div class="logo-cloud__item"><span class="logo-cloud__text">Angkasa Pura</span></div>
-          <div class="logo-cloud__item"><Image src={logoHypermart} alt="Hypermart" width={400} height={160} quality="max" class="logo-cloud__img" /></div>
-          <div class="logo-cloud__item"><span class="logo-cloud__text">Primo</span></div>
-          <div class="logo-cloud__item"><Image src={logoHyfresh} alt="Hyfresh" width={400} height={160} quality="max" class="logo-cloud__img" /></div>
-          <div class="logo-cloud__item"><span class="logo-cloud__text">Svetofor</span></div>
-          <div class="logo-cloud__item"><span class="logo-cloud__text">Sendys</span></div>
-          <div class="logo-cloud__item"><span class="logo-cloud__text">KPD Retail</span></div>
-        </div>
-
-      </div>
-      <p class="logo-cloud__proof">{tr.b2b.socialProof}</p>
-    </div>
-
-    <section class="process-section" aria-labelledby="process-heading">
-      <header class="process-section__header">
-        <h3 id="process-heading" class="process-section__title">{tr.b2b.processTitle}</h3>
-        <p class="process-section__subtitle">{tr.b2b.processSubtitle}</p>
-      </header>
-
-      <div class="process-cards" role="list">
-        {processTypes.map((type, i) => (
-          <article class={`process-card ${type.accentClass}`} role="listitem" style={`animation-delay: ${i * 120}ms`}>
-            <div class="process-card__img-wrap">
-              <Image src={type.img} alt={type.imgAlt} width={480} height={360} class="process-card__img" loading="lazy" />
-            </div>
-            <div class="process-card__body">
-              <header class="process-card__head">
-                <div class="process-card__icon-wrap">
-                  <Icon name={type.icon} width={22} height={22} aria-hidden="true" />
-                </div>
-                <h4 class="process-card__name">{type.label}</h4>
-              </header>
-              <p class="process-card__desc">{type.desc}</p>
-              
-              <div class="process-card__meta">
-                <div class="process-card__meta-item">
-                  <span class="process-card__meta-label">Flavour</span>
-                  <div class="process-card__flavours" aria-label="Flavour profiles">
-                    {type.flavours.map(f => <span class="flavour-chip">{f}</span>)}
-                  </div>
-                </div>
-                <div class="process-card__meta-item">
-                  <span class="process-card__meta-label">Cup Character</span>
-                  <span class="process-card__meta-value">{type.cup}</span>
-                </div>
-                <div class="process-card__meta-item">
-                  <span class="process-card__meta-label">Suitable Roast</span>
-                  <span class="process-card__meta-value">{type.roast}</span>
-                </div>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-      <div class="partnerships-cta partnerships-cta--cream" aria-label={tr.b2b.ctaBanner}>
-          <div class="partnerships-cta__inner">
-            <div class="partnerships-cta__text">
-              <h2 class="partnerships-cta__title" set:html={nl(tr.b2b.ctaTitle)}></h2>
-              <p class="partnerships-cta__sub">{tr.b2b.ctaSubtitle}</p>
-            </div>
-            <div class="partnerships-cta__actions">
-              <a href={`/${lang}/#contact`} class="btn btn--primary">{tr.b2b.ctaButton}</a>
-            </div>
+    <div class="brand-cloud reveal" aria-label="Our Trusted Partners">
+      {partnerCategories.map((cat, i) => (
+        <div class="brand-cloud__category reveal" style={`transition-delay: ${i * 100}ms`}>
+          <span class="brand-cloud__pill">{cat.label}</span>
+          <div class="brand-cloud__row">
+            {cat.brands.map(brand => (
+              brand.type === 'img' ? (
+                <Image src={brand.src} alt={brand.alt} width={400} height={160} quality="max" class="partner-logo" loading="lazy" />
+              ) : (
+                <span class="brand-cloud__text">{brand.text}</span>
+              )
+            ))}
           </div>
         </div>
+      ))}
+    </div>
+
+    <p class="brand-cloud__trust">
+      <span class="brand-cloud__dot" aria-hidden="true"></span>
+      {t.b2b.trustStrip}
+    </p>
+
+    <!-- Component 2: Solutions Cards -->
+    <header class="solutions__header reveal">
+      <h3 class="solutions__title">{t.b2b.solutionsTitle}</h3>
+      <p class="solutions__subtitle">{t.b2b.solutionsSubtitle}</p>
+    </header>
+
+    <div class="solutions-grid">
+      {solutions.map((s, i) => (
+        <article class={`solution-card ${s.accentClass} reveal`} style={`transition-delay: ${i * 100}ms`}>
+          <div class="solution-card__icon-wrap" style={`color: ${s.iconColor}`}>
+            <Icon name={s.icon} width={36} height={36} aria-hidden="true" />
+          </div>
+          <h4 class="solution-card__headline">{s.headline}</h4>
+          <p class="solution-card__tagline">{s.tagline}</p>
+          <p class="solution-card__body">{s.body}</p>
+          <div class="solution-card__chips">
+            {s.chips.map(chip => <span class="spec-chip">{chip}</span>)}
+          </div>
+          <a href={`/${lang}/#contact`} class="solution-card__cta">
+            {s.cta} <Icon name="mdi:arrow-right" width={16} height={16} aria-hidden="true" />
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <!-- Component 3: Benefits Strip -->
+    <div class="benefits-strip reveal">
+      <div class="benefits-headline-wrap">
+        <span class="eyebrow">{t.b2b.benefitsEyebrow}</span>
+        <h3 class="benefits-headline">{t.b2b.benefitsHeadline}</h3>
+        <p class="benefits-micro">{t.b2b.benefitsMicro}</p>
+      </div>
+      <ul class="benefit-list" role="list">
+        {benefits.map((b, i) => (
+          <li class="benefit-item reveal" style={`transition-delay: ${i * 80}ms`}>
+            <span class="benefit-item__check" aria-hidden="true">
+              <Icon name="mdi:check" width={20} height={20} />
+            </span>
+            <div>
+              <h4 class="benefit-item__title">{b.title}</h4>
+              <p class="benefit-item__body">{b.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Bottom CTA Bar -->
+    <div class="b2b-cta reveal" aria-label={t.b2b.ctaBanner}>
+      <div class="b2b-cta__inner">
+        <div class="b2b-cta__text">
+          <h3 class="b2b-cta__title">{t.b2b.ctaTitle}</h3>
+          <p class="b2b-cta__sub">{t.b2b.ctaSubtitle}</p>
+        </div>
+        <div class="b2b-cta__actions">
+          <a href={`/${lang}/#contact`} class="b2b-cta__btn b2b-cta__btn--primary">
+            {t.b2b.ctaPrimary}
+          </a>
+          <a href={`/${lang}/#contact`} class="b2b-cta__btn b2b-cta__btn--secondary">
+            {t.b2b.ctaSecondary} <Icon name="mdi:arrow-right" width={16} height={16} aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </div>
 
   </div>
 </section>
 
 <style>
-.partnerships { background: var(--color-neutral-100); }
+.b2b { background: var(--color-neutral-100); }
 
-/* ── Header ─────────────────────────── */
-.partnerships__header {
-  text-align: center;
-  margin-bottom: var(--space-8);
+/* ── Eyebrow (shared) ─────────────────── */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brand-red);
+  margin-bottom: var(--space-3);
 }
 
-.partnerships__title {
+/* ── Header ─────────────────────────── */
+.b2b__header {
+  text-align: center;
+  margin-bottom: var(--space-10);
+}
+
+.b2b__title {
   font-family: var(--font-display);
   font-size: clamp(28px, 3.5vw, 46px);
   font-weight: 700;
   color: var(--color-brand-earth);
   line-height: 1.2;
   letter-spacing: -0.02em;
-  margin-bottom: var(--space-4);
 }
 
-.partnerships__subtitle {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.75;
-  color: var(--color-brand-muted);
-  max-width: 580px;
-  margin: 0 auto;
-}
-
-/* ── Trust Strip ─────────────────────── */
-.partnerships__trust-strip {
+/* ── Brand Cloud ──────────────────────── */
+.brand-cloud {
   display: flex;
-  flex-direction: column; 
-  gap: var(--space-3);
-  background: transparent; 
-  padding: 0;
-  margin-bottom: var(--space-10);
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-6) 0;
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid rgba(92, 61, 30, 0.10);
 }
 
-.trust-stat {
+.brand-cloud__category {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: var(--color-brand-red); 
-  padding: var(--space-4);
-  border-radius: var(--radius-lg);
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+  gap: var(--space-3);
 }
 
-.trust-stat__value {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 700;
+.brand-cloud__pill {
+  display: inline-block;
+  background: var(--color-accent, #225522);
   color: #fff;
-  margin-bottom: var(--space-1);
-  line-height: 1;
-}
-
-.trust-stat__label {
   font-family: var(--font-label);
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  padding: 6px 16px;
+  border-radius: 6px;
+  white-space: nowrap;
 }
 
-/* ── Logo Cloud ─────────────────────────── */
-.partnerships__logo-cloud {
-  text-align: center;
-  margin-bottom: var(--space-10);
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
-}
-
-.logo-cloud__track {
-  display: flex;
-  gap: var(--space-8);
-  width: max-content;
-  animation: logoMarquee 28s linear infinite;
-}
-
-.logo-cloud__track-inner {
-  display: flex;
-  align-items: center;
-  gap: var(--space-8);
-  flex-shrink: 0;
-}
-
-.logo-cloud__item {
+.brand-cloud__row {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 100px;
+  flex-wrap: wrap;
+  gap: var(--space-8);
 }
 
-.logo-cloud__text {
+.partner-logo {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.55);
+  transition: filter 350ms ease, opacity 350ms ease;
+}
+
+.partner-logo:hover {
+  filter: grayscale(0) opacity(1);
+}
+
+.brand-cloud__text {
   font-family: var(--font-display);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-brand-muted);
-  transition: opacity 200ms ease;
   white-space: nowrap;
+  transition: color 200ms ease, opacity 200ms ease;
+  opacity: 0.65;
+  cursor: default;
 }
 
-.logo-cloud__img {
-  object-fit: contain;
-  filter: grayscale(100%);
-  transition: filter 200ms ease, opacity 200ms ease;
-  height: 36px;
-  width: auto;
+.brand-cloud__text:hover {
+  color: var(--color-brand-earth);
+  opacity: 1;
 }
 
-.logo-cloud__item:hover .logo-cloud__img {
-  filter: grayscale(0%);
-}
-
-.logo-cloud__proof {
+.brand-cloud__trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
   color: var(--color-brand-muted);
-  margin-top: 1.5rem;
+  text-align: center;
+  margin-bottom: var(--space-12);
+  max-width: 720px;
+  margin-inline: auto;
 }
 
-/* ── Process Section ─────────────────── */
-.process-section__header {
+.brand-cloud__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-brand-red);
+  flex-shrink: 0;
+}
+
+/* ── Solutions Header ───────────────── */
+.solutions__header {
   text-align: center;
   margin-bottom: var(--space-8);
 }
 
-.process-section__title {
+.solutions__title {
   font-family: var(--font-display);
-  font-size: clamp(20px, 2.5vw, 30px);
+  font-size: clamp(24px, 3vw, 34px);
   font-weight: 700;
   color: var(--color-brand-earth);
   margin-bottom: var(--space-3);
+  line-height: 1.2;
 }
 
-.process-section__subtitle {
+.solutions__subtitle {
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.7;
   color: var(--color-brand-muted);
-  max-width: 520px;
+  max-width: 560px;
   margin: 0 auto;
 }
 
-/* ── Process Cards (mobile-first) ───── */
-.process-cards {
+/* ── Solutions Grid ──────────────────── */
+.solutions-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-5);
-  margin-bottom: var(--space-10);
+  margin-bottom: var(--space-16);
 }
 
-.process-card {
+.solution-card {
   background: #fff;
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
+  border: 1px solid rgba(92, 61, 30, 0.10);
+  border-radius: 20px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
-  opacity: 0;
-  animation: fadeInUp 400ms ease forwards;
-  transition: transform 260ms ease, box-shadow 260ms ease;
-}
-
-
-.process-card:hover {
-  transform: translateY(-5px);
-}
-
-.process-card--washed:hover,
-.process-card--natural:hover,
-.process-card--honey:hover { 
-  box-shadow: 0 20px 48px rgba(154, 0, 2, 0.28); 
-}
-.process-card__img-wrap {
+  gap: 14px;
   position: relative;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-.process-card__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 480ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.solution-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 20px 20px 0 0;
 }
 
-.process-card:hover .process-card__img {
-  transform: scale(1.06);
+.solution-card--green-bean::before  { background: #225522; }
+.solution-card--private-label::before { background: #cd1222; }
+.solution-card--horeca::before      { background: #5C3D1E; }
+
+.solution-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(92, 61, 30, 0.12);
 }
 
-.process-card__body {
-  flex: 1;
+.solution-card__icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(92, 61, 30, 0.06);
+  flex-shrink: 0;
+}
+
+.solution-card__headline {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.solution-card__tagline {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-brand-red);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.solution-card__body {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--color-brand-muted);
+  margin: 0;
+}
+
+.solution-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.spec-chip {
+  display: inline-block;
+  background: var(--color-neutral);
+  color: var(--color-text-brown);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(92, 61, 30, 0.15);
+}
+
+.solution-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  margin-top: var(--space-2);
+  color: var(--color-brand-red);
+  font-family: var(--font-label);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: gap 150ms ease, color 150ms ease;
+}
+
+.solution-card__cta:hover {
+  gap: 10px;
+  color: #a80e1a;
+}
+
+/* ── Benefits Strip ─────────────────── */
+.benefits-strip {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  padding: var(--space-12) 0;
+  margin-bottom: var(--space-12);
+  border-top: 1px solid rgba(92, 61, 30, 0.10);
+  border-bottom: 1px solid rgba(92, 61, 30, 0.10);
+}
+
+.benefits-headline-wrap .eyebrow {
+  text-align: left;
+}
+
+.benefits-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-4);
+}
+
+.benefits-micro {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--color-brand-muted);
+  max-width: 460px;
+}
+
+.benefit-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-4);
+  gap: var(--space-5);
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.process-card__head {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
+.benefit-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 14px;
+  align-items: start;
 }
 
-.process-card__icon-wrap {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-md);
-  display: flex;
+.benefit-item__check {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(34, 85, 34, 0.12);
+  color: #225522;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.process-card--washed .process-card__icon-wrap  { background: rgba(107, 168, 146, 0.12); color: #4A8A6C; }
-.process-card--natural .process-card__icon-wrap { background: rgba(196, 122, 61, 0.12); color: #A05C22; }
-.process-card--honey .process-card__icon-wrap   { background: rgba(212, 160, 42, 0.12); color: #B07B10; }
-
-.process-card__name {
+.benefit-item__title {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--color-brand-earth);
-  line-height: 1.2;
+  margin-bottom: 4px;
+  line-height: 1.3;
 }
 
-.process-card__desc {
+.benefit-item__body {
   font-family: var(--font-body);
-  font-size: 0.75rem;
-  line-height: 1.65;
-  color: var(--color-brand-muted);
+  font-size: 0.875rem;
+  color: rgba(92, 61, 30, 0.70);
+  line-height: 1.6;
+  margin: 0;
 }
 
-.process-card__meta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+/* ── Bottom CTA ──────────────────────── */
+.b2b-cta {
+  background: #a80e1a;
+  border-radius: 20px;
+  padding: var(--space-10) var(--space-6);
+  color: #fff;
+  margin-bottom: var(--space-8);
 }
 
-.process-card__meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.process-card__meta-label {
-  font-family: var(--font-label);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-brand-muted);
-}
-
-.process-card__flavours {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.process-card__meta-value {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--color-brand-earth);
-  font-weight: 500;
-}
-
-.partnerships-cta {
-  padding-block: var(--space-10);
-  padding-inline: var(--space-6);
-  margin-top: var(--space-12);
-  border-radius: var(--radius-2xl);
-  border: 1px solid var(--color-neutral-200);
-}
-
-.partnerships-cta--cream { 
-  background: var(--color-brand-cream);
-
-}
-
-.partnerships-cta__inner {
+.b2b-cta__inner {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-6);
-  text-align: left; 
+  align-items: center;
 }
 
-.partnerships-cta__title {
+.b2b-cta__title {
   font-family: var(--font-display);
-  font-size: clamp(24px, 3.5vw, 36px);
+  font-size: clamp(22px, 3vw, 30px);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  margin-bottom: var(--space-3);
-  color: var(--color-brand-earth); 
+  line-height: 1.2;
+  margin-bottom: var(--space-2);
+  color: #fff;
 }
 
-.partnerships-cta__sub {
+.b2b-cta__sub {
   font-family: var(--font-body);
-  font-size: clamp(14px, 1.5vw, 16px);
-  line-height: 1.7;
-  max-width: 480px;
-  color: var(--color-brand-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 520px;
+  margin: 0;
 }
 
-.partnerships-cta__actions {
+.b2b-cta__actions {
   display: flex;
-  flex-direction: row; 
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   gap: var(--space-3);
-  align-items: center; 
+  align-items: center;
 }
 
-@keyframes logoMarquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(calc(-50% - (var(--space-8) / 2))); }
+.b2b-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-label);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 12px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 200ms ease, color 200ms ease, gap 200ms ease;
+  white-space: nowrap;
+}
+
+.b2b-cta__btn--primary {
+  background: #fff;
+  color: #cd1222;
+}
+
+.b2b-cta__btn--primary:hover {
+  background: var(--color-neutral);
+  gap: 10px;
+}
+
+.b2b-cta__btn--secondary {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.b2b-cta__btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+  gap: 10px;
+}
+
+/* ── Reveal Animation ────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .logo-cloud__track { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* ── Responsive ────────────────────────── */
+/* ── Responsive ──────────────────────── */
 @media (min-width: 640px) {
-  .partnerships__trust-strip {
-    flex-direction: row;
-    gap: var(--space-8);
-    text-align: left;
-  }
-  .process-cards { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
+  .solutions-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (min-width: 768px) {
-  .partnerships__trust-strip {
-    flex-direction: row; 
-    justify-content: center;
-    gap: var(--space-8);
-    background: var(--color-brand-red);
-    padding: var(--space-6) var(--space-10);
-    border-radius: var(--radius-xl);
+  .benefits-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    padding: 80px 0;
   }
-
-  .trust-stat {
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
+  .b2b-cta {
+    padding: var(--space-12) var(--space-10);
   }
-  .partnerships-cta {
-    padding-block: var(--space-12);
-    padding-inline: var(--space-10);
-  }
-  
-  .partnerships-cta__inner {
-    grid-template-columns: 1fr auto; 
-    align-items: center;
+  .b2b-cta__inner {
+    grid-template-columns: 1fr auto;
     gap: var(--space-10);
   }
 }
 
 @media (min-width: 1024px) {
-  .process-cards { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
-  .process-card__body { padding: var(--space-5); }
-  .process-card__name { font-size: 1rem; }
-  .partnerships__cta { padding: var(--space-12) var(--space-8); }
+  .solutions-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+  .brand-cloud {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-8);
+  }
+  .brand-cloud__category {
+    flex: 1;
+    align-items: center;
+  }
+  .brand-cloud__row {
+    gap: var(--space-6);
+  }
 }
-
 </style>
+
+<script>
+  // Scroll-triggered reveal — IntersectionObserver
+  const reveals = document.querySelectorAll<HTMLElement>('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('visible'));
+  }
+</script>

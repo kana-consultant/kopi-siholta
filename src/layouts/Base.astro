@@ -18,7 +18,7 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiholta.com');
 ---
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -352,6 +352,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
     <slot />
 
     <script>
+      document.documentElement.classList.remove('no-js');
+      document.documentElement.classList.add('js');
+
       const pageLoader = document.getElementById('global-page-loader');
 
       const hideLoader = () => {
