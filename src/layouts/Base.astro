@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { Image } from 'astro:assets';
 import logo from '../images/logo/logo-siholta.png';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 
 interface Props {
   title?: string;
@@ -18,7 +19,7 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiholta.com');
 ---
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -256,6 +257,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
         "https://shopee.co.id/kopisiholta"
       ]
     })} />
+
+  <GoogleAnalytics />
+    
   </head>
   <body class="grain-overlay">
     
@@ -352,6 +356,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
     <slot />
 
     <script>
+      document.documentElement.classList.remove('no-js');
+      document.documentElement.classList.add('js');
+
       const pageLoader = document.getElementById('global-page-loader');
 
       const hideLoader = () => {

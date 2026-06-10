@@ -74,20 +74,7 @@ Website ini dibangun dengan arsitektur komponen yang modular:
 ### Struktur Komponen
 
 ```
-src/
-├── components/
-│   ├── Hero.astro        
-│   ├── Products.astro    # 📦 Grid produk
-│   ├── About.astro       # 📖 Cerita brand
-│   ├── Export.astro      # 🌍 Info ekspor
-│   ├── Partnership.astro  # 🤝 Section kemitraan
-│   ├── Contact.astro     # 📧 Form & Maps
-│   ├── Navigation.astro  # 🔝 Navbar
-│   └── Footer.astro      # 🔚 Footer
-├── layouts/
-│   └── Layout.astro     
-└── pages/
-    └── index.astro      # Homepage
+
 ```
 
 ---
