@@ -9,19 +9,20 @@
 }
 .b2b__title {
   font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 44px);
+  font-size: clamp(28px, 3.5vw, 46px);
   font-weight: 700;
   color: var(--color-brand-earth);
-  line-height: 1.2;
+  line-height: 1.1;
   letter-spacing: -0.02em;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .b2b__subtitle {
-  text-align: left;
   font-family: var(--font-body);
-  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.75;
   color: var(--color-brand-muted);
-  max-width: 600px;
+  max-width: 100%;;
 }
 
 .partnerships__trust-strip {
@@ -50,7 +51,7 @@
   font-family: var(--font-display);
   font-size: 1.4rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-main);
   margin-bottom: var(--space-1);
   line-height: 1;
 }
@@ -58,7 +59,7 @@
 .trust-stat__label {
   font-family: var(--font-label);
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-text-main);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -85,7 +86,7 @@
 
 .logo-cloud__track {
   display: flex;
-  gap: var(--space-8);
+  gap: var(--space-5);
   width: max-content;
   animation: logoMarquee 28s linear infinite;
 }
@@ -97,7 +98,7 @@
 .logo-cloud__track-inner {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-3);
   flex-shrink: 0;
 }
 
@@ -116,11 +117,12 @@
 }
 
 .logo-cloud__img {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   object-fit: contain;
   mix-blend-mode: multiply;
   transition: transform 300ms ease;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .logo-cloud__item:hover .logo-cloud__img {
@@ -153,7 +155,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--color-text-main);
   border: 1px solid rgba(92, 61, 30, 0.08);
   transition:
     transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -204,7 +206,7 @@
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.6;
-  color: #555;
+  color: var(color-text-muted);
   margin: 0;
 }
 .solution-card__chips {
@@ -331,6 +333,11 @@
     padding: 0;
     flex: none;
   }
+
+  .logo-cloud__img {
+  width: 100%;
+  height: 100%;
+}
   .solutions-grid {
     grid-template-columns: repeat(3, 1fr);
   }

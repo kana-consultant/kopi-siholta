@@ -136,14 +136,8 @@ const columns = [
     <!-- Divider -->
     <div class="footer__divider" aria-hidden="true"></div>
 
-    <!-- Bottom Bar -->
-    <div class="footer__bottom">
-      <p class="footer__copyright">{t.footer.copyright}</p>
-      <div class="footer__bottom-links">
-        <a href={`/${lang}/privacy`} class="footer__bottom-link" aria-label={t.footer.privacyAria}>{t.footer.privacy}</a>
-        <span class="footer__bottom-sep" aria-hidden="true">·</span>
-        <a href={`/${lang}/terms`} class="footer__bottom-link" aria-label={t.footer.termsAria}>{t.footer.terms}</a>
-      </div>
+    <div class="footer__copyright">
+      <p>{t.footer.copyright}</p>
     </div>
 
   </div>
@@ -330,35 +324,16 @@ const columns = [
   background: rgba(255,255,255,0.12);
 }
 
-.footer__bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-3);
-}
-
 .footer__copyright {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--color-text-main);
-}
-
-.footer__bottom-links {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  justify-content: center;
 }
 
-.footer__bottom-link {
+.footer__copyright p {
   font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--color-text-main);
-  text-decoration: none;
-  transition: color 150ms ease;
 }
-
-.footer__bottom-link:hover { color: #fff; }
-.footer__bottom-link:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 2px; border-radius: 2px; }
 
 .footer__bottom-sep {
   color: rgba(255,255,255,0.25);

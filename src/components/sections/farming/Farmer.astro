@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import fFarmer1 from '../../../images/farming/farmer.jpg';
-import fFarmer2 from '../../../images/farming/farmer-1.jpg';
+import fFarmer1 from '../../../images/farming/farmer-m.png';
+import fFarmer2 from '../../../images/farming/farmer-f.png';
 import { useTranslations } from '../../../i18n/utils';
 
 interface Props {
@@ -13,8 +13,8 @@ const t = useTranslations(lang);
 const nl = (s: string) => s.split('\n').join('<br>');
 
 const farmers = [
-  { nameKey: 'farmerMargondang', villageKey: 'farmerMargondangVillage', sinceKey: 'farmerMargondangSince', quoteKey: 'farmerMargondangQuote', img: fFarmer1 },
-  { nameKey: 'farmerRohani',     villageKey: 'farmerRohaniVillage',     sinceKey: 'farmerRohaniSince',     quoteKey: 'farmerRohaniQuote',     img: fFarmer2 },
+  { nameKey: 'farmerMale', villageKey: 'farmerMaleVillage', sinceKey: 'farmerMaleSince', quoteKey: 'farmerMaleQuote', img: fFarmer1 },
+  { nameKey: 'farmerFemale',     villageKey: 'farmerFemaleVillage',     sinceKey: 'farmerFemaleSince',     quoteKey: 'farmerFemaleQuote',     img: fFarmer2 },
 ];
 ---
 
