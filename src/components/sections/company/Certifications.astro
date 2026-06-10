@@ -10,28 +10,6 @@ import { useTranslations } from '../../../i18n/utils';
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const tc = t.company;
-const certs = [
-  {
-    nameKey: 'certBrandName', descKey: 'certBrandDesc',
-    img: certBrand, altKey: 'Sertifikat Merek Kopi Siholta',
-    iconName: 'mdi:certificate', pdf: '/docs/brand-certificate.pdf',
-  },
-  {
-    nameKey: 'certHalalName', descKey: 'certHalalDesc',
-    img: certHalal, altKey: 'Sertifikat Halal Kopi Siholta',
-    iconName: 'mdi:shield-check', pdf: '/docs/halal-certificate.pdf',
-  },
-  {
-    nameKey: 'certTrainingName', descKey: 'certTrainingDesc',
-    img: certTraining, altKey: 'Sertifikat Pelatihan Keamanan Pangan Kopi Siholta',
-    iconName: 'mdi:food-apple', pdf: '/docs/training-certificate.pdf',
-  },
-  {
-    nameKey: 'certPirtName', descKey: 'certPirtDesc',
-    img: certPirt, altKey: 'SPP-IRT Kopi Siholta',
-    iconName: 'mdi:food', pdf: '/docs/spp-irt.pdf',
-  },
-];
 ---
 
  <!-- ── Trusted & Certified ─────────────────────── -->
