@@ -12,7 +12,7 @@
 
   /* Text Colors */
   --color-text-main: rgba(255, 255, 255, 1);
-  --color-text-muted: rgba(255, 255, 255, 0.25);
+  --color-text-muted: rgba(255, 255, 255, 0.85);
   --color-text-red: rgba(205, 18, 34, 1);
   --color-text-brown: rgba(92, 61, 30, 1);
   --color-text-brown-muted: rgba(92, 61, 30, 0.70);
