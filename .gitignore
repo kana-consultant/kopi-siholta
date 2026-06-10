@@ -6,6 +6,7 @@ dist/
 .omc/
 .playwright-mcp/
 .claude/
+.fallow/
 tests/
 .vercel/
 scripts/

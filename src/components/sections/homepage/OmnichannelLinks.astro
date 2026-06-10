@@ -7,10 +7,10 @@ import igLogo from '../../../images/logo/logo-instagram.png';
 import waLogo from '../../../images/logo/logo-whatsapp.png';
 import tiktokLogo from '../../../images/logo/logo-tiktok.png';
 
-import igPhoto1 from '../../../images/omni/instagram-1.webp';
-import igPhoto2 from '../../../images/omni/instagram-2.webp';
-import igPhoto3 from '../../../images/omni/instagram-3.webp';
-import igPhoto4 from '../../../images/omni/instagram-4.webp';
+import igPhoto1 from '../../../images/omni/instagram-1.jpg';
+import igPhoto2 from '../../../images/omni/instagram-2.jpg';
+import igPhoto3 from '../../../images/omni/instagram-3.jpg';
+import igPhoto4 from '../../../images/omni/instagram-4.jpg';
 
 import { useTranslations } from '../../../i18n/utils';
 
@@ -27,6 +27,11 @@ const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
 const TIKTOK_URL = 'https://www.tiktok.com/@kopisiholta';
 const INSTAGRAM_URL = 'https://www.instagram.com/kopi_siholta.id/';
 const WHATSAPP_URL = 'https://wa.me/6281322518527';
+
+const ig_content1 = 'https://www.instagram.com/p/DXWpenWk4MA/?igsh=M20xbTFwbGtkeXo4';
+const ig_content2 = 'https://www.instagram.com/p/DZE9DjZTJL5/?igsh=dmluN2UwM3l6cDB6';
+const ig_content3 = 'https://www.instagram.com/p/DZEqWWDCCE3/?igsh=cTcwMWo0dmQ3eWw4';
+const ig_content4 = 'https://www.instagram.com/p/DZOznoZzH3i/?igsh=bWFycW1iMmwyMWgx';
 
 const marketplaceCards = [
   {
@@ -59,10 +64,10 @@ const marketplaceCards = [
 ];
 
 const igPhotos = [
-  { src: igPhoto1, alt: 'Close-up espresso crema' },
-  { src: igPhoto2, alt: 'Hands sorting green beans at farm' },
-  { src: igPhoto3, alt: 'Roastery ambiance with golden-hour light' },
-  { src: igPhoto4, alt: 'Kopi Siholta packaging flat-lay' },
+  { src: igPhoto1, alt: 'Close-up espresso crema', url: ig_content1 },
+  { src: igPhoto2, alt: 'Hands sorting green beans at farm', url: ig_content2 },
+  { src: igPhoto3, alt: 'Roastery ambiance with golden-hour light', url: ig_content3 },
+  { src: igPhoto4, alt: 'Kopi Siholta packaging flat-lay', url: ig_content4 },
 ];
 ---
 
@@ -70,14 +75,12 @@ const igPhotos = [
   <div class="container">
 
     <!-- Section Header -->
-    <div class="section__header reveal">
-      <span class="eyebrow">{t.omni.eyebrow}</span>
+    <header class="section__header reveal">
       <h2 class="section-title" set:html={nl(t.omni.title)} />
       <p class="section-sub">{t.omni.subtitle}</p>
-    </div>
+    </header>
 
     <!-- Upper Sub-section: Marketplace & Direct Order -->
-    <div class="sub-label reveal">{t.omni.marketplaceLabel}</div>
     <div class="marketplace-grid">
       {marketplaceCards.map((card, i) => (
         <a
@@ -94,30 +97,29 @@ const igPhotos = [
           <h3 class="marketplace-card__headline">{card.headline}</h3>
           <p class="marketplace-card__sub">{card.sub}</p>
           <span class="card-cta">
-            {card.cta} <Icon name="mdi:arrow-right" width={14} height={14} aria-hidden="true" />
+            {card.cta}
           </span>
         </a>
       ))}
     </div>
 
     <!-- Lower Sub-section: Social Media & Community -->
-    <div class="sub-label reveal">{t.omni.socialLabel}</div>
-    <p class="sub-copy reveal">{t.omni.socialSub}</p>
-
     <div class="ig-bento reveal">
       <article class="ig-feature">
-        <p class="ig-feature__line">{t.omni.igFeatureLine}</p>
+        <div class="ig-feature__header">
+          <Image src={igLogo} alt="Instagram" width={48} height={48} quality="max" class="ig-feature__logo" />
+        </div>
         <h3 class="ig-feature__headline">{t.omni.igFeatureHeadline}</h3>
         <p class="ig-feature__body">{t.omni.igFeatureBody}</p>
-        <div class="ig-feature__handle">@kopisiholta</div>
+        <div class="ig-feature__handle">@kopi_siholta.id</div>
         <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="ig-feature__cta">
-          {t.omni.igFollowCta} <Icon name="mdi:arrow-right" width={16} height={16} aria-hidden="true" />
+          {t.omni.igFollowCta}
         </a>
       </article>
 
       <div class="ig-grid">
         {igPhotos.map((p, i) => (
-          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="photo-tile" aria-label={p.alt}>
+          <a href={p.url} target="_blank" rel="noopener noreferrer" class="photo-tile" aria-label={p.alt}>
             <Image src={p.src} alt={p.alt} width={400} height={400} quality={75} format="webp" class="photo-tile__img" loading="lazy" />
           </a>
         ))}
@@ -125,38 +127,28 @@ const igPhotos = [
     </div>
 
     <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="tiktok-banner reveal" aria-label={t.omni.tiktokHeadline}>
-      <div class="tiktok-banner__icon" aria-hidden="true">
-        <Icon name="mdi:music-note" width={28} height={28} />
+      <div class="tiktok-banner-image" aria-hidden="true">
+          <Image src={tiktokLogo} alt="Tiktok" width={64} height={64} quality="max" class="tiktok-img" />
       </div>
       <div class="tiktok-banner__text">
-        <h3 class="tiktok-banner__title">{t.omni.tiktokHeadline}</h3>
+        <h3 class="tiktok-banner__title">@kopisiholta</h3>
         <p class="tiktok-banner__body">{t.omni.tiktokBody}</p>
       </div>
-      <span class="tiktok-banner__cta">
-        {t.omni.tiktokCta} <Icon name="mdi:arrow-right" width={16} height={16} aria-hidden="true" />
-      </span>
+      <button class="tiktok-banner__cta">
+        {t.omni.tiktokCta}
+      </button>
     </a>
 
   </div>
 </section>
 
 <style>
-/* ── Section + Header ─────────────────── */
 .omni {
   background: var(--color-brand-cream);
   padding-block: var(--space-12);
 }
 
-.eyebrow {
-  display: inline-block;
-  font-family: var(--font-label);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-brand-red);
-  margin-bottom: var(--space-3);
-}
+
 
 .section__header {
   text-align: center;
@@ -183,7 +175,6 @@ const igPhotos = [
   margin: 0 0 var(--space-6) 0;
 }
 
-/* ── Marketplace Grid ─────────────────── */
 .marketplace-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -210,17 +201,6 @@ const igPhotos = [
   box-shadow: 0 16px 40px rgba(92, 61, 30, 0.14);
 }
 
-.marketplace-card__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(92, 61, 30, 0.08);
-  margin-bottom: 4px;
-}
 
 .marketplace-card__img {
   width: 28px;
@@ -267,12 +247,10 @@ const igPhotos = [
   background: #a80e1a;
 }
 
-/* Per-card accent stripe (subtle) */
 .card--tokopedia { border-top: 3px solid #d4edda; }
 .card--shopee    { border-top: 3px solid #ffe5db; }
 .card--whatsapp  { border-top: 3px solid #d9f0dc; }
 
-/* ── Instagram Bento ─────────────────── */
 .ig-bento {
   display: grid;
   grid-template-columns: 1fr;
@@ -288,8 +266,18 @@ const igPhotos = [
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   min-height: 220px;
+}
+
+.ig-feature__header {
+  margin-bottom: var(--space-1);
+}
+
+.ig-feature__logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
 }
 
 .ig-feature__line {
@@ -342,12 +330,13 @@ const igPhotos = [
   padding: 10px 20px;
   border-radius: 999px;
   text-decoration: none;
-  transition: gap 150ms ease, background 150ms ease;
+  transition: gap 150ms ease, background 150ms ease, color 150ms ease;
 }
 
 .ig-feature__cta:hover {
   gap: 10px;
-  background: var(--color-neutral);
+  background: #1a1a1a; 
+  color: #fff;
 }
 
 .ig-grid {
@@ -374,15 +363,11 @@ const igPhotos = [
   transition: transform 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.photo-tile:hover .photo-tile__img {
-  transform: scale(1.06);
-}
-
 .photo-tile::after {
   content: "Buka Instagram ↗";
   position: absolute;
   inset: 0;
-  background: rgba(205, 18, 34, 0.72);
+  background: rgba(205, 18, 34, 0.85);
   color: #fff;
   display: flex;
   align-items: center;
@@ -393,13 +378,9 @@ const igPhotos = [
   opacity: 0;
   transition: opacity 250ms ease;
   font-family: var(--font-label);
+  pointer-events: none; 
 }
 
-.photo-tile:hover::after {
-  opacity: 1;
-}
-
-/* ── TikTok Banner ───────────────────── */
 .tiktok-banner {
   background: #1a1a1a;
   border-radius: 16px;
@@ -413,19 +394,13 @@ const igPhotos = [
   transition: background 200ms ease;
 }
 
-.tiktok-banner:hover {
-  background: #2a2a2a;
-}
-
-.tiktok-banner__icon {
+.tiktok-img {
   width: 44px;
   height: 44px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  flex-shrink: 0;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .tiktok-banner__title {
@@ -452,16 +427,23 @@ const igPhotos = [
   font-family: var(--font-label);
   font-size: 0.875rem;
   font-weight: 700;
-  color: #fff;
   margin-top: var(--space-2);
-  transition: gap 150ms ease;
+  border: none;
+  cursor: pointer;
+  
+  color: #1a1a1a; 
+  background-color: #fff; 
+  padding: 8px 16px;
+  border-radius: 20px; 
+  align-self: flex-start;
+  box-shadow: -3px -3px 0 #00f2fe, 3px 3px 0 #fe0979;
+  transition: 
+    gap 150ms ease, 
+    transform 150ms ease, 
+    box-shadow 150ms ease; 
 }
 
-.tiktok-banner:hover .tiktok-banner__cta {
-  gap: 10px;
-}
 
-/* ── Reveal Animation ────────────────── */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -477,10 +459,31 @@ const igPhotos = [
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
+@media (hover: none) {
+  .photo-tile:focus::after,
+  .photo-tile:active::after {
+    opacity: 1;
+  }
+  .photo-tile:focus .photo-tile__img,
+  .photo-tile:active .photo-tile__img {
+    transform: scale(1.06);
+  }
+}
+
+@media (hover: hover) {
+  .photo-tile:hover .photo-tile__img {
+    transform: scale(1.06);
+  }
+  .photo-tile:hover::after {
+    opacity: 1;
+  }
+}
+
 /* ── Responsive ──────────────────────── */
 @media (min-width: 640px) {
   .marketplace-grid { grid-template-columns: repeat(2, 1fr); }
   .ig-grid { gap: var(--space-4); }
+  
   .tiktok-banner {
     flex-direction: row;
     align-items: center;
@@ -515,7 +518,19 @@ const igPhotos = [
     padding: 36px 40px;
   }
   .tiktok-banner__title { font-size: 1.25rem; }
+
+  /* Aturan Desktop: Hilangkan box-shadow saat kondisi normal */
+  .tiktok-banner__cta {
+    box-shadow: none;
+  }
+  
+  /* Munculkan box-shadow eksklusif saat di-hover di desktop */
+  .tiktok-banner__cta:hover {
+    transform: scale(1.03);
+    box-shadow: -3px -3px 0 #00f2fe, 3px 3px 0 #fe0979;
+  }
 }
+
 </style>
 
 <script>
