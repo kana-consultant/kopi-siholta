@@ -1,94 +1,70 @@
 ---
-import { Image } from 'astro:assets';
-import { useTranslations } from '../../../i18n/utils';
-import '../../../styles/page.css';
-import '../../../styles/components/stats.css';
+import '../../../styles/components/partnerships.css';
+import { Icon } from 'astro-icon/components';
+import { Image } from "astro:assets";
+import { useTranslations } from "../../../i18n/utils";
+import "../../../styles/page.css";
+import "../../../styles/components/stats.css";
 
-import logoHypermart from '../../../images/logo/logo-hypermart.webp';
-import logoHyfresh from '../../../images/logo/logo-hyfresh.webp';
-import logoAngkasaPura from '../../../images/logo/logo-angkasapura.png';
-import logoSendys from '../../../images/logo/logo-sendys.png';
-import logoPrimo from '../../../images/logo/logo-primo.png';
+import logoHypermart from "../../../images/logo/logo-hypermart.webp";
+import logoHyfresh from "../../../images/logo/logo-hyfresh.png";
+import logoAngkasaPura from "../../../images/logo/logo-angkasapura.png";
+import logoSendys from "../../../images/logo/logo-sendys.png";
+import logoPrimo from "../../../images/logo/logo-primo.png";
+import logoSvetofor from "../../../images/logo/logo-svetofor.png";
+import logoAeki from "../../../images/logo/logo-aeki.webp";
+import logoAski from "../../../images/logo/logo-aski.png";
+import logoScai from "../../../images/logo/SCAI logo.webp";
 
-import imgGreenBeans from '../../../images/partnerships/green-beans.jpg';
-import imgProcess from '../../../images/farming/process (2).jpg';
-import imgCoffeeBeans from '../../../images/fnb/coffee-beans.jpg';
+import imgGreenBeans from "../../../images/partnerships/green-beans.jpg";
+import imgProcess from "../../../images/farming/process (2).jpg";
+import imgCoffeeBeans from "../../../images/fnb/caffee.jpg";
 
 interface Props {
-  lang: 'id' | 'en' | 'fr';
+  lang: "id" | "en" | "fr";
 }
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const partnerCategories = [
-  {
-    label: t.b2b.categoryModernRetail,
-    brands: [
-      { src: logoHypermart, alt: 'Hypermart' },
-      { src: logoHyfresh, alt: 'Hyfresh' },
-    ],
-  },
-  {
-    label: t.b2b.categoryCorporate,
-    brands: [
-      { src: logoAngkasaPura, alt: 'Angkasa Pura' },
-    ],
-  },
-  {
-    label: t.b2b.categoryHoreca,
-    brands: [
-      { src: logoSendys, alt: 'Sendys' },
-      { src: logoPrimo, alt: 'Primo' },
-    ],
-  },
-];
-
 const solutions = [
   {
-    id: 'green-bean',
+    id: "modern-retail",
+    image: imgProcess,
+    imageAlt: t.b2b.cardModernRetailImageAlt,
+    headline: t.b2b.cardModernRetailTitle,
+    tagline: t.b2b.cardModernRetailTagline,
+    body: t.b2b.cardModernRetailBody,
+    chips: [
+      t.b2b.chipModernRetailReady,
+      t.b2b.chipDistribusi,
+      t.b2b.chipDocComplete,
+    ],
+    variant: "highlight",
+  },
+  {
+    id: "green-bean",
     image: imgGreenBeans,
     imageAlt: t.b2b.cardGreenBeanImageAlt,
     headline: t.b2b.cardGreenBeanTitle,
     tagline: t.b2b.cardGreenBeanTagline,
     body: t.b2b.cardGreenBeanBody,
-    chips: [
-      t.b2b.chipLintong,
-      t.b2b.chipMoq,
-      t.b2b.chipExport,
-    ],
-    cta: t.b2b.cardGreenBeanCta,
-    variant: 'cream',
+    chips: [t.b2b.chipLintong, t.b2b.chipRobusta, t.b2b.chipExport],
+    variant: "cream",
   },
   {
-    id: 'private-label',
-    image: imgProcess,
-    imageAlt: t.b2b.cardPrivateLabelImageAlt,
-    headline: t.b2b.cardPrivateLabelTitle,
-    tagline: t.b2b.cardPrivateLabelTagline,
-    body: t.b2b.cardPrivateLabelBody,
-    chips: [
-      t.b2b.chipCustomRoast,
-      t.b2b.chipFlexiblePackaging,
-      t.b2b.chipFreeSample,
-    ],
-    cta: t.b2b.cardPrivateLabelCta,
-    variant: 'highlight',
-  },
-  {
-    id: 'horeca',
+    id: "franchise",
     image: imgCoffeeBeans,
-    imageAlt: t.b2b.cardHorecaImageAlt,
-    headline: t.b2b.cardHorecaTitle,
-    tagline: t.b2b.cardHorecaTagline,
-    body: t.b2b.cardHorecaBody,
+    imageAlt: t.b2b.cardFranchiseImageAlt,
+    headline: t.b2b.cardFranchiseTitle,
+    tagline: t.b2b.cardFranchiseTagline,
+    body: t.b2b.cardFranchiseBody,
     chips: [
-      t.b2b.chipRoastedToOrder,
-      t.b2b.chipScheduledDelivery,
-      t.b2b.chipFreeConsultation,
+      t.b2b.chipFranchiseSupport,
+      t.b2b.chipBaristaTraining,
+      t.b2b.chipBranding,
     ],
-    cta: t.b2b.cardHorecaCta,
-    variant: 'cream',
+    variant: "cream",
   },
 ];
 
@@ -102,576 +78,197 @@ const benefits = [
 
 <section class="b2b section" id="b2b" aria-labelledby="b2b-heading">
   <div class="container">
-
-    <!-- Component 1: Brand Cloud with Partnership Categories -->
     <header class="b2b__header reveal">
-      <h2 id="b2b-heading" class="b2b__title">{t.b2b.title}</h2>
+      <h2 id="b2b-heading" class="b2b__title">{t.b2b.titleLine1}</h2>
+      <h2 id="b2b-heading" class="b2b__title">{t.b2b.titleLine2}</h2>
       <p class="b2b__subtitle">{t.b2b.subtitle}</p>
     </header>
 
-    <div class="brand-cloud reveal" aria-label="Our Trusted Partners">
-      {partnerCategories.map((cat, i) => (
-        <div class="brand-cloud__category reveal" style={`transition-delay: ${i * 100}ms`}>
-          <span class="brand-cloud__pill">{cat.label}</span>
-          <div class="brand-cloud__row">
-            {cat.brands.map(brand => (
-              <Image src={brand.src} alt={brand.alt} width={120} height={48} quality={75} class="partner-logo" loading="lazy" />
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-
-    <!-- Component 1b: Trust Strip (stats consistency) -->
-    <ul class="partnerships__trust-strip" role="list">
-      <li class="trust-stat reveal">
-        <p class="trust-stat__value">{t.b2b.stat1Value}</p>
-        <p class="trust-stat__label">{t.b2b.stat1Label}</p>
+    <ul class="partnerships__trust-strip reveal" role="list">
+      <li class="trust-stat">
+        <span class="trust-stat__value">{t.b2b.stat1Value}</span>
+        <span class="trust-stat__label">{t.b2b.stat1Label}</span>
       </li>
-      <li class="trust-stat reveal">
-        <p class="trust-stat__value">{t.b2b.stat2Value}</p>
-        <p class="trust-stat__label">{t.b2b.stat2Label}</p>
+      <li class="trust-stat">
+        <span class="trust-stat__value">{t.b2b.stat2Value}</span>
+        <span class="trust-stat__label">{t.b2b.stat2Label}</span>
       </li>
-      <li class="trust-stat reveal">
-        <p class="trust-stat__value">{t.b2b.stat3Value}</p>
-        <p class="trust-stat__label">{t.b2b.stat3Label}</p>
+      <li class="trust-stat">
+        <span class="trust-stat__value">{t.b2b.stat3Value}</span>
+        <span class="trust-stat__label">{t.b2b.stat3Label}</span>
       </li>
     </ul>
 
-    <!-- Component 2: Solutions Cards -->
-    <header class="solutions__header reveal">
-      <h3 class="solutions__title">{t.b2b.solutionsTitle}</h3>
-      <p class="solutions__subtitle">{t.b2b.solutionsSubtitle}</p>
-    </header>
+    <div
+      class="partnerships__logo-cloud reveal"
+      aria-label="Our Trusted Partners"
+    >
+      <div class="logo-cloud__track">
+        <div class="logo-cloud__track-inner">
+          <div class="logo-cloud__item">
+            <Image src={logoHypermart} alt="Hypermart" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoHyfresh} alt="Hyfresh" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoAngkasaPura} alt="Angkasa Pura" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoSendys} alt="Sendys" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoPrimo} alt="Primo" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoSvetofor} alt="Svetofor" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoAeki} alt="AEKI" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoAski} alt="ASKI" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoScai} alt="SCAI" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+        </div>
 
-    <div class="solutions-grid">
-      {solutions.map((s, i) => (
-        <article class={`solution-card solution-card--${s.variant} reveal`} style={`transition-delay: ${i * 100}ms`}>
-          <div class="solution-card__media">
-            <Image src={s.image} alt={s.imageAlt} width={400} height={300} quality={75} class="solution-card__image" loading="lazy" />
+        <div class="logo-cloud__track-inner" aria-hidden="true">
+          <div class="logo-cloud__item">
+            <Image src={logoHypermart} alt="Hypermart" height={400} quality="max" class="logo-cloud__img" /> 
           </div>
-          <div class="solution-card__content">
-            <h4 class="solution-card__headline">{s.headline}</h4>
-            <p class="solution-card__tagline">{s.tagline}</p>
-            <p class="solution-card__body">{s.body}</p>
-            <div class="solution-card__chips">
-              {s.chips.map(chip => <span class="spec-chip">{chip}</span>)}
-            </div>
-            <a href={`/${lang}/#contact`} class="solution-card__cta">
-              {s.cta} <span aria-hidden="true">→</span>
-            </a>
+          <div class="logo-cloud__item">
+            <Image src={logoHyfresh} alt="Hyfresh" height={400} quality="max" class="logo-cloud__img" /> 
           </div>
-        </article>
-      ))}
+          <div class="logo-cloud__item">
+            <Image src={logoAngkasaPura} alt="Angkasa Pura" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoSendys} alt="Sendys" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoPrimo} alt="Primo" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoSvetofor} alt="Svetofor" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoAeki} alt="AEKI" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoAski} alt="ASKI" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+          <div class="logo-cloud__item">
+            <Image src={logoScai} alt="SCAI" height={400} quality="max" class="logo-cloud__img" /> 
+          </div>
+        </div>
+      </div>
+      <p class="logo-cloud__proof">{t.b2b.socialProof}</p>
     </div>
 
-    <!-- Component 3: Benefits Strip -->
+    <div class="solutions-grid">
+      {
+        solutions.map((s, i) => (
+          <article
+            class={`solution-card solution-card--${s.variant} reveal`}
+            style={`transition-delay: ${i * 100}ms`}
+          >
+            <div class="solution-card__media">
+              <Image
+                src={s.image}
+                alt={s.imageAlt}
+                width={400}
+                height={250}
+                quality={80}
+                class="solution-card__image"
+                loading="lazy"
+              />
+            </div>
+            <div class="solution-card__content">
+              <h4 class="solution-card__headline">{s.headline}</h4>
+              <p class="solution-card__tagline">{s.tagline}</p>
+              <p class="solution-card__body">{s.body}</p>
+              <div class="solution-card__chips">
+                {s.chips.map((chip) => (
+                  <span class="spec-chip">{chip}</span>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
     <div class="benefits-strip reveal">
       <div class="benefits-headline-wrap">
         <h3 class="benefits-headline">{t.b2b.benefitsHeadline}</h3>
-        <p class="benefits-micro">{t.b2b.benefitsMicro}</p>
+        <p class="benefits-sub">{t.b2b.benefitsSub}</p>
       </div>
       <ul class="benefit-list" role="list">
-        {benefits.map((b, i) => (
-          <li class="benefit-item reveal" style={`transition-delay: ${i * 80}ms`}>
-            <span class="benefit-item__check" aria-hidden="true">
-              <span class="benefit-check-mark">✓</span>
-            </span>
-            <div>
-              <h4 class="benefit-item__title">{b.title}</h4>
-              <p class="benefit-item__body">{b.body}</p>
-            </div>
-          </li>
-        ))}
+        {
+          benefits.map((b, i) => (
+            <li class="benefit-item" style={`transition-delay: ${i * 80}ms`}>
+              <Icon name="mdi:checkbox-marked" width={24} height={24} class="benefit-item__check" aria-hidden="true" />
+              <div>
+                <h4 class="benefit-item__title">{b.title}</h4>
+                <p class="benefit-item__body">{b.body}</p>
+              </div>
+            </li>
+          ))
+        }
       </ul>
     </div>
-
-    <!-- Bottom CTA Bar (uses shared page-cta--cream pattern for consistency) -->
-    <section class="page-cta page-cta--cream" aria-label={t.b2b.ctaBanner}>
-      <div class="container page-cta__inner">
-        <div class="page-cta__text animate-on-scroll">
-          <h2 class="page-cta__title page-cta__title--earth">{t.b2b.ctaTitle}</h2>
-          <p class="page-cta__sub page-cta__sub--earth">{t.b2b.ctaSubtitle}</p>
-        </div>
-        <div class="page-cta__actions animate-on-scroll">
-          <a href={`/${lang}/#contact`} class="btn btn--primary">{t.b2b.ctaPrimary}</a>
-        </div>
-      </div>
-    </section>
-
   </div>
+
+  <section class="page-cta page-cta--cream" aria-label={t.b2b.ctaBanner}>
+    <div class="container page-cta__inner">
+      <div class="page-cta__text animate-on-scroll">
+        <h2 class="page-cta__title page-cta__title--earth">{t.b2b.ctaTitle}</h2>
+        <p class="page-cta__sub page-cta__sub--earth">{t.b2b.ctaSubtitle}</p>
+      </div>
+      <div class="page-cta__actions animate-on-scroll">
+        <a href={`/${lang}/#contact`} class="btn btn--primary"
+          >{t.b2b.ctaPrimary}</a
+        >
+      </div>
+    </div>
+  </section>
 </section>
-
-<style>
-.b2b { background: var(--color-neutral-100); padding-block: var(--space-12); }
-
-/* ── Header ─────────────────────────── */
-.b2b__header {
-  text-align: center;
-  margin-bottom: var(--space-10);
-}
-
-.b2b__title {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 3.5vw, 46px);
-  font-weight: 700;
-  color: var(--color-brand-earth);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-/* ── B2B Subtitle ────────────────────── */
-.b2b__subtitle {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 1.25vw, 1.125rem);
-  line-height: 1.7;
-  color: var(--color-brand-muted);
-  max-width: 620px;
-  margin: var(--space-3) auto 0;
-  letter-spacing: 0.01em;
-}
-
-/* ── Trust Strip (consistency with story__stats) ── */
-.partnerships__trust-strip {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: var(--space-6);
-  list-style: none;
-  padding: var(--space-8) 0 0;
-  margin: 0 0 var(--space-12);
-  border-top: 0.5px solid var(--color-neutral-200);
-}
-
-.trust-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-left: 1px solid var(--color-neutral-200);
-  padding-left: var(--space-5);
-}
-
-.trust-stat:first-child {
-  border-left: none;
-  padding-left: 0;
-}
-
-.trust-stat__value {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 3.5vw, 44px);
-  font-weight: 700;
-  color: var(--color-brand-red);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.trust-stat__label {
-  font-family: var(--font-label);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-brand-muted);
-  margin: 0;
-}
-
-/* ── Brand Cloud ──────────────────────── */
-.brand-cloud {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  padding: var(--space-6) 0;
-  margin-bottom: var(--space-4);
-  border-bottom: 1px solid rgba(92, 61, 30, 0.10);
-}
-
-.brand-cloud__category {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.brand-cloud__pill {
-  display: inline-block;
-  background: var(--color-accent, #225522);
-  color: #fff;
-  font-family: var(--font-label);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 6px 16px;
-  border-radius: 6px;
-  white-space: nowrap;
-}
-
-.brand-cloud__row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: var(--space-8);
-}
-
-.partner-logo {
-  height: 36px;
-  width: auto;
-  object-fit: contain;
-  filter: grayscale(1) opacity(0.55);
-  transition: filter 350ms ease, opacity 350ms ease;
-}
-
-.partner-logo:hover {
-  filter: grayscale(0) opacity(1);
-}
-
-/* ── Solutions Header ───────────────── */
-.solutions__header {
-  text-align: center;
-  margin-bottom: var(--space-8);
-}
-
-.solutions__title {
-  font-family: var(--font-display);
-  font-size: clamp(24px, 3vw, 34px);
-  font-weight: 700;
-  color: var(--color-brand-earth);
-  margin-bottom: var(--space-3);
-  line-height: 1.2;
-}
-
-.solutions__subtitle {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--color-brand-muted);
-  max-width: 620px;
-  margin: 0 auto;
-  letter-spacing: 0.01em;
-}
-
-/* ── Solutions Grid ──────────────────── */
-.solutions-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-5);
-  margin-bottom: var(--space-16);
-}
-
-/* Card variants: cream (subtle) and highlight (white with shadow to pop) */
-.solution-card {
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  transition: transform 200ms ease, box-shadow 200ms ease;
-}
-
-.solution-card--cream {
-  background: #F5EFE2;
-  border: 1px solid rgba(92, 61, 30, 0.08);
-}
-
-.solution-card--highlight {
-  background: #fff;
-  border: 1px solid rgba(92, 61, 30, 0.08);
-  box-shadow: 0 8px 24px rgba(92, 61, 30, 0.10);
-}
-
-.solution-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(92, 61, 30, 0.14);
-}
-
-.solution-card__media {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: rgba(92, 61, 30, 0.06);
-  flex-shrink: 0;
-}
-
-.solution-card__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 400ms ease;
-}
-
-.solution-card:hover .solution-card__image {
-  transform: scale(1.04);
-}
-
-.solution-card__content {
-  padding: 24px 24px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  text-align: left;
-}
-
-.solution-card__headline {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-brand-earth);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
-
-.solution-card__tagline {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-brand-red);
-  line-height: 1.4;
-  margin: 0;
-  letter-spacing: 0.01em;
-}
-
-.solution-card__body {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  line-height: 1.75;
-  letter-spacing: 0.01em;
-  color: #6b6359;
-  margin: 0;
-  text-align: left;
-}
-
-.solution-card__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 6px;
-}
-
-.spec-chip {
-  display: inline-block;
-  background: #f3f0ea;
-  color: #6b5a47;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: none;
-  letter-spacing: 0.02em;
-}
-
-.solution-card__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  align-self: flex-start;
-  margin-top: 8px;
-  color: var(--color-brand-red);
-  font-family: var(--font-label);
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  transition: gap 150ms ease, color 150ms ease;
-}
-
-.solution-card__cta:hover {
-  gap: 10px;
-  color: #a80e1a;
-}
-
-/* ── Benefits Strip ─────────────────── */
-.benefits-strip {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-8);
-  padding: var(--space-12) 0;
-  margin-bottom: var(--space-12);
-  border-top: 1px solid rgba(92, 61, 30, 0.10);
-  border-bottom: 1px solid rgba(92, 61, 30, 0.10);
-}
-
-.benefits-headline-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.benefits-headline {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 700;
-  color: var(--color-brand-earth);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin-bottom: var(--space-4);
-  white-space: pre-line;
-}
-
-.benefits-micro {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  line-height: 1.7;
-  color: var(--color-brand-muted);
-  max-width: 460px;
-  letter-spacing: 0.01em;
-}
-
-.benefit-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.benefit-item {
-  display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 14px;
-  align-items: start;
-}
-
-.benefit-item__check {
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  background: rgba(34, 85, 34, 0.12);
-  color: #225522;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: background 200ms ease, color 200ms ease, transform 200ms ease;
-  font-weight: 700;
-  font-size: 0.9rem;
-}
-
-.benefit-item:hover .benefit-item__check {
-  background: #225522;
-  color: #fff;
-  transform: scale(1.15);
-}
-
-.benefit-item__title {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--color-brand-earth);
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-
-.benefit-item__body {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  color: rgba(92, 61, 30, 0.70);
-  line-height: 1.6;
-  margin: 0;
-  letter-spacing: 0.01em;
-}
-
-/* ── Reveal Animation ────────────────── */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 500ms ease, transform 500ms ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 500ms ease, transform 500ms ease;
-}
-
-.animate-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .animate-on-scroll { opacity: 1; transform: none; transition: none; }
-}
-
-/* ── Responsive ──────────────────────── */
-@media (min-width: 640px) {
-  .partnerships__trust-strip {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-8);
-  }
-
-  .solutions-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (min-width: 768px) {
-  .benefits-strip {
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    padding: 80px 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .solutions-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
-    align-items: stretch;
-  }
-  .brand-cloud {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: var(--space-8);
-  }
-  .brand-cloud__category {
-    flex: 1;
-    align-items: center;
-  }
-  .brand-cloud__row {
-    gap: var(--space-6);
-  }
-}
-</style>
-
 <script>
-  // Scroll-triggered reveal — IntersectionObserver
-  const reveals = document.querySelectorAll<HTMLElement>('.reveal');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
-        }
+  function initAnimations() {
+    const targets = document.querySelectorAll<HTMLElement>(
+      ".reveal, .animate-on-scroll",
+    );
+
+    if (!targets.length) return;
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const isCta =
+                entry.target.classList.contains("animate-on-scroll");
+              entry.target.classList.add(isCta ? "is-visible" : "visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.05, rootMargin: "0px 0px -20px 0px" },
+      );
+
+      targets.forEach((el) => observer.observe(el));
+    } else {
+      targets.forEach((el) => {
+        const isCta = el.classList.contains("animate-on-scroll");
+        el.classList.add(isCta ? "is-visible" : "visible");
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => io.observe(el));
-  } else {
-    reveals.forEach(el => el.classList.add('visible'));
+    }
   }
 
-  // Scroll-triggered animations for the page-cta shared class
-  const animOnScroll = document.querySelectorAll<HTMLElement>('.animate-on-scroll');
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    animOnScroll.forEach(el => observer.observe(el));
-  } else {
-    animOnScroll.forEach(el => el.classList.add('is-visible'));
-  }
+  document.addEventListener("DOMContentLoaded", initAnimations);
+  document.addEventListener("astro:page-load", initAnimations);
+
+  initAnimations();
 </script>
