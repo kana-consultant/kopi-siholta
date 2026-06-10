@@ -206,7 +206,7 @@
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--color-text-muted);
+  color: var(--color-brand-earth);
   margin: 0;
 }
 .solution-card__chips {
