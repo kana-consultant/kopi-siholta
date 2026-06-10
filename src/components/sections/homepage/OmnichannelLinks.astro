@@ -107,7 +107,7 @@ const igPhotos = [
     <div class="ig-bento reveal">
       <article class="ig-feature">
         <div class="ig-feature__header">
-          <Image src={igLogo} alt="Instagram" width={48} height={48} quality="max" class="ig-feature__logo" />
+          <Image src={igLogo} alt="Instagram" width={160} height={160} quality="max" class="ig-feature__logo" />
         </div>
         <h3 class="ig-feature__headline">{t.omni.igFeatureHeadline}</h3>
         <p class="ig-feature__body">{t.omni.igFeatureBody}</p>
@@ -128,7 +128,7 @@ const igPhotos = [
 
     <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="tiktok-banner reveal" aria-label={t.omni.tiktokHeadline}>
       <div class="tiktok-banner-image" aria-hidden="true">
-          <Image src={tiktokLogo} alt="Tiktok" width={64} height={64} quality="max" class="tiktok-img" />
+          <Image src={tiktokLogo} alt="Tiktok" width={160} height={160} quality="max" class="tiktok-img" />
       </div>
       <div class="tiktok-banner__text">
         <h3 class="tiktok-banner__title">@kopisiholta</h3>
@@ -278,6 +278,7 @@ const igPhotos = [
   width: 44px;
   height: 44px;
   object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .ig-feature__line {
