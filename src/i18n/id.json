@@ -25,9 +25,7 @@
     "fnb": "F&B"
   },
   "hero": {
-    "label": "PRODUSEN & EKSPORTIR KOPI SPECIALTY #1 INDONESIA",
-    "titleLine1": "Keindahan Danau Toba",
-    "titleLine2": "Dalam setiap cangkir",
+    "title": "Keindahan <em>Danau Toba</em> Dalam setiap cangkir",
     "subtitle": "Dari lereng Sumatera Lintong hingga ke meja dunia  Kopi Siholta mempersembahkan cita rasa autentik dari bumi Humbang Hasundutan, Sumatera Utara.",
     "ctaPrimary": "Jelajahi Produk",
     "ctaSecondary": "Cerita Kami",
@@ -560,8 +558,9 @@
     "titleLine2": "Merayakan Rasa",
     "subtitle": "Setiap cangkir kopi selalu dimulai dari sebuah cerita. Bagi PT Siholta Toba Indonesia, cerita itu berakar dari kekayaan alam Nusantara dan komitmen untuk menghadirkan cita rasa kopi Indonesia yang autentik.",
     "storyLogo": "PT SIHOLTA TOBA INDONESIA",
-    "storyBody1": "PT Siholta Toba Indonesia adalah brand kopi asal Sumatra Utara yang lahir dari kecintaan terhadap budaya kopi Nusantara dan kerinduan akan kampung halaman.",
-    "storyBody2": "Nama \"Siholta\" berasal dari bahasa Batak yang berarti \"Kopi Kerinduan Kita\", sebuah filosofi yang merepresentasikan kehangatan, kebersamaan, dan rasa yang selalu mengingatkan pada rumah. Brand ini mulai dirintis sejak tahun 2021 dan resmi terdaftar sebagai badan hukum pada 14 April 2023 di bawah kepemimpinan Dono Holong (Dono PHS). Berakar dari kawasan Lintong Nihuta, Humbang Hasundutan, Kopi Siholta berkomitmen menghadirkan kopi berkualitas tanpa bahan pengawet dengan cita rasa autentik khas Sumatra Utara.",
+    "storyBody1": "PT Siholta Toba Indonesia adalah brand kopi asal Sumatra Utara yang lahir dari kecintaan terhadap budaya kopi Nusantara dan kerinduan akan kampung halaman. Brand ini mulai dirintis sejak tahun 2021 dan resmi terdaftar sebagai badan hukum pada 14 April 2023 di bawah kepemimpinan Dono Holong (Dono PHS).",
+    "storyBody2": "Siholta berarti \"yang terkasih\". Kopi Siholta adalah kopi yang sangat dicintai, sebuah kopi khas Danau Toba yang berasal dari Lintongnihuta di Kabupaten Humbang Hasundutan, Sumatra Utara. Ini adalah sebuah desa unik dengan perpaduan kopinya yang terkenal, panoramanya yang indah, serta budayanya yang mempesona.",
+    "storyBody3": "Kami tidak hanya berfokus pada kopi, tetapi kami juga mengampanyekan keindahan surga tersembunyi \"Danau Toba\" ke seluruh Indonesia dan penjuru dunia.",
     "founded": "Didirikan",
     "farmers": "Petani Partner",
     "sectors": "Sektor Usaha",

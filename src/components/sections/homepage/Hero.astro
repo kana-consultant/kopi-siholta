@@ -54,13 +54,7 @@ const slides = [
   <div class="container hero__container">
     <div class="hero__content">
 
-      <!-- Title -->
-      <h1 class="hero__title animate-fade-in-up delay-100">
-        <span class="hero__title-line1">{tr.hero.titleLine1}</span>
-        <span class="hero__title-line2">{tr.hero.titleLine2}</span>
-      </h1>
-
-      <!-- Subtitle -->
+      <h1 class="hero__title animate-fade-in-up delay-100" set:html={tr.hero.title} />
       <p class="hero__subtitle animate-fade-in-up delay-200">
         {tr.hero.subtitle}
       </p>

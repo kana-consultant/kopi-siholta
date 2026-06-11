@@ -71,25 +71,19 @@
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(32px, 8vw, 48px); 
+  font-size: clamp(32px, 5vw, 48px);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: var(--color-section-cream);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  opacity: 0;
+  line-height: 1.2;
+  color: var(--color-section-cream); 
+  white-space: normal; 
+  word-break: keep-all; 
+  text-wrap: balance; 
+  max-width: 550px; 
 }
 
-.hero__title em { font-style: normal; color: var(--color-brand-red); }
-.hero__title-line1 { display: block; }
-
-.hero__title-line2 {
-  display: block;
-  font-size: 0.75em;
-  font-weight: 500;
-  color: var(--color-section-cream);
+.hero__title em { 
+  font-style: normal; 
+  color: var(--color-brand-red); 
 }
 
 .hero__subtitle {
