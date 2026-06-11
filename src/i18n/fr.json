@@ -25,9 +25,7 @@
     "fnb": "Restauration"
   },
   "hero": {
-    "label": "PRODUCTEUR & EXPORTATEUR N°1 DE CAFÉ SPÉCIALITÉ D'INDONÉSIE",
-    "titleLine1": "Découvrez la Beauté du",
-    "titleLine2": "Lac Toba",
+    "title": "Découvrez la Beauté du <em>Lac Toba</em>",
     "subtitle": "Des hauts plateaux de Sumatera Lintong aux tables du monde entier  Kopi Siholta partage l'authenticité de Humbang Hasundutan, Sumatra Nord, dans chaque tasse.",
     "ctaPrimary": "Explorer les Produits",
     "ctaSecondary": "Notre Histoire",
@@ -563,8 +561,9 @@
     "titleLine2": "Célébrer la Saveur",
     "subtitle": "Chaque tasse de café commence toujours par une histoire. Pour PT Siholta Toba Indonesia, cette histoire prend racine dans la richesse naturelle de l'archipel indonésien et dans l'engagement à offrir la saveur authentique du café indonésien.",
     "storyLogo": "PT SIHOLTA TOBA INDONESIA",
-    "storyBody1": "En 2019, PT Siholta Toba Indonesia a été fondée avec une mission : porter le café specialty de Humbang Hasundutan  reconnu depuis l'époque coloniale néerlandaise  sur la scène mondiale. « Siholta » signifie « vieil arbre » en langue Batak, symbolisant des racines profondes et un héritage préservé.",
-    "storyBody2": "Partis de dizaines de familles partenaires sur les contreforts de Sumatera, nous sommes devenus une entreprise intégrée de café specialty opérant trois secteurs  de l'agronomie jusqu'à votre tasse.",
+    "storyBody1": "PT Siholta Toba Indonesia est une marque de café originaire du nord de Sumatra, née de l'amour pour la culture du café indonésien et de la nostalgie du pays natal. Cette marque a été lancée en 2021 et s'est officiellement enregistrée en tant qu'entité juridique le 14 avril 2023, sous la direction de Dono Holong (Dono PHS).",
+    "storyBody2": "Siholta signifie « le bien-aimé ». Kopi Siholta est un café profondément apprécié, un café typique du lac Toba originaire de Lintongnihuta, dans la régence de Humbang Hasundutan au nord de Sumatra. C'est un village unique mêlant la renommée de son café, la splendeur de son panorama et la fascination de sa culture.",
+    "storyBody3": "Nous ne nous limitons pas au café, nous faisons également campagne pour faire découvrir la beauté du paradis caché du « lac Toba » à l'Indonésie tout entière ainsi qu'au reste du monde.",    
     "founded": "Fondée",
     "farmers": "Agricult. Partenaires",
     "sectors": "Secteurs d'Activités",
