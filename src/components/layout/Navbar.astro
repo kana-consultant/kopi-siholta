@@ -3,16 +3,18 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import logoLight from '../../images/logo/logo-siholta.png';
 import LanguageSwitcher from './LanguageSwitcher.astro';
-import { useTranslations } from '../../i18n/utils';
 import '../../styles/components/navbar.css';
 import '../../styles/components/navbar-mobile.css';
+
+import { getTranslations } from '../../i18n/utils';
 
 interface Props {
   lang?: string;
 }
 
-const { lang = 'id' } = Astro.props;
-const t = useTranslations(lang);
+const { lang = 'en' } = Astro.props;
+
+const t = await getTranslations(lang);
 
 const nav = t.nav as Record<string, string>;
 

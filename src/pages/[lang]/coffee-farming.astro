@@ -5,9 +5,7 @@ import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
-import { useTranslations } from '../../i18n/utils';
 
-// Import Sections
 import FarmingHero from '../../components/sections/farming/FarmingHero.astro';
 import FarmingStats from '../../components/sections/farming/FarmingStats.astro';
 import HarvestingProcedure from '../../components/sections/farming/HarvestingProcedure.astro';
@@ -19,11 +17,10 @@ import Farmer from '../../components/sections/farming/Farmer.astro';
 import LocationMap from '../../components/sections/farming/LocationMap.astro';
 import FarmingCta from '../../components/sections/farming/FarmingCta.astro';
 
-const { lang } = Astro.params;
+import { getTranslations } from '../../i18n/utils';
 
-const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
-
-const t = useTranslations(currentLang);
+const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
+const t = await getTranslations(currentLang);
 ---
 
 <Base title={t.meta.titleFarming} description={t.meta.descFarming} lang={currentLang} breadcrumbs={[

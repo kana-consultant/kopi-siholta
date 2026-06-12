@@ -6,18 +6,17 @@ import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
 import { Icon } from 'astro-icon/components';
-import { useTranslations } from '../../i18n/utils';
+import { getTranslations } from '../../i18n/utils';
 
 interface Props {
   lang?: 'id' | 'en' | 'fr';
 }
 
 const { lang: langProp } = Astro.props;
-const { lang: langParam } = Astro.params;
-const resolvedLang = langProp ?? (['id', 'en', 'fr'].includes(langParam || '') ? (langParam as 'id' | 'en' | 'fr') : 'id');
-const currentLang: 'id' | 'en' | 'fr' = resolvedLang;
 
-const t = useTranslations(currentLang);
+const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || langProp || 'en';
+
+const t = await getTranslations(currentLang);
 const nf = t.notFound;
 ---
 

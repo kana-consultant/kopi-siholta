@@ -2,11 +2,15 @@
 import { Image } from 'astro:assets';
 import companyLogo from '../../../images/logo/logo-STI.png';
 import aboutFoto from '../../../images/about.webp';
-import { useTranslations } from '../../../i18n/utils';
 import '../../../styles/components/stats.css';
 
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+import { getTranslations } from '../../../i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 const tc = t.company;
 ---
 

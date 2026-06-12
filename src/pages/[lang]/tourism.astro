@@ -11,12 +11,10 @@ import TourismStat from '../../components/sections/tourism/TourismStat.astro';
 import Experiences from '../../components/sections/tourism/Experiences.astro';
 import TourismCta from '../../components/sections/tourism/TourismCta.astro';
 
-import { useTranslations } from '../../i18n/utils';
+import { getTranslations } from '../../i18n/utils';
 
-const { lang } = Astro.params;
-const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
-
-const t = useTranslations(currentLang);
+const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
+const t = await getTranslations(currentLang);
 ---
 
 <Base title={t.meta.titleTourism} description={t.meta.descTourism} lang={currentLang} breadcrumbs={[

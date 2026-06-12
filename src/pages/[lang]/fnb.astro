@@ -14,12 +14,10 @@ import RetailDistribution from '../../components/sections/fnb/RetailDistibution.
 import Sustainability from '../../components/sections/fnb/Sustainability.astro';
 import FnbCta from '../../components/sections/fnb/FnbCta.astro';
 
-import { useTranslations } from '../../i18n/utils';
+import { getTranslations } from '../../i18n/utils';
 
-const { lang } = Astro.params;
-const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
-
-const t = useTranslations(currentLang);
+const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
+const t = await getTranslations(currentLang);
 ---
 
 <Base title={t.meta.titleFnb} description={t.meta.descFnb} lang={currentLang} breadcrumbs={[

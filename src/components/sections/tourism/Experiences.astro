@@ -1,8 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
-import { useTranslations } from '../../../i18n/utils';
-
 import t1Farm from '../../../images/tourism/coffee-plantation.jpg';
 import t2Factory from '../../../images/tourism/process (5).jpg';
 import t3Cup from '../../../images/tourism/cup-and-test(2).jpg';
@@ -10,12 +8,13 @@ import tThumb1 from '../../../images/tourism/samosir-island.jpg';
 import tThumb2 from '../../../images/tourism/danau-toba.jpg';
 import tThumb3 from '../../../images/tourism/cup-and-test.jpg';
 
-interface Props {
-  lang: 'id' | 'en' | 'fr';
-}
+import { getTranslations } from '../../../i18n/utils';
 
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 
 const nl = (s: string) => s.split('\n').join('<br>');
 
