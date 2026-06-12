@@ -24,7 +24,10 @@ const t = useTranslations(currentLang);
 
 ---
 
-<Base title={t.meta.titleCompany} description={t.meta.descCompany} lang={currentLang}>
+<Base title={t.meta.titleCompany} description={t.meta.descCompany} lang={currentLang} breadcrumbs={[
+  { name: t.breadcrumb.home, href: `/${currentLang}/` },
+  { name: t.breadcrumb.company, href: `/${currentLang}/company` },
+]}>
   <Navbar lang={currentLang} />
   <header>
     <CompanyHero lang={currentLang} />

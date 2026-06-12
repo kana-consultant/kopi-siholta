@@ -19,7 +19,10 @@ const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'e
 const t = useTranslations(currentLang);
 ---
 
-<Base title={t.meta.titleTourism} description={t.meta.descTourism} lang={currentLang}>
+<Base title={t.meta.titleTourism} description={t.meta.descTourism} lang={currentLang} breadcrumbs={[
+  { name: t.breadcrumb.home, href: `/${currentLang}/` },
+  { name: t.breadcrumb.tourism, href: `/${currentLang}/tourism` },
+]}>
   <Navbar lang={currentLang} />
   
   <main id="main-content">
