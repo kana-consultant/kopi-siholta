@@ -39,7 +39,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     preferredLang = LANG_MAP[country.toUpperCase()] ?? DEFAULT_LANG;
 
     context.cookies.set('preferred_lang', preferredLang, {
-      maxAge: 60 * 60 * 24, 
+      maxAge: 60 * 60 * 24 * 7, 
       path: '/',
       sameSite: 'lax',
     });
