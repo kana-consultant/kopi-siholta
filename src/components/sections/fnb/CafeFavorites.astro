@@ -1,17 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import { useTranslations } from '../../../i18n/utils';
 import fnbHero1 from '../../../images/fnb/coffee-susu.jpg';
 import fnbHero5 from '../../../images/fnb/coffee-caramel.jpg';
 import fnbHero7 from '../../../images/fnb/gula-aren.jpg';
 import fnbHero8 from '../../../images/fnb/expresso.jpg';
 
-interface Props {
-  lang: 'id' | 'en' | 'fr';
-}
+import { getTranslations } from '../../../i18n/utils';
 
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 
 const cafeBestSellers = [
   {

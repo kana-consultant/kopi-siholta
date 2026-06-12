@@ -2,16 +2,15 @@
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import fnbBg from '../../../images/bg/bg-fnb.jpg';
-import { useTranslations } from '../../../i18n/utils';
-
 import '../../../styles/components/hero.css';
 
-interface Props {
-  lang: 'id' | 'en' | 'fr';
-}
+import { getTranslations } from '../../../i18n/utils';
 
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 ---
 
 <section class="page-hero page-hero--mid" aria-label={t.fnb.page}>

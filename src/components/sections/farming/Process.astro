@@ -1,12 +1,11 @@
 ---
-import { useTranslations } from '../../../i18n/utils';
+import { getTranslations } from '../../../i18n/utils';
 
 interface Props {
-  lang: 'id' | 'en' | 'fr';
+  lang?: string;
 }
-
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 
 const nl = (s: string) => s.split('\n').join('<br>');
 ---
