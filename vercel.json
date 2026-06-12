@@ -1,6 +1,14 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "kopisiholta.com" }],
+      "destination": "https://www.kopisiholta.com/$1",
+      "statusCode": 308
+    }
+  ],
   "headers": [
     {
       "source": "/_astro/chunks/(.*)",

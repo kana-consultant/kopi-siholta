@@ -1,23 +1,16 @@
-import en from './en.json';
-import id from './id.json';
-import fr from './fr.json';
-
 export type Lang = 'id' | 'en' | 'fr';
-export type Translations = typeof en;
 
-const translations: Record<Lang, Translations> = { id, en, fr };
+export type Translations = typeof import('./en.json');
 
-/**
- * Returns the full translation object for the given lang code.
- * Falls back to Indonesian if the lang is unknown.
- */
-export function t(lang: string): Translations {
-  return translations[lang as Lang] ?? translations['id'];
-}
+// Mendaftarkan loader dinamis untuk masing-masing bahasa
+const loaders: Record<Lang, () => Promise<{ default: Translations }>> = {
+  en: () => import('./en.json'),
+  id: () => import('./id.json'),
+  fr: () => import('./fr.json'),
+};
 
-/**
- * Shortcut for deeply nested keys, e.g. t(lang).hero.titleLine1
- */
-export function useTranslations(lang: string) {
-  return t(lang);
+export async function getTranslations(lang: string): Promise<Translations> {
+  const targetLang = (lang in loaders ? lang : 'en') as Lang;
+  const module = await loaders[targetLang]();
+  return module.default; 
 }

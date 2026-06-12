@@ -18,18 +18,13 @@ const {
   breadcrumbs,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://www.kopisiholta.com');
+const canonicalURL = Astro.url.href;
 
 const SITE_ORIGIN = 'https://www.kopisiholta.com';
 
-// Resolve actual asset URLs for schema/OG (these get hashed by Astro and served
-// from /_astro/ at build time — using the static /logo.png or /og.jpg paths
-// would 404 because no such files exist in /public).
 const logoAbsURL = new URL(logo.src, Astro.site ?? SITE_ORIGIN).href;
 const ogImageAbsURL = `${SITE_ORIGIN}/og.png`;
 
-// --- Dynamic hreflang: build page-specific alternates ---
-// Strip leading "/<lang>/" so we can rebuild it for each locale
 const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
 const langPrefixes = ['en', 'id', 'fr'];
 const currentLang = pathSegments[0];
@@ -42,15 +37,11 @@ const HREFLANG_LOCALES = [
   { code: 'en', url: `${SITE_ORIGIN}${localizedPath('en')}` },
 ];
 
-// Set to true once /fr/<page> routes are live in production. Until then, omitting
-// hreflang for 'fr' is safer than emitting entries that point at 404s (Google would
-// drop the entire hreflang cluster).
-const ENABLE_FR = false;
+const ENABLE_FR = true;
 if (ENABLE_FR) {
   HREFLANG_LOCALES.push({ code: 'fr', url: `${SITE_ORIGIN}${localizedPath('fr')}` });
 }
 
-// x-default points to the site's primary locale (indonesian)
 const X_DEFAULT_URL = `${SITE_ORIGIN}${localizedPath('id')}`;
 ---
 <!doctype html>
@@ -326,7 +317,7 @@ const X_DEFAULT_URL = `${SITE_ORIGIN}${localizedPath('id')}`;
           "@type": "WebPage",
           "name": title,
           "description": description,
-          "url": canonicalURL.href,
+          "url": canonicalURL,
           "inLanguage": pageLang,
           "isPartOf": {
             "@id": `https://www.kopisiholta.com${slugPath.startsWith('/') ? slugPath : '/' + slugPath}`

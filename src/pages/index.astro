@@ -1,13 +1,7 @@
 ---
+export const prerender = false;
 
+const preferredLang = Astro.cookies.get('preferred_lang')?.value || 'en';
+
+return Astro.redirect(`/${preferredLang}/`);
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Kopi Siholta</title>
-    <meta name="robots" content="noindex, nofollow" />
-  </head>
-  <body>
-  </body>
-</html>

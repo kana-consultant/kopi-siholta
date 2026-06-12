@@ -13,12 +13,10 @@ import B2BPartners from '../../components/sections/homepage/Partnerships.astro';
 import OmnichannelLinks from '../../components/sections/homepage/OmnichannelLinks.astro';
 import ContactSection from '../../components/sections/homepage/ContactSection.astro';
 
-import { useTranslations } from '../../i18n/utils';
+import { getTranslations } from '../../i18n/utils';
+const currentLang = (Astro.locals as any).lang || 'en';
 
-const { lang } = Astro.params;
-const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
-
-const t = useTranslations(currentLang);
+const t = await getTranslations(currentLang);
 ---
 
 <Base title={t.meta.titleHome} description={t.meta.descHome} lang={currentLang}>
@@ -38,7 +36,6 @@ const t = useTranslations(currentLang);
 
 <script>
   const revealEls = document.querySelectorAll('.animate-fade-in-up');
-
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -46,10 +43,6 @@ const t = useTranslations(currentLang);
         revealObserver.unobserve(entry.target);
       }
     });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -40px 0px',
-  });
-
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => revealObserver.observe(el));
 </script>
