@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 
 const SITE_ORIGIN = 'https://www.kopisiholta.com';
 
-const LOCALES = ['id', 'en'] as const;
+const LOCALES = ['id', 'en', 'fr'] as const;
 
 const PAGES: { slug: string; lastmod: string; changefreq: string; priority: string }[] = [
   { slug: '',            lastmod: '2026-06-12', changefreq: 'monthly', priority: '1.0' },
