@@ -26,7 +26,6 @@
   display: block !important; 
 }
 
-/* Mobile Menu */
 .mobile-menu {
   position: fixed;
   inset: 0;
@@ -174,7 +173,6 @@
 }
 
  
- /* ── Mobile sub-menu (details/summary) ───── */
   .mobile-menu__item { display: flex; flex-direction: column; }
 
   .mobile-menu__summary {
