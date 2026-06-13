@@ -7,14 +7,14 @@ import igLogo from '../../images/logo/logo-instagram.png';
 import waLogo from '../../images/logo/logo-whatsapp.png';
 import tiktokLogo from '../../images/logo/logo-tiktok.png';
 import linktreeLogo from '../../images/logo/logo-linktree.png';
-import { useTranslations } from '../../i18n/utils';
+import { getTranslations } from '../../i18n/utils';
 
 interface Props {
   lang?: string;
 }
 
-const { lang = 'id' } = Astro.props;
-const t = useTranslations(lang);
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 
 const WHATSAPP_NUMBER = '6281322518527';
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -65,50 +65,39 @@ const columns = [
 <footer class="footer" role="contentinfo">
   <div class="footer__inner container">
 
-    <!-- Top: Brand + Columns side by side -->
     <div class="footer__top">
 
-      <!-- Brand -->
     <div class="footer__brand">
       <div class="footer__brand-logo">
         <Image src={logo} alt="Kopi Siholta" width={160} height={160} quality="max" class="footer__logo-img" />
         <span class="footer__wordmark">KOPI SIHOLTA</span>
       </div>
-      <p class="footer__tagline">{t.footer.tagline}</p>
-
       <div class="footer__shop-row">
         <p class="footer__shop-label">{t.footer.shopLabel}</p>
         <div class="footer__shop-btns">
           <a href={TOKPED_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Tokopedia">
-            {/* Diubah: width & height diseragamkan ke 96, densities dihapus */}
             <Image src={tokpedLogo} alt="Tokopedia" width={96} height={96} quality="max" class="footer__shop-logo" />
           </a>
           <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Shopee">
-            {/* Diubah: width & height naik ke 96, densities dihapus */}
             <Image src={shopeeLogo} alt="Shopee" width={96} height={96} quality="max" class="footer__shop-logo" />
           </a>
           
           <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Instagram">
-            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
             <Image src={igLogo} alt="Instagram" width={96} height={96} quality="max" class="footer__shop-logo" />
           </a>
           <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="TikTok">
-            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
             <Image src={tiktokLogo} alt="TikTok" width={96} height={96} quality="max" class="footer__shop-logo" />
           </a>
           <a href={LINKTREE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Linktree">
-            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
             <Image src={linktreeLogo} alt="Linktree" width={96} height={96} quality="max" class="footer__shop-logo" />
           </a>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="WhatsApp">
-            {/* Diubah: width & height naik ke 96, densities dihapus, tambah class footer__shop-logo */}
             <Image src={waLogo} alt="WhatsApp" width={96} height={96} quality="max" class="footer__shop-logo" />
           </a>
         </div>
       </div>
     </div>
 
-      <!-- Link Columns -->
       <div class="footer__cols">
         {columns.map(col => (
           <div class="footer__col">
@@ -133,7 +122,6 @@ const columns = [
       </div>
     </div>
 
-    <!-- Divider -->
     <div class="footer__divider" aria-hidden="true"></div>
 
     <div class="footer__copyright">

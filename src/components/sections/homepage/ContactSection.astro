@@ -7,14 +7,13 @@ import shopeeLogo from '../../../images/logo/logo-shopee.png';
 import igLogo from '../../../images/logo/logo-instagram.png';
 import tiktokLogo from '../../../images/logo/logo-tiktok.png';
 import linktreeLogo from '../../../images/logo/logo-linktree.png';
-import { useTranslations } from '../../../i18n/utils';
+import { getTranslations } from '../../../i18n/utils';
 
 interface Props {
-  lang: 'id' | 'en' | 'fr';
+  lang?: string;
 }
-
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 
 const WHATSAPP_NUMBER = '6281322518527';
 const WHATSAPP_MSG_ID = 'Halo, saya tertarik dengan Kopi Siholta. Bisa info lengkap lebih lanjut?';

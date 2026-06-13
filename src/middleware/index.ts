@@ -1,16 +1,30 @@
 import { defineMiddleware } from 'astro:middleware';
 
 const LANG_MAP: Record<string, string> = {
-  FR: 'fr', BE: 'fr', CH: 'fr',
+  FR: 'fr', BE: 'fr', CH: 'fr', 
 };
 const DEFAULT_LANG = 'en';
-// const SUPPORTED_LANGS = ['id', 'en', 'fr'];
+const SUPPORTED_LANGS = ['id', 'en', 'fr'];
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const url = new URL(context.request.url);
 
-  // Abaikan middleware untuk aset statis dan API
   if (url.pathname.startsWith('/_astro') || url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg|ico)$/)) {
+    return next();
+  }
+
+  const pathSegments = url.pathname.split('/').filter(Boolean);
+  const urlLang = pathSegments[0];
+
+  if (SUPPORTED_LANGS.includes(urlLang)) {
+    (context.locals as any).lang = urlLang;
+    
+    context.cookies.set('preferred_lang', urlLang, {
+      maxAge: 60 * 60 * 24 * 7,
+      path: '/',
+      sameSite: 'lax',
+    });
+    
     return next();
   }
 
@@ -25,13 +39,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
     preferredLang = LANG_MAP[country.toUpperCase()] ?? DEFAULT_LANG;
 
     context.cookies.set('preferred_lang', preferredLang, {
-      maxAge: 60 * 60 * 24 * 365, // 1 tahun
+      maxAge: 60 * 60 * 24 * 7, 
       path: '/',
       sameSite: 'lax',
     });
   }
 
-(context.locals as any).lang = preferredLang;
+  (context.locals as any).lang = preferredLang;
 
   if (url.pathname === '/') {
     return context.redirect(`/${preferredLang}`, 302);

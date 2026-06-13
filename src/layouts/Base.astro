@@ -8,15 +8,42 @@ interface Props {
   title?: string;
   description?: string;
   lang?: string;
+  breadcrumbs?: { name: string; href: string }[];
 }
 
 const {
-  title = "Kopi Siholta — Indonesia's Specialty Coffee Pioneer",
+  title = "Kopi Siholta | Indonesia's Specialty Coffee Pioneer",
   description = "PT Siholta Toba Indonesia is Indonesia's first specialty coffee producer and exporter from Sumatera Lintong, Humbang Hasundutan, North Sumatra.",
   lang = 'en',
+  breadcrumbs,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiholta.com');
+const canonicalURL = Astro.url.href;
+
+const SITE_ORIGIN = 'https://www.kopisiholta.com';
+
+const logoAbsURL = new URL(logo.src, Astro.site ?? SITE_ORIGIN).href;
+const ogImageAbsURL = `${SITE_ORIGIN}/og.png`;
+
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const langPrefixes = ['en', 'id', 'fr'];
+const currentLang = pathSegments[0];
+
+const pageSlug = langPrefixes.includes(currentLang) ? pathSegments.slice(1) : pathSegments;
+const slugPath = pageSlug.length === 0 ? '' : '/' + pageSlug.join('/'); 
+const localizedPath = (l: string) => `/${l}${slugPath}`;
+
+const HREFLANG_LOCALES = [
+  { code: 'id', url: `${SITE_ORIGIN}${localizedPath('id')}` },
+  { code: 'en', url: `${SITE_ORIGIN}${localizedPath('en')}` },
+];
+
+const ENABLE_FR = true;
+if (ENABLE_FR) {
+  HREFLANG_LOCALES.push({ code: 'fr', url: `${SITE_ORIGIN}${localizedPath('fr')}` });
+}
+
+const X_DEFAULT_URL = `${SITE_ORIGIN}${localizedPath('en')}`;
 ---
 <!doctype html>
 <html lang={lang} class="no-js">
@@ -33,16 +60,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL} />
 
-    <link rel="alternate" hreflang="id" href="https://kopisiholta.com/id/" />
-    <link rel="alternate" hreflang="en" href="https://kopisiholta.com/en/" />
-    <link rel="alternate" hreflang="fr" href="https://kopisiholta.com/fr/" />
-    <link rel="alternate" hreflang="x-default" href="https://kopisiholta.com/en/" />
+    {HREFLANG_LOCALES.map(l => (
+      <link rel="alternate" hreflang={l.code} href={l.url} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={X_DEFAULT_URL} />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content="https://kopisiholta.com/og.jpg" />
+    <meta property="og:image" content={ogImageAbsURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Kopi Siholta — Specialty Coffee from Lake Toba, Sumatera Lintong" />
     <meta property="og:site_name" content="Kopi Siholta" />
     <meta property="og:locale" content={lang === 'id' ? 'id_ID' : lang === 'fr' ? 'fr_FR' : 'en_US'} />
 
@@ -50,11 +80,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <link rel="icon" type="image/png" href={logo.src} class="favicon-circular" />
-    <link rel="shortcut icon" type="image/x-icon" href={logo.src} class="favicon-circular" />
-    
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/png" href={logo.src}  />
+    <link rel="shortcut icon" type="image/x-icon" href={logo.src}  />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -225,8 +253,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
       }
     </style>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400&display=swap" />
@@ -237,19 +263,23 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
       "@type": "Organization",
       "name": "PT Siholta Toba Indonesia",
       "alternateName": "Kopi Siholta",
-      "url": "https://kopisiholta.com",
-      "logo": "https://kopisiholta.com/logo.svg",
+      "url": "https://www.kopisiholta.com",
+      "logo": logoAbsURL,
       "description": "First specialty coffee producer and exporter from Sumatera Lintong, Indonesia.",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Humbang Hasundutan",
-        "addressRegion": "North Sumatra",
+        "streetAddress": "Jl. Lubang Buaya Raya No.50, RT.2/RW.9, Lubang Buaya",
+        "addressLocality": "Jakarta Timur",
+        "addressRegion": "DKI Jakarta",
+        "postalCode": "13810",
         "addressCountry": "ID"
       },
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+6281322518527",
-        "contactType": "sales"
+        "contactType": "sales",
+        "email": "info@kopisiholta.com",
+        "areaServed": ["ID", "US", "JP", "KR", "AE", "HK", "NL", "ZA"]
       },
       "sameAs": [
         "https://www.instagram.com/kopisiholta",
@@ -257,6 +287,55 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kopisiho
         "https://shopee.co.id/kopisiholta"
       ]
     })} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Kopi Siholta",
+      "alternateName": "PT Siholta Toba Indonesia",
+      "url": "https://www.kopisiholta.com",
+      "inLanguage": ["id", "en"],
+      "publisher": {
+        "@type": "Organization",
+        "name": "PT Siholta Toba Indonesia",
+        "logo": logoAbsURL
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.kopisiholta.com/{lang}/#products"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    })} />
+
+    {breadcrumbs && breadcrumbs.length > 0 && (() => {
+      const pageLang = lang === 'id' ? 'id-ID' : lang === 'fr' ? 'fr-FR' : 'en-US';
+      return (<>
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": title,
+          "description": description,
+          "url": canonicalURL,
+          "inLanguage": pageLang,
+          "isPartOf": {
+            "@id": `https://www.kopisiholta.com${slugPath.startsWith('/') ? slugPath : '/' + slugPath}`
+          }
+        })} />
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": breadcrumbs.map((b, idx) => ({
+            "@type": "ListItem",
+            "position": idx + 1,
+            "name": b.name,
+            "item": b.href.startsWith("http") ? b.href : `https://www.kopisiholta.com${b.href}`
+          }))
+        })} />
+      </>);
+    })()}
 
   <GoogleAnalytics />
     
