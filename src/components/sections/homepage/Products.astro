@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import { useTranslations } from '../../../i18n/utils';
 import '../../../styles/components/products.css';
 
 import arabicaBubuk250 from '../../../images/products/arabica-bubuk-250g.webp';
@@ -16,13 +15,13 @@ import tokopediaLogo from '../../../images/logo/logo-tokopedia.png';
 import halalLogo from '../../../images/logo/logo-halal.png';
 import bpomLogo from '../../../images/logo/logo-bpom.png';
 
+import { getTranslations } from '../../../i18n/utils';
+
 interface Props {
   lang?: string;
 }
-
-const { lang = 'id' } = Astro.props;
-
-const translations = useTranslations(lang);
+const { lang = 'en' } = Astro.props;
+const translations = await getTranslations(lang);
 const p = translations.products;
 
 const tokpedLinks = [

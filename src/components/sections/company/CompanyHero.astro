@@ -6,10 +6,13 @@ import companyBg from '../../../images/bg/bg-company.jpg';
 import '../../../styles/components/hero.css';
 
 
-import { useTranslations } from '../../../i18n/utils';
+import { getTranslations } from '../../../i18n/utils';
 
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 const tc = t.company;
 ---
   

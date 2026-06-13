@@ -1,10 +1,14 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { useTranslations } from '../../../i18n/utils';
 import '../../../styles/components/location-map.css';
 
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+import { getTranslations } from '../../../i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 const tc = t.company;
 ---
   <!-- ── Location & Map ───────────────────────────────── -->

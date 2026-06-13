@@ -2,17 +2,15 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import farmingBg from '../../../images/bg/bg-farming.jpg';
-import { useTranslations } from '../../../i18n/utils';
-
 import '../../../styles/components/hero.css';
 
+import { getTranslations } from '../../../i18n/utils';
 
 interface Props {
-  lang: 'id' | 'en' | 'fr';
+  lang?: string;
 }
-
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 ---
 <!-- ── Hero ─────────────────────────────────────────── -->
 <section class="page-hero page-hero--tall" aria-label="Budidaya Kopi Kopi Siholta">

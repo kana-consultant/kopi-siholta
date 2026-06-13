@@ -253,7 +253,7 @@ const current = langs.find(l => l.code === currentLang) ?? langs[0];
   }
 
   function selectLanguage(lang: string): void {
-    document.cookie = `preferred_lang=${lang}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+    document.cookie = `preferred_lang=${lang}; path=/; max-age=${60 * 60 * 24 * 7}; samesite=lax`;
     window.location.href = localeHref(lang);
   }
 

@@ -1,9 +1,11 @@
 ---
-import { useTranslations } from '../../../i18n/utils';
+import { getTranslations } from '../../../i18n/utils';
 
-const { lang } = Astro.props;
-const currentLang = ['id', 'en', 'fr'].includes(lang || '') ? (lang as 'id' | 'en' | 'fr') : 'id';
-const t = useTranslations(currentLang);
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 const nl = (s: string) => s.split('\n').join('<br>');
 ---
 <section class="harvest-proc section" id="harvest-procedure" aria-labelledby="harvest-proc-heading">

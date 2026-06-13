@@ -12,14 +12,14 @@ import igPhoto2 from '../../../images/omni/instagram-2.jpg';
 import igPhoto3 from '../../../images/omni/instagram-3.jpg';
 import igPhoto4 from '../../../images/omni/instagram-4.jpg';
 
-import { useTranslations } from '../../../i18n/utils';
+import { getTranslations } from '../../../i18n/utils';
 
 interface Props {
-  lang: 'id' | 'en' | 'fr';
+  lang?: string;
 }
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
 
-const { lang } = Astro.props;
-const t = useTranslations(lang);
 const nl = (s: string) => s.split('\n').join('<br>');
 
 const TOKPED_URL = 'https://www.tokopedia.com/kopisiholta';

@@ -1,13 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { useTranslations } from '../../../i18n/utils';
+import { getTranslations } from '../../../i18n/utils';
 
 interface Props {
-  lang: 'id' | 'en' | 'fr';
+  lang?: string;
 }
-
-const { lang } = Astro.props;
-const tr = useTranslations(lang);
+const { lang = 'en' } = Astro.props;
+const tr = await getTranslations(lang);
 
 const countryKeys = ['countryUSA', 'countryJapan', 'countryKorea', 'countryTimurTengah', 'countryHongkong', 'countryBelanda', 'countryAfrika'] as const;
 const codes = ['US', 'JP', 'KR', 'AE', 'HK', 'NL', 'ZA'];
