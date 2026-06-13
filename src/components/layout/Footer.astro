@@ -328,34 +328,6 @@ const columns = [
   font-size: 0.75rem;
 }
 
-/* ── Responsive ─────────────────────────── */
-@media (min-width: 640px) {
-  .footer {
-    padding-top: var(--space-10);
-    padding-bottom: var(--space-8);
-  }
-  .footer__inner {
-    padding-inline: var(--space-8);
-    gap: var(--space-8);
-  }
-  .footer__top {
-    grid-template-columns: 1.3fr 2fr;
-    gap: var(--space-10);
-  }
-  .footer__cols {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .footer__brand {
-    gap: var(--space-5);
-  }
-
-  .footer__shop-btns {
-    flex-wrap: nowrap;
-    gap: 1rem;
-  }
-}
-
 @media (min-width: 1024px) {
   .footer {
     padding-top: var(--space-12);
@@ -365,7 +337,7 @@ const columns = [
     padding-inline: var(--section-padding-x);
     gap: var(--space-8);
   }
-  .footer__top { gap: var(--space-12); }
+  .footer__top { grid-template-columns: 1.3fr 2fr; gap: var(--space-12); }
   .footer__cols {
     grid-template-columns: repeat(4, 1fr);
   }

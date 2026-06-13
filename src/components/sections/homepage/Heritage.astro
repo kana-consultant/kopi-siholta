@@ -54,8 +54,9 @@ function multiline(label: string) {
       ))}
     </div>
 
-    <a href={`/${lang}/company`} class="company-banner__see-more" aria-label={tr.companyBanner.ctaAria}>
+    <a href={`/${lang}/company`} class="company-banner__see-more">
       {tr.companyBanner.cta}
+      <span class="sr-only"> about PT Siholta Toba Indonesia</span>
     </a>
   </div>
 </section>
