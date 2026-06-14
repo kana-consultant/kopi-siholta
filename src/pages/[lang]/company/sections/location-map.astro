@@ -1,18 +1,20 @@
 ---
 import LocationMap from '@/components/shared/location-map.astro';
-import { getTranslations } from '@/i18n/utils';
 
 interface Props {
-  lang?: string;
+  title: string;
+  subtitle: string;
+  mapLabel: string;
+  lang: string;
 }
-const { lang = 'en' } = Astro.props;
-const t = await getTranslations(lang);
-const tc = t.company;
+
+const { title, subtitle, mapLabel, lang } = Astro.props;
 ---
+
 <LocationMap
   mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4879.739208830867!2d106.9037104!3d-6.295721899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3007f623b53%3A0x118fc0912e442961!2sPT.%20Siholta%20Toba%20Indonesia!5e1!3m2!1sid!2sid!4v1780411154960!5m2!1sid!2sid"
-  title={tc.locationTitle}
-  subtitle={tc.locationSub}
-  mapLabel="Lokasi PT Siholta Toba Indonesia"
+  title={title}
+  subtitle={subtitle}
+  mapLabel={mapLabel}
   lang={lang}
 />

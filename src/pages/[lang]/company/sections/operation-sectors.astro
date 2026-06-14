@@ -1,40 +1,33 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { getTranslations } from '@/i18n/utils';
 import { nl, hexToRgb } from '@/utils/helpers';
+import '../styles/operation-sectors.css';
+
+interface SectorItem {
+  name: string;
+  desc: string;
+  cta: string;
+  highlights: string[];
+  iconName: string;
+  bgColor: string;
+  accentColor: string;
+  href: string;
+}
 
 interface Props {
-  lang?: string;
+  title: string;
+  subtitle: string;
+  sectors: SectorItem[];
 }
-const { lang = 'en' } = Astro.props;
-const t = await getTranslations(lang);
-const tc = t.company;
 
-const sectors = [
-  {
-    nameKey: 'sector1Name', labelKey: 'sector1Label', descKey: 'sector1Desc', ctaKey: 'sector1Cta',
-    highlightsKey: ['sector1H1', 'sector1H2', 'sector1H3', 'sector1H4'],
-    iconName: 'mdi:coffee', bgColor: '#F5F0EA', accentColor: '#5C3D1E', href: `/${lang}/coffee-farming`,
-  },
-  {
-    nameKey: 'sector2Name', labelKey: 'sector2Label', descKey: 'sector2Desc', ctaKey: 'sector2Cta',
-    highlightsKey: ['sector2H1', 'sector2H2', 'sector2H3', 'sector2H4'],
-    iconName: 'mdi:cup', bgColor: '#F0F0F5', accentColor: '#1A3A5C', href: `/${lang}/fnb`,
-  },
-  {
-    nameKey: 'sector3Name', labelKey: 'sector3Label', descKey: 'sector3Desc', ctaKey: 'sector3Cta',
-    highlightsKey: ['sector3H1', 'sector3H2', 'sector3H3', 'sector3H4'],
-    iconName: 'mdi:office-building', bgColor: '#EAF0EA', accentColor: '#2A4A20', href: `/${lang}/tourism`,
-  },
-];
+const { title, subtitle, sectors } = Astro.props;
 ---
 
-<!-- ── Operation Sectors ──────────────────────────── -->
 <section class="sectors section" aria-labelledby="sectors-heading">
   <div class="container">
     <div class="section__header animate-on-scroll">
-      <h2 id="sectors-heading" class="section-title" set:html={nl(tc.sectorsTitle)} />
-      <p class="section-sub">{tc.sectorsSubtitle}</p>
+      <h2 id="sectors-heading" class="section-title" set:html={nl(title)} />
+      <p class="section-sub">{subtitle}</p>
     </div>
 
     <div class="sectors__grid">
@@ -47,20 +40,20 @@ const sectors = [
               <Icon name={sector.iconName} width="24" height="24" />
             </div>
             <div>
-              <h3 class="sector-card__name">{tc[sector.nameKey as keyof typeof tc]}</h3>
+              <h3 class="sector-card__name">{sector.name}</h3>
             </div>
           </div>
-          <p class="sector-card__desc">{tc[sector.descKey as keyof typeof tc]}</p>
+          <p class="sector-card__desc">{sector.desc}</p>
           <ul class="sector-card__highlights" role="list">
-            {sector.highlightsKey.map(key => (
+            {sector.highlights.map(key => (
               <li class="sector-card__highlight">
                 <Icon name="mdi:circle-small" width="10" height="10" />
-                {tc[key as keyof typeof tc]}
+                {key}
               </li>
             ))}
           </ul>
           <a href={sector.href} class="btn btn--card-cta">
-            {tc[sector.ctaKey as keyof typeof tc]}
+            {sector.cta}
             <Icon name="mdi:chevron-right" width="12" height="12" />
           </a>
         </article>
@@ -68,95 +61,3 @@ const sectors = [
     </div>
   </div>
 </section>
-
-<style>
-.sectors__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  margin-top: var(--space-10);
-}
-
-/* ── Sector Card ─────────────────────────────────────────── */
-.sector-card {
-  background: var(--card-bg, var(--color-brand-cream));
-  border-radius: var(--radius-xl);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  border: 0.5px solid var(--color-neutral-200);
-  transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
-}
-
-.sector-card:hover {
-  border-color: var(--card-accent, var(--color-brand-earth));
-  box-shadow: 0 8px 32px rgba(92,61,30,0.10);
-  transform: translateY(-3px);
-}
-
-.sector-card__header { 
-  display: flex; 
-  align-items: center; 
-  gap: var(--space-3); 
-}
-
-.sector-card__icon {
-  width: 44px; 
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: rgba(255,255,255,0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: var(--card-accent, var(--color-brand-earth));
-}
-
-.sector-card__label {
-  font-family: var(--font-label);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-brand-muted);
-  margin-bottom: 2px;
-}
-
-.sector-card__name {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--card-accent, var(--color-brand-earth));
-  letter-spacing: -0.01em;
-}
-
-.sector-card__desc {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.75;
-  color: var(--color-brand-muted);
-  flex: 1;
-}
-
-.sector-card__highlights {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.sector-card__highlight {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--color-brand-earth);
-}
-
-@media (min-width: 1025px) {
-  .sectors__grid { 
-    grid-template-columns: repeat(3, 1fr); 
-  }
-}
-</style>

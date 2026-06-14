@@ -1,54 +1,53 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import companyBg from '@/images/bg/bg-company.jpg';
-
 import '@/styles/components/hero.css';
 
-
-import { getTranslations } from '@/i18n/utils';
-
 interface Props {
-  lang?: string;
+  titleLine1: string;
+  titleLine2: string;
+  subtitle: string;
+  pageLabel: string;
+  homeLabel: string;
+  lang: string;
 }
-const { lang = 'en' } = Astro.props;
-const t = await getTranslations(lang);
-const tc = t.company;
+
+const { titleLine1, titleLine2, subtitle, pageLabel, homeLabel, lang } = Astro.props;
 ---
-  
-  <!-- ── Hero ─────────────────────────────────────────── -->
-  <section class="company-hero" aria-label="Tentang PT Siholta Toba Indonesia">
-    <div class="company-hero__bg">
-      <Image
-        src={companyBg}
-        alt="Perkebunan kopi di dataran tinggi Sumatera"
-        class="company-hero__img"
-        loading="eager"
-        widths={[768, 1280, 1920]}
-        sizes="100vw"
-      />
-      <div class="page-hero__overlay" aria-hidden="true"></div>
-    </div>
 
-    <div class="container company-hero__inner">
-      <!-- Breadcrumb -->
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <ol class="breadcrumb__list">
-          <li class="breadcrumb__item">
-            <a href={`/${lang}/`} class="breadcrumb__link">{t.breadcrumb.home}</a>
-          </li>
-          <li class="breadcrumb__sep" aria-hidden="true">
-            <Icon name="mdi:chevron-right" width="10" height="10" />
-          </li>
-          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">
-            {tc.page}
-          </li>
-        </ol>
-      </nav>
+<section class="company-hero" aria-label="Tentang PT Siholta Toba Indonesia">
+  <div class="company-hero__bg">
+    <Image
+      src={companyBg}
+      alt="Perkebunan kopi di dataran tinggi Sumatera"
+      class="company-hero__img"
+      loading="eager"
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+    />
+    <div class="page-hero__overlay" aria-hidden="true"></div>
+  </div>
 
-      <div class="company-hero__content page-hero__content">
-        <h1 class="page-hero__title">{tc?.titleLine1}<br/>{tc?.titleLine2}</h1>
-        <p class="page-hero__sub">{tc?.['subtitle']}</p>
-      </div>
+  <div class="container company-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item">
+          <a href={`/${lang}/`} class="breadcrumb__link">{homeLabel}</a>
+        </li>
+        <li class="breadcrumb__sep" aria-hidden="true">
+          <Icon name="mdi:chevron-right" width="10" height="10" />
+        </li>
+        <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">
+          {pageLabel}
+        </li>
+      </ol>
+    </nav>
+
+    <div class="company-hero__content page-hero__content">
+      <h1 class="page-hero__title">{titleLine1}<br/>{titleLine2}</h1>
+      <p class="page-hero__sub">{subtitle}</p>
     </div>
-  </section>
+  </div>
+</section>
