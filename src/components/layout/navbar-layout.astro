@@ -1,0 +1,304 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import logoLight from '@/images/logo/logo-siholta.png';
+import LanguageSwitcher from './language-switcher.astro';
+import '@/styles/components/navbar.css';
+import '@/styles/components/navbar-mobile.css';
+
+import { getTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const t = await getTranslations(lang);
+
+const nav = t.nav as Record<string, string>;
+
+const mainNavItems = [
+  { key: 'products', href: `/${lang}/#products` },
+  { key: 'export',   href: `/${lang}/#export` },
+  { key: 'b2b',      href: `/${lang}/#b2b` },
+  { key: 'omniChannel',      href: `/${lang}/#omni` },
+  { key: 'contact',  href: `/${lang}/#contact` },
+];
+---
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner container">
+
+    <a href={`/${lang}/`} class="navbar__logo" aria-label="Kopi Siholta — Home">
+      <Image
+        src={logoLight}
+        alt="Kopi Siholta"
+        width={128}
+        height={128}
+        quality="max"
+        class="navbar__logo-img"
+      />
+    </a>
+
+    <nav class="navbar__nav hide-mobile" aria-label="Main navigation">
+      <ul class="navbar__links">
+
+        <li class="navbar__item navbar__item--parent">
+          <button class="navbar__trigger" aria-expanded="false" aria-haspopup="true" data-nav-dropdown>
+            <span>{nav.company}</span>
+            <Icon name="mdi:chevron-down" width="10" height="10" />
+          </button>
+          <ul class="navbar__dropdown" role="menu" aria-label="Sectors — About Us, Coffee Farming, F&amp;B, Tourism">
+            <li role="none">
+              <a href={`/${lang}/company`} class="navbar__dropdown-link" role="menuitem">
+                {nav.company}
+              </a>
+            </li>
+            <li role="none">
+              <a href={`/${lang}/coffee-farming`} class="navbar__dropdown-link" role="menuitem">
+                {nav.coffeeFarming}
+              </a>
+            </li>
+            <li role="none">
+              <a href={`/${lang}/fnb`} class="navbar__dropdown-link" role="menuitem">
+                {nav.fnb}
+              </a>
+            </li>
+            <li role="none">
+              <a href={`/${lang}/tourism`} class="navbar__dropdown-link" role="menuitem">
+                {nav.tourism}
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        {mainNavItems.map(item => (
+          <li>
+            <a href={item.href} class="navbar__link">
+              {nav[item.key]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="navbar__right">
+      <div class="hide-mobile">
+        <LanguageSwitcher currentLang={lang} />
+      </div>
+      <div class="hide-desktop mobile-navbar-lang">
+        <LanguageSwitcher currentLang={lang} />
+      </div>
+      <a href={`/${lang}/#contact`} class="btn btn--primary navbar__cta hide-mobile">
+        {nav.cta}
+      </a>
+      <button
+        class="navbar__hamburger hide-desktop"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <Icon name="mdi:menu" class="icon-hamburger" width="24" height="24" />
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="mobile-menu"
+    id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+    data-menu
+  >
+    <div class="mobile-menu__overlay" data-menu-close></div>
+    <nav class="mobile-menu__panel">
+      <button class="mobile-menu__close" aria-label="Close menu" data-menu-close>
+        <Icon name="mdi:close" width="20" height="20" />
+      </button>
+
+      <ul class="mobile-menu__links">
+
+        <li class="mobile-menu__item mobile-menu__item--parent">
+          <button
+            class="mobile-menu__trigger"
+            aria-expanded="false"
+            aria-controls="sub-sectors"
+            aria-label="Sectors — About Us, Coffee Farming, F&amp;B, Tourism"
+            data-dropdown-toggle
+          >
+            <span>{nav.company}</span>
+            <Icon name="mdi:chevron-down" width="16" height="16" class="mobile-menu__trigger-icon" />
+          </button>
+          <ul class="mobile-menu__sub" id="sub-sectors" role="list" aria-label="Sectors" hidden>
+            <li>
+              <a href={`/${lang}/company`} class="mobile-menu__sub-link">
+                {nav.company}
+              </a>
+            </li>
+            <li>
+              <a href={`/${lang}/coffee-farming`} class="mobile-menu__sub-link">
+                {nav.coffeeFarming}
+              </a>
+            </li>
+            <li>
+              <a href={`/${lang}/fnb`} class="mobile-menu__sub-link">
+                {nav.fnb}
+              </a>
+            </li>
+            <li>
+              <a href={`/${lang}/tourism`} class="mobile-menu__sub-link">
+                {nav.tourism}
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        {mainNavItems.map(item => (
+          <li>
+            <a href={item.href} class="mobile-menu__link">
+              {nav[item.key]}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mobile-menu__footer">
+        <a href={`/${lang}/#contact`} class="mobile-menu__cta">
+          {nav.cta}
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menu = document.querySelector('[data-menu]') as HTMLElement | null;
+  const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement | null;
+  const closeBtns = document.querySelectorAll('[data-menu-close]');
+  const navLinks = menu?.querySelectorAll('.mobile-menu__link') ?? [];
+  const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
+
+  function openMenu() {
+    if (!menu || !toggle) return;
+    menu.classList.add('is-open');
+    toggle.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    const closeBtn = menu.querySelector('[data-menu-close]') as HTMLElement | null;
+    closeBtn?.focus();
+  }
+
+  function closeMenu() {
+    if (!menu || !toggle) return;
+    menu.classList.remove('is-open');
+    toggle.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    
+    dropdownToggles.forEach(btn => {
+      btn.setAttribute('aria-expanded', 'false');
+      const sub = document.getElementById(btn.getAttribute('aria-controls') ?? '');
+      if (sub) sub.setAttribute('hidden', '');
+    });
+  }
+
+  toggle?.addEventListener('click', () => {
+    menu?.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+
+  closeBtns.forEach(btn => btn.addEventListener('click', closeMenu));
+  navLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+  dropdownToggles.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault(); 
+      
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const ctrlId = btn.getAttribute('aria-controls') ?? '';
+      const sub = document.getElementById(ctrlId);
+      
+      dropdownToggles.forEach(other => {
+        if (other !== btn) {
+          other.setAttribute('aria-expanded', 'false');
+          const otherSub = document.getElementById(other.getAttribute('aria-controls') ?? '');
+          if (otherSub) otherSub.setAttribute('hidden', '');
+        }
+      });
+      
+      btn.setAttribute('aria-expanded', String(!expanded));
+      
+      if (sub) {
+        if (!expanded) {
+          sub.removeAttribute('hidden');
+          sub.style.display = 'block';
+        } else {
+          sub.setAttribute('hidden', '');
+          sub.style.display = 'none';
+        }
+      }
+    });
+  });
+
+  const navDropdown = document.querySelector('[data-nav-dropdown]') as HTMLButtonElement | null;
+  const navDropdownEl = navDropdown?.closest('.navbar__item')?.querySelector('.navbar__dropdown') as HTMLElement | null;
+
+  navDropdown?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!navDropdownEl) return;
+    const expanded = navDropdown.getAttribute('aria-expanded') === 'true';
+    navDropdown.setAttribute('aria-expanded', String(!expanded));
+    navDropdownEl.classList.toggle('is-open', !expanded);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (navDropdownEl && !navDropdown?.closest('.navbar__item')?.contains(e.target as Node)) {
+      navDropdown?.setAttribute('aria-expanded', 'false');
+      navDropdownEl.classList.remove('is-open');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu?.classList.contains('is-open')) closeMenu();
+  });
+
+  window.addEventListener('beforeunload', () => {
+    document.body.style.overflow = '';
+  });
+
+  document.addEventListener('click', (e) => {
+    const anchor = (e.target as HTMLElement).closest('a');
+    if (!anchor) return;
+
+    const href = anchor.getAttribute('href');
+    if (!href || href === '#') return;
+
+    if (href.includes('#')) {
+      try {
+        const targetUrl = new URL(href, window.location.origin);
+        
+        const cleanTargetClass = targetUrl.pathname.replace(/\/$/, '');
+        const cleanCurrentClass = window.location.pathname.replace(/\/$/, '');
+
+        if (cleanTargetClass === cleanCurrentClass) {
+          const targetSelector = targetUrl.hash; 
+          const targetElement = document.querySelector(targetSelector);
+
+          if (targetElement) {
+            e.preventDefault();
+            
+            closeMenu();
+
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            history.pushState(null, '', targetSelector);
+          }
+        }
+      } catch (err) {
+        console.error('Error parsing navigation hash:', err);
+      }
+    }
+  });
+</script>

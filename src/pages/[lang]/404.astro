@@ -1,12 +1,12 @@
 ---
 export const prerender = false;
 
-import Base from '../../layouts/Base.astro';
-import Navbar from '../../components/layout/Navbar.astro';
-import Footer from '../../components/layout/Footer.astro';
-import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
+import Base from '@/layouts/base-layout.astro';
+import Navbar from '@/components/layout/navbar-layout.astro';
+import Footer from '@/components/layout/footer-layout.astro';
+import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 import { Icon } from 'astro-icon/components';
-import { getTranslations } from '../../i18n/utils';
+import { getTranslations } from '@/i18n/utils';
 
 interface Props {
   lang?: 'id' | 'en' | 'fr';

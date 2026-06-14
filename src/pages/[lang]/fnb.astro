@@ -1,20 +1,20 @@
 ---
 export const prerender = false;
 
-import Base from '../../layouts/Base.astro';
-import Navbar from '../../components/layout/Navbar.astro';
-import Footer from '../../components/layout/Footer.astro';
-import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
+import Base from '@/layouts/base-layout.astro';
+import Navbar from '@/components/layout/navbar-layout.astro';
+import Footer from '@/components/layout/footer-layout.astro';
+import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 
-import FnbHero from '../../components/sections/fnb/FnbHero.astro';
-import FnbStat from '../../components/sections/fnb/FnbStat.astro';
-import RetailCoffee from '../../components/sections/fnb/RetailCoffee.astro';
-import CafeFavorites from '../../components/sections/fnb/CafeFavorites.astro';
-import RetailDistribution from '../../components/sections/fnb/RetailDistibution.astro';
-import Sustainability from '../../components/sections/fnb/Sustainability.astro';
-import FnbCta from '../../components/sections/fnb/FnbCta.astro';
+import FnbHero from '@/components/sections/fnb/fnb-hero.astro';
+import FnbStat from '@/components/sections/fnb/fnb-stats.astro';
+import RetailCoffee from '@/components/sections/fnb/retail-coffee.astro';
+import CafeFavorites from '@/components/sections/fnb/cafe-favorites.astro';
+import RetailDistribution from '@/components/sections/fnb/retail-distribution.astro';
+import Sustainability from '@/components/sections/fnb/sustainability-section.astro';
+import FnbCta from '@/components/sections/fnb/fnb-cta.astro';
 
-import { getTranslations } from '../../i18n/utils';
+import { getTranslations } from '@/i18n/utils';
 
 const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
 const t = await getTranslations(currentLang);

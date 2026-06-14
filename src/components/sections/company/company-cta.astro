@@ -1,0 +1,24 @@
+---
+import { getTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
+const tc = t.company;
+const nl = (s: string) => s.split('\n').join('<br>');
+---
+  <!-- ── CTA Banner ────────────────────────────────── -->
+  <section class="page-cta page-cta--cream" aria-label={tc.ctaBanner}>
+    <div class="container page-cta__inner">
+      <div class="page-cta__text animate-on-scroll">
+        <h2 class="page-cta__title page-cta__title--earth" set:html={nl(tc.ctaTitle)}></h2>
+        <p class="page-cta__sub page-cta__sub--earth">{tc.ctaSubtitle}</p>
+      </div>
+      <div class="page-cta__actions animate-on-scroll">
+        <a href={`/${lang}/#contact`} class="btn btn--primary">{tc.cta1}</a>
+        <a href={`/${lang}/`} class="btn btn--outline-dark">{tc.cta2}</a>
+      </div>
+    </div>
+  </section>

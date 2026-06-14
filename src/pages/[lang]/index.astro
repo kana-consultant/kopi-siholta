@@ -1,19 +1,20 @@
 ---
 export const prerender = false;
 
-import Base from '../../layouts/Base.astro';
-import Navbar from '../../components/layout/Navbar.astro';
-import Footer from '../../components/layout/Footer.astro';
-import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
-import Hero from '../../components/sections/homepage/Hero.astro';
-import Heritage from '../../components/sections/homepage/Heritage.astro';
-import Products from '../../components/sections/homepage/Products.astro';
-import Exports from '../../components/sections/homepage/Exports.astro';
-import B2BPartners from '../../components/sections/homepage/Partnerships.astro';
-import OmnichannelLinks from '../../components/sections/homepage/OmnichannelLinks.astro';
-import ContactSection from '../../components/sections/homepage/ContactSection.astro';
+import Base from '@/layouts/base-layout.astro';
+import Navbar from '@/components/layout/navbar-layout.astro';
+import Footer from '@/components/layout/footer-layout.astro';
+import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 
-import { getTranslations } from '../../i18n/utils';
+import Hero from '@/components/sections/homepage/hero-section.astro';
+import Heritage from '@/components/sections/homepage/heritage-section.astro';
+import Products from '@/components/sections/homepage/products-section.astro';
+import Exports from '@/components/sections/homepage/exports-section.astro';
+import B2BPartners from '@/components/sections/homepage/partnerships-section.astro';
+import OmnichannelLinks from '@/components/sections/homepage/omnichannel-links.astro';
+import ContactSection from '@/components/sections/homepage/contact-section.astro';
+
+import { getTranslations } from '@/i18n/utils';
 const currentLang = (Astro.locals as any).lang || 'en';
 
 const t = await getTranslations(currentLang);

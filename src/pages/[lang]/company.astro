@@ -1,22 +1,21 @@
 ---
 export const prerender = false;
 
-import Base from '../../layouts/Base.astro';
-import Navbar from '../../components/layout/Navbar.astro';
-import Footer from '../../components/layout/Footer.astro';
-import WhatsAppFAB from '../../components/layout/WhatsAppFAB.astro';
+import Base from '@/layouts/base-layout.astro';
+import Navbar from '@/components/layout/navbar-layout.astro';
+import Footer from '@/components/layout/footer-layout.astro';
+import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 
-import CompanyHero from '../../components/sections/company/CompanyHero.astro';
-import CompanyStory from '../../components/sections/company/CompanyStory.astro';
-import VisiMisi from '../../components/sections/company/VisiMisi.astro';
-import Timeline from '../../components/sections/company/Timeline.astro';
-import Certifications from '../../components/sections/company/Certifications.astro';
-import OperationSectors from '../../components/sections/company/OperationSectors.astro';
-import LocationMap from '../../components/sections/company/LocationMap.astro';
-import CertModal from '../../components/sections/company/CertModal.astro';
-import CompanyCta from '../../components/sections/company/CompanyCta.astro';
-
-import { getTranslations } from '../../i18n/utils';
+import CompanyHero from '@/components/sections/company/company-hero.astro';
+import CompanyStory from '@/components/sections/company/company-story.astro';
+import VisiMisi from '@/components/sections/company/visi-misi.astro';
+import Timeline from '@/components/sections/company/time-line.astro';
+import OperationSectors from '@/components/sections/company/operation-sectors.astro';
+import LocationMap from '@/components/sections/company/location-map.astro';
+import CertModal from '@/components/sections/company/cert-modal.astro';
+import CompanyCta from '@/components/sections/company/company-cta.astro';
+import Certifications from '@/components/sections/company/cert-section.astro';
+import { getTranslations } from '@/i18n/utils';
 
 const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
 const t = await getTranslations(currentLang);

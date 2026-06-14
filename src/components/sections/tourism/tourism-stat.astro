@@ -1,0 +1,27 @@
+---
+import { getTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
+---
+
+<section class="stat-band stat-band--green" aria-label="Statistik Pariwisata Kopi Siholta">
+  <div class="container">
+    <div class="stat-band__grid">
+      {[
+        { value: '1.200 mdpl', label: t.tourism.statAlt },
+        { value: '200+', label: t.tourism.statFamilies },
+        { value: '6+', label: t.tourism.statCountries },
+        { value: '2021', label: t.tourism.statFounded },
+      ].map(stat => (
+        <div class="stat-band__item animate-on-scroll">
+          <span class="stat-band__value">{stat.value}</span>
+          <span class="stat-band__label">{stat.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
