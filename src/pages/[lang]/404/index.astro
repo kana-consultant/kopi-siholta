@@ -5,7 +5,7 @@ import Base from '@/layouts/base-layout.astro';
 import Navbar from '@/components/layout/navbar-layout.astro';
 import Footer from '@/components/layout/footer-layout.astro';
 import WhatsAppFAB from '@/components/layout/wa-fab.astro';
-import { Icon } from 'astro-icon/components';
+import ErrorContent from './sections/404-content.astro'; 
 import { getTranslations } from '@/i18n/utils';
 import './styles/index.css';
 
@@ -14,8 +14,7 @@ interface Props {
 }
 
 const { lang: langProp } = Astro.props;
-
-const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || langProp || 'en';
+const currentLang = (Astro.locals as any).lang || langProp || 'en';
 
 const { pageTranslations: nf } = currentLang === 'id'
   ? await import('./i18n/id')
@@ -28,35 +27,8 @@ const { nav, footer } = await getTranslations(currentLang);
 
 <Base title={nf.title} description={nf.message} lang={currentLang}>
   <Navbar lang={currentLang} nav={nav} />
-
-  <main id="main-content" class="error-page">
-    <div class="error-page__inner container">
-
-      <div class="error-page__bean" aria-hidden="true">
-        <Icon name="mdi:coffee" width="70" height="70" />
-      </div>
-
-      <p class="error-page__code" aria-hidden="true">{nf.code}</p>
-
-      <h1 class="error-page__title">{nf.headline}</h1>
-
-      <p class="error-page__message">{nf.message}</p>
-
-      <p class="error-page__suggestion">{nf.suggestion}</p>
-
-      <div class="error-page__actions">
-        <a href={`/${currentLang}/`} class="btn btn--primary">
-          <Icon name="mdi:home" width="16" height="16" />
-          {nf.ctaHome}
-        </a>
-        <a href={`/${currentLang}/#products`} class="btn btn--outline-dark">
-          <Icon name="mdi:shopping-outline" width="16" height="16" />
-          {nf.ctaExplore}
-        </a>
-      </div>
-
-    </div>
-  </main>
+  
+  <ErrorContent currentLang={currentLang} nf={nf} />
 
   <Footer lang={currentLang} footer={footer} />
   <WhatsAppFAB />
