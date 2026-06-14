@@ -7,31 +7,56 @@ import Footer from '@/components/layout/footer-layout.astro';
 import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 import ScrollReveal from '@/components/shared/scroll-reveal.astro';
 
-import TourismHero from '@/pages/[lang]/tourism/sections/hero.astro';
-import TourismStat from '@/pages/[lang]/tourism/sections/stats.astro';
-import Experiences from '@/pages/[lang]/tourism/sections/experiences-section.astro';
-import TourismCta from '@/pages/[lang]/tourism/sections/cta.astro';
-
-import { getTranslations } from '@/i18n/utils';
+import TourismHero from './sections/hero.astro';
+import TourismStat from './sections/stats.astro';
+import Experiences from './sections/experiences-section.astro';
+import TourismCta from './sections/cta.astro';
 
 const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
-const t = await getTranslations(currentLang);
+
+const { pageTranslations: t } = currentLang === 'id'
+  ? await import('./i18n/id')
+  : currentLang === 'fr'
+    ? await import('./i18n/fr')
+    : await import('./i18n/en');
 ---
 
-<Base title={t.meta.titleTourism} description={t.meta.descTourism} lang={currentLang} breadcrumbs={[
+<Base title={t.meta.title} description={t.meta.description} lang={currentLang} breadcrumbs={[
   { name: t.breadcrumb.home, href: `/${currentLang}/` },
   { name: t.breadcrumb.tourism, href: `/${currentLang}/tourism` },
 ]}>
   <Navbar lang={currentLang} />
 
   <main id="main-content">
-    <TourismHero lang={currentLang} />
-    <TourismStat lang={currentLang} />
-    <Experiences lang={currentLang} />
-    <TourismCta lang={currentLang} />
+    <TourismHero
+      alt={t.hero.alt}
+      titleLine1={t.hero.titleLine1}
+      titleLine2={t.hero.titleLine2}
+      subtitle={t.hero.subtitle}
+      pageLabel={t.hero.pageLabel}
+      homeLabel={t.breadcrumb.home}
+      prevLabel={t.breadcrumb.prev}
+      prevHref={`/${currentLang}/company`}
+      lang={currentLang}
+    />
+    <TourismStat stats={t.stats} />
+    <Experiences
+      tag={t.experiences.tag}
+      title={t.experiences.title}
+      subtitle={t.experiences.subtitle}
+      bookNow={t.experiences.bookNow}
+      list={t.experiences.list}
+      lang={currentLang}
+    />
+    <TourismCta
+      title={t.cta.title}
+      subtitle={t.cta.subtitle}
+      ctaText={t.cta.ctaText}
+      lang={currentLang}
+    />
   </main>
 
   <Footer lang={currentLang} />
   <WhatsAppFAB />
-  <ScrollReveal />
+  <ScrollReveal selectors={['.animate-on-scroll']} />
 </Base>

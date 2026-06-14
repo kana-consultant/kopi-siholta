@@ -1,16 +1,15 @@
 ---
 import StatBand from '@/components/shared/stat-band.astro';
-import { getTranslations } from '@/i18n/utils';
+import '../styles/stats.css';
+
+interface StatItem {
+  value: string;
+  label: string;
+}
 
 interface Props {
-  lang?: string;
+  stats: StatItem[];
 }
-const { lang = 'en' } = Astro.props;
-const t = await getTranslations(lang);
+const { stats } = Astro.props;
 ---
-<StatBand stats={[
-  { value: '1.200 mdpl', label: t.tourism.statAlt },
-  { value: '200+', label: t.tourism.statFamilies },
-  { value: '6+', label: t.tourism.statCountries },
-  { value: '2021', label: t.tourism.statFounded },
-]} />
+<StatBand stats={stats} />
