@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import '@/pages/[lang]/homepage/styles/products.css';
+import '../styles/products.css';
 
 import arabicaBubuk250 from '@/images/products/arabica-bubuk-250g.webp';
 import arabicaBubuk70 from '@/images/products/arabica-bubuk-70g.webp';
@@ -15,160 +15,104 @@ import tokopediaLogo from '@/images/logo/logo-tokopedia.png';
 import halalLogo from '@/images/logo/logo-halal.png';
 import bpomLogo from '@/images/logo/logo-bpom.png';
 
-import { getTranslations } from '@/i18n/utils';
+interface ProductItem {
+  name: string;
+  desc: string;
+  tag: string;
+  tagVariant: 'bestSeller' | 'valuePack' | 'signature' | 'baristaChoice' | 'popular';
+}
+
+interface Cert { name: string; desc: string; }
 
 interface Props {
-  lang?: string;
+  title: string;
+  subtitle: string;
+  items: ProductItem[];
+  labels: {
+    productDetails: string;
+    tersediaDi: string;
+    viewCompany: string;
+  };
+  certs: Cert[];
 }
-const { lang = 'en' } = Astro.props;
-const translations = await getTranslations(lang);
-const p = translations.products;
+
+const { title, subtitle, items, labels, certs } = Astro.props;
+
+const images = [
+  arabicaBubuk250, arabicaBubuk70, arabicaRosbeans70, arabicaKapsul70,
+  robustaBubuk250, robustaBubuk70, robustaRosbeans70, robustaKapsul70,
+];
+
+const tagBgMap: Record<string, string> = {
+  bestSeller: '#CD1222',
+  valuePack: '#5C3D1E',
+  signature: '#8B5E3C',
+  baristaChoice: '#1E508C',
+  popular: '#CD1222',
+};
 
 const tokpedLinks = [
-  'https://tk.tokopedia.com/ZSxWcQ8Yw/',
-  'https://tk.tokopedia.com/ZSxWcQTDw/',
-  'https://tk.tokopedia.com/ZSxWcQqm4/',
-  'https://tk.tokopedia.com/ZSxWcaqpU/',
-  'https://tk.tokopedia.com/ZSxWcP817/',
-  'https://tk.tokopedia.com/ZSxWcKGep/',
-  'https://tk.tokopedia.com/ZSxW3YW7c/',
-  'https://tk.tokopedia.com/ZSxWcaqpU/',
+  'https://tk.tokopedia.com/ZSxWcQ8Yw/', 'https://tk.tokopedia.com/ZSxWcQTDw/',
+  'https://tk.tokopedia.com/ZSxWcQqm4/', 'https://tk.tokopedia.com/ZSxWcaqpU/',
+  'https://tk.tokopedia.com/ZSxWcP817/', 'https://tk.tokopedia.com/ZSxWcKGep/',
+  'https://tk.tokopedia.com/ZSxW3YW7c/', 'https://tk.tokopedia.com/ZSxWcaqpU/',
 ];
 const shopeeLinks = [
-  'https://s.shopee.co.id/7pqW1w7KIL',
-  'https://s.shopee.co.id/6AiI2wH4dj',
-  'https://s.shopee.co.id/2LVZTvUzqv',
-  'https://s.shopee.co.id/W3vIce8om',
-  'https://s.shopee.co.id/5q5RfpFHn7',
-  'https://s.shopee.co.id/W3vJzWChs',
-  'https://s.shopee.co.id/AAEQoR8FPK',
-  'https://s.shopee.co.id/W3vIce8om',
+  'https://s.shopee.co.id/7pqW1w7KIL', 'https://s.shopee.co.id/6AiI2wH4dj',
+  'https://s.shopee.co.id/2LVZTvUzqv', 'https://s.shopee.co.id/W3vIce8om',
+  'https://s.shopee.co.id/5q5RfpFHn7', 'https://s.shopee.co.id/W3vJzWChs',
+  'https://s.shopee.co.id/AAEQoR8FPK', 'https://s.shopee.co.id/W3vIce8om',
 ];
 
-const products = [
-  {
-    name: p.product1Name,
-    desc: p.product1Desc,
-    image: arabicaBubuk250,
-    tag: p.tagBestSeller,
-    tagBg: '#CD1222',
-    shopeeLink: shopeeLinks[0],
-    tokpedLink: tokpedLinks[0],
-  },
-  {
-    name: p.product2Name,
-    desc: p.product2Desc,
-    image: arabicaBubuk70,
-    tag: p.tagValuePack,
-    tagBg: '#D97706',
-    shopeeLink: shopeeLinks[1],
-    tokpedLink: tokpedLinks[1],
-  },
-  {
-    name: p.product3Name,
-    desc: p.product3Desc,
-    image: arabicaRosbeans70,
-    tag: p.tagSignature,
-    tagBg: '#92400E',
-    shopeeLink: shopeeLinks[2],
-    tokpedLink: tokpedLinks[2],
-  },
-  {
-    name: p.product4Name,
-    desc: p.product4Desc,
-    image: arabicaKapsul70,
-    tag: p.tagBaristaChoice,
-    tagBg: '#047857',
-    shopeeLink: shopeeLinks[3],
-    tokpedLink: tokpedLinks[3],
-  },
-  {
-    name: p.product5Name,
-    desc: p.product5Desc,
-    image: robustaBubuk250,
-    tag: p.tagPopular,
-    tagBg: '#D97706',
-    shopeeLink: shopeeLinks[4],
-    tokpedLink: tokpedLinks[4],
-  },
-  {
-    name: p.product6Name,
-    desc: p.product6Desc,
-    image: robustaBubuk70,
-    tag: p.tagValuePack,
-    tagBg: '#D97706',
-    shopeeLink: shopeeLinks[5],
-    tokpedLink: tokpedLinks[5],
-  },
-  {
-    name: p.product7Name,
-    desc: p.product7Desc,
-    image: robustaRosbeans70,
-    tag: p.tagSignature,
-    tagBg: '#92400E',
-    shopeeLink: shopeeLinks[6],
-    tokpedLink: tokpedLinks[6],
-  },
-  {
-    name: p.product8Name,
-    desc: p.product8Desc,
-    image: robustaKapsul70,
-    tag: p.tagPopular,
-    tagBg: '#D97706',
-    shopeeLink: shopeeLinks[7],
-    tokpedLink: tokpedLinks[7],
-  },
-];
-
-const companyLink = lang === 'id' ? '/id/company' : '/en/company';
+const certLogos = [bpomLogo, halalLogo];
 ---
 
 <section id="products" class="products-section">
   <div class="container">
     <div class="products-header">
-      <h2 class="section-title">{p.title}</h2>
-      <p class="section-subtitle">{p.subtitle}</p>
+      <h2 class="section-title">{title}</h2>
+      <p class="section-subtitle">{subtitle}</p>
     </div>
 
     <div class="products-grid">
-      {products.map((product, index) => (
+      {items.map((item, i) => (
         <article class="product-card">
           <div class="product-image-wrap">
             <Image
-              src={product.image}
-              alt={product.name}
+              src={images[i]}
+              alt={item.name}
               width={480}
               height={480}
               class="product-image"
-              loading={index < 4 ? 'eager' : 'lazy'}
+              loading={i < 4 ? 'eager' : 'lazy'}
             />
             <div class="image-gradient" />
 
-            <span class="product-tag" style={`--tag-bg: ${product.tagBg}`}>
-              {product.tag}
+            <span class="product-tag" style={`--tag-bg: ${tagBgMap[item.tagVariant]}`}>
+              {item.tag}
             </span>
           </div>
 
           <div class="product-body">
             <div class="product-info">
-              <h3 class="product-name">{product.name}</h3>
+              <h3 class="product-name">{item.name}</h3>
             </div>
           </div>
 
           <div class="product-reveal">
             <div class="reveal-content">
               <div class="reveal-header">
-                <h4 class="reveal-title">{p.productDetails}</h4>
+                <h4 class="reveal-title">{labels.productDetails}</h4>
               </div>
-              <p class="reveal-desc">{product.desc}</p>
+              <p class="reveal-desc">{item.desc}</p>
 
               <div class="reveal-actions">
-                <p class="shop-available-label">{p.tersediaDi}</p>
+                <p class="shop-available-label">{labels.tersediaDi}</p>
                 <div class="shop-logos">
-                  <a href={product.shopeeLink} target="_blank" rel="noopener noreferrer" class="shop-logo-btn" aria-label="Beli di Shopee">
+                  <a href={shopeeLinks[i]} target="_blank" rel="noopener noreferrer" class="shop-logo-btn" aria-label="Beli di Shopee">
                     <Image src={shopeeLogo} alt="Shopee" width={96} height={96} quality="max" class="shop-logo-img" />                  
                   </a>
-                  <a href={product.tokpedLink} target="_blank" rel="noopener noreferrer" class="shop-logo-btn" aria-label="Beli di Tokopedia">
+                  <a href={tokpedLinks[i]} target="_blank" rel="noopener noreferrer" class="shop-logo-btn" aria-label="Beli di Tokopedia">
                     <Image src={tokopediaLogo} alt="Tokopedia" width={96} height={96} quality="max" class="shop-logo-img" />
                   </a>
                 </div>
@@ -181,16 +125,15 @@ const companyLink = lang === 'id' ? '/id/company' : '/en/company';
 
     <div class="certificates">
       <div class="cert-card">
-        
-        <div class="cert-item">
-          <Image src={bpomLogo} alt="Logo BPOM" width={120} quality="max" class="cert-img" loading="lazy" />
-          <span class="cert-name">{p.certBpomName}</span>
-        </div>
-        <div class="cert-divider" aria-hidden="true"></div>
-        <div class="cert-item">
-          <Image src={halalLogo} alt="Logo Halal" width={120} quality="max" class="cert-img" loading="lazy" />
-          <span class="cert-name">{p.certHalalName}</span>
-        </div>
+        {certs.map((cert, i) => (
+          <>
+            <div class="cert-item">
+              <Image src={certLogos[i]} alt={`Logo ${cert.name}`} width={120} quality="max" class="cert-img" loading="lazy" />
+              <span class="cert-name">{cert.name}</span>
+            </div>
+            {i < certs.length - 1 && <div class="cert-divider" aria-hidden="true"></div>}
+          </>
+        ))}
       </div>
     </div>
   </div>

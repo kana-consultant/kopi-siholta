@@ -7,19 +7,25 @@ import hero4 from '@/images/hero/hero-4.jpg';
 import '@/styles/components/hero.css';
 import '@/styles/components/stats.css';
 
-import { getTranslations } from '@/i18n/utils';
+interface StatItem { value: string; label: string; }
 
 interface Props {
-  lang?: string;
+  title: string;
+  subtitle: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+  slideLabel: string;
+  stats: StatItem[];
+  slideAlts: string[];
 }
-const { lang = 'en' } = Astro.props;
-const tr = await getTranslations(lang);;
+
+const { title, subtitle, ctaPrimary, ctaSecondary, slideLabel, stats, slideAlts } = Astro.props;
 
 const slides = [
-  { img: hero1, alt: tr.fnb.gallery.altBarista },
-  { img: hero2, alt: tr.fnb.gallery.altAtmosphere },
-  { img: hero3, alt: tr.fnb.gallery.altProcess },
-  { img: hero4, alt: tr.fnb.gallery.altVariants },
+  { img: hero1, alt: slideAlts[0] ?? '' },
+  { img: hero2, alt: slideAlts[1] ?? '' },
+  { img: hero3, alt: slideAlts[2] ?? '' },
+  { img: hero4, alt: slideAlts[3] ?? '' },
 ];
 ---
 
@@ -54,47 +60,32 @@ const slides = [
   <div class="container hero__container">
     <div class="hero__content">
 
-      <h1 class="hero__title animate-fade-in-up delay-100" set:html={tr.hero.title} />
+      <h1 class="hero__title animate-fade-in-up delay-100" set:html={title} />
       <p class="hero__subtitle animate-fade-in-up delay-200">
-        {tr.hero.subtitle}
+        {subtitle}
       </p>
 
       <!-- CTAs -->
       <div class="hero__ctas animate-fade-in-up delay-300">
         <a href="#products" class="btn btn--primary hero__cta-primary">
-          {tr.hero.ctaPrimary}
+          {ctaPrimary}
         </a>
         <a href="#heritage" class="btn btn--outline hero__cta-secondary">
-          {tr.hero.ctaSecondary}
+          {ctaSecondary}
         </a>
       </div>
 
       <!-- Stats Preview -->
       <div class="hero__stats-preview animate-fade-in-up delay-400">
-        <div class="hero__stat">
-          <span class="hero__stat-num">6+</span>
-          <span class="hero__stat-label">{tr.hero.statCountries}</span>
-        </div>
-        <div class="hero__stat-divider"></div>
-        <div class="hero__stat">
-          <span class="hero__stat-num">100</span>
-          <span class="hero__stat-label">{tr.hero.statTonsYear}</span>
-        </div>
-        <div class="hero__stat-divider"></div>
-        <div class="hero__stat">
-          <span class="hero__stat-num">#1</span>
-          <span class="hero__stat-label">{tr.hero.statPioneer}</span>
-        </div>
-        <div class="hero__stat-divider"></div>
-        <div class="hero__stat">
-          <span class="hero__stat-num">2035</span>
-          <span class="hero__stat-label">{tr.hero.statVision}</span>
-        </div>
-        <div class="hero__stat-divider"></div>
-        <div class="hero__stat">
-          <span class="hero__stat-num">3</span>
-          <span class="hero__stat-label">{tr.hero.statSectors}</span>
-        </div>
+        {stats.map((stat, i) => (
+          <>
+            <div class="hero__stat">
+              <span class="hero__stat-num">{stat.value}</span>
+              <span class="hero__stat-label">{stat.label}</span>
+            </div>
+            {i < stats.length - 1 && <div class="hero__stat-divider"></div>}
+          </>
+        ))}
       </div>
     </div>
 
@@ -106,7 +97,7 @@ const slides = [
           data-slide={i}
           role="tab"
           aria-selected={i === 0 ? 'true' : 'false'}
-          aria-label={`${tr.hero.slideLabel} ${i + 1} of ${slides.length}`}
+          aria-label={`${slideLabel} ${i + 1} of ${slides.length}`}
         ></button>
       ))}
     </div>

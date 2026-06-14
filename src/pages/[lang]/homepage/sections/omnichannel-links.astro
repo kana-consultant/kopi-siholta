@@ -1,11 +1,11 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
-import tokpedLogo from '@/images/logo/logo-tokopedia.png';
-import shopeeLogo from '@/images/logo/logo-shopee.png';
 import igLogo from '@/images/logo/logo-instagram.png';
-import waLogo from '@/images/logo/logo-whatsapp.png';
 import tiktokLogo from '@/images/logo/logo-tiktok.png';
+import shopeeLogo from '@/images/logo/logo-shopee.png';
+import tokopediaLogo from '@/images/logo/logo-tokopedia.png';
+import waLogo from '@/images/logo/logo-whatsapp.png';
 
 import igPhoto1 from '@/images/omni/instagram-1.jpg';
 import igPhoto2 from '@/images/omni/instagram-2.jpg';
@@ -14,14 +14,35 @@ import igPhoto4 from '@/images/omni/instagram-4.jpg';
 
 import { nl } from '@/utils/helpers.ts' ;
 
-import { getTranslations } from '@/i18n/utils';
 import { SOCIAL, SHOP } from '@/constants/site';
+import '../styles/omnichannel-links.css';
+
+interface MarketplaceCard { headline: string; sub: string; cta: string; }
+interface IGPhoto { src: string; alt: string; }
 
 interface Props {
-  lang?: string;
+  title: string;
+  subtitle: string;
+  tokopedia: MarketplaceCard;
+  shopee: MarketplaceCard;
+  whatsapp: MarketplaceCard;
+  instagram: {
+    line: string;
+    headline: string;
+    body: string;
+    handle: string;
+    followCta: string;
+    openContent: string;
+    photos: IGPhoto[];
+  };
+  tiktok: {
+    headline: string;
+    body: string;
+    cta: string;
+  };
 }
-const { lang = 'en' } = Astro.props;
-const t = await getTranslations(lang);
+
+const { title, subtitle, tokopedia, shopee, whatsapp, instagram, tiktok: tiktokData } = Astro.props;
 
 const TOKPED_URL = SHOP.tokopedia;
 const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
@@ -38,37 +59,37 @@ const marketplaceCards = [
   {
     id: 'tokopedia',
     name: 'Tokopedia',
-    headline: t.omni.tokopediaHeadline,
-    sub: t.omni.tokopediaSub,
-    cta: t.omni.tokopediaCta,
+    headline: tokopedia.headline,
+    sub: tokopedia.sub,
+    cta: tokopedia.cta,
     url: TOKPED_URL,
-    logo: tokpedLogo,
+    logo: tokopediaLogo,
   },
   {
     id: 'shopee',
     name: 'Shopee',
-    headline: t.omni.shopeeHeadline,
-    sub: t.omni.shopeeSub,
-    cta: t.omni.shopeeCta,
+    headline: shopee.headline,
+    sub: shopee.sub,
+    cta: shopee.cta,
     url: SHOPEE_URL,
     logo: shopeeLogo,
   },
   {
     id: 'whatsapp',
     name: 'WhatsApp',
-    headline: t.omni.whatsappHeadline,
-    sub: t.omni.whatsappSub,
-    cta: t.omni.whatsappCta,
+    headline: whatsapp.headline,
+    sub: whatsapp.sub,
+    cta: whatsapp.cta,
     url: WHATSAPP_URL,
     logo: waLogo,
   },
 ];
 
 const igPhotos = [
-  { src: igPhoto1, alt: 'Close-up espresso crema', url: ig_content1 },
-  { src: igPhoto2, alt: 'Hands sorting green beans at farm', url: ig_content2 },
-  { src: igPhoto3, alt: 'Roastery ambiance with golden-hour light', url: ig_content3 },
-  { src: igPhoto4, alt: 'Kopi Siholta packaging flat-lay', url: ig_content4 },
+  { src: igPhoto1, alt: instagram.photos[0]?.alt ?? '', url: ig_content1 },
+  { src: igPhoto2, alt: instagram.photos[1]?.alt ?? '', url: ig_content2 },
+  { src: igPhoto3, alt: instagram.photos[2]?.alt ?? '', url: ig_content3 },
+  { src: igPhoto4, alt: instagram.photos[3]?.alt ?? '', url: ig_content4 },
 ];
 ---
 
@@ -76,8 +97,8 @@ const igPhotos = [
   <div class="container">
 
     <header class="section__header reveal">
-      <h2 class="section-title" set:html={nl(t.omni.title)} />
-      <p class="section-sub">{t.omni.subtitle}</p>
+      <h2 class="section-title" set:html={nl(title)} />
+      <p class="section-sub">{subtitle}</p>
     </header>
 
     <div class="marketplace-grid">
@@ -107,11 +128,11 @@ const igPhotos = [
         <div class="ig-feature__header">
           <Image src={igLogo} alt="Instagram" width={160} height={160} quality="max" class="ig-feature__logo" />
         </div>
-        <h3 class="ig-feature__headline">{t.omni.igFeatureHeadline}</h3>
-        <p class="ig-feature__body">{t.omni.igFeatureBody}</p>
-        <div class="ig-feature__handle">@kopi_siholta.id</div>
+        <h3 class="ig-feature__headline">{instagram.headline}</h3>
+        <p class="ig-feature__body">{instagram.body}</p>
+        <div class="ig-feature__handle">{instagram.handle}</div>
         <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="ig-feature__cta">
-          {t.omni.igFollowCta}
+          {instagram.followCta}
         </a>
       </article>
 
@@ -120,7 +141,7 @@ const igPhotos = [
           <a href={p.url} target="_blank" rel="noopener noreferrer" class="photo-tile" aria-label={p.alt}>
             <Image src={p.src} alt={p.alt} width={400} height={400} quality={75} format="webp" class="photo-tile__img" loading="lazy" />
             <div class="photo-tile__overlay">
-              <span>{t.omni.openContent}</span>
+              <span>{instagram.openContent}</span>
               <Icon name="mdi:open-in-new" class="photo-tile__icon" /> 
             </div>
           </a>
@@ -128,430 +149,21 @@ const igPhotos = [
       </div>
     </div>
 
-    <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="tiktok-banner reveal" aria-label={t.omni.tiktokHeadline}>
+    <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="tiktok-banner reveal" aria-label={tiktokData.headline}>
       <div class="tiktok-banner-image" aria-hidden="true">
           <Image src={tiktokLogo} alt="Tiktok" width={160} height={160} quality="max" class="tiktok-img" />
       </div>
       <div class="tiktok-banner__text">
         <h3 class="tiktok-banner__title">@kopisiholta</h3>
-        <p class="tiktok-banner__body">{t.omni.tiktokBody}</p>
+        <p class="tiktok-banner__body">{tiktokData.body}</p>
       </div>
       <button class="tiktok-banner__cta">
-        {t.omni.tiktokCta}
+        {tiktokData.cta}
       </button>
     </a>
 
   </div>
 </section>
-
-<style>
-.omni {
-  background: var(--color-brand-cream);
-  padding-block: var(--space-12);
-}
-
-
-
-.section__header {
-  text-align: center;
-  margin-bottom: var(--space-10);
-}
-
-.sub-label {
-  font-family: var(--font-label);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-brand-red);
-  margin-bottom: var(--space-4);
-  margin-top: var(--space-8);
-}
-
-.sub-copy {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--color-brand-muted);
-  line-height: 1.6;
-  max-width: 620px;
-  margin: 0 0 var(--space-6) 0;
-}
-
-.marketplace-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-5);
-  margin-bottom: var(--space-8);
-}
-
-.marketplace-card {
-  background: color-mix(in srgb, var(--color-neutral) 85%, var(--color-text-brown) 15%);
-  border: 1px solid rgba(92, 61, 30, 0.12);
-  border-radius: 16px;
-  padding: 28px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 200ms ease, box-shadow 200ms ease;
-  cursor: pointer;
-}
-
-.marketplace-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(92, 61, 30, 0.14);
-}
-
-
-.marketplace-card__img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
-.marketplace-card__headline {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--color-brand-earth);
-  line-height: 1.25;
-  margin: 0;
-}
-
-.marketplace-card__sub {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: var(--color-brand-muted);
-  margin: 0;
-}
-
-.card-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  align-self: flex-start;
-  margin-top: var(--space-3);
-  background: var(--color-primary, #cd1222);
-  color: #fff;
-  font-family: var(--font-label);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  padding: 10px 20px;
-  border-radius: 999px;
-  transition: background 150ms ease, gap 150ms ease;
-}
-
-.card-cta:hover {
-  gap: 10px;
-  background: #a80e1a;
-}
-
-.card--tokopedia { border-top: 3px solid #d4edda; }
-.card--shopee    { border-top: 3px solid #ffe5db; }
-.card--whatsapp  { border-top: 3px solid #d9f0dc; }
-
-.ig-bento {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
-}
-
-.ig-feature {
-  background: linear-gradient(135deg, var(--color-brand-red) 0%, #a80e1a 100%);
-  color: #fff;
-  border-radius: 16px;
-  padding: 32px 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  min-height: 220px;
-}
-
-.ig-feature__header {
-  margin-bottom: var(--space-1);
-}
-
-.ig-feature__logo {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
-}
-
-.ig-feature__line {
-  font-family: var(--font-label);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.85);
-  margin: 0;
-}
-
-.ig-feature__headline {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #fff;
-  margin: 0;
-}
-
-.ig-feature__body {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: var(--color-text-main);
-  margin: 0;
-  max-width: 360px;
-}
-
-.ig-feature__handle {
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #fff;
-  opacity: 0.9;
-}
-
-.ig-feature__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  align-self: flex-start;
-  margin-top: var(--space-2);
-  background: #fff;
-  color: var(--color-brand-red);
-  font-family: var(--font-label);
-  font-size: 0.875rem;
-  font-weight: 700;
-  padding: 10px 20px;
-  border-radius: 999px;
-  text-decoration: none;
-  transition: gap 150ms ease, background 150ms ease, color 150ms ease;
-}
-
-.ig-feature__cta:hover {
-  gap: 10px;
-  background: #1a1a1a; 
-  color: #fff;
-}
-
-.ig-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: var(--space-3);
-  aspect-ratio: 1 / 1;
-}
-
-.photo-tile {
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  display: block;
-  cursor: pointer;
-}
-
-.photo-tile__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.photo-tile__overlay {
-  position: absolute;
-  inset: 0;
-  background-color: color-mix(in srgb, var(--color-brand-red) 85%, transparent);
-  color: var(--color-text-main);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px; 
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  opacity: 0;
-  transition: opacity 250ms ease;
-  font-family: var(--font-body);
-  pointer-events: none; 
-}
-
-.photo-tile:hover .photo-tile__overlay {
-  opacity: 1;
-}
-
-.photo-tile__icon {
-  width: 1rem;
-  height: 1rem;
-}
-
-.tiktok-banner {
-  background: #1a1a1a;
-  border-radius: 16px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  text-decoration: none;
-  color: var(--color-text-main);
-  margin-top: var(--space-3);
-  transition: background 200ms ease;
-}
-
-.tiktok-img {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  object-fit: contain;
-  flex-shrink: 0;
-  image-rendering: -webkit-optimize-contrast;
-}
-
-.tiktok-banner__title {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--color-text-main);
-  margin: 0;
-  line-height: 1.2;
-}
-
-.tiktok-banner__body {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: var(--color-text-muted);
-  margin: 0;
-}
-
-.tiktok-banner__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-label);
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin-top: var(--space-2);
-  border: none;
-  cursor: pointer;
-  color: #1a1a1a; 
-  background-color: var(--color-text-main); 
-  padding: 8px 16px;
-  border-radius: 20px; 
-  align-self: flex-start;
-  box-shadow: -3px -3px 0 #00f2fe, 3px 3px 0 #fe0979;
-  transition: 
-    gap 150ms ease, 
-    transform 150ms ease, 
-    box-shadow 150ms ease; 
-}
-
-
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 500ms ease, transform 500ms ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
-}
-
-@media (hover: hover) {
-  .photo-tile:hover .photo-tile__overlay {
-    opacity: 1;
-  }
-  .photo-tile:hover .photo-tile__img {
-    transform: scale(1.06);
-  }
-}
-
-@media (hover: none) {
-  .photo-tile:focus .photo-tile__overlay,
-  .photo-tile:active .photo-tile__overlay {
-    opacity: 1;
-  }
-  .photo-tile:focus .photo-tile__img,
-  .photo-tile:active .photo-tile__img {
-    transform: scale(1.06);
-  }
-}
-
-@media (hover: hover) {
-  .photo-tile:hover .photo-tile__img {
-    transform: scale(1.06);
-  }
-  .photo-tile:hover::after {
-    opacity: 1;
-  }
-}
-
-/* ── Responsive ──────────────────────── */
-@media (min-width: 640px) {
-  .marketplace-grid { grid-template-columns: repeat(2, 1fr); }
-  .ig-grid { gap: var(--space-4); }
-  
-  .tiktok-banner {
-    flex-direction: row;
-    align-items: center;
-    padding: 28px 32px;
-    gap: var(--space-4);
-  }
-  .tiktok-banner__text { flex: 1; }
-  .tiktok-banner__cta { margin-top: 0; }
-}
-
-@media (min-width: 1024px) {
-  .omni { padding-block: var(--space-16); }
-  .marketplace-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
-  }
-  .ig-bento {
-    grid-template-columns: 1.4fr 1fr;
-    gap: var(--space-5);
-  }
-  .ig-feature {
-    padding: 40px 36px;
-    min-height: 100%;
-  }
-  .ig-feature__headline { font-size: 1.6rem; }
-  .ig-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    aspect-ratio: 1 / 1;
-  }
-  .tiktok-banner {
-    padding: 36px 40px;
-  }
-  .tiktok-banner__title { font-size: 1.25rem; }
-
-  /* Aturan Desktop: Hilangkan box-shadow saat kondisi normal */
-  .tiktok-banner__cta {
-    box-shadow: none;
-  }
-  
-  /* Munculkan box-shadow eksklusif saat di-hover di desktop */
-  .tiktok-banner__cta:hover {
-    transform: scale(1.03);
-    box-shadow: -3px -3px 0 #00f2fe, 3px 3px 0 #fe0979;
-  }
-}
-
-</style>
 
 <script>
   const reveals = document.querySelectorAll<HTMLElement>('.omni .reveal');
