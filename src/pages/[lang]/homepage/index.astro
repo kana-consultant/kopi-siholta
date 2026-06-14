@@ -7,13 +7,13 @@ import Footer from '@/components/layout/footer-layout.astro';
 import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 import ScrollReveal from '@/components/shared/scroll-reveal.astro';
 
-import Hero from './index/sections/hero.astro';
-import Heritage from './index/sections/heritage-section.astro';
-import Products from './index/sections/products-section.astro';
-import Exports from './index/sections/exports-section.astro';
-import B2BPartners from './index/sections/partnerships-section.astro';
-import OmnichannelLinks from './index/sections/omnichannel-links.astro';
-import ContactSection from './index/sections/contact-section.astro';
+import Hero from '@/pages/[lang]/homepage/sections/hero.astro';
+import Heritage from '@/pages/[lang]/homepage/sections/heritage-section.astro';
+import Products from '@/pages/[lang]/homepage/sections/products-section.astro';
+import Exports from '@/pages/[lang]/homepage/sections/exports-section.astro';
+import B2BPartners from '@/pages/[lang]/homepage/sections/partnerships-section.astro';
+import OmnichannelLinks from '@/pages/[lang]/homepage/sections/omnichannel-links.astro';
+import ContactSection from '@/pages/[lang]/homepage/sections/contact-section.astro';
 
 import { getTranslations } from '@/i18n/utils';
 const currentLang = (Astro.locals as any).lang || 'en';

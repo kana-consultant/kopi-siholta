@@ -7,18 +7,18 @@ import Footer from '@/components/layout/footer-layout.astro';
 import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 import ScrollReveal from '@/components/shared/scroll-reveal.astro';
 
-import CompanyHero from './company/sections/hero.astro';
-import CompanyStory from './company/sections/story.astro';
-import VisiMisi from './company/sections/visi-misi.astro';
-import Timeline from './company/sections/timeline.astro';
-import OperationSectors from './company/sections/operation-sectors.astro';
-import LocationMap from './company/sections/location-map.astro';
-import Certifications from './company/sections/certifications.astro';
-import CompanyCta from './company/sections/cta.astro';
+import CompanyHero from '@/pages/[lang]/company/sections/hero.astro';
+import CompanyStory from '@/pages/[lang]/company/sections/story.astro';
+import VisiMisi from '@/pages/[lang]/company/sections/visi-misi.astro';
+import Timeline from '@/pages/[lang]/company/sections/timeline.astro';
+import OperationSectors from '@/pages/[lang]/company/sections/operation-sectors.astro';
+import LocationMap from '@/pages/[lang]/company/sections/location-map.astro';
+import Certifications from '@/pages/[lang]/company/sections/certifications.astro';
+import CompanyCta from '@/pages/[lang]/company/sections/cta.astro';
 
 import { getTranslations } from '@/i18n/utils';
+const currentLang = (Astro.locals as any).lang || 'en';
 
-const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
 const t = await getTranslations(currentLang);
 ---
 
@@ -44,7 +44,7 @@ const t = await getTranslations(currentLang);
   <ScrollReveal threshold={0.12} />
 </Base>
 
-<script client:load>
+<script>
   const sectorCards = document.querySelectorAll<HTMLElement>('.sector-card');
   sectorCards.forEach((card, i) => {
     (card as HTMLElement).style.transitionDelay = `${i * 80}ms`;

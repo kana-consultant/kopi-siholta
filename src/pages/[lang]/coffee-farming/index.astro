@@ -7,16 +7,17 @@ import Footer from '@/components/layout/footer-layout.astro';
 import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 import ScrollReveal from '@/components/shared/scroll-reveal.astro';
 
-import FarmingHero from './coffee-farming/sections/hero.astro';
-import FarmingStats from './coffee-farming/sections/stats.astro';
-import HarvestingProcedure from './coffee-farming/sections/harvesting-procedure.astro';
-import Process from './coffee-farming/sections/process-section.astro';
-import Roasting from './coffee-farming/sections/roasting-section.astro';
-import Regions from './coffee-farming/sections/regions-section.astro';
-import Quality from './coffee-farming/sections/quality-section.astro';
-import Farmer from './coffee-farming/sections/farmer-section.astro';
-import LocationMap from './coffee-farming/sections/location-map.astro';
-import FarmingCta from './coffee-farming/sections/cta.astro';
+import FarmingHero from '@/pages/[lang]/coffee-farming/sections/hero.astro';
+import FarmingStats from '@/pages/[lang]/coffee-farming/sections/stats.astro';
+import HarvestingProcedure from '@/pages/[lang]/coffee-farming/sections/harvesting-procedure.astro';
+import Process from '@/pages/[lang]/coffee-farming/sections/process-section.astro';
+import Roasting from '@/pages/[lang]/coffee-farming/sections/roasting-section.astro';
+import Regions from '@/pages/[lang]/coffee-farming/sections/regions-section.astro';
+import Quality from '@/pages/[lang]/coffee-farming/sections/quality-section.astro';
+import Farmer from '@/pages/[lang]/coffee-farming/sections/farmer-section.astro';
+import LocationMap from '@/pages/[lang]/coffee-farming/sections/location-map.astro';
+import FarmingCta from '@/pages/[lang]/coffee-farming/sections/cta.astro';
+
 
 import { getTranslations } from '@/i18n/utils';
 
@@ -35,7 +36,7 @@ const t = await getTranslations(currentLang);
     <FarmingStats lang={currentLang} />
   </header>
 
-  <main>
+  <main id="main-content">
     <HarvestingProcedure lang={currentLang} />
     <Process lang={currentLang} />
     <Roasting lang={currentLang} />
@@ -48,5 +49,5 @@ const t = await getTranslations(currentLang);
 
   <Footer lang={currentLang} />
   <WhatsAppFAB />
-  <ScrollReveal />
+  <ScrollReveal/>
 </Base>

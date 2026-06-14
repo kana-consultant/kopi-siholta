@@ -5,9 +5,14 @@ interface Props {
   rootMargin?: string
 }
 
-const { selectors = ['.animate-on-scroll'], threshold = 0.1, rootMargin = '0px 0px -40px 0px' } = Astro.props
+const { 
+  selectors = ['.animate-on-scroll'], 
+  threshold = 0.1, 
+  rootMargin = '0px 0px -40px 0px' 
+} = Astro.props
 ---
-<script client:load>
+
+<script define:vars={{ selectors, threshold, rootMargin }}>
   for (const sel of selectors) {
     const els = document.querySelectorAll(sel)
     const obs = new IntersectionObserver((entries) => {
@@ -17,7 +22,8 @@ const { selectors = ['.animate-on-scroll'], threshold = 0.1, rootMargin = '0px 0
           obs.unobserve(e.target)
         }
       })
-    }, { threshold, rootMargin })
+    }, { threshold, rootMargin }) // Variabel di sini sekarang aman dibaca browser
+    
     els.forEach(el => obs.observe(el))
   }
 </script>

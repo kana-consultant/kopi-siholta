@@ -19,18 +19,18 @@ const t = await getTranslations(lang);
 const nav = t.nav as Record<string, string>;
 
 const mainNavItems = [
-  { key: 'products', href: `/${lang}/#products` },
-  { key: 'export',   href: `/${lang}/#export` },
-  { key: 'b2b',      href: `/${lang}/#b2b` },
-  { key: 'omniChannel',      href: `/${lang}/#omni` },
-  { key: 'contact',  href: `/${lang}/#contact` },
+  { key: 'products', href: `/${lang}/homepage/#products` },
+  { key: 'export',   href: `/${lang}/homepage/#export` },
+  { key: 'b2b',      href: `/${lang}/homepage/#b2b` },
+  { key: 'omniChannel',      href: `/${lang}/homepage/#omni` },
+  { key: 'contact',  href: `/${lang}/homepage/#contact` },
 ];
 ---
 
 <header class="navbar" role="banner">
   <div class="navbar__inner container">
 
-    <a href={`/${lang}/`} class="navbar__logo" aria-label="Kopi Siholta — Home">
+    <a href={`/${lang}/homepage/`} class="navbar__logo" aria-label="Kopi Siholta — Home">
       <Image
         src={logoLight}
         alt="Kopi Siholta"
@@ -51,22 +51,22 @@ const mainNavItems = [
           </button>
           <ul class="navbar__dropdown" role="menu" aria-label="Sectors — About Us, Coffee Farming, F&amp;B, Tourism">
             <li role="none">
-              <a href={`/${lang}/company`} class="navbar__dropdown-link" role="menuitem">
+              <a href={`/${lang}/company/`} class="navbar__dropdown-link" role="menuitem">
                 {nav.company}
               </a>
             </li>
             <li role="none">
-              <a href={`/${lang}/coffee-farming`} class="navbar__dropdown-link" role="menuitem">
+              <a href={`/${lang}/coffee-farming/`} class="navbar__dropdown-link" role="menuitem">
                 {nav.coffeeFarming}
               </a>
             </li>
             <li role="none">
-              <a href={`/${lang}/fnb`} class="navbar__dropdown-link" role="menuitem">
+              <a href={`/${lang}/fnb/`} class="navbar__dropdown-link" role="menuitem">
                 {nav.fnb}
               </a>
             </li>
             <li role="none">
-              <a href={`/${lang}/tourism`} class="navbar__dropdown-link" role="menuitem">
+              <a href={`/${lang}/tourism/`} class="navbar__dropdown-link" role="menuitem">
                 {nav.tourism}
               </a>
             </li>
