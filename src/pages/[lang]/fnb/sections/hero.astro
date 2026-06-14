@@ -1,24 +1,31 @@
 ---
 import PageHero from '@/components/shared/page-hero.astro';
 import fnbBg from '@/images/bg/bg-fnb.jpg';
-import { getTranslations } from '@/i18n/utils';
+import '../styles/hero.css';
 
 interface Props {
-  lang?: string;
+  alt: string;
+  titleLine1: string;
+  titleLine2: string;
+  subtitle: string;
+  pageLabel: string;
+  homeLabel: string;
+  prevLabel: string;
+  prevHref: string;
+  lang: string;
 }
-const { lang = 'en' } = Astro.props;
-const t = await getTranslations(lang);
+const { alt, titleLine1, titleLine2, subtitle, pageLabel, homeLabel, prevLabel, prevHref, lang } = Astro.props;
 ---
 <PageHero
   bgImage={fnbBg}
-  alt={t.fnb.gallery?.altAtmosphere ?? 'Suasana Cafe Kopi Siholta'}
-  titleLine1={t.fnb.titleLine1}
-  titleLine2={t.fnb.titleLine2}
-  subtitle={t.fnb.subtitle}
-  pageLabel={t.fnb.page}
-  homeLabel={t.breadcrumb.home}
-  prevLabel={t.breadcrumb.company}
-  prevHref={`/${lang}/company`}
+  alt={alt}
+  titleLine1={titleLine1}
+  titleLine2={titleLine2}
+  subtitle={subtitle}
+  pageLabel={pageLabel}
+  homeLabel={homeLabel}
+  prevLabel={prevLabel}
+  prevHref={prevHref}
   overlayPosition="center 40%"
   lang={lang}
 />

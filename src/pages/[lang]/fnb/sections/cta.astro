@@ -1,11 +1,13 @@
 ---
 import PageCta from '@/components/shared/page-cta.astro';
-import { getTranslations } from '@/i18n/utils';
+import '../styles/cta.css';
 
 interface Props {
-  lang?: string;
+  title: string;
+  subtitle: string;
+  ctaText: string;
+  lang: string;
 }
-const { lang = 'en' } = Astro.props;
-const t = await getTranslations(lang);
+const { title, subtitle, ctaText, lang } = Astro.props;
 ---
-<PageCta title={t.fnb.ctaTitle} subtitle={t.fnb.ctaSubtitle} ctaText={t.fnb.cta1} lang={lang} />
+<PageCta title={title} subtitle={subtitle} ctaText={ctaText} lang={lang} />

@@ -7,37 +7,77 @@ import Footer from '@/components/layout/footer-layout.astro';
 import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 import ScrollReveal from '@/components/shared/scroll-reveal.astro';
 
-import FnbHero from '@/pages/[lang]/fnb/sections/hero.astro';
-import FnbStat from '@/pages/[lang]/fnb/sections/stats.astro';
-import RetailCoffee from '@/pages/[lang]/fnb/sections/retail-coffee.astro';
-import CafeFavorites from '@/pages/[lang]/fnb/sections/cafe-favorites.astro';
-import RetailDistribution from '@/pages/[lang]/fnb/sections/retail-distribution.astro';
-import Sustainability from '@/pages/[lang]/fnb/sections/sustainability.astro';
-import FnbCta from '@/pages/[lang]/fnb/sections/cta.astro';
-
-import { getTranslations } from '@/i18n/utils';
+import FnbHero from './sections/hero.astro';
+import FnbStat from './sections/stats.astro';
+import RetailCoffee from './sections/retail-coffee.astro';
+import CafeFavorites from './sections/cafe-favorites.astro';
+import RetailDistribution from './sections/retail-distribution.astro';
+import Sustainability from './sections/sustainability.astro';
+import FnbCta from './sections/cta.astro';
 
 const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
-const t = await getTranslations(currentLang);
+
+const { pageTranslations: t } = currentLang === 'id'
+  ? await import('./i18n/id')
+  : currentLang === 'fr'
+    ? await import('./i18n/fr')
+    : await import('./i18n/en');
 ---
 
-<Base title={t.meta.titleFnb} description={t.meta.descFnb} lang={currentLang} breadcrumbs={[
+<Base title={t.meta.title} description={t.meta.description} lang={currentLang} breadcrumbs={[
   { name: t.breadcrumb.home, href: `/${currentLang}/` },
   { name: t.breadcrumb.fnb, href: `/${currentLang}/fnb` },
 ]}>
   <Navbar lang={currentLang} />
 
   <main id="main-content">
-    <FnbHero lang={currentLang} />
-    <FnbStat lang={currentLang} />
-    <RetailCoffee lang={currentLang} />
-    <CafeFavorites lang={currentLang} />
-    <RetailDistribution lang={currentLang} />
-    <Sustainability lang={currentLang} />
-    <FnbCta lang={currentLang} />
+    <FnbHero
+      alt={t.hero.alt}
+      titleLine1={t.hero.titleLine1}
+      titleLine2={t.hero.titleLine2}
+      subtitle={t.hero.subtitle}
+      pageLabel={t.hero.pageLabel}
+      homeLabel={t.breadcrumb.home}
+      prevLabel={t.breadcrumb.prev}
+      prevHref={`/${currentLang}/company`}
+      lang={currentLang}
+    />
+    <FnbStat stats={t.stats} />
+    <RetailCoffee
+      title={t.retail.title}
+      subtitle={t.retail.subtitle}
+      ctaText={t.retail.ctaText}
+      main={t.retail.main}
+      items={t.retail.items}
+      lang={currentLang}
+    />
+    <CafeFavorites
+      title={t.cafe.title}
+      subtitle={t.cafe.subtitle}
+      drinks={t.cafe.drinks}
+    />
+    <RetailDistribution
+      title={t.distribution.title}
+      retailNetworkHeading={t.distribution.retailNetworkHeading}
+      retailNetworkDesc={t.distribution.retailNetworkDesc}
+      cafeLocationsHeading={t.distribution.cafeLocationsHeading}
+      locations={t.distribution.locations}
+      mapPreviewLabel={t.distribution.mapPreviewLabel}
+      regionChips={t.distribution.regionChips}
+    />
+    <Sustainability
+      title={t.sustainability.title}
+      subtitle={t.sustainability.subtitle}
+    />
+    <FnbCta
+      title={t.cta.title}
+      subtitle={t.cta.subtitle}
+      ctaText={t.cta.ctaText}
+      lang={currentLang}
+    />
   </main>
 
   <Footer lang={currentLang} />
   <WhatsAppFAB />
-  <ScrollReveal />
+  <ScrollReveal selectors={['.animate-on-scroll']} />
 </Base>
