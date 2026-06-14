@@ -1,17 +1,18 @@
 ---
-import LocationMap from '@/components/shared/location-map.astro';
-import { getTranslations } from '@/i18n/utils';
+import SharedLocationMap from '@/components/shared/location-map.astro';
 
 interface Props {
-  lang?: string;
+  title: string;
+  address: string;
+  mapLabel: string;
+  lang: string;
 }
-const { lang = 'en' } = Astro.props;
-const t = await getTranslations(lang);
+const { title, address, mapLabel, lang } = Astro.props;
 ---
-<LocationMap
+<SharedLocationMap
   mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4905.48087178627!2d98.8646577!3d2.2739400000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e1702ecca12b9%3A0xddab3e62499da70!2sKopi%20Siholta!5e1!3m2!1sid!2sid!4v1780411697138!5m2!1sid!2sid"
-  title={t.coffeeFarming.locationTitle}
-  address={t.coffeeFarming.locationAddress}
-  mapLabel={t.coffeeFarming.locationMapLabel}
+  title={title}
+  address={address}
+  mapLabel={mapLabel}
   lang={lang}
 />

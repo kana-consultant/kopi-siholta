@@ -2,81 +2,69 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import fRoastProfile from '@/images/farming/coffee-roast-profiles.png';
-import { getTranslations } from '@/i18n/utils';
+import '../styles/roasting-section.css';
+
+interface RoastLevel {
+  name: string;
+  temp: string;
+  desc: string;
+  variant: 'light' | 'medium' | 'dark';
+  featured: boolean;
+}
+
+interface Standard {
+  icon: string;
+  title: string;
+  desc: string;
+}
 
 interface Props {
-  lang?: string;
+  title: string;
+  subtitle: string;
+  levels: RoastLevel[];
+  standards: Standard[];
+  profileLabel: string;
 }
-const { lang = 'en' } = Astro.props;
-const t = await getTranslations(lang);
+const { title, subtitle, levels, standards, profileLabel } = Astro.props;
 ---
 
 <section class="roasting section" id="roasting" aria-labelledby="roasting-heading">
   <div class="container">
-
     <header class="roasting__header animate-on-scroll">
-      <h2 id="roasting-heading" class="roasting__title">{t.coffeeFarming.roastingTitle}</h2>
-      <p class="roasting__sub">{t.coffeeFarming.roastingSubtitle}</p>
+      <h2 id="roasting-heading" class="roasting__title">{title}</h2>
+      <p class="roasting__sub">{subtitle}</p>
     </header>
 
     <div class="roasting__levels">
-      <article class="roast-card roast-card--light animate-on-scroll">
-        <div class="roast-card__stripe" aria-hidden="true"></div>
-        <div class="roast-card__body">
-          <h3 class="roast-card__name">{t.coffeeFarming.roastingLevelLightTitle}</h3>
-          <span class="roast-card__temp">{t.coffeeFarming.roastingLevelLightTemp}</span>
-          <p class="roast-card__desc">{t.coffeeFarming.roastingLevelLightDesc}</p>
-        </div>
-      </article>
-
-      <article class="roast-card roast-card--medium roast-card--feature animate-on-scroll" style="transition-delay:80ms">
-        <div class="roast-card__stripe" aria-hidden="true"></div>
-        <div class="roast-card__body">
-          <h3 class="roast-card__name">{t.coffeeFarming.roastingLevelMediumTitle}</h3>
-          <span class="roast-card__temp">{t.coffeeFarming.roastingLevelMediumTemp}</span>
-          <p class="roast-card__desc">{t.coffeeFarming.roastingLevelMediumDesc}</p>
-        </div>
-      </article>
-
-      <article class="roast-card roast-card--dark animate-on-scroll" style="transition-delay:160ms">
-        <div class="roast-card__stripe" aria-hidden="true"></div>
-        <div class="roast-card__body">
-          <h3 class="roast-card__name">{t.coffeeFarming.roastingLevelDarkTitle}</h3>
-          <span class="roast-card__temp">{t.coffeeFarming.roastingLevelDarkTemp}</span>
-          <p class="roast-card__desc">{t.coffeeFarming.roastingLevelDarkDesc}</p>
-        </div>
-      </article>
+      {levels.map((level, i) => (
+        <article class={`roast-card roast-card--${level.variant}${level.featured ? ' roast-card--feature' : ''} animate-on-scroll`} style={`transition-delay:${i * 80}ms`}>
+          <div class="roast-card__stripe" aria-hidden="true"></div>
+          <div class="roast-card__body">
+            <h3 class="roast-card__name">{level.name}</h3>
+            <span class="roast-card__temp">{level.temp}</span>
+            <p class="roast-card__desc">{level.desc}</p>
+          </div>
+        </article>
+      ))}
     </div>
 
     <div class="roasting__standards animate-on-scroll">
       <div class="roasting__std-grid">
-        <div class="roasting__std-card">
-          <div class="roasting__std-icon" aria-hidden="true"><Icon name="mdi:thermometer" width="28" height="28" /></div>
-          <div>
-            <h3 class="roasting__std-title">{t.coffeeFarming.roastingStdTempTitle}</h3>
-            <p class="roasting__std-desc">{t.coffeeFarming.roastingStdTempDesc}</p>
+        {standards.map(std => (
+          <div class="roasting__std-card">
+            <div class="roasting__std-icon" aria-hidden="true"><Icon name={std.icon} width="28" height="28" /></div>
+            <div>
+              <h3 class="roasting__std-title">{std.title}</h3>
+              <p class="roasting__std-desc">{std.desc}</p>
+            </div>
           </div>
-        </div>
-        <div class="roasting__std-card">
-          <div class="roasting__std-icon" aria-hidden="true"><Icon name="mdi:palette" width="28" height="28" /></div>
-          <div>
-            <h3 class="roasting__std-title">{t.coffeeFarming.roastingStdColorTitle}</h3>
-            <p class="roasting__std-desc">{t.coffeeFarming.roastingStdColorDesc}</p>
-          </div>
-        </div>
-        <div class="roasting__std-card">
-          <div class="roasting__std-icon" aria-hidden="true"><Icon name="mdi:coffee" width="28" height="28" /></div>
-          <div>
-            <h3 class="roasting__std-title">{t.coffeeFarming.roastingStdCraftedTitle}</h3>
-            <p class="roasting__std-desc">{t.coffeeFarming.roastingStdCraftedDesc}</p>
-          </div>
-        </div>
+        ))}
       </div>
 
       <figure class="roasting__profiles">
         <Image
           src={fRoastProfile}
-          alt="Koleksi profil roasting Kopi Siholta — dari Light City hingga Dark Roast"
+          alt={profileLabel}
           class="roasting__profiles-img"
           loading="lazy"
           widths={[480, 768, 1024]}
@@ -84,212 +72,5 @@ const t = await getTranslations(lang);
         />
       </figure>
     </div>
-
   </div>
 </section>
- 
-<style>
-.roasting {
-  background: #FAF8F5;
-  padding-block: var(--space-12);
-}
-
-/* Header */
-.roasting__header {
-  text-align: center;
-  margin-bottom: var(--space-8);
-}
-
-.roasting__title {
-  font-family: var(--font-display);
-  font-size: 1.625rem;
-  font-weight: 700;
-  color: var(--color-brand-earth);
-  line-height: 1.1;
-  margin-bottom: var(--space-4);
-}
-
-.roasting__sub {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  line-height: 1.75;
-  color: var(--color-brand-muted);
-  max-width: 560px;
-  margin-inline: auto;
-}
-
-/* Roast Level Cards Mobile First */
-.roasting__levels {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
-  margin-bottom: var(--space-12);
-}
-
-.roast-card {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  background: #fff;
-  border: 0.5px solid var(--color-neutral-200);
-  display: flex;
-  flex-direction: column;
-  transition: box-shadow 300ms ease, transform 300ms ease;
-  position: relative;
-}
-
-.roast-card__stripe {
-  height: 6px;
-  width: 100%;
-  flex-shrink: 0;
-}
-
-.roast-card--light  .roast-card__stripe { background: #C8956C; }
-.roast-card--medium .roast-card__stripe { background: #8B5E3C; }
-.roast-card--dark   .roast-card__stripe { background: #3D1E0E; }
-
-.roast-card__body {
-  padding: var(--space-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  flex: 1;
-}
-
-.roast-card__name {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.roast-card--light  .roast-card__name { color: #9B6840; }
-.roast-card--medium .roast-card__name { color: var(--color-brand-earth); }
-.roast-card--dark   .roast-card__name { color: #3D1E0E; }
-
-.roast-card__temp {
-  font-family: var(--font-label);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-brand-red);
-  background: rgba(205, 18, 34, 0.06);
-  border: 0.5px solid rgba(205, 18, 34, 0.15);
-  border-radius: 2px;
-  padding: 3px 8px;
-  width: fit-content;
-}
-
-.roast-card__desc {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  line-height: 1.75;
-  color: var(--color-brand-muted);
-  flex: 1;
-}
-
-/* Standards & Profiles */
-.roasting__standards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  align-items: start;
-}
-
-.roasting__std-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.roasting__std-card {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-4);
-  padding: var(--space-4);
-  background: #fff;
-  border-radius: var(--radius-xl);
-  border: 0.5px solid var(--color-neutral-200);
-  transition: box-shadow 200ms ease;
-}
-
-.roasting__std-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-lg);
-  background: rgba(205, 18, 34, 0.07);
-  color: var(--color-brand-red);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.roasting__std-title {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-brand-earth);
-  margin-bottom: 4px;
-  line-height: 1.2;
-}
-
-.roasting__std-desc {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  line-height: 1.75;
-  color: var(--color-brand-muted);
-}
-
-.roasting__profiles {
-  border-radius: var(--radius-xl);
-  padding: var(--space-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  border: 1px solid var(--color-neutral-200);
-  margin: 0;
-}
-
-.roasting__profiles-img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-lg);
-  object-fit: cover;
-}
-
-/* ── Tablet & Desktop Media Queries ── */
-@media (min-width: 481px) {
-  .roast-card__body { padding: var(--space-6); }
-  .roasting__profiles { padding: var(--space-6); gap: var(--space-5); }
-  .roasting__std-card { padding: var(--space-5); }
-}
-
-@media (min-width: 769px) {
-  .roasting { padding-block: var(--space-16); }
-  .roasting__header { margin-bottom: var(--space-12); }
-  .roasting__title { font-size: clamp(28px, 4vw, 48px); }
-  .roasting__sub { font-size: clamp(13px, 1.5vw, 16px); }
-  .roast-card__name { font-size: clamp(20px, 2.2vw, 26px); }
-  .roasting__std-title { font-size: clamp(15px, 1.5vw, 18px); }
-  .roasting__standards { grid-template-columns: 1fr 1fr; }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .roasting__levels { grid-template-columns: 1fr 1fr; }
-  .roasting__levels .roast-card:last-child { grid-column: span 2; }
-}
-
-@media (min-width: 1025px) {
-  .roasting__levels { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (hover: hover) {
-  .roast-card:hover {
-    box-shadow: 0 12px 40px rgba(92, 61, 30, 0.12);
-    transform: translateY(-3px);
-  }
-  .roasting__std-card:hover {
-    box-shadow: 0 6px 24px rgba(92, 61, 30, 0.08);
-  }
-}
-</style>

@@ -1,26 +1,33 @@
 ---
 import PageHero from '@/components/shared/page-hero.astro';
 import farmingBg from '@/images/bg/bg-farming.jpg';
-import { getTranslations } from '@/i18n/utils';
 
 interface Props {
-  lang?: string;
+  alt: string;
+  titleLine1: string;
+  titleLine2: string;
+  subtitle: string;
+  pageLabel: string;
+  homeLabel: string;
+  prevLabel: string;
+  prevHref: string;
+  ctaText: string;
+  lang: string;
 }
-const { lang = 'en' } = Astro.props;
-const t = await getTranslations(lang);
+const { alt, titleLine1, titleLine2, subtitle, pageLabel, homeLabel, prevLabel, prevHref, ctaText, lang } = Astro.props;
 ---
 <PageHero
   bgImage={farmingBg}
-  alt={t.coffeeFarming.farmImages?.altFarm ?? 'Perkebunan Kopi Kopi Siholta'}
-  titleLine1={t.coffeeFarming.titleLine1}
-  titleLine2={t.coffeeFarming.titleLine2}
-  subtitle={t.coffeeFarming.subtitle}
-  pageLabel={t.coffeeFarming.page}
-  homeLabel={t.breadcrumb.home}
-  prevLabel={t.breadcrumb.company}
-  prevHref={`/${lang}/company`}
+  alt={alt}
+  titleLine1={titleLine1}
+  titleLine2={titleLine2}
+  subtitle={subtitle}
+  pageLabel={pageLabel}
+  homeLabel={homeLabel}
+  prevLabel={prevLabel}
+  prevHref={prevHref}
   overlayPosition="center 25%"
   showCta
-  ctaText={t.coffeeFarming.ctaHero}
+  ctaText={ctaText}
   lang={lang}
 />

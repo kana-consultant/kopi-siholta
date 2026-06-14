@@ -7,47 +7,105 @@ import Footer from '@/components/layout/footer-layout.astro';
 import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 import ScrollReveal from '@/components/shared/scroll-reveal.astro';
 
-import FarmingHero from '@/pages/[lang]/coffee-farming/sections/hero.astro';
-import FarmingStats from '@/pages/[lang]/coffee-farming/sections/stats.astro';
-import HarvestingProcedure from '@/pages/[lang]/coffee-farming/sections/harvesting-procedure.astro';
-import Process from '@/pages/[lang]/coffee-farming/sections/process-section.astro';
-import Roasting from '@/pages/[lang]/coffee-farming/sections/roasting-section.astro';
-import Regions from '@/pages/[lang]/coffee-farming/sections/regions-section.astro';
-import Quality from '@/pages/[lang]/coffee-farming/sections/quality-section.astro';
-import Farmer from '@/pages/[lang]/coffee-farming/sections/farmer-section.astro';
-import LocationMap from '@/pages/[lang]/coffee-farming/sections/location-map.astro';
-import FarmingCta from '@/pages/[lang]/coffee-farming/sections/cta.astro';
-
-
-import { getTranslations } from '@/i18n/utils';
+import FarmingHero from './sections/hero.astro';
+import FarmingStats from './sections/stats.astro';
+import HarvestingProcedure from './sections/harvesting-procedure.astro';
+import Process from './sections/process-section.astro';
+import Roasting from './sections/roasting-section.astro';
+import Regions from './sections/regions-section.astro';
+import Quality from './sections/quality-section.astro';
+import Farmer from './sections/farmer-section.astro';
+import LocationMap from './sections/location-map.astro';
+import FarmingCta from './sections/cta.astro';
 
 const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
-const t = await getTranslations(currentLang);
+
+const { pageTranslations: t } = currentLang === 'id'
+  ? await import('./i18n/id')
+  : currentLang === 'fr'
+    ? await import('./i18n/fr')
+    : await import('./i18n/en');
+
+const regionsWithImages = t.regions.list.map((r: typeof t.regions.list[number], i: number) => ({ ...r, imgIndex: i }));
 ---
 
-<Base title={t.meta.titleFarming} description={t.meta.descFarming} lang={currentLang} breadcrumbs={[
+<Base title={t.meta.title} description={t.meta.description} lang={currentLang} breadcrumbs={[
   { name: t.breadcrumb.home, href: `/${currentLang}/` },
   { name: t.breadcrumb.coffeeFarming, href: `/${currentLang}/coffee-farming` },
 ]}>
   <Navbar lang={currentLang} />
 
   <header>
-    <FarmingHero lang={currentLang} />
-    <FarmingStats lang={currentLang} />
+    <FarmingHero
+      alt={t.hero.alt}
+      titleLine1={t.hero.titleLine1}
+      titleLine2={t.hero.titleLine2}
+      subtitle={t.hero.subtitle}
+      pageLabel={t.hero.pageLabel}
+      homeLabel={t.breadcrumb.home}
+      prevLabel={t.breadcrumb.prev}
+      prevHref={`/${currentLang}/company`}
+      ctaText={t.hero.ctaText}
+      lang={currentLang}
+    />
+    <FarmingStats stats={t.stats} />
   </header>
 
   <main id="main-content">
-    <HarvestingProcedure lang={currentLang} />
-    <Process lang={currentLang} />
-    <Roasting lang={currentLang} />
-    <Regions lang={currentLang} />
-    <Quality lang={currentLang} />
-    <Farmer lang={currentLang} />
-    <LocationMap lang={currentLang} />
-    <FarmingCta lang={currentLang} />
+    <HarvestingProcedure
+      title={t.harvestProcedure.title}
+      subtitle={t.harvestProcedure.subtitle}
+      steps={t.harvestProcedure.steps}
+      outro={t.harvestProcedure.outro}
+    />
+    <Process
+      tag={t.process.tag}
+      title={t.process.title}
+      subtitle={t.process.subtitle}
+      tabs={t.process.tabs}
+      panels={t.process.panels}
+    />
+    <Roasting
+      title={t.roasting.title}
+      subtitle={t.roasting.subtitle}
+      levels={t.roasting.levels}
+      standards={t.roasting.standards}
+      profileLabel={t.roasting.profileLabel}
+    />
+    <Regions
+      title={t.regions.title}
+      subtitle={t.regions.subtitle}
+      list={regionsWithImages}
+    />
+    <Quality
+      title={t.quality.title}
+      subtitle={t.quality.subtitle}
+      panelTitle={t.quality.panelTitle}
+      panelText={t.quality.panelText}
+      stats={t.quality.stats}
+      gallery={t.quality.gallery}
+    />
+    <Farmer
+      title={t.farmers.title}
+      subtitle={t.farmers.subtitle}
+      role={t.farmers.role}
+      list={t.farmers.list}
+    />
+    <LocationMap
+      title={t.location.title}
+      address={t.location.address}
+      mapLabel={t.location.mapLabel}
+      lang={currentLang}
+    />
+    <FarmingCta
+      title={t.cta.title}
+      subtitle={t.cta.subtitle}
+      ctaText={t.cta.ctaText}
+      lang={currentLang}
+    />
   </main>
 
   <Footer lang={currentLang} />
   <WhatsAppFAB />
-  <ScrollReveal/>
+  <ScrollReveal selectors={['.animate-on-scroll']} />
 </Base>
