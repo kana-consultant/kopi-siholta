@@ -1,4 +1,4 @@
-import type { pageTranslations } from './en';
+import type { PageTranslationsType } from "./en";
 
 export const pageTranslations = {
   meta: {
@@ -165,4 +165,4 @@ export const pageTranslations = {
     subtitle: 'PT Siholta Toba Indonesia terbuka untuk kemitraan dengan petani kopi dan buyer internasional. Hubungi kami untuk diskusi lebih lanjut.',
     ctaText: 'Hubungi Kami',
   },
-} as const satisfies typeof pageTranslations;
+} satisfies PageTranslationsType;

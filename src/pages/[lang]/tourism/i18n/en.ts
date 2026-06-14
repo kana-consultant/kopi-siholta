@@ -73,3 +73,15 @@ export const pageTranslations = {
     ctaText: 'Contact Us',
   },
 } as const;
+
+type DeepString<T> = {
+  readonly [K in keyof T]: T[K] extends object
+    ? T[K] extends Array<any>
+      ? T[K][number] extends object
+        ? DeepString<T[K][number]>[] 
+        : string[] 
+      : DeepString<T[K]> 
+    : string; 
+};
+
+export type PageTranslationsType = DeepString<typeof pageTranslations>;

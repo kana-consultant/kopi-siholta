@@ -1,4 +1,4 @@
-import type { pageTranslations } from './en';
+import type { PageTranslationsType } from "./en";
 
 export const pageTranslations = {
   meta: {
@@ -165,4 +165,4 @@ export const pageTranslations = {
     subtitle: 'PT Siholta Toba Indonesia est ouverte aux partenariats avec des agriculteurs et acheteurs internationaux. Contactez-nous pour en discuter.',
     ctaText: 'Nous Contacter',
   },
-} as const satisfies typeof pageTranslations;
+} satisfies PageTranslationsType;

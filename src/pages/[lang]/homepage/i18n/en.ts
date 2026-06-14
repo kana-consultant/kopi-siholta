@@ -171,7 +171,7 @@ export const pageTranslations = {
     tiktok: {
       headline: 'Kopi Siholta on TikTok',
       body: 'Short videos, coffee tips, and daily brewing inspiration. Follow us for exclusive content and product drops.',
-      cta: '@kopisiholta',
+      cta: 'Watch Now',
     },
   },
   contact: {
@@ -207,3 +207,15 @@ export const pageTranslations = {
     },
   },
 } as const;
+
+type DeepString<T> = {
+  readonly [K in keyof T]: T[K] extends object
+    ? T[K] extends Array<any>
+      ? DeepString<T[K][number]>[] 
+      : DeepString<T[K]> 
+    : T[K] extends string
+      ? string 
+      : T[K];
+};
+
+export type PageTranslationsType = DeepString<typeof pageTranslations>;

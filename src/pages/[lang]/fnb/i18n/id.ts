@@ -1,4 +1,4 @@
-import type { pageTranslations } from './en';
+import type { PageTranslationsType } from "./en";
 
 export const pageTranslations = {
   meta: {
@@ -70,4 +70,4 @@ export const pageTranslations = {
     subtitle: 'Beli Sekarang dan bawa petualangan kopi terbaik ke dapur Anda hari ini.',
     ctaText: 'Hubungi Kami',
   },
-} as const satisfies typeof pageTranslations;
+} satisfies PageTranslationsType;

@@ -1,4 +1,4 @@
-import type { pageTranslations } from './en';
+import type { PageTranslationsType } from "./en";
 
 export const pageTranslations = {
   meta: {
@@ -173,7 +173,7 @@ export const pageTranslations = {
     tiktok: {
       headline: 'Kopi Siholta di TikTok',
       body: 'Video pendek, tips kopi, dan inspirasi seduhan harian. Ikuti kami untuk konten eksklusif dan info produk terbaru.',
-      cta: '@kopisiholta',
+      cta: 'Tonton Sekarang',
     },
   },
   contact: {
@@ -208,4 +208,4 @@ export const pageTranslations = {
       sendEmailAria: 'Kirim pertanyaan via Email',
     },
   },
-} as const satisfies typeof pageTranslations;
+} as const satisfies PageTranslationsType;

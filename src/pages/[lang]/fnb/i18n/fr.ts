@@ -1,4 +1,4 @@
-import type { pageTranslations } from './en';
+import type { PageTranslationsType } from "./en";
 
 export const pageTranslations = {
   meta: {
@@ -70,4 +70,4 @@ export const pageTranslations = {
     subtitle: "Commandez cette Origine et invitez des aujourd'hui l'aventure cafe ultime dans votre cuisine.",
     ctaText: 'Nous Contacter',
   },
-} as const satisfies typeof pageTranslations;
+} satisfies PageTranslationsType;

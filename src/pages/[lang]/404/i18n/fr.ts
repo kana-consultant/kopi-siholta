@@ -1,4 +1,4 @@
-import type { pageTranslations } from './en';
+import type { PageTranslationsType } from './en';
 
 export const pageTranslations = {
   title: 'Page Introuvable',
@@ -8,4 +8,4 @@ export const pageTranslations = {
   suggestion: 'Retournez à la page d\'accueil ou découvrez notre collection de cafés de spécialité.',
   ctaHome: 'Retour à l\'accueil',
   ctaExplore: 'Explorer les produits',
-} as const satisfies typeof pageTranslations;
+} as const satisfies PageTranslationsType;

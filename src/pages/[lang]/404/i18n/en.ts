@@ -7,3 +7,5 @@ export const pageTranslations = {
   ctaHome: 'Back to Homepage',
   ctaExplore: 'Explore Products',
 } as const;
+
+export type PageTranslationsType = Record<keyof typeof pageTranslations, string>;

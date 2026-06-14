@@ -1,4 +1,5 @@
-import type { pageTranslations } from './en';
+import type { PageTranslationsType } from './en';
+
 
 export const pageTranslations = {
   title: 'Halaman Tidak Ditemukan',
@@ -8,4 +9,4 @@ export const pageTranslations = {
   suggestion: 'Coba kembali ke halaman utama atau jelajahi koleksi kopi spesialti kami.',
   ctaHome: 'Kembali ke Beranda',
   ctaExplore: 'Jelajahi Produk',
-} as const satisfies typeof pageTranslations;
+} as const satisfies PageTranslationsType;

@@ -1,4 +1,4 @@
-import type { pageTranslations } from './en';
+import type { PageTranslationsType } from "./en";
 
 export const pageTranslations = {
   meta: {
@@ -74,4 +74,4 @@ export const pageTranslations = {
     subtitle: "Contactez notre équipe pour organiser une visite de plantation, une visite d'usine ou une session de cupping sur place.",
     ctaText: 'Nous Contacter',
   },
-} as const satisfies typeof pageTranslations;
+} satisfies PageTranslationsType;
