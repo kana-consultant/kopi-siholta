@@ -1,0 +1,26 @@
+---
+import PageHero from '@/components/shared/page-hero.astro';
+import farmingBg from '@/images/bg/bg-farming.jpg';
+import { getTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
+---
+<PageHero
+  bgImage={farmingBg}
+  alt={t.coffeeFarming.farmImages?.altFarm ?? 'Perkebunan Kopi Kopi Siholta'}
+  titleLine1={t.coffeeFarming.titleLine1}
+  titleLine2={t.coffeeFarming.titleLine2}
+  subtitle={t.coffeeFarming.subtitle}
+  pageLabel={t.coffeeFarming.page}
+  homeLabel={t.breadcrumb.home}
+  prevLabel={t.breadcrumb.company}
+  prevHref={`/${lang}/company`}
+  overlayPosition="center 25%"
+  showCta
+  ctaText={t.coffeeFarming.ctaHero}
+  lang={lang}
+/>

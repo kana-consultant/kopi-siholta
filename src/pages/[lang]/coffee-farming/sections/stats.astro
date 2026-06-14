@@ -1,0 +1,16 @@
+---
+import StatBand from '@/components/shared/stat-band.astro';
+import { getTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
+---
+<StatBand stats={[
+  { value: '20+', label: t.coffeeFarming.statFamilies },
+  { value: '1.500 mdpl', label: t.coffeeFarming.statMaxAlt },
+  { value: 'Giling Basah', label: t.coffeeFarming.statMethod },
+  { value: '100 ton', label: t.coffeeFarming.statCapacity },
+]} />

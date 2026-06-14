@@ -1,0 +1,16 @@
+---
+import StatBand from '@/components/shared/stat-band.astro';
+import { getTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
+---
+<StatBand stats={[
+  { value: '1.200 mdpl', label: t.tourism.statAlt },
+  { value: '200+', label: t.tourism.statFamilies },
+  { value: '6+', label: t.tourism.statCountries },
+  { value: '2021', label: t.tourism.statFounded },
+]} />

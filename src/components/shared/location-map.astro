@@ -1,0 +1,41 @@
+---
+import { Icon } from "astro-icon/components";
+import { getTranslations } from '@/i18n/utils';
+import { nl } from '@/utils/helpers';
+import '@/styles/components/location-map.css';
+
+interface Props {
+  mapUrl: string
+  title: string
+  address?: string
+  subtitle?: string
+  mapLabel?: string
+  lang?: string
+  showSubtitle?: boolean
+}
+
+const { mapUrl, title, address, subtitle, mapLabel = 'Lokasi', lang = 'en', showSubtitle = true } = Astro.props
+const t = await getTranslations(lang)
+---
+<section class="location section" aria-labelledby="location-heading">
+  <div class="container">
+    <div class="section__header animate-on-scroll">
+      <h2 id="location-heading" class="section-title">{nl(title)}</h2>
+      {showSubtitle && subtitle ? <p class="section-sub">{nl(subtitle)}</p> : null}
+    </div>
+    <div class="location__body animate-on-scroll">
+      <div class="location__map-wrap">
+        <div class="location__map-inner">
+          <iframe src={mapUrl} allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="location__iframe" title={mapLabel}></iframe>
+        </div>
+      </div>
+      {address ? (
+        <div class="location__info">
+          <div class="location__address-wrap">
+            <address class="location__address">{nl(address)}</address>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  </div>
+</section>

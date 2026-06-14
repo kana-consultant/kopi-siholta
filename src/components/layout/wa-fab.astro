@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import waLogo from '@/images/logo/logo-whatsapp.png';
+import { WHATSAPP_NUMBER } from '@/constants/site';
 
 interface Props {
   waNumber?: string;
@@ -8,7 +9,7 @@ interface Props {
 }
 
 const {
-  waNumber = '6281322518527',
+  waNumber = WHATSAPP_NUMBER,
   message = 'Halo, saya tertarik dengan Kopi Siholta. Bisa info lengkap lebih lanjut?',
 } = Astro.props;
 

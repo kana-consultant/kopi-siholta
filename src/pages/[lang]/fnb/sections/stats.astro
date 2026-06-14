@@ -1,0 +1,16 @@
+---
+import StatBand from '@/components/shared/stat-band.astro';
+import { getTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
+---
+<StatBand stats={[
+  { value: `${t.fnb.stats.statMenuItemsValue}${t.fnb.stats.statMenuItemsUnit}`, label: t.fnb.stats.statMenuItems },
+  { value: t.fnb.stats.statDrinksValue, label: t.fnb.stats.statDrinks },
+  { value: `${t.fnb.stats.statCupsDayValue}${t.fnb.stats.statCupsDayUnit}`, label: t.fnb.stats.statCupsDay },
+  { value: `${t.fnb.stats.statYearsExpValue}${t.fnb.stats.statYearsExpUnit}`, label: t.fnb.stats.statYearsExp },
+]} />

@@ -5,21 +5,21 @@ import Base from '@/layouts/base-layout.astro';
 import Navbar from '@/components/layout/navbar-layout.astro';
 import Footer from '@/components/layout/footer-layout.astro';
 import WhatsAppFAB from '@/components/layout/wa-fab.astro';
+import ScrollReveal from '@/components/shared/scroll-reveal.astro';
 
-import CompanyHero from '@/components/sections/company/company-hero.astro';
-import CompanyStory from '@/components/sections/company/company-story.astro';
-import VisiMisi from '@/components/sections/company/visi-misi.astro';
-import Timeline from '@/components/sections/company/time-line.astro';
-import OperationSectors from '@/components/sections/company/operation-sectors.astro';
-import LocationMap from '@/components/sections/company/location-map.astro';
-import CertModal from '@/components/sections/company/cert-modal.astro';
-import CompanyCta from '@/components/sections/company/company-cta.astro';
-import Certifications from '@/components/sections/company/cert-section.astro';
+import CompanyHero from './company/sections/hero.astro';
+import CompanyStory from './company/sections/story.astro';
+import VisiMisi from './company/sections/visi-misi.astro';
+import Timeline from './company/sections/timeline.astro';
+import OperationSectors from './company/sections/operation-sectors.astro';
+import LocationMap from './company/sections/location-map.astro';
+import Certifications from './company/sections/certifications.astro';
+import CompanyCta from './company/sections/cta.astro';
+
 import { getTranslations } from '@/i18n/utils';
 
 const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
 const t = await getTranslations(currentLang);
-
 ---
 
 <Base title={t.meta.titleCompany} description={t.meta.descCompany} lang={currentLang} breadcrumbs={[
@@ -41,29 +41,12 @@ const t = await getTranslations(currentLang);
   </main>
   <Footer lang={currentLang} />
   <WhatsAppFAB />
-  <CertModal lang={currentLang} />
+  <ScrollReveal threshold={0.12} />
 </Base>
 
-<script>
-  // ── Scroll-triggered animations ────────────────────
-  const els = document.querySelectorAll<HTMLElement>('.animate-on-scroll');
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-  );
-  els.forEach((el) => observer.observe(el));
-
-  // ── Stagger children of sectors grid ───────────────
+<script client:load>
   const sectorCards = document.querySelectorAll<HTMLElement>('.sector-card');
   sectorCards.forEach((card, i) => {
     (card as HTMLElement).style.transitionDelay = `${i * 80}ms`;
   });
-
 </script>

@@ -1,0 +1,326 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import t1Farm from '@/images/tourism/coffee-plantation.jpg';
+import t2Factory from '@/images/tourism/process (5).jpg';
+import t3Cup from '@/images/tourism/cup-and-test(2).jpg';
+import tThumb1 from '@/images/tourism/samosir-island.jpg';
+import tThumb2 from '@/images/tourism/danau-toba.jpg';
+import tThumb3 from '@/images/tourism/cup-and-test.jpg';
+
+import { getTranslations } from '@/i18n/utils';
+import { nl } from '@/utils/helpers';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const t = await getTranslations(lang);
+
+const experiences = [
+  {
+    num: '01',
+    titleKey: 'exp1Title', subtitleKey: 'exp1Subtitle', descKey: 'exp1Desc',
+    detailsKey: ['exp1Detail1', 'exp1Detail2', 'exp1Detail3', 'exp1Detail4'],
+    img: t1Farm, imgAltKey: 'altFarm', thumb: tThumb1,
+  },
+  {
+    num: '02',
+    titleKey: 'exp2Title', subtitleKey: 'exp2Subtitle', descKey: 'exp2Desc',
+    detailsKey: ['exp2Detail1', 'exp2Detail2', 'exp2Detail3'],
+    img: t2Factory, imgAltKey: 'altFactory', thumb: tThumb2,
+  },
+  {
+    num: '03',
+    titleKey: 'exp3Title', subtitleKey: 'exp3Subtitle', descKey: 'exp3Desc',
+    detailsKey: ['exp3Detail1', 'exp3Detail2', 'exp3Detail3', 'exp3Detail4'],
+    img: t3Cup, imgAltKey: 'altCupping', thumb: tThumb3,
+  },
+];
+---
+
+<section class="experiences section section--cream" id="experiences" aria-labelledby="exp-heading">
+  <div class="container">
+    <div class="section__header animate-on-scroll">
+      <h2 id="exp-heading" class="section-title" set:html={nl(t.tourism.expTitle)} />
+      <p class="section-sub">{t.tourism.expSubtitle}</p>
+    </div>
+
+    <div class="exp-list">
+      {experiences.map((exp, i) => (
+        <article class={`exp-item ${i % 2 !== 0 ? 'exp-item--rev' : ''} animate-on-scroll`}>
+          <!-- Image Panel -->
+          <div class="exp-item__media">
+            <div class="exp-item__img-wrap">
+              <Image
+                src={exp.img}
+                alt={t.tourism.images?.[exp.imgAltKey as keyof typeof t.tourism.images] ?? ''}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                widths={[480, 768, 1024]}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                class="exp-item__img"
+              />
+            </div>
+            <div class="exp-item__num-badge" aria-hidden="true">
+              <span class="exp-item__num">{exp.num}</span>
+            </div>
+            <div class="exp-item__thumb" aria-hidden="true">
+              <Image
+                src={exp.thumb}
+                alt=""
+                loading="lazy"
+                widths={[200, 300]}
+                sizes="80px"
+                class="exp-item__thumb-img"
+              />
+            </div>
+          </div>
+
+          <!-- Content Panel -->
+          <div class="exp-item__content">
+            <h3 class="exp-item__title">{t.tourism[exp.titleKey as keyof typeof t.tourism]}</h3>
+            <p class="exp-item__subtitle">{t.tourism[exp.subtitleKey as keyof typeof t.tourism]}</p>
+            <p class="exp-item__desc">{t.tourism[exp.descKey as keyof typeof t.tourism]}</p>
+            
+            <ul class="exp-item__details" role="list">
+              {exp.detailsKey.map(dk => (
+                <li class="exp-item__detail">
+                  <Icon name="mdi:check" width="12" height="12" />
+                  {t.tourism[dk as keyof typeof t.tourism]}
+                </li>
+              ))}
+            </ul>
+            
+            <a href={`/${lang}/#contact`} class="btn btn--outline-dark exp-item__cta">
+              {t.tourism.ctaPesan}
+              <Icon name="mdi:chevron-right" width="12" height="12" />
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+.exp-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  align-items: center;
+  border-radius: var(--radius-xl);
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  transition: box-shadow 300ms ease;
+}
+
+.exp-item:hover {
+  box-shadow: 0 12px 40px rgba(92,61,30,0.10);
+}
+
+.exp-item__media { 
+  position: relative; 
+}
+
+.exp-item__img-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  aspect-ratio: 16/9;
+}
+
+.exp-item__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.exp-item:hover .exp-item__img { 
+  transform: scale(1.04); 
+}
+
+.exp-item__num-badge {
+  position: absolute;
+  bottom: -8px;
+  left: -8px;
+  width: 44px;
+  height: 44px;
+  background: var(--color-brand-red);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(205,18,34,0.40);
+}
+
+.exp-item__num {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.exp-item__thumb {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  z-index: 2;
+}
+
+.exp-item__thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.exp-item__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2);
+}
+
+.exp-item__label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-brand-gold);
+}
+
+.exp-item__title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.exp-item__subtitle {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted);
+  margin-top: -0.5rem;
+}
+
+.exp-item__desc {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1.75;
+  color: var(--color-brand-muted);
+}
+
+.exp-item__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.exp-item__detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-brand-earth);
+}
+
+.exp-item__detail svg { 
+  color: var(--color-agri-green); 
+  flex-shrink: 0; 
+}
+
+.exp-item__cta {
+  margin-top: var(--space-2);
+  align-self: flex-start;
+  width: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 641px) {
+  .exp-item {
+    gap: var(--space-4);
+    padding: var(--space-6);
+  }
+
+  .exp-item__img-wrap {
+    aspect-ratio: 4/3;
+  }
+
+  .exp-item__num-badge {
+    width: 52px;
+    height: 52px;
+  }
+
+  .exp-item__num {
+    font-size: 1rem;
+  }
+
+  .exp-item__thumb {
+    width: 80px;
+    height: 80px;
+  }
+
+  .exp-item__cta {
+    width: auto;
+    justify-content: flex-start;
+  }
+}
+@media (min-width: 1025px) {
+  .exp-item {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .exp-item--rev {
+    direction: rtl;
+  }
+  
+  .exp-item--rev > * { 
+    direction: ltr; 
+  }
+
+  .exp-item__num-badge {
+    bottom: -12px;
+    left: -12px;
+  }
+
+  .exp-item--rev .exp-item__num-badge {
+    left: auto;
+    right: -12px;
+  }
+
+  .exp-item__thumb {
+    top: -10px;
+    right: -10px;
+  }
+
+  .exp-item--rev .exp-item__thumb {
+    right: auto;
+    left: -10px;
+  }
+}
+</style>

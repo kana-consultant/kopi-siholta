@@ -8,6 +8,7 @@ import waLogo from '@/images/logo/logo-whatsapp.png';
 import tiktokLogo from '@/images/logo/logo-tiktok.png';
 import linktreeLogo from '@/images/logo/logo-linktree.png';
 import { getTranslations } from '@/i18n/utils';
+import { WHATSAPP_NUMBER, SOCIAL, SHOP } from '@/constants/site';
 
 interface Props {
   lang?: string;
@@ -16,13 +17,12 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const t = await getTranslations(lang);
 
-const WHATSAPP_NUMBER = '6281322518527';
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 const EMAIL = 'siholtatobaindonesia@gmail.com';
-const INSTAGRAM_URL = 'https://www.instagram.com/kopi_siholta.id/';
-const TOKPED_URL = 'https://www.tokopedia.com/kopisiholta';
+const INSTAGRAM_URL = SOCIAL.instagram;
+const TOKPED_URL = SHOP.tokopedia;
 const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
-const TIKTOK_URL = 'https://www.tiktok.com/@kopisiholta';
+const TIKTOK_URL = SOCIAL.tiktok;
 const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
 
 

@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets'
+import { Icon } from "astro-icon/components"
+import '@/styles/components/hero.css'
+
+interface Props {
+  bgImage: unknown
+  alt?: string
+  titleLine1: string
+  titleLine2: string
+  subtitle: string
+  pageLabel: string
+  homeLabel: string
+  prevLabel?: string
+  prevHref?: string
+  overlayPosition?: string
+  showCta?: boolean
+  ctaText?: string
+  ctaHref?: string
+  lang?: string
+}
+
+const {
+  bgImage,
+  alt = 'Kopi Siholta',
+  titleLine1,
+  titleLine2,
+  subtitle,
+  pageLabel,
+  homeLabel,
+  prevLabel,
+  prevHref,
+  overlayPosition = 'center 25%',
+  showCta = false,
+  ctaText,
+  ctaHref = '#process',
+  lang = 'en',
+} = Astro.props
+---
+<section class="page-hero page-hero--tall" aria-label={pageLabel}>
+  <div class="page-hero__bg">
+    <Image
+      src={bgImage}
+      alt={alt}
+      class="page-hero__img"
+      fetchpriority="high"
+      style={`object-position: ${overlayPosition}`}
+      loading="eager"
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+    />
+    <div class="page-hero__overlay" aria-hidden="true"></div>
+  </div>
+
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item">
+          <a href={`/${lang}/`} class="breadcrumb__link">{homeLabel}</a>
+        </li>
+        {prevLabel && prevHref ? (
+          <>
+            <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
+            <li class="breadcrumb__item">
+              <a href={prevHref} class="breadcrumb__link">{prevLabel}</a>
+            </li>
+          </>
+        ) : null}
+        <li class="breadcrumb__sep" aria-hidden="true"><Icon name="mdi:chevron-right" width="10" height="10" /></li>
+        <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">{pageLabel}</li>
+      </ol>
+    </nav>
+
+    <div class="page-hero__content">
+      <h1 class="page-hero__title">{titleLine1}<br/>{titleLine2}</h1>
+      <p class="page-hero__sub">{subtitle}</p>
+      {showCta && ctaText && ctaHref ? <a href={ctaHref} class="btn btn--primary">{ctaText}</a> : null}
+    </div>
+  </div>
+</section>
