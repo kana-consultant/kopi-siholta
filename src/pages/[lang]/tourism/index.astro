@@ -11,6 +11,7 @@ import TourismHero from './sections/hero.astro';
 import TourismStat from './sections/stats.astro';
 import Experiences from './sections/experiences-section.astro';
 import TourismCta from './sections/cta.astro';
+import { getTranslations } from '@/i18n/utils';
 
 const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
 
@@ -19,13 +20,15 @@ const { pageTranslations: t } = currentLang === 'id'
   : currentLang === 'fr'
     ? await import('./i18n/fr')
     : await import('./i18n/en');
+
+const { nav, footer } = await getTranslations(currentLang);
 ---
 
 <Base title={t.meta.title} description={t.meta.description} lang={currentLang} breadcrumbs={[
   { name: t.breadcrumb.home, href: `/${currentLang}/` },
   { name: t.breadcrumb.tourism, href: `/${currentLang}/tourism` },
 ]}>
-  <Navbar lang={currentLang} />
+  <Navbar lang={currentLang} nav={nav} />
 
   <main id="main-content">
     <TourismHero
@@ -56,7 +59,7 @@ const { pageTranslations: t } = currentLang === 'id'
     />
   </main>
 
-  <Footer lang={currentLang} />
+  <Footer lang={currentLang} footer={footer} />
   <WhatsAppFAB />
   <ScrollReveal selectors={['.animate-on-scroll']} />
 </Base>

@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/navbar-layout.astro';
 import Footer from '@/components/layout/footer-layout.astro';
 import WhatsAppFAB from '@/components/layout/wa-fab.astro';
 import { Icon } from 'astro-icon/components';
+import { getTranslations } from '@/i18n/utils';
 import './styles/index.css';
 
 interface Props {
@@ -21,10 +22,12 @@ const { pageTranslations: nf } = currentLang === 'id'
   : currentLang === 'fr'
     ? await import('./i18n/fr')
     : await import('./i18n/en');
+
+const { nav, footer } = await getTranslations(currentLang);
 ---
 
 <Base title={nf.title} description={nf.message} lang={currentLang}>
-  <Navbar lang={currentLang} />
+  <Navbar lang={currentLang} nav={nav} />
 
   <main id="main-content" class="error-page">
     <div class="error-page__inner container">
@@ -55,6 +58,6 @@ const { pageTranslations: nf } = currentLang === 'id'
     </div>
   </main>
 
-  <Footer lang={currentLang} />
+  <Footer lang={currentLang} footer={footer} />
   <WhatsAppFAB />
 </Base>

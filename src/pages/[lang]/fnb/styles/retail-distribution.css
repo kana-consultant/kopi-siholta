@@ -1,36 +1,177 @@
-.distribution { padding-block: var(--space-8); }
-.distribution__grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); margin-top: var(--space-6); }
-.distribution-card { border-radius: var(--radius-xl); padding: var(--space-5); background: #fff; border: 0.5px solid var(--color-neutral-200); display: flex; flex-direction: column; gap: var(--space-4); transition: box-shadow 300ms ease; }
-.distribution-card:hover { box-shadow: 0 8px 32px rgba(92, 61, 30, 0.08); }
-.distribution-card--cafe { background: linear-gradient(145deg, #fff 0%, #fafaf8 100%); }
-.distribution-card__heading { font-family: var(--font-display); font-size: clamp(16px, 4vw, 20px); font-weight: 700; color: var(--color-brand-earth); line-height: 1.3; }
-.distribution-card__desc { font-family: var(--font-body); font-size: 0.75rem; line-height: 1.7; color: var(--color-brand-muted); }
-.retail-logos { display: flex; flex-wrap: wrap; }
-.retail-logo { display: flex; align-items: center; justify-content: center; height: 50px; width: auto; padding-inline: var(--space-2); border-radius: var(--radius-md); opacity: 0.8; transition: opacity 200ms ease; }
-.retail-logo:hover { opacity: 1; }
-.retail-logo__img { height: 40px; width: auto; object-fit: contain; image-rendering: -webkit-optimize-contrast; }
-.region-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-.region-chip { display: inline-flex; align-items: center; padding: var(--space-1) var(--space-3); border-radius: 50px; background: var(--color-neutral-100); font-family: var(--font-body); font-size: 0.75rem; color: var(--color-brand-earth); font-weight: 500; }
-.cafe-locations { display: flex; flex-direction: column; gap: var(--space-5); }
-.cafe-location { display: flex; align-items: flex-start; gap: var(--space-4); }
-.cafe-location__icon { width: 36px; height: 36px; border-radius: var(--radius-md); background: var(--color-brand-cream); color: var(--color-brand-red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.cafe-location__info { flex: 1; }
-.cafe-location__city { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--color-brand-earth); margin-bottom: 4px; }
-.cafe-location__address { font-family: var(--font-body); font-size: 0.75rem; line-height: 1.6; color: var(--color-brand-muted); }
-.cafe-map-preview { margin-top: auto; padding-top: var(--space-5); border-top: 1px solid var(--color-neutral-200); display: flex; align-items: center; gap: var(--space-3); }
-.cafe-map-preview__dots { display: flex; gap: 8px; }
-.cafe-map-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-brand-muted); }
-.cafe-map-dot--active { background: var(--color-brand-red); }
-.cafe-map-preview__label { font-family: var(--font-body); font-size: 0.75; color: var(--color-brand-muted); }
+.distribution {
+  padding-block: var(--space-8);
+}
+.distribution__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.distribution-card {
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  background: #fff;
+  border: 0.5px solid var(--color-neutral-200);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: box-shadow 300ms ease;
+}
+.distribution-card:hover {
+  box-shadow: 0 8px 32px rgba(92, 61, 30, 0.08);
+}
+.distribution-card--cafe {
+  background: linear-gradient(145deg, #fff 0%, #fafaf8 100%);
+}
+.distribution-card__heading {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 4vw, 20px);
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  line-height: 1.3;
+}
+.distribution-card__desc {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--color-brand-muted);
+}
+.retail-logos {
+  display: flex;
+  flex-wrap: wrap;
+}
+.retail-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: auto;
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-md);
+  opacity: 0.8;
+  transition: opacity 200ms ease;
+}
+.retail-logo:hover {
+  opacity: 1;
+}
+.retail-logo__img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+.region-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.region-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: 50px;
+  background: var(--color-neutral-100);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-brand-earth);
+  font-weight: 500;
+}
+.cafe-locations {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.cafe-location {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+.cafe-location__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cafe-location__info {
+  flex: 1;
+}
+.cafe-location__city {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-brand-earth);
+  margin-bottom: 4px;
+}
+.cafe-location__address {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-brand-muted);
+}
+.cafe-map-preview {
+  margin-top: auto;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-neutral-200);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.cafe-map-preview__dots {
+  display: flex;
+  gap: 8px;
+}
+.cafe-map-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-brand-muted);
+}
+.cafe-map-dot--active {
+  background: var(--color-brand-red);
+}
+.cafe-map-preview__label {
+  font-family: var(--font-body);
+  font-size: 0.75;
+  color: var(--color-brand-muted);
+}
 @media (min-width: 481px) {
-  .region-chip { font-size: 0.75rem; padding: var(--space-2) var(--space-4); }
-  .retail-logo { width: auto; height: 36px; }
+  .region-chip {
+    font-size: 0.75rem;
+    padding: var(--space-2) var(--space-4);
+  }
+  .retail-logo {
+    width: auto;
+    height: 36px;
+  }
 }
 @media (min-width: 769px) {
-  .distribution { padding-block: var(--space-12); }
-  .distribution__grid { grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-8); }
-  .distribution-card { padding: var(--space-6); gap: var(--space-5); }
-  .distribution-card__heading { font-size: clamp(18px, 2vw, 22px); }
-  .retail-logo { min-width: 72px; height: 44px; width: auto; }
-  .cafe-location__icon { width: 40px; height: 40px; }
+  .distribution {
+    padding-block: var(--space-12);
+  }
+  .distribution__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+  .distribution-card {
+    padding: var(--space-6);
+    gap: var(--space-5);
+  }
+  .distribution-card__heading {
+    font-size: clamp(18px, 2vw, 22px);
+  }
+  .retail-logo {
+    min-width: 72px;
+    height: 44px;
+    width: auto;
+  }
+  .cafe-location__icon {
+    width: 40px;
+    height: 40px;
+  }
 }

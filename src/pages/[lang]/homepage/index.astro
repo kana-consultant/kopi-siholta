@@ -14,6 +14,7 @@ import Exports from './sections/exports-section.astro';
 import B2BPartners from './sections/partnerships-section.astro';
 import OmnichannelLinks from './sections/omnichannel-links.astro';
 import ContactSection from './sections/contact-section.astro';
+import { getTranslations } from '@/i18n/utils';
 
 const currentLang = (Astro.locals as any).lang || 'en';
 
@@ -22,10 +23,12 @@ const { pageTranslations: t } = currentLang === 'id'
   : currentLang === 'fr'
     ? await import('./i18n/fr')
     : await import('./i18n/en');
+
+const { nav, footer } = await getTranslations(currentLang);
 ---
 
 <Base title={t.meta.title} description={t.meta.description} lang={currentLang}>
-  <Navbar lang={currentLang} />
+  <Navbar lang={currentLang} nav={nav} />
   <main id="main-content">
     <Hero
       title={t.hero.title}
@@ -98,7 +101,7 @@ const { pageTranslations: t } = currentLang === 'id'
       form={t.contact.form}
     />
   </main>
-  <Footer lang={currentLang} />
+  <Footer lang={currentLang} footer={footer} />
   <WhatsAppFAB />
   <ScrollReveal selectors={['.animate-on-scroll', '.animate-fade-in-up']} />
 </Base>

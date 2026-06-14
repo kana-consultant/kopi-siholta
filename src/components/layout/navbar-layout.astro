@@ -6,17 +6,26 @@ import LanguageSwitcher from './language-switcher.astro';
 import '@/styles/components/navbar.css';
 import '@/styles/components/navbar-mobile.css';
 
-import { getTranslations } from '@/i18n/utils';
+export interface NavData {
+  home: string;
+  company: string;
+  products: string;
+  export: string;
+  b2b: string;
+  omniChannel: string;
+  contact: string;
+  coffeeFarming: string;
+  tourism: string;
+  fnb: string;
+  cta: string;
+}
 
 interface Props {
   lang?: string;
+  nav: NavData;
 }
 
-const { lang = 'en' } = Astro.props;
-
-const t = await getTranslations(lang);
-
-const nav = t.nav as Record<string, string>;
+const { lang = 'en', nav } = Astro.props;
 
 const mainNavItems = [
   { key: 'products', href: `/${lang}/homepage/#products` },
@@ -76,7 +85,7 @@ const mainNavItems = [
         {mainNavItems.map(item => (
           <li>
             <a href={item.href} class="navbar__link">
-              {nav[item.key]}
+              {nav[item.key as keyof NavData]}
             </a>
           </li>
         ))}
@@ -159,7 +168,7 @@ const mainNavItems = [
         {mainNavItems.map(item => (
           <li>
             <a href={item.href} class="mobile-menu__link">
-              {nav[item.key]}
+              {nav[item.key as keyof NavData]}
             </a>
           </li>
         ))}

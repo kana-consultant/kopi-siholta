@@ -17,6 +17,7 @@ import Quality from './sections/quality-section.astro';
 import Farmer from './sections/farmer-section.astro';
 import LocationMap from './sections/location-map.astro';
 import FarmingCta from './sections/cta.astro';
+import { getTranslations } from '@/i18n/utils';
 
 const currentLang: 'id' | 'en' | 'fr' = (Astro.locals as any).lang || 'en';
 
@@ -26,6 +27,8 @@ const { pageTranslations: t } = currentLang === 'id'
     ? await import('./i18n/fr')
     : await import('./i18n/en');
 
+const { nav, footer } = await getTranslations(currentLang);
+
 const regionsWithImages = t.regions.list.map((r: typeof t.regions.list[number], i: number) => ({ ...r, imgIndex: i }));
 ---
 
@@ -33,7 +36,7 @@ const regionsWithImages = t.regions.list.map((r: typeof t.regions.list[number], 
   { name: t.breadcrumb.home, href: `/${currentLang}/` },
   { name: t.breadcrumb.coffeeFarming, href: `/${currentLang}/coffee-farming` },
 ]}>
-  <Navbar lang={currentLang} />
+  <Navbar lang={currentLang} nav={nav} />
 
   <header>
     <FarmingHero
@@ -105,7 +108,7 @@ const regionsWithImages = t.regions.list.map((r: typeof t.regions.list[number], 
     />
   </main>
 
-  <Footer lang={currentLang} />
+  <Footer lang={currentLang} footer={footer} />
   <WhatsAppFAB />
   <ScrollReveal selectors={['.animate-on-scroll']} />
 </Base>

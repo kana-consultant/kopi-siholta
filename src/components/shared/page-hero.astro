@@ -1,10 +1,11 @@
 ---
 import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
 import { Icon } from "astro-icon/components"
 import '@/styles/components/hero.css'
 
 interface Props {
-  bgImage: unknown
+  bgImage: ImageMetadata
   alt?: string
   titleLine1: string
   titleLine2: string
