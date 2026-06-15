@@ -5,7 +5,7 @@ const SITE_ORIGIN = 'https://www.kopisiholta.com';
 const LOCALES = ['id', 'en', 'fr'] as const;
 
 const PAGES: { slug: string; lastmod: string; changefreq: string; priority: string }[] = [
-  { slug: '',            lastmod: '2026-06-12', changefreq: 'monthly', priority: '1.0' },
+  { slug: 'homepage',    lastmod: '2026-06-12', changefreq: 'monthly', priority: '1.0' },
   { slug: 'company',     lastmod: '2026-06-12', changefreq: 'monthly', priority: '0.8' },
   { slug: 'coffee-farming', lastmod: '2026-06-12', changefreq: 'monthly', priority: '0.8' },
   { slug: 'fnb',         lastmod: '2026-06-12', changefreq: 'monthly', priority: '0.7' },
@@ -16,8 +16,7 @@ const escapeXml = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 
-const localizedPath = (lang: string, slug: string) =>
-  slug.length === 0 ? `/${lang}/` : `/${lang}/${slug}`;
+const localizedPath = (lang: string, slug: string) => `/${lang}/${slug}`;
 
 export const GET: APIRoute = async () => {
   const urls = PAGES.flatMap((page) =>
@@ -27,7 +26,7 @@ export const GET: APIRoute = async () => {
         const href = `${SITE_ORIGIN}${localizedPath(l, page.slug)}`;
         return `    <xhtml:link rel="alternate" hreflang="${l}" href="${href}" />`;
       }).join('\n');
-      const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}${localizedPath('id', page.slug)}" />`;
+      const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}${localizedPath('en', page.slug)}" />`;
       return `  <url>
     <loc>${escapeXml(loc)}</loc>
     <lastmod>${page.lastmod}</lastmod>

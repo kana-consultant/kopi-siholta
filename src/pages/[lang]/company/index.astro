@@ -37,7 +37,7 @@ const { nav, footer } = await getTranslations(currentLang);
   description={t.meta.description}
   lang={currentLang}
   breadcrumbs={[
-    { name: t.breadcrumb.home, href: `/${currentLang}/` },
+    { name: t.breadcrumb.home, href: `/${currentLang}/homepage/` },
     { name: t.breadcrumb.company, href: `/${currentLang}/company` },
   ]}
 >
@@ -98,8 +98,8 @@ const { nav, footer } = await getTranslations(currentLang);
       title={t.cta.title}
       subtitle={t.cta.subtitle}
       buttons={[
-        { text: t.cta.cta1, href: `/${currentLang}/#contact` },
-        { text: t.cta.cta2, href: `/${currentLang}/` },
+        { text: t.cta.cta1, href: `/${currentLang}/homepage/#contact` },
+        { text: t.cta.cta2, href: `/${currentLang}/homepage/` },
       ]}
     />
   </main>

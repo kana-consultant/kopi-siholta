@@ -32,9 +32,10 @@ interface Props {
   cards: SolutionCard[];
   benefits: { headline: string; sub: string; items: BenefitItem[]; };
   cta: CTA;
+  lang?: string;
 }
 
-const { titleLine1, subtitle, socialProof, trustStats, cards, benefits, cta } = Astro.props;
+const { titleLine1, subtitle, socialProof, trustStats, cards, benefits, cta, lang = 'en' } = Astro.props;
 
 const solutionImages = [imgProcess, imgGreenBeans, imgCoffeeBeans];
 
@@ -146,7 +147,7 @@ const logos = [
         <p class="page-cta__sub page-cta__sub--earth">{cta.subtitle}</p>
       </div>
       <div class="page-cta__actions animate-on-scroll">
-        <a href="/#contact" class="btn btn--primary"
+        <a href={`/${lang}/homepage/#contact`} class="btn btn--primary"
           >{cta.primary}</a
         >
       </div>
