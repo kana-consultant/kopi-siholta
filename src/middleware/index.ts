@@ -48,7 +48,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   (context.locals as any).lang = preferredLang;
 
   if (url.pathname === '/') {
-    return context.redirect(`/${preferredLang}`, 302);
+    return context.redirect(`/${preferredLang}/homepage`, 302);
   }
 
   return next();

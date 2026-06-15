@@ -3,5 +3,5 @@ export const prerender = false;
 
 const preferredLang = Astro.cookies.get('preferred_lang')?.value || 'en';
 
-return Astro.redirect(`/${preferredLang}/`);
+return Astro.redirect(`/${preferredLang}/homepage/`);
 ---

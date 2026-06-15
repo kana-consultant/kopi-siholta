@@ -27,11 +27,11 @@ const { currentLang, nf } = Astro.props;
     <p class="error-page__suggestion">{nf.suggestion}</p>
 
     <div class="error-page__actions">
-      <a href={`/${currentLang}/`} class="btn btn--primary">
+      <a href={`/${currentLang}/homepage/`} class="btn btn--primary">
         <Icon name="mdi:home" width="16" height="16" />
         {nf.ctaHome}
       </a>
-      <a href={`/${currentLang}/#products`} class="btn btn--outline-dark">
+      <a href={`/${currentLang}/homepage/#products`} class="btn btn--outline-dark">
         <Icon name="mdi:shopping-outline" width="16" height="16" />
         {nf.ctaExplore}
       </a>

@@ -28,7 +28,7 @@ const { nav, footer } = await getTranslations(currentLang);
 ---
 
 <Base title={t.meta.title} description={t.meta.description} lang={currentLang} breadcrumbs={[
-  { name: t.breadcrumb.home, href: `/${currentLang}/` },
+  { name: t.breadcrumb.home, href: `/${currentLang}/homepage/` },
   { name: t.breadcrumb.fnb, href: `/${currentLang}/fnb` },
 ]}>
   <Navbar lang={currentLang} nav={nav} />

@@ -10,7 +10,7 @@ interface Props {
   buttons?: { text: string; href: string }[]
 }
 
-const { title, subtitle, ctaText, lang = 'en', buttons = [{ text: ctaText, href: `/${lang}/#contact` }] } = Astro.props
+const { title, subtitle, ctaText, lang = 'en', buttons = [{ text: ctaText, href: `/${lang}/homepage/#contact` }] } = Astro.props
 ---
 <section class="page-cta page-cta--cream" aria-label={title}>
   <div class="container page-cta__inner">
