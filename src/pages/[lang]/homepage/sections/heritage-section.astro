@@ -1,0 +1,163 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import logoKopiSiholta from '@/images/logo/logo-kopi-siholta.png';
+import heritage1 from '@/images/heritage/heritage-1.jpg';
+import heritage6 from '@/images/heritage/heritage-6.jpg';
+import heritage5 from '@/images/heritage/heritage-5.jpg';
+import farmer1 from '@/images/farming/farmer-1.jpg';
+import batakPeople from '@/images/heritage/batak-people.jpg';
+import '../styles/heritage-section.css';
+
+interface HeritageCard { title: string; desc: string; stat: string; }
+interface HeritageAlts { card1: string; card2: string; card3: string; card4: string; card5: string; }
+
+interface Props {
+  bannerName: string;
+  bannerTagline: string;
+  bannerSectorsLabel: string;
+  bannerSectorFarming: string;
+  bannerSectorFnB: string;
+  bannerSectorIndustry: string;
+  bannerCta: string;
+  bannerCtaAria: string;
+  heritageTitle: string;
+  heritageSubtitle: string;
+  cards: HeritageCard[];
+  alts: HeritageAlts;
+  lang: string;
+}
+
+const { bannerName, bannerTagline, bannerSectorsLabel, bannerSectorFarming, bannerSectorFnB, bannerSectorIndustry, bannerCta, bannerCtaAria, heritageTitle, heritageSubtitle, cards, alts, lang } = Astro.props;
+
+const sectorNameMap: Record<string, string> = {
+  sectorFarming: bannerSectorFarming,
+  sectorFnB: bannerSectorFnB,
+  sectorIndustry: bannerSectorIndustry,
+};
+
+const sectors = [
+  { nameKey: 'sectorFarming' as const, iconName: 'mdi:coffee',        href: `/${lang}/coffee-farming` },
+  { nameKey: 'sectorFnB' as const,       iconName: 'mdi:cup',         href: `/${lang}/fnb` },
+  { nameKey: 'sectorIndustry' as const,   iconName: 'mdi:office-building', href: `/${lang}/tourism` },
+];
+
+function multiline(label: string) {
+  return label.split('\n');
+}
+---
+
+<section class="company-banner" aria-label="PT Siholta Toba Indonesia" id="heritage">
+  <div class="container company-banner__inner">
+    <div class="company-banner__logo-wrap">
+      <Image
+        src={logoKopiSiholta}
+        alt={bannerName}
+        width={288}
+        height={288}
+        quality="max"
+        class="company-banner__logo-img"
+      />
+    </div>
+    <div class="company-banner__content">
+      <h2 class="company-banner__name">{bannerName}</h2>
+      <p class="company-banner__tagline">{bannerTagline}</p>
+    </div>
+    <div class="company-banner__divider" aria-hidden="true"></div>
+    <div class="company-banner__sectors">
+      <p class="company-banner__sectors-label">{bannerSectorsLabel}</p>
+      {sectors.map(sector => (
+        <a href={sector.href} class="company-banner__sector" style={`--sector-color: ${sector.iconName === 'mdi:coffee' ? '#5C2E10' : sector.iconName === 'mdi:cup' ? '#1A3A5C' : '#2A4A20'}`}>
+          <span class="company-banner__sector-icon" aria-hidden="true"><Icon name={sector.iconName} width="18" height="18" /></span>
+          <span class="company-banner__sector-name">{sectorNameMap[sector.nameKey]}</span>
+        </a>
+      ))}
+    </div>
+
+    <a href={`/${lang}/company`} class="company-banner__see-more">
+      {bannerCta}
+      <span class="sr-only"> about PT Siholta Toba Indonesia</span>
+    </a>
+  </div>
+</section>
+
+<section class="heritage" aria-label="Heritage and Identity">
+  <div class="bento">
+
+    <article class="bento__card bento__card--feature">
+      <div class="bento__card-img-wrap">
+        <Image src={heritage6} alt={alts.card1} class="bento__card-img" loading="eager" format="webp" quality={75} widths={[360, 540, 720]} sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 600px" />
+        <div class="bento__card-overlay"></div>
+      </div>
+      <div class="bento__card-content">
+        <h3 class="bento__card-title">
+          {multiline(cards[0].title).map((line, i) => (
+            <>{line}{i < multiline(cards[0].title).length - 1 ? <br /> : null}</>
+          ))}
+        </h3>
+        <p class="bento__card-desc">{cards[0].desc}</p>
+      </div>
+    </article>
+
+    <article class="bento__card bento__card--stat">
+      <div class="bento__card-img-wrap">
+        <Image src={farmer1} alt={alts.card2} class="bento__card-img" loading="lazy" format="webp" quality={75} widths={[360, 540]} sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 320px" />
+        <div class="bento__card-overlay"></div>
+      </div>
+      <div class="bento__card-content">
+        <h3 class="bento__card-title bento__card-title--sm">
+          {multiline(cards[1].title).map((line, i) => (
+            <>{line}{i < multiline(cards[1].title).length - 1 ? <br /> : null}</>
+          ))}
+        </h3>
+        <p class="bento__card-desc">{cards[1].desc}</p>
+      </div>
+    </article>
+
+    <article class="bento__card bento__card--text">
+      <div class="bento__card-img-wrap">
+        <Image src={heritage1} alt={alts.card3} class="bento__card-img" loading="lazy" format="webp" quality={75} widths={[360, 540]} sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 320px" />
+        <div class="bento__card-overlay"></div>
+      </div>
+      <div class="bento__card-content">
+        <h3 class="bento__card-title">
+          {multiline(cards[2].title).map((line, i) => (
+            <>{line}{i < multiline(cards[2].title).length - 1 ? <br /> : null}</>
+          ))}
+        </h3>
+        <p class="bento__card-desc">{cards[2].desc}</p>
+      </div>
+    </article>
+
+    <article class="bento__card bento__card--portrait">
+      <div class="bento__card-img-wrap">
+        <Image src={batakPeople} alt={alts.card4} class="bento__card-img" loading="lazy" format="webp" quality={75} widths={[360, 540]} sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 250px" />
+        <div class="bento__card-overlay"></div>
+      </div>
+      <div class="bento__card-content">
+        <h3 class="bento__card-title bento__card-title--sm">
+          {multiline(cards[3].title).map((line, i) => (
+            <>{line}{i < multiline(cards[3].title).length - 1 ? <br /> : null}</>
+          ))}
+        </h3>
+        <p class="bento__card-desc">{cards[3].desc}</p>
+      </div>
+    </article>
+
+    <article class="bento__card bento__card--wide">
+      <div class="bento__card-img-wrap">
+        <Image src={heritage5} alt={alts.card5} class="bento__card-img" loading="lazy" format="webp" quality={75} widths={[360, 540, 720]} sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 450px" />
+        <div class="bento__card-overlay"></div>
+      </div>
+      <div class="bento__card-content">
+        <h3 class="bento__card-title">
+          {multiline(cards[4].title).map((line, i) => (
+            <>{line}{i < multiline(cards[4].title).length - 1 ? <br /> : null}</>
+          ))}
+        </h3>
+        <p class="bento__card-desc">{cards[4].desc}</p>
+      </div>
+    </article>
+
+  </div>
+</section>

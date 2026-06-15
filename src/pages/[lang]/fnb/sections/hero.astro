@@ -1,0 +1,30 @@
+---
+import PageHero from '@/components/shared/page-hero.astro';
+import fnbBg from '@/images/bg/bg-fnb.jpg';
+
+interface Props {
+  alt: string;
+  titleLine1: string;
+  titleLine2: string;
+  subtitle: string;
+  pageLabel: string;
+  homeLabel: string;
+  prevLabel: string;
+  prevHref: string;
+  lang: string;
+}
+const { alt, titleLine1, titleLine2, subtitle, pageLabel, homeLabel, prevLabel, prevHref, lang } = Astro.props;
+---
+<PageHero
+  bgImage={fnbBg}
+  alt={alt}
+  titleLine1={titleLine1}
+  titleLine2={titleLine2}
+  subtitle={subtitle}
+  pageLabel={pageLabel}
+  homeLabel={homeLabel}
+  prevLabel={prevLabel}
+  prevHref={prevHref}
+  overlayPosition="center 40%"
+  lang={lang}
+/>

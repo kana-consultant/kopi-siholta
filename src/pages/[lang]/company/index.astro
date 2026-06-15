@@ -1,0 +1,116 @@
+---
+export const prerender = false;
+
+import Base from '@/layouts/base-layout.astro';
+import Navbar from '@/components/layout/navbar-layout.astro';
+import Footer from '@/components/layout/footer-layout.astro';
+import WhatsAppFAB from '@/components/layout/wa-fab.astro';
+import ScrollReveal from '@/components/shared/scroll-reveal.astro';
+
+import CompanyHero from './sections/hero.astro';
+import CompanyStory from './sections/story.astro';
+import VisiMisi from './sections/visi-misi.astro';
+import Timeline from './sections/timeline.astro';
+import CertModal from './sections/cert-modal.astro';
+import Certifications from './sections/certifications.astro';
+import OperationSectors from './sections/operation-sectors.astro';
+import LocationMap from './sections/location-map.astro';
+import CompanyCta from './sections/cta.astro';
+
+import { getTranslations } from '@/i18n/utils';
+import type { pageTranslations } from './i18n/en';
+type SectorItem = typeof pageTranslations.sectors.items[number];
+
+const currentLang = (Astro.locals as any).lang || 'en';
+
+const { pageTranslations: t } = currentLang === 'id'
+  ? await import('./i18n/id')
+  : currentLang === 'fr'
+    ? await import('./i18n/fr')
+    : await import('./i18n/en');
+
+const { nav, footer } = await getTranslations(currentLang);
+---
+
+<Base
+  title={t.meta.title}
+  description={t.meta.description}
+  lang={currentLang}
+  breadcrumbs={[
+    { name: t.breadcrumb.home, href: `/${currentLang}/` },
+    { name: t.breadcrumb.company, href: `/${currentLang}/company` },
+  ]}
+>
+  <Navbar lang={currentLang} nav={nav} />
+  <header>
+    <CompanyHero
+      titleLine1={t.hero.titleLine1}
+      titleLine2={t.hero.titleLine2}
+      subtitle={t.hero.subtitle}
+      pageLabel={t.hero.pageLabel}
+      homeLabel={t.breadcrumb.home}
+      lang={currentLang}
+    />
+  </header>
+  <main id="main-content">
+    <CompanyStory
+      logo={t.story.logo}
+      body1={t.story.body1}
+      body2={t.story.body2}
+      body3={t.story.body3}
+      founded={t.story.founded}
+      farmers={t.story.farmers}
+      sectors={t.story.sectors}
+    />
+    <VisiMisi
+      title={t.visiMisi.title}
+      headlineLeft={t.visiMisi.headlineLeft}
+      vision={t.visiMisi.vision}
+      missions={t.visiMisi.missions}
+    />
+    <Timeline
+      title={t.timeline.title}
+      subtitle={t.timeline.subtitle}
+      milestones={t.timeline.milestones}
+    />
+    <CertModal />
+    <Certifications
+      title={t.certifications.title}
+      subtitle={t.certifications.subtitle}
+      viewBtn={t.certifications.viewBtn}
+      items={t.certifications.items}
+    />
+    <OperationSectors
+      title={t.sectors.title}
+      subtitle={t.sectors.subtitle}
+      sectors={t.sectors.items.map((s: SectorItem) => ({
+        ...s,
+        href: `/${currentLang}/${s.href}`,
+      }))}
+    />
+    <LocationMap
+      title={t.location.title}
+      subtitle={t.location.subtitle}
+      mapLabel={t.location.mapLabel}
+      lang={currentLang}
+    />
+    <CompanyCta
+      title={t.cta.title}
+      subtitle={t.cta.subtitle}
+      buttons={[
+        { text: t.cta.cta1, href: `/${currentLang}/#contact` },
+        { text: t.cta.cta2, href: `/${currentLang}/` },
+      ]}
+    />
+  </main>
+  <Footer lang={currentLang} footer={footer} />
+  <WhatsAppFAB />
+  <ScrollReveal selectors={['.animate-on-scroll']} />
+</Base>
+
+<script>
+  const sectorCards = document.querySelectorAll<HTMLElement>('.sector-card');
+  sectorCards.forEach((card, i) => {
+    (card as HTMLElement).style.transitionDelay = `${i * 80}ms`;
+  });
+</script>

@@ -1,0 +1,39 @@
+---
+import '../styles/visi-misi.css';
+
+interface Props {
+  title: string;
+  headlineLeft: string;
+  vision: string;
+  missions: string[];
+}
+
+const { title, headlineLeft, vision, missions } = Astro.props;
+---
+
+<section class="visimisi section" aria-labelledby="visimisi-heading">
+  <div class="container">
+
+    <div class="visimisi__header animate-on-scroll">
+      <h2 id="visimisi-heading" class="visimisi__title">{title}</h2>
+      <p class="visimisi__sub">{headlineLeft}</p>
+    </div>
+
+    <div class="visimisi__grid animate-on-scroll">
+      <div class="visimisi__col visimisi__col--vision">
+        <h3 class="visimisi__col-tag">Visi</h3>
+        <p class="visimisi__col-text">{vision}</p>
+      </div>
+
+      <div class="visimisi__col visimisi__col--mission">
+        <h3 class="visimisi__col-tag">Misi</h3>
+        <ul class="visimisi__list" role="list">
+          {missions.map(m => (
+            <li class="visimisi__item">{m}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>

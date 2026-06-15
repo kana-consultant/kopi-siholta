@@ -1,0 +1,101 @@
+---
+import { Image } from 'astro:assets';
+import fnbHero1 from '@/images/fnb/coffee-susu.jpg';
+import fnbHero5 from '@/images/fnb/coffee-caramel.jpg';
+import fnbHero7 from '@/images/fnb/gula-aren.jpg';
+import fnbHero8 from '@/images/fnb/expresso.jpg';
+import '../styles/cafe-favorites.css';
+
+interface Drink {
+  name: string;
+  tag: string;
+  desc: string;
+  alt: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  drinks: Drink[];
+}
+const { title, subtitle, drinks } = Astro.props;
+
+const drinkImages = [fnbHero7, fnbHero8, fnbHero5, fnbHero1];
+---
+
+<section class="cafe-favorites section section--cream" aria-labelledby="cafe-heading">
+  <div class="container">
+    <div class="section__header animate-on-scroll">
+      <h2 id="cafe-heading" class="section-title">{title}</h2>
+      <p class="section-sub">{subtitle}</p>
+    </div>
+
+    <div class="cafe-carousel animate-on-scroll">
+      <div class="cafe-carousel__track">
+        {drinks.map((drink, i) => (
+          <article class="product-card cafe-card" aria-labelledby={`cafe-card-name-${i}`}>
+            <div class="product-card__media">
+              <Image
+                src={drinkImages[i]!}
+                alt={drink.alt}
+                loading="lazy"
+                widths={[320, 480]}
+                sizes="(max-width: 768px) 80vw, 25vw"
+                class="product-card__img"
+              />
+              <div class="product-card__tag">{drink.tag}</div>
+            </div>
+            <div class="product-card__body">
+              <h3 id={`cafe-card-name-${i}`} class="product-card__name">{drink.name}</h3>
+              <p class="product-card__desc">{drink.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="cafe-carousel__indicators">
+        {drinks.map((_, i) => (
+          <button class={`cafe-carousel__indicator ${i === 0 ? 'cafe-carousel__indicator--active' : ''}`} aria-label={`Go to card ${i + 1}`} data-index={i}></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const track = document.querySelector('.cafe-carousel__track');
+  const indicators = document.querySelectorAll('.cafe-carousel__indicator');
+
+  if (track && indicators.length > 0) {
+    const updateIndicators = () => {
+      const scrollLeft = (track as HTMLElement).scrollLeft;
+      const maxScrollLeft = (track as HTMLElement).scrollWidth - (track as HTMLElement).clientWidth;
+      const cardWidth = (track as HTMLElement).children[0]?.clientWidth || 180;
+      const gap = 16;
+      
+      let activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+      if (scrollLeft >= maxScrollLeft - 5) {
+        activeIndex = indicators.length - 1;
+      }
+      indicators.forEach((ind, i) => {
+        ind.classList.toggle('cafe-carousel__indicator--active', i === activeIndex);
+      });
+    };
+
+    (track as HTMLElement).addEventListener('scroll', updateIndicators, { passive: true });
+
+    indicators.forEach((ind) => {
+      ind.addEventListener('click', () => {
+        const index = parseInt(ind.getAttribute('data-index') || '0');
+        const cardWidth = (track as HTMLElement).children[0]?.clientWidth || 180;
+        const gap = 16;
+        const maxScrollLeft = (track as HTMLElement).scrollWidth - (track as HTMLElement).clientWidth;
+        
+        let targetScroll = index * (cardWidth + gap);
+        if (targetScroll > maxScrollLeft) {
+          targetScroll = maxScrollLeft;
+        }
+        (track as HTMLElement).scrollTo({ left: targetScroll, behavior: 'smooth' });
+      });
+    });
+  }
+</script>

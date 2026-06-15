@@ -1,0 +1,155 @@
+---
+import { Image } from 'astro:assets';
+import logo from '@/images/logo/logo-siholta.png';
+import tokpedLogo from '@/images/logo/logo-tokopedia.png';
+import shopeeLogo from '@/images/logo/logo-shopee.png';
+import igLogo from '@/images/logo/logo-instagram.png';
+import waLogo from '@/images/logo/logo-whatsapp.png';
+import tiktokLogo from '@/images/logo/logo-tiktok.png';
+import linktreeLogo from '@/images/logo/logo-linktree.png';
+import { WHATSAPP_NUMBER, SOCIAL, SHOP } from '@/constants/site';
+import '@/styles/components/footer.css';
+
+export interface FooterData {
+  shopLabel: string;
+  col1Title: string;
+  col1About: string;
+  col1History: string;
+  col1Certification: string;
+  col2Title: string;
+  col2ArabicaBeans: string;
+  col2ArabicaGround: string;
+  col2Robusta: string;
+  col3Title: string;
+  col3B2B: string;
+  col3Tourism: string;
+  col3FarmVisit: string;
+  col4Title: string;
+  col4Email: string;
+  col4Phone: string;
+  col4Address: string;
+  col4EmailAria: string;
+  col4PhoneAria: string;
+  col4AddressAria: string;
+  copyright: string;
+}
+
+interface Props {
+  lang?: string;
+  footer: FooterData;
+}
+
+const { lang = 'en', footer } = Astro.props;
+
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
+const EMAIL = 'siholtatobaindonesia@gmail.com';
+const INSTAGRAM_URL = SOCIAL.instagram;
+const TOKPED_URL = SHOP.tokopedia;
+const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
+const TIKTOK_URL = SOCIAL.tiktok;
+const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
+
+const columns = [
+  {
+    title: footer.col1Title,
+    links: [
+      { label: footer.col1About, href: `/${lang}/company/#about`, desc: '' },
+      { label: footer.col1History, href: `/${lang}/company/#timeline`, desc: '' },
+      { label: footer.col1Certification, href: `/${lang}/company/#certificates`, desc: '' },
+    ],
+  },
+  {
+    title: footer.col2Title,
+    links: [
+      { label: footer.col2ArabicaBeans, href: `/${lang}/#products`, desc: '' },
+      { label: footer.col2ArabicaGround, href: `/${lang}/#products`, desc: '' },
+      { label: footer.col2Robusta, href: `/${lang}/#products`, desc: '' },
+    ],
+  },
+  {
+    title: footer.col3Title,
+    links: [
+      { label: footer.col3B2B, href: `/${lang}/#b2b`, desc: '' },
+      { label: footer.col3Tourism, href: `/${lang}/tourism`, desc: '' },
+      { label: footer.col3FarmVisit, href: `/${lang}/coffee-farming`, desc: '' },
+    ],
+  },
+  {
+    title: footer.col4Title,
+    links: [
+      { label: `${footer.col4Email}: ${EMAIL}`, href: `mailto:${EMAIL}`, desc: footer.col4EmailAria },
+      { label: `${footer.col4Phone}: ${WHATSAPP_NUMBER}`, href: WHATSAPP_URL, desc: footer.col4PhoneAria },
+      { label: footer.col4Address, href: `/${lang}/company/#our-office`, desc: footer.col4AddressAria },
+    ],
+  },
+];
+---
+
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner container">
+
+    <div class="footer__top">
+
+    <div class="footer__brand">
+      <div class="footer__brand-logo">
+        <Image src={logo} alt="Kopi Siholta" width={160} height={160} quality="max" class="footer__logo-img" />
+        <span class="footer__wordmark">KOPI SIHOLTA</span>
+      </div>
+      <div class="footer__shop-row">
+        <p class="footer__shop-label">{footer.shopLabel}</p>
+        <div class="footer__shop-btns">
+          <a href={TOKPED_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Tokopedia">
+            <Image src={tokpedLogo} alt="Tokopedia" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Shopee">
+            <Image src={shopeeLogo} alt="Shopee" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Instagram">
+            <Image src={igLogo} alt="Instagram" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="TikTok">
+            <Image src={tiktokLogo} alt="TikTok" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={LINKTREE_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="Linktree">
+            <Image src={linktreeLogo} alt="Linktree" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="footer__shop-btn" aria-label="WhatsApp">
+            <Image src={waLogo} alt="WhatsApp" width={96} height={96} quality="max" class="footer__shop-logo" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+      <div class="footer__cols">
+        {columns.map(col => (
+          <div class="footer__col">
+            <p class="footer__col-title">{col.title}</p>
+            <ul class="footer__col-links">
+              {col.links.map(link => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="footer__link"
+                    aria-label={link.desc}
+                    target={link.href.startsWith('http') || link.href.startsWith('mailto') ? '_blank' : undefined}
+                    rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="footer__divider" aria-hidden="true"></div>
+
+    <div class="footer__copyright">
+      <p>{footer.copyright}</p>
+    </div>
+
+  </div>
+</footer>

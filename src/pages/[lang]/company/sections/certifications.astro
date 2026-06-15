@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import certBrand from '@/images/certified/brand-certificate.webp';
+import certHalal from '@/images/certified/halal-certificate.webp';
+import certTraining from '@/images/certified/training-certificate.webp';
+import certPirt from '@/images/certified/P-IRT.webp';
+import '../styles/certifications.css';
+
+interface CertItem {
+  pdfPath: string;
+  iconName: string;
+  name: string;
+  desc: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  viewBtn: string;
+  items: CertItem[];
+}
+
+const { title, subtitle, viewBtn, items } = Astro.props;
+
+const certImages = [certBrand, certHalal, certTraining, certPirt];
+const certAlts = [
+  "Sertifikat Merek Kopi Siholta",
+  "Sertifikat Halal Kopi Siholta",
+  "Sertifikat Pelatihan Keamanan Pangan Kopi Siholta",
+  "SPP-IRT Kopi Siholta",
+];
+---
+
+<section id="certificates" class="certifications section" aria-labelledby="certifications-heading">
+  <div class="container">
+    <div class="section__header animate-on-scroll">
+      <h2 id="certifications-heading" class="section-title">{title}</h2>
+      <p class="section-sub">{subtitle}</p>
+    </div>
+
+    <div class="certifications__grid">
+      {items.map((item, i) => (
+        <article class="cert-card animate-on-scroll">
+          <div class="cert-card__img-wrap">
+            <Image
+              src={certImages[i]}
+              alt={certAlts[i]}
+              class="cert-card__img"
+              loading="lazy"
+              widths={[320, 480]}
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          </div>
+          <div class="cert-card__body">
+            <div class="cert-card__icon" aria-hidden="true"><Icon name={item.iconName} width="28" height="28" /></div>
+            <h3 class="cert-card__name">{item.name}</h3>
+            <p class="cert-card__desc">{item.desc}</p>
+            <button class="cert-card__btn"
+              type="button"
+              data-cert-pdf={item.pdfPath}
+              data-cert-title={item.name}>
+              <Icon name="mdi:eye" width="14" height="14" aria-hidden="true" />
+              {viewBtn}
+            </button>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

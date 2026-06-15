@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import fFarmer1 from '@/images/farming/farmer-m.png';
+import fFarmer2 from '@/images/farming/farmer-f.png';
+import { nl } from '@/utils/helpers';
+import '../styles/farmer-section.css';
+
+interface Farmer {
+  name: string;
+  village: string;
+  since: string;
+  quote: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  role: string;
+  list: Farmer[];
+}
+const { title, subtitle, role, list } = Astro.props;
+
+const farmerImages = [fFarmer1, fFarmer2];
+---
+
+<section class="farmers section" aria-labelledby="farmers-heading">
+  <div class="container">
+    <header class="section__header animate-on-scroll">
+      <h2 id="farmers-heading" class="section-title" set:html={nl(title)}></h2>
+      <p class="section-sub">{subtitle}</p>
+    </header>
+
+    <div class="farmers__grid">
+      {list.map((farmer, i) => (
+        <article class="farmer-card animate-on-scroll">
+          <div class={`farmer-card__media ${i % 2 !== 0 ? 'desktop-order-2' : ''}`}>
+            <Image
+              src={farmerImages[i]!}
+              alt={`${farmer.name} — ${role}`}
+              loading="lazy"
+              widths={[480, 768]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              class="farmer-card__img"
+            />
+            <div class="farmer-card__info-badge">
+              <span class="farmer-card__village">{farmer.village}</span>
+              <span class="farmer-card__since">{farmer.since}</span>
+            </div>
+          </div>
+          
+          <div class="farmer-card__content">
+            <blockquote class="farmer-card__quote">
+              <p>"{farmer.quote}"</p>
+            </blockquote>
+            <footer class="farmer-card__author">
+              <span class="farmer-card__name">{farmer.name}</span>
+              <cite class="farmer-card__role">{role}</cite>
+            </footer>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

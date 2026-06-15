@@ -1,0 +1,76 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import fRoastProfile from '@/images/farming/coffee-roast-profiles.png';
+import '../styles/roasting-section.css';
+
+interface RoastLevel {
+  name: string;
+  temp: string;
+  desc: string;
+  variant: 'light' | 'medium' | 'dark';
+  featured: boolean;
+}
+
+interface Standard {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  levels: RoastLevel[];
+  standards: Standard[];
+  profileLabel: string;
+}
+const { title, subtitle, levels, standards, profileLabel } = Astro.props;
+---
+
+<section class="roasting section" id="roasting" aria-labelledby="roasting-heading">
+  <div class="container">
+    <header class="roasting__header animate-on-scroll">
+      <h2 id="roasting-heading" class="roasting__title">{title}</h2>
+      <p class="roasting__sub">{subtitle}</p>
+    </header>
+
+    <div class="roasting__levels">
+      {levels.map((level, i) => (
+        <article class={`roast-card roast-card--${level.variant}${level.featured ? ' roast-card--feature' : ''} animate-on-scroll`} style={`transition-delay:${i * 80}ms`}>
+          <div class="roast-card__stripe" aria-hidden="true"></div>
+          <div class="roast-card__body">
+            <h3 class="roast-card__name">{level.name}</h3>
+            <span class="roast-card__temp">{level.temp}</span>
+            <p class="roast-card__desc">{level.desc}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="roasting__standards animate-on-scroll">
+      <div class="roasting__std-grid">
+        {standards.map(std => (
+          <div class="roasting__std-card">
+            <div class="roasting__std-icon" aria-hidden="true"><Icon name={std.icon} width="28" height="28" /></div>
+            <div>
+              <h3 class="roasting__std-title">{std.title}</h3>
+              <p class="roasting__std-desc">{std.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <figure class="roasting__profiles">
+        <Image
+          src={fRoastProfile}
+          alt={profileLabel}
+          class="roasting__profiles-img"
+          loading="lazy"
+          widths={[480, 768, 1024]}
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+      </figure>
+    </div>
+  </div>
+</section>

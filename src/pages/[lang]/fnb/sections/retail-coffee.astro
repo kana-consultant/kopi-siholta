@@ -1,0 +1,81 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import fnbHero2 from '@/images/fnb/coffee-powder.jpg';
+import fnbHero4 from '@/images/fnb/coffee-beans.jpg';
+import fnbHero6 from '@/images/fnb/caffee.jpg';
+import fnbHero9 from '@/images/fnb/green-beans.jpg';
+import '../styles/retail-coffee.css';
+
+interface RetailItem {
+  name: string;
+  desc: string;
+  alt: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  ctaText: string;
+  main: RetailItem & { tag: string };
+  items: RetailItem[];
+  lang: string;
+}
+const { title, subtitle, ctaText, main, items, lang } = Astro.props;
+
+const itemImages = [fnbHero2, fnbHero9, fnbHero6];
+---
+
+<section class="retail-coffee section" aria-labelledby="retail-heading">
+  <div class="container">
+    <div class="section__header animate-on-scroll">
+      <h2 id="retail-heading" class="section-title">{title}</h2>
+      <p class="section-sub">{subtitle}</p>
+    </div>
+
+    <div class="retail-coffee__grid">
+      <article class="product-card retail-card--main animate-on-scroll">
+        <div class="product-card__media">
+          <Image
+            src={fnbHero4}
+            alt={main.alt}
+            loading="eager"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 768px) 100vw, 55vw"
+            class="product-card__img"
+          />
+          <div class="product-card__tag">{main.tag}</div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name">{main.name}</h3>
+          <p class="product-card__desc">{main.desc}</p>
+          <a href={`/${lang}/#products`} class="btn btn--link-cta" aria-label={ctaText}>
+            {ctaText}
+            <Icon name="mdi:arrow-right" width="16" height="16" />
+          </a>
+        </div>
+      </article>
+
+      <div class="retail-coffee__stack">
+        {items.map((item, i) => (
+          <article class="product-card retail-card--sm animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>
+            <div class="product-card__media">
+              <Image
+                src={itemImages[i]!}
+                alt={item.alt}
+                loading="lazy"
+                widths={[300, 480]}
+                sizes="(max-width: 768px) 50vw, 22vw"
+                class="product-card__img"
+              />
+            </div>
+            <div class="product-card__body">
+              <h3 class="product-card__name">{item.name}</h3>
+              <p class="product-card__desc">{item.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

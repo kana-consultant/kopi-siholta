@@ -1,0 +1,63 @@
+---
+import { Icon } from 'astro-icon/components';
+import '../styles/cert-modal.css';
+---
+
+<div id="cert-modal" class="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title" hidden>
+  <div class="cert-modal__backdrop"></div>
+  <div class="cert-modal__panel">
+    <div class="cert-modal__header">
+      <h3 id="cert-modal-title" class="cert-modal__title"></h3>
+      <button id="cert-modal-close" class="cert-modal__close" type="button" aria-label="Close">
+        <Icon name="mdi:close" width="20" height="20" />
+      </button>
+    </div>
+    <div class="cert-modal__body">
+      <iframe id="cert-modal-iframe" class="cert-modal__iframe" title="" src="" width="100%" height="100%"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('cert-modal') as HTMLElement;
+  const modalTitle = document.getElementById('cert-modal-title') as HTMLElement;
+  const modalIframe = document.getElementById('cert-modal-iframe') as HTMLIFrameElement;
+  const modalClose = document.getElementById('cert-modal-close') as HTMLButtonElement;
+  const modalBackdrop = modal?.querySelector('.cert-modal__backdrop') as HTMLElement;
+
+  function openCertModal(pdfPath: string, title: string) {
+    if (!modal || !modalIframe || !modalTitle) return;
+    modalTitle.textContent = title;
+    modalIframe.src = pdfPath;
+    modal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    modalClose?.focus();
+  }
+
+  function closeCertModal() {
+    if (!modal || !modalIframe) return;
+    modal.setAttribute('hidden', '');
+    modalIframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const btn = target.closest('.cert-card__btn');
+    if (btn) {
+      const pdf = btn.getAttribute('data-cert-pdf');
+      const title = btn.getAttribute('data-cert-title');
+      if (pdf && title) {
+        e.preventDefault();
+        openCertModal(pdf, title);
+      }
+    }
+  });
+
+  modalClose?.addEventListener('click', closeCertModal);
+  modalBackdrop?.addEventListener('click', closeCertModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (modal && !modal.hasAttribute('hidden') && e.key === 'Escape') closeCertModal();
+  });
+</script>

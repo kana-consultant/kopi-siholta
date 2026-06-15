@@ -1,0 +1,183 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import igLogo from '@/images/logo/logo-instagram.png';
+import tiktokLogo from '@/images/logo/logo-tiktok.png';
+import shopeeLogo from '@/images/logo/logo-shopee.png';
+import tokopediaLogo from '@/images/logo/logo-tokopedia.png';
+import waLogo from '@/images/logo/logo-whatsapp.png';
+
+import igPhoto1 from '@/images/omni/instagram-1.jpg';
+import igPhoto2 from '@/images/omni/instagram-2.jpg';
+import igPhoto3 from '@/images/omni/instagram-3.jpg';
+import igPhoto4 from '@/images/omni/instagram-4.jpg';
+
+import { nl } from '@/utils/helpers.ts' ;
+
+import { SOCIAL, SHOP } from '@/constants/site';
+import '../styles/omnichannel-links.css';
+
+interface MarketplaceCard { headline: string; sub: string; cta: string; }
+interface IGPhoto { src: string; alt: string; }
+
+interface Props {
+  title: string;
+  subtitle: string;
+  tokopedia: MarketplaceCard;
+  shopee: MarketplaceCard;
+  whatsapp: MarketplaceCard;
+  instagram: {
+    line: string;
+    headline: string;
+    body: string;
+    handle: string;
+    followCta: string;
+    openContent: string;
+    photos: IGPhoto[];
+  };
+  tiktok: {
+    headline: string;
+    body: string;
+    cta: string;
+  };
+}
+
+const { title, subtitle, tokopedia, shopee, whatsapp, instagram, tiktok: tiktokData } = Astro.props;
+
+const TOKPED_URL = SHOP.tokopedia;
+const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
+const TIKTOK_URL = SOCIAL.tiktok;
+const INSTAGRAM_URL = SOCIAL.instagram;
+const WHATSAPP_URL = 'https://wa.me/6281322518527';
+
+const ig_content1 = 'https://www.instagram.com/p/DXWpenWk4MA/?igsh=M20xbTFwbGtkeXo4';
+const ig_content2 = 'https://www.instagram.com/p/DZE9DjZTJL5/?igsh=dmluN2UwM3l6cDB6';
+const ig_content3 = 'https://www.instagram.com/p/DZEqWWDCCE3/?igsh=cTcwMWo0dmQ3eWw4';
+const ig_content4 = 'https://www.instagram.com/p/DZOznoZzH3i/?igsh=bWFycW1iMmwyMWgx';
+
+const marketplaceCards = [
+  {
+    id: 'tokopedia',
+    name: 'Tokopedia',
+    headline: tokopedia.headline,
+    sub: tokopedia.sub,
+    cta: tokopedia.cta,
+    url: TOKPED_URL,
+    logo: tokopediaLogo,
+  },
+  {
+    id: 'shopee',
+    name: 'Shopee',
+    headline: shopee.headline,
+    sub: shopee.sub,
+    cta: shopee.cta,
+    url: SHOPEE_URL,
+    logo: shopeeLogo,
+  },
+  {
+    id: 'whatsapp',
+    name: 'WhatsApp',
+    headline: whatsapp.headline,
+    sub: whatsapp.sub,
+    cta: whatsapp.cta,
+    url: WHATSAPP_URL,
+    logo: waLogo,
+  },
+];
+
+const igPhotos = [
+  { src: igPhoto1, alt: instagram.photos[0]?.alt ?? '', url: ig_content1 },
+  { src: igPhoto2, alt: instagram.photos[1]?.alt ?? '', url: ig_content2 },
+  { src: igPhoto3, alt: instagram.photos[2]?.alt ?? '', url: ig_content3 },
+  { src: igPhoto4, alt: instagram.photos[3]?.alt ?? '', url: ig_content4 },
+];
+---
+
+<section class="omni section section--cream" id="omni" aria-label="Omnichannel Shopping Links">
+  <div class="container">
+
+    <header class="section__header reveal">
+      <h2 class="section-title" set:html={nl(title)} />
+      <p class="section-sub">{subtitle}</p>
+    </header>
+
+    <div class="marketplace-grid">
+      {marketplaceCards.map((card, i) => (
+        <a
+          href={card.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class={`marketplace-card card--${card.id} reveal`}
+          style={`transition-delay: ${i * 100}ms`}
+          aria-label={card.headline}
+        >
+          <div class="marketplace-card__icon">
+            <Image src={card.logo} alt={card.name} width={96} height={96} quality="max" format="webp" class="marketplace-card__img" />
+          </div>
+          <h3 class="marketplace-card__headline">{card.headline}</h3>
+          <p class="marketplace-card__sub">{card.sub}</p>
+          <span class="card-cta">
+            {card.cta}
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <div class="ig-bento reveal">
+      <article class="ig-feature">
+        <div class="ig-feature__header">
+          <Image src={igLogo} alt="Instagram" width={160} height={160} quality="max" class="ig-feature__logo" />
+        </div>
+        <h3 class="ig-feature__headline">{instagram.headline}</h3>
+        <p class="ig-feature__body">{instagram.body}</p>
+        <div class="ig-feature__handle">{instagram.handle}</div>
+        <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="ig-feature__cta">
+          {instagram.followCta}
+        </a>
+      </article>
+
+      <div class="ig-grid">
+        {igPhotos.map((p, i) => (
+          <a href={p.url} target="_blank" rel="noopener noreferrer" class="photo-tile" aria-label={p.alt}>
+            <Image src={p.src} alt={p.alt} width={400} height={400} quality={75} format="webp" class="photo-tile__img" loading="lazy" />
+            <div class="photo-tile__overlay">
+              <span>{instagram.openContent}</span>
+              <Icon name="mdi:open-in-new" class="photo-tile__icon" /> 
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="tiktok-banner reveal" aria-label={tiktokData.headline}>
+      <div class="tiktok-banner-image" aria-hidden="true">
+          <Image src={tiktokLogo} alt="Tiktok" width={160} height={160} quality="max" class="tiktok-img" />
+      </div>
+      <div class="tiktok-banner__text">
+        <h3 class="tiktok-banner__title">@kopisiholta</h3>
+        <p class="tiktok-banner__body">{tiktokData.body}</p>
+      </div>
+      <button class="tiktok-banner__cta">
+        {tiktokData.cta}
+      </button>
+    </a>
+
+  </div>
+</section>
+
+<script>
+  const reveals = document.querySelectorAll<HTMLElement>('.omni .reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('visible'));
+  }
+</script>

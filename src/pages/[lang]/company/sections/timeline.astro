@@ -1,0 +1,47 @@
+---
+import { Icon } from 'astro-icon/components';
+import { nl } from '@/utils/helpers';
+import '../styles/timeline.css';
+
+interface Milestone {
+  year: string;
+  iconName: string;
+  title: string;
+  desc: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  milestones: Milestone[];
+}
+
+const { title, subtitle, milestones } = Astro.props;
+---
+
+<section id="timeline" class="timeline section section--cream" aria-labelledby="timeline-heading">
+  <div class="container">
+    <div class="section__header animate-on-scroll">
+      <h2 id="timeline-heading" class="section-title" set:html={nl(title)} />
+      <p class="section-sub">{subtitle}</p>
+    </div>
+
+    <ol class="timeline__list" role="list">
+      {milestones.map((m, i) => (
+        <li class={`timeline__item ${i % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'} animate-on-scroll`}>
+          <div class="timeline__card">
+            <div class="timeline__card-icon" aria-hidden="true">
+              <Icon name={m.iconName} width="16" height="16" />
+            </div>
+            <div class="timeline__card-year">{m.year}</div>
+            <h3 class="timeline__card-title">{m.title}</h3>
+            <p class="timeline__card-desc">{m.desc}</p>
+          </div>
+          <div class="timeline__connector" aria-hidden="true">
+            <div class="timeline__dot"></div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

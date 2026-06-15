@@ -1,0 +1,107 @@
+---
+export const prerender = false;
+
+import Base from '@/layouts/base-layout.astro';
+import Navbar from '@/components/layout/navbar-layout.astro';
+import Footer from '@/components/layout/footer-layout.astro';
+import WhatsAppFAB from '@/components/layout/wa-fab.astro';
+import ScrollReveal from '@/components/shared/scroll-reveal.astro';
+
+import Hero from './sections/hero.astro';
+import Heritage from './sections/heritage-section.astro';
+import Products from './sections/products-section.astro';
+import Exports from './sections/exports-section.astro';
+import B2BPartners from './sections/partnerships-section.astro';
+import OmnichannelLinks from './sections/omnichannel-links.astro';
+import ContactSection from './sections/contact-section.astro';
+import { getTranslations } from '@/i18n/utils';
+
+const currentLang = (Astro.locals as any).lang || 'en';
+
+const { pageTranslations: t } = currentLang === 'id'
+  ? await import('./i18n/id')
+  : currentLang === 'fr'
+    ? await import('./i18n/fr')
+    : await import('./i18n/en');
+
+const { nav, footer } = await getTranslations(currentLang);
+---
+
+<Base title={t.meta.title} description={t.meta.description} lang={currentLang}>
+  <Navbar lang={currentLang} nav={nav} />
+  <main id="main-content">
+    <Hero
+      title={t.hero.title}
+      subtitle={t.hero.subtitle}
+      ctaPrimary={t.hero.ctaPrimary}
+      ctaSecondary={t.hero.ctaSecondary}
+      slideLabel={t.hero.slideLabel}
+      stats={t.hero.stats}
+      slideAlts={t.hero.slideAlts}
+    />
+    <Heritage
+      bannerName={t.companyBanner.name}
+      bannerTagline={t.companyBanner.tagline}
+      bannerSectorsLabel={t.companyBanner.sectorsLabel}
+      bannerSectorFarming={t.companyBanner.sectorFarming}
+      bannerSectorFnB={t.companyBanner.sectorFnB}
+      bannerSectorIndustry={t.companyBanner.sectorIndustry}
+      bannerCta={t.companyBanner.cta}
+      bannerCtaAria={t.companyBanner.ctaAria}
+      heritageTitle={t.heritage.title}
+      heritageSubtitle={t.heritage.subtitle}
+      cards={t.heritage.cards}
+      alts={t.heritage.alts}
+      lang={currentLang}
+    />
+    <Products
+      title={t.products.title}
+      subtitle={t.products.subtitle}
+      items={t.products.items}
+      labels={t.products.labels}
+      certs={t.products.certs}
+    />
+    <Exports
+      title={t.export.title}
+      subtitle={t.export.subtitle}
+      routesLabel={t.export.routesLabel}
+      kpis={t.export.kpis}
+      activeMarketsLabel={t.export.sections.activeMarkets}
+      expansionPlanLabel={t.export.sections.expansionPlan}
+      statusActive={t.export.statusActive}
+      statusSoon={t.export.statusSoon}
+      countries={t.export.countries}
+    />
+    <B2BPartners
+      titleLine1={t.b2b.titleLine1}
+      subtitle={t.b2b.subtitle}
+      socialProof={t.b2b.socialProof}
+      trustStats={t.b2b.trustStats}
+      cards={t.b2b.cards}
+      benefits={t.b2b.benefits}
+      cta={t.b2b.cta}
+    />
+    <OmnichannelLinks
+      title={t.omni.title}
+      subtitle={t.omni.subtitle}
+      tokopedia={t.omni.tokopedia}
+      shopee={t.omni.shopee}
+      whatsapp={t.omni.whatsapp}
+      instagram={t.omni.instagram}
+      tiktok={t.omni.tiktok}
+    />
+    <ContactSection
+      title={t.contact.title}
+      subtitle={t.contact.subtitle}
+      followInstagram={t.contact.followInstagram}
+      followTiktok={t.contact.followTiktok}
+      address={t.contact.address}
+      mapsLabel={t.contact.mapsLabel}
+      formTitle={t.contact.formTitle}
+      form={t.contact.form}
+    />
+  </main>
+  <Footer lang={currentLang} footer={footer} />
+  <WhatsAppFAB />
+  <ScrollReveal selectors={['.animate-on-scroll', '.animate-fade-in-up']} />
+</Base>
