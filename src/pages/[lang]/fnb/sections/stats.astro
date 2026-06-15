@@ -1,0 +1,14 @@
+---
+import StatBand from '@/components/shared/stat-band.astro';
+
+interface StatItem {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  stats: StatItem[];
+}
+const { stats } = Astro.props;
+---
+<StatBand stats={stats} />

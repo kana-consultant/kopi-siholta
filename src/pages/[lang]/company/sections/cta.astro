@@ -1,0 +1,18 @@
+---
+import PageCta from '@/components/shared/page-cta.astro';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  buttons: { text: string; href: string }[];
+}
+
+const { title, subtitle, buttons } = Astro.props;
+---
+
+<PageCta
+  title={title}
+  subtitle={subtitle}
+  ctaText={buttons[0]?.text ?? ''}
+  buttons={buttons}
+/>

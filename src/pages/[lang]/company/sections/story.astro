@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import companyLogo from '@/images/logo/logo-STI.png';
+import aboutFoto from '@/images/about.webp';
+import '@/styles/components/stats.css';
+import '../styles/story.css';
+
+interface Props {
+  logo: string;
+  body1: string;
+  body2: string;
+  body3: string;
+  founded: string;
+  farmers: string;
+  sectors: string;
+}
+
+const { logo, body1, body2, body3, founded, farmers, sectors } = Astro.props;
+---
+
+<section id="about" class="story section" aria-labelledby="story-heading">
+  <div class="container">
+    <div class="story__grid">
+
+      <div class="story__intro animate-on-scroll">
+        <h2 id="story-heading" class="story__heading">
+          <Image
+            src={companyLogo}
+            alt="PT Siholta Toba Indonesia Logo"
+            width={480}
+            height={480}
+            quality="max"
+            loading="eager"
+            class="story__logo object-contain"
+          />
+          <span>{logo}</span>
+        </h2>
+        <p class="story__body">{body1}</p>
+        <p class="story__body">{body2}</p>
+        <p class="story__body">{body3}</p>
+        <div class="story__stats">
+          <div class="story__stat">
+            <span class="story__stat-num">2021</span>
+            <span class="story__stat-label">{founded}</span>
+          </div>
+          <div class="story__stat">
+            <span class="story__stat-num">200+</span>
+            <span class="story__stat-label">{farmers}</span>
+          </div>
+          <div class="story__stat">
+            <span class="story__stat-num">3</span>
+            <span class="story__stat-label">{sectors}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="story__image animate-on-scroll">
+        <div class="story__image-frame">
+          <Image
+            src={aboutFoto}
+            alt="Perkebunan kopi PT Siholta Toba Indonesia di Humbang Hasundutan"
+            class="story__img"
+            loading="lazy"
+            widths={[480, 768, 1024]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

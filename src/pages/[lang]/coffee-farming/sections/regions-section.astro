@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import fFarm from '@/images/farming/coffee-plantation.jpg';
+import fFarm2 from '@/images/farming/coffee-plantation (2).jpg';
+import fFarm3 from '@/images/farming/coffee-plantation (3).jpg';
+import { nl } from '@/utils/helpers';
+import '../styles/regions-section.css';
+
+interface Region {
+  name: string;
+  desc: string;
+  imgIndex: number;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  list: Region[];
+}
+const { title, subtitle, list } = Astro.props;
+
+const images = [fFarm, fFarm2, fFarm3];
+---
+
+<section class="regions section section--cream" aria-labelledby="regions-heading">
+  <div class="container">
+    <header class="section__header animate-on-scroll">
+      <h2 id="regions-heading" class="section-title" set:html={nl(title)}></h2>
+      <p class="section-sub">{subtitle}</p>
+    </header>
+
+    <div class="regions__grid">
+      {list.map((region, i) => (
+        <article class="region-card animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>
+          <figure class="region-card__media">
+            <Image
+              src={images[region.imgIndex]!}
+              alt={region.name}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              widths={[480, 768]}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              class="region-card__img"
+            />
+          </figure>
+          <div class="region-card__body">
+            <h3 class="region-card__name">{region.name}</h3>
+            <p class="region-card__desc">{region.desc}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+---
+import { getTranslations } from '@/i18n/utils';
+import { nl } from '@/utils/helpers';
+
+interface Props {
+  title: string
+  subtitle: string
+  ctaText: string
+  lang?: string
+  buttons?: { text: string; href: string }[]
+}
+
+const { title, subtitle, ctaText, lang = 'en', buttons = [{ text: ctaText, href: `/${lang}/#contact` }] } = Astro.props
+---
+<section class="page-cta page-cta--cream" aria-label={title}>
+  <div class="container page-cta__inner">
+    <div class="page-cta__text animate-on-scroll">
+      <h2 class="page-cta__title page-cta__title--earth" set:html={nl(title)} />
+      <p class="page-cta__sub page-cta__sub--earth">{subtitle}</p>
+    </div>
+    <div class="page-cta__actions animate-on-scroll">
+      {buttons.map(b => (
+        <a href={b.href} class="btn btn--primary">{b.text}</a>
+      ))}
+    </div>
+  </div>
+</section>

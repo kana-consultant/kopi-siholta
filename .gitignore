@@ -10,8 +10,6 @@ dist/
 tests/
 .vercel/
 scripts/
-docs/
-design-system/
 
 # dependencies
 node_modules/
@@ -34,4 +32,3 @@ Thumbs.db
 .idea/
 .vscode/
 
-DESIGN.md

@@ -1,0 +1,26 @@
+---
+import { Icon } from "astro-icon/components";
+import '../styles/sustainability.css';
+
+interface Props {
+  title: string;
+  subtitle: string;
+}
+const { title, subtitle } = Astro.props;
+---
+
+<section class="sustainability section section--olive" aria-labelledby="sustainability-heading">
+  <div class="container">
+    <div class="sustainability__inner animate-on-scroll">
+      <div class="sustainability__text">
+        <h2 id="sustainability-heading" class="section-title">{title}</h2>
+        <p class="section-sub">{subtitle}</p>
+      </div>
+      <div class="sustainability__visual">
+        <div class="sustainability__icon-wrap" aria-hidden="true">
+          <Icon name="mdi:leaf" width="64" height="64" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

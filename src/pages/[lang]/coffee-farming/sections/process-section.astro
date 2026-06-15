@@ -1,0 +1,183 @@
+---
+import { nl } from '@/utils/helpers';
+import '../styles/process-section.css';
+
+interface Step {
+  title: string;
+  desc: string;
+  _split?: boolean;
+  splitA?: { title: string; desc: string };
+  splitB?: { title: string; desc: string };
+}
+
+interface Panel {
+  id: string;
+  tabId: string;
+  active: boolean;
+  title: string;
+  desc: string;
+  steps: Step[];
+  outro: string;
+}
+
+interface Tab {
+  num: string;
+  label: string;
+  labelShort: string;
+  tabId: string;
+  panelId: string;
+}
+
+interface Props {
+  tag: string;
+  title: string;
+  subtitle: string;
+  tabs: Tab[];
+  panels: Panel[];
+}
+const { tag, title, subtitle, tabs, panels } = Astro.props;
+---
+
+<section class="journey section section--cream" id="process" aria-labelledby="process-heading">
+  <div class="container">
+    <header class="section__header animate-on-scroll">
+      <h2 id="process-heading" class="section-title" set:html={nl(title)} />
+      <p class="section-sub">{subtitle}</p>
+    </header>
+
+    <div class="process-tabs animate-on-scroll" role="tablist" aria-label={tag} data-process-tabs>
+      {tabs.map(tab => (
+        <button
+          class={`process-tab${tab.tabId === tabs[0]!.tabId ? ' process-tab--active' : ''}`}
+          role="tab"
+          aria-selected={tab.tabId === tabs[0]!.tabId ? 'true' : 'false'}
+          aria-controls={tab.panelId}
+          id={tab.tabId}
+          data-process-tab={tab.tabId}
+          data-short={tab.labelShort}
+          tabindex={tab.tabId === tabs[0]!.tabId ? '0' : '-1'}
+        >
+          <span class="process-tab__num">{tab.num}</span>
+          <span class="process-tab__label">{tab.label}</span>
+        </button>
+      ))}
+    </div>
+
+    {panels.map(panel => (
+      <div
+        class={`process-panel${panel.active ? ' process-panel--active' : ''}`}
+        id={panel.id}
+        role="tabpanel"
+        aria-labelledby={panel.tabId}
+        data-process-panel={panel.id}
+        hidden={!panel.active || undefined}
+      >
+        <div class="process-panel__intro animate-on-scroll">
+          <h3 class="process-panel__title">{panel.title}</h3>
+          <p class="process-panel__desc">{panel.desc}</p>
+        </div>
+        <ol class="process-steps">
+          {panel.steps.map((step, si) => (
+            <li class={`process-step${step._split ? ' process-step--split' : ''} animate-on-scroll`} style={`transition-delay:${si * 60}ms`}>
+              <div class="process-step__num" aria-hidden="true">{String(si + 1).padStart(2, '0')}</div>
+              {step._split && step.splitA && step.splitB ? (
+                <div class="process-step__content-wrapper">
+                  <div class="process-step__body process-step__body--split-item">
+                    <h4 class="process-step__title">{step.splitA.title}</h4>
+                    <p class="process-step__desc">{step.splitA.desc}</p>
+                  </div>
+                  <div class="process-step__divider" aria-hidden="true">|</div>
+                  <div class="process-step__body process-step__body--split-item">
+                    <h4 class="process-step__title">{step.splitB.title}</h4>
+                    <p class="process-step__desc">{step.splitB.desc}</p>
+                  </div>
+                </div>
+              ) : (
+                <div class="process-step__body">
+                  <h4 class="process-step__title">{step.title}</h4>
+                  <p class="process-step__desc">{step.desc}</p>
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
+        <div class="process-panel__outro animate-on-scroll">
+          <p>{panel.outro}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  const SHORT_BREAKPOINT = 480;
+
+  function isMobileTab(): boolean {
+    return window.matchMedia(`(max-width: ${SHORT_BREAKPOINT - 1}px)`).matches;
+  }
+
+  function applyMobileLabels() {
+    const isMobile = isMobileTab();
+    tabs.forEach(tab => {
+      const label = tab.querySelector<HTMLElement>('.process-tab__label');
+      const short = tab.dataset.short ?? '';
+      if (label) {
+        label.textContent = isMobile && short ? short : (tab.dataset.fullLabel ?? label.textContent);
+      }
+    });
+  }
+
+  const tabs   = document.querySelectorAll<HTMLElement>('[data-process-tab]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-process-panel]');
+
+  tabs.forEach(tab => {
+    const label = tab.querySelector<HTMLElement>('.process-tab__label');
+    if (label) tab.dataset.fullLabel = label.textContent ?? '';
+  });
+
+  applyMobileLabels();
+  window.addEventListener('resize', applyMobileLabels);
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.processTab ?? '';
+
+      tabs.forEach(t => {
+        const isActive = t.dataset.processTab === target;
+        t.classList.toggle('process-tab--active', isActive);
+        t.setAttribute('aria-selected', String(isActive));
+        t.setAttribute('tabindex', isActive ? '0' : '-1');
+      });
+
+      panels.forEach(p => {
+        const isActive = p.dataset.processPanel === target;
+        if (isActive) p.removeAttribute('hidden');
+        else p.setAttribute('hidden', '');
+      });
+
+      panels.forEach(p => {
+        if (!p.hasAttribute('hidden')) {
+          p.style.animation = 'none';
+          p.offsetHeight;
+          p.style.animation = '';
+        }
+      });
+    });
+
+    tab.addEventListener('keydown', (e: KeyboardEvent) => {
+      const tabArr = Array.from(tabs);
+      const idx = tabArr.indexOf(tab as HTMLElement);
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        const next = tabArr[idx + 1] ?? tabArr[0];
+        next.focus();
+        (next as HTMLElement).click();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const prev = tabArr[idx - 1] ?? tabArr[tabArr.length - 1];
+        prev.focus();
+        (prev as HTMLElement).click();
+      }
+    });
+  });
+</script>

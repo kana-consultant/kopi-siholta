@@ -1,0 +1,29 @@
+---
+interface Props {
+  selectors?: string[]
+  threshold?: number
+  rootMargin?: string
+}
+
+const { 
+  selectors = ['.animate-on-scroll'], 
+  threshold = 0.1, 
+  rootMargin = '0px 0px -40px 0px' 
+} = Astro.props
+---
+
+<script define:vars={{ selectors, threshold, rootMargin }}>
+  for (const sel of selectors) {
+    const els = document.querySelectorAll(sel)
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible')
+          obs.unobserve(e.target)
+        }
+      })
+    }, { threshold, rootMargin }) // Variabel di sini sekarang aman dibaca browser
+    
+    els.forEach(el => obs.observe(el))
+  }
+</script>

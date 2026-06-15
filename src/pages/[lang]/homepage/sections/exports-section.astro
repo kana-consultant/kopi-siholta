@@ -1,0 +1,82 @@
+---
+import { Icon } from 'astro-icon/components';
+import '../styles/exports-section.css';
+
+interface KPI { value: string; label: string; }
+interface Country { code: string; flag: string; name: string; active: boolean; }
+
+interface Props {
+  title: string;
+  subtitle: string;
+  routesLabel: string;
+  kpis: KPI[];
+  activeMarketsLabel: string;
+  expansionPlanLabel: string;
+  statusActive: string;
+  statusSoon: string;
+  countries: Country[];
+}
+
+const { title, subtitle, routesLabel, kpis, activeMarketsLabel, expansionPlanLabel, statusActive, statusSoon, countries } = Astro.props;
+
+const activeCountries = countries.filter(c => c.active);
+const upcomingCountries = countries.filter(c => !c.active);
+
+const iconNames = ['mdi:weight', 'mdi:earth', 'mdi:calendar', 'mdi:handshake'];
+---
+
+<section class="export" id="export" aria-label="Jangkauan Internasional">
+  <div class="export__wrap">
+    <div class="export__top">
+      <div class="export__head">
+        <h2 class="export__title">{title}</h2>
+        <p class="export__desc">{subtitle}</p>
+      </div>
+    </div>
+
+    <div class="export__kpi-strip">
+      {kpis.map((kpi, i) => (
+        <div class="export__kpi-cell">
+          <div class="export__kpi-icon">
+            <Icon name={iconNames[i] ?? 'mdi:star'} width="18" height="18" />
+          </div>
+          <span class="export__kpi-num">{kpi.value}</span>
+          <span class="export__kpi-label">{kpi.label}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="export__country-grid">
+      <div class="export__country-section">
+        <div class="export__country-cards">
+          {activeCountries.map((c) => (
+            <div class="export__country-card export__country-card--active">
+              <div class="export__country-card-code">{c.code}</div>
+              <div class="export__country-card-info">
+                <span class="export__country-card-name">{c.name}</span>
+                <span class="export__country-card-status">{statusActive}</span>
+              </div>
+              <Icon name="mdi:check-circle" width="14" height="14" class="export__country-card-check" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="export__country-section">
+        <div class="export__country-cards">
+          {upcomingCountries.map((c) => (
+            <div class="export__country-card">
+              <div class="export__country-card-code">{c.code}</div>
+              <div class="export__country-card-info">
+                <span class="export__country-card-name">{c.name}</span>
+                <span class="export__country-card-status">{statusSoon}</span>
+              </div>
+              <Icon name="mdi:clock-outline" width="14" height="14" class="export__country-card-clock" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

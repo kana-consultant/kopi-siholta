@@ -1,0 +1,84 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import logoHypermart from "@/images/logo/logo-hypermart.webp";
+import logoSendys from "@/images/logo/logo-sendys.png";
+import logoHyfresh from "@/images/logo/logo-hyfresh.png";
+import logoSvetofor from "@/images/logo/logo-svetofor.png";
+import '../styles/retail-distribution.css';
+
+interface CafeLocation {
+  city: string;
+  address: string;
+}
+
+interface Props {
+  title: string;
+  retailNetworkHeading: string;
+  retailNetworkDesc: string;
+  cafeLocationsHeading: string;
+  locations: CafeLocation[];
+  mapPreviewLabel: string;
+  regionChips: string[];
+}
+const { title, retailNetworkHeading, retailNetworkDesc, cafeLocationsHeading, locations, mapPreviewLabel, regionChips } = Astro.props;
+
+const retailLogos = [
+  { name: "hyfresh", logo: logoHyfresh },
+  { name: "svetofor", logo: logoSvetofor },
+  { name: "Sendys", logo: logoSendys },
+];
+---
+
+<section class="distribution section" aria-labelledby="distribution-heading">
+  <div class="container">
+    <div class="section__header animate-on-scroll">
+      <h2 id="distribution-heading" class="section-title">{title}</h2>
+    </div>
+
+    <div class="distribution__grid animate-on-scroll">
+      <div class="distribution-card distribution-card--retail">
+        <h3 class="distribution-card__heading">{retailNetworkHeading}</h3>
+        <p class="distribution-card__desc">{retailNetworkDesc}</p>
+
+        <div class="retail-logos">
+          {retailLogos.map(n => (
+            <div class="retail-logo">
+              <Image src={n.logo} alt={n.name} height={120} class="retail-logo__img" />
+            </div>
+          ))}
+        </div>
+
+        <div class="region-chips">
+          {regionChips.map(region => <span class="region-chip">{region}</span>)}
+        </div>
+      </div>
+
+      <div class="distribution-card distribution-card--cafe">
+        <h3 class="distribution-card__heading">{cafeLocationsHeading}</h3>
+
+        <div class="cafe-locations">
+          {locations.map(loc => (
+            <div class="cafe-location">
+              <div class="cafe-location__icon" aria-hidden="true">
+                <Icon name="mdi:map-marker" width="18" height="18" />
+              </div>
+              <div class="cafe-location__info">
+                <p class="cafe-location__city">{loc.city}</p>
+                <p class="cafe-location__address">{loc.address}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="cafe-map-preview" aria-hidden="true">
+          <div class="cafe-map-preview__dots">
+            <div class="cafe-map-dot cafe-map-dot--active"></div>
+            <div class="cafe-map-dot"></div>
+          </div>
+          <p class="cafe-map-preview__label">{mapPreviewLabel}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

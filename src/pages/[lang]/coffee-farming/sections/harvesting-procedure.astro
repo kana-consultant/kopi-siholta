@@ -1,0 +1,43 @@
+---
+import { nl } from '@/utils/helpers';
+import '../styles/harvesting-procedure.css';
+
+interface Step {
+  num: string;
+  title: string;
+  desc: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  steps: Step[];
+  outro: string;
+}
+const { title, subtitle, steps, outro } = Astro.props;
+---
+<section class="harvest-proc section" id="harvest-procedure" aria-labelledby="harvest-proc-heading">
+  <div class="container">
+    <header class="section__header animate-on-scroll">
+      <h2 id="harvest-proc-heading" class="section-title" set:html={nl(title)} />
+      <p class="section-sub">{subtitle}</p>
+    </header>
+
+    <div class="harvest-steps">
+      <ol class="harvest-steps__grid">
+        {steps.map((step, i) => (
+          <li class="harvest-step-card animate-on-scroll" style={`transition-delay:${i * 80}ms`}>
+            <div class="harvest-step-card__num" aria-hidden="true">{step.num}</div>
+            <div class="harvest-step-card__body">
+              <h3 class="harvest-step-card__title">{step.title}</h3>
+              <p class="harvest-step-card__desc">{step.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div class="harvest-proc__outro animate-on-scroll">
+        <p>{outro}</p>
+      </div>
+    </div>
+  </div>
+</section>

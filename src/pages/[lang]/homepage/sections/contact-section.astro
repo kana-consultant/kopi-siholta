@@ -1,0 +1,303 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import igLogo from '@/images/logo/logo-instagram.png';
+import tiktokLogo from '@/images/logo/logo-tiktok.png';
+import linktreeLogo from '@/images/logo/logo-linktree.png';
+import tokpedLogo from '@/images/logo/logo-tokopedia.png';
+import shopeeLogo from '@/images/logo/logo-shopee.png';
+import waIcon from '@/images/logo/logo-whatsapp.png';
+import { WHATSAPP_NUMBER, SOCIAL, SHOP } from '@/constants/site';
+import '../styles/contact-section.css';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  followInstagram: string;
+  followTiktok: string;
+  address: string;
+  mapsLabel: string;
+  formTitle: string;
+  form: {
+    fullName: string;
+    fullNamePlaceholder: string;
+    email: string;
+    emailPlaceholder: string;
+    phone: string;
+    phonePlaceholder: string;
+    company: string;
+    companyPlaceholder: string;
+    inquiryType: string;
+    inquiryTypePlaceholder: string;
+    inquiryOpt1: string;
+    inquiryOpt2: string;
+    inquiryOpt3: string;
+    inquiryOpt4: string;
+    message: string;
+    messagePlaceholder: string;
+    optional: string;
+    sendWa: string;
+    sendWaAria: string;
+    sendEmail: string;
+    sendEmailAria: string;
+  };
+}
+
+const { title, subtitle, followInstagram, followTiktok, address, mapsLabel, formTitle, form } = Astro.props;
+const EMAIL = 'siholtatobaindonesia@gmail.com';
+
+const WHATSAPP_MSG_ID = 'Halo, saya tertarik dengan Kopi Siholta. Bisa info lengkap lebih lanjut?';
+const WHATSAPP_MSG_EN = 'Hello, I\'m interested in Kopi Siholta. Can I get more details?';
+const WHATSAPP_MSG = WHATSAPP_MSG_ID;
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MSG)}`;
+const INSTAGRAM_URL = SOCIAL.instagram;
+const TOKPED_URL = SHOP.tokopedia;
+const SHOPEE_URL = 'https://shopee.co.id/kopi_siholta';
+const TIKTOK_URL = SOCIAL.tiktok;
+const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
+---
+
+<section class="contact section" id="contact" aria-label="Contact Section">
+  <div class="container contact__inner">
+
+    <aside class="contact__info">
+      <header class="section__header">
+        <h2 class="section-title">{title}</h2>
+        <p class="section-sub">{subtitle}</p>
+      </header>
+      <nav class="contact__social-grid" aria-label="Social Media">
+        <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label={followInstagram}>
+          <Image src={igLogo} alt="Instagram" width={80} height={80} quality="max" class="social-img" />
+          <span>@kopi_siholta.id</span>
+        </a>
+        <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label={followTiktok}>
+          <Image src={tiktokLogo} alt="Tiktok" width={80} height={80} quality="max" class="social-img" />
+          <span>@kopisiholta</span>
+        </a>
+        <a href={LINKTREE_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Linktree">
+          <Image src={linktreeLogo} alt="Linktree" width={104} height={104} quality="max" class="social-img linktree-adjust" />
+          <span>@kopisiholta</span>
+        </a>
+        <a href={TOKPED_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Tokopedia">
+          <Image src={tokpedLogo} alt="Tokopedia" width={80} height={80} quality="max" class="social-img" />
+          <span>@kopisiholta</span>
+        </a>
+        <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Shopee">
+          <Image src={shopeeLogo} alt="Shopee" width={80} height={80} quality="max" class="social-img" />
+          <span>@kopi_siholta</span>
+        </a>
+      </nav>
+
+      <address class="contact__details">
+        <div class="contact__detail-item">
+          <Icon name="mdi:map-marker" width="14" height="14" />
+          <span>{address}</span>
+        </div>
+        <div class="contact__detail-item">
+          <Icon name="mdi:email" width="14" height="14" />
+          <a href={`mailto:${EMAIL}`} class="contact__link">{EMAIL}</a>
+        </div>
+        <div class="contact__detail-item">
+          <Icon name="mdi:phone" width="14" height="14" />
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="contact__link">+62 813 2251 8527</a>
+        </div>
+      </address>
+
+      <div class="contact__maps">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4879.739208830867!2d106.9037104!3d-6.295721899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3007f623b53%3A0x118fc0912e442961!2sPT.%20Siholta%20Toba%20Indonesia!5e1!3m2!1sid!2sid!4v1780411154960!5m2!1sid!2sid" width="100%" height="180"
+          style="border:0; border-radius: var(--radius-lg);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title={mapsLabel}></iframe>
+      </div>
+    </div>
+
+    <div class="contact__form-wrap">
+      <form class="contact__form" id="contactForm" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fullName" class="form-label">
+              {form.fullName}
+              <span class="form-required" aria-hidden="true">*</span>
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              class="form-input"
+              placeholder={form.fullNamePlaceholder}
+              required
+              autocomplete="name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">
+              {form.email}
+              <span class="form-required" aria-hidden="true">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder={form.emailPlaceholder}
+              required
+              autocomplete="email"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone" class="form-label">
+              {form.phone}
+              <span class="form-required" aria-hidden="true">*</span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-input"
+              placeholder={form.phonePlaceholder}
+              required
+              autocomplete="tel"
+            />
+          </div>
+          <div class="form-group">
+            <label for="company" class="form-label">
+              {form.company}
+              <span class="form-optional">({form.optional})</span>
+            </label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              class="form-input"
+              placeholder={form.companyPlaceholder}
+              autocomplete="organization"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inquiryType" class="form-label">
+            {form.inquiryType}
+            <span class="form-required" aria-hidden="true">*</span>
+          </label>
+          <select id="inquiryType" name="inquiryType" class="form-input form-select" required>
+            <option value="" disabled selected>{form.inquiryTypePlaceholder}</option>
+            <option value={form.inquiryOpt1}>{form.inquiryOpt1}</option>
+            <option value={form.inquiryOpt2}>{form.inquiryOpt2}</option>
+            <option value={form.inquiryOpt3}>{form.inquiryOpt3}</option>
+            <option value={form.inquiryOpt4}>{form.inquiryOpt4}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="form-label">
+            {form.message}
+            <span class="form-required" aria-hidden="true">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            class="form-input form-textarea"
+            rows="7"
+            placeholder={form.messagePlaceholder}
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="button"
+            id="btnWhatsApp"
+            class="btn btn--whatsapp form-btn"
+            aria-label={form.sendWaAria}
+          >
+            <Image src={waIcon} alt="WhatsApp" width={72} height={72} quality="max" class="button-wa-img"/>
+            {form.sendWa}
+          </button>
+          <button
+            type="button"
+            id="btnEmail"
+            class="btn btn--email form-btn"
+            aria-label={form.sendEmailAria}
+          >
+            <Icon name="mdi:email-outline" width={18} height={18} />
+            {form.sendEmail}
+          </button>
+        </div>
+
+        <p class="form-error" id="formError" role="alert" aria-live="polite" hidden></p>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<script define:vars={{ WHATSAPP_NUMBER, EMAIL }}>
+  const btnWa    = document.getElementById('btnWhatsApp');
+  const btnEmail = document.getElementById('btnEmail');
+  const errEl    = document.getElementById('formError');
+
+  function getVal(id) { return document.getElementById(id).value.trim(); }
+
+  function validate() {
+    const fullName = getVal('fullName');
+    const email    = getVal('email');
+    const phone    = getVal('phone');
+    const inquiry  = document.getElementById('inquiryType').value;
+    const message  = getVal('message');
+    const company  = getVal('company');
+
+    if (!fullName || !email || !phone || !inquiry || !message) {
+      errEl.textContent = 'Please fill in all required fields.';
+      errEl.hidden = false;
+      return null;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errEl.textContent = 'Please enter a valid email address.';
+      errEl.hidden = false;
+      return null;
+    }
+    errEl.hidden = true;
+    return { fullName, email, phone, company, inquiry, message };
+  }
+
+  btnWa.addEventListener('click', () => {
+    const d = validate();
+    if (!d) return;
+    const companyLine = d.company
+      ? `\n*Perusahaan/Instansi:* ${d.company}` : '';
+    const waText =
+`Nama Lengkap: ${d.fullName}
+*Email:* ${d.email}
+*No. HP/WA:* ${d.phone}${companyLine}
+*Jenis Keperluan:* ${d.inquiry}
+
+*Pesan:*
+${d.message}`;
+    window.open(
+      `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(waText)}`,
+      '_blank', 'noopener,noreferrer'
+    );
+  });
+
+  btnEmail.addEventListener('click', () => {
+    const d = validate();
+    if (!d) return;
+    const subject = `[Kopi Siholta] ${d.inquiry} — ${d.fullName}`;
+    const companyLine = d.company
+      ? `Perusahaan/Instansi: ${d.company}\n` : '';
+    const body =
+`Nama Lengkap: ${d.fullName}
+Email: ${d.email}
+No. HP/WA: ${d.phone}
+${companyLine}Jenis Keperluan: ${d.inquiry}
+
+Pesan:
+${d.message}`;
+    window.location.href =
+      `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>

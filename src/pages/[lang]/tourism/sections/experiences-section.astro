@@ -1,0 +1,96 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import t1Farm from '@/images/tourism/coffee-plantation.jpg';
+import t2Factory from '@/images/tourism/process (5).jpg';
+import t3Cup from '@/images/tourism/cup-and-test(2).jpg';
+import tThumb1 from '@/images/tourism/samosir-island.jpg';
+import tThumb2 from '@/images/tourism/danau-toba.jpg';
+import tThumb3 from '@/images/tourism/cup-and-test.jpg';
+import { nl } from '@/utils/helpers';
+import '../styles/experiences-section.css';
+
+interface ExpItem {
+  num: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  alt: string;
+  details: string[];
+}
+
+interface Props {
+  tag: string;
+  title: string;
+  subtitle: string;
+  bookNow: string;
+  list: ExpItem[];
+  lang: string;
+}
+const { tag, title, subtitle, bookNow, list, lang } = Astro.props;
+
+const images = [t1Farm, t2Factory, t3Cup];
+const thumbs = [tThumb1, tThumb2, tThumb3];
+---
+
+<section class="experiences section section--cream" id="experiences" aria-labelledby="exp-heading">
+  <div class="container">
+    <div class="section__header animate-on-scroll">
+      <p class="section-tag">{tag}</p>
+      <h2 id="exp-heading" class="section-title" set:html={nl(title)} />
+      <p class="section-sub">{subtitle}</p>
+    </div>
+
+    <div class="exp-list">
+      {list.map((exp, i) => (
+        <article class={`exp-item ${i % 2 !== 0 ? 'exp-item--rev' : ''} animate-on-scroll`}>
+          <div class="exp-item__media">
+            <div class="exp-item__img-wrap">
+              <Image
+                src={images[i]!}
+                alt={exp.alt}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                widths={[480, 768, 1024]}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                class="exp-item__img"
+              />
+            </div>
+            <div class="exp-item__num-badge" aria-hidden="true">
+              <span class="exp-item__num">{exp.num}</span>
+            </div>
+            <div class="exp-item__thumb" aria-hidden="true">
+              <Image
+                src={thumbs[i]!}
+                alt=""
+                loading="lazy"
+                widths={[200, 300]}
+                sizes="80px"
+                class="exp-item__thumb-img"
+              />
+            </div>
+          </div>
+
+          <div class="exp-item__content">
+            <h3 class="exp-item__title">{exp.title}</h3>
+            <p class="exp-item__subtitle">{exp.subtitle}</p>
+            <p class="exp-item__desc">{exp.desc}</p>
+
+            <ul class="exp-item__details" role="list">
+              {exp.details.map(d => (
+                <li class="exp-item__detail">
+                  <Icon name="mdi:check" width="12" height="12" />
+                  {d}
+                </li>
+              ))}
+            </ul>
+
+            <a href={`/${lang}/#contact`} class="btn btn--outline-dark exp-item__cta">
+              {bookNow}
+              <Icon name="mdi:chevron-right" width="12" height="12" />
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
