@@ -112,7 +112,6 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
     <div class="contact__form-wrap">
       <form class="contact__form" id="contactForm" novalidate>
 
-        <!-- Row 1: Full Name + Email -->
         <div class="form-row">
           <div class="form-group">
             <label for="fullName" class="form-label">
@@ -146,7 +145,6 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
           </div>
         </div>
 
-        <!-- Row 2: Phone + Company -->
         <div class="form-row">
           <div class="form-group">
             <label for="phone" class="form-label">
@@ -179,7 +177,6 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
           </div>
         </div>
 
-        <!-- Row 3: Inquiry Type -->
         <div class="form-group">
           <label for="inquiryType" class="form-label">
             {form.inquiryType}
@@ -194,7 +191,6 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
           </select>
         </div>
 
-        <!-- Row 4: Message -->
         <div class="form-group">
           <label for="message" class="form-label">
             {form.message}
@@ -210,7 +206,6 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
           ></textarea>
         </div>
 
-        <!-- Action Buttons -->
         <div class="form-actions">
           <button
             type="button"
@@ -232,7 +227,6 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
           </button>
         </div>
 
-        <!-- Validation feedback -->
         <p class="form-error" id="formError" role="alert" aria-live="polite" hidden></p>
 
       </form>
@@ -270,7 +264,6 @@ const LINKTREE_URL = 'https://linktr.ee/kopisiholta';
     return { fullName, email, phone, company, inquiry, message };
   }
 
-  // ---------- Send via WhatsApp ----------
   btnWa.addEventListener('click', () => {
     const d = validate();
     if (!d) return;
@@ -290,7 +283,6 @@ ${d.message}`;
     );
   });
 
-  // ---------- Send via Email ----------
   btnEmail.addEventListener('click', () => {
     const d = validate();
     if (!d) return;

@@ -206,7 +206,7 @@ export const pageTranslations = {
       sendEmailAria: 'Send inquiry via Email',
     },
   },
-} as const;
+};
 
 type DeepString<T> = {
   readonly [K in keyof T]: T[K] extends object

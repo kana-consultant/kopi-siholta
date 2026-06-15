@@ -180,7 +180,7 @@ export const pageTranslations = {
     cta1: "Contact Us",
     cta2: "Back to Home",
   },
-} as const;
+};
 
 type DeepString<T> = {
   readonly [K in keyof T]: T[K] extends object

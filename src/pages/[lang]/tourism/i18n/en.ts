@@ -72,7 +72,7 @@ export const pageTranslations = {
     subtitle: 'Contact our team to schedule a farm tour, factory tour, or cupping session at our location.',
     ctaText: 'Contact Us',
   },
-} as const;
+};
 
 type DeepString<T> = {
   readonly [K in keyof T]: T[K] extends object

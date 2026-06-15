@@ -6,6 +6,6 @@ export const pageTranslations = {
   suggestion: 'Try heading back to the homepage or explore our specialty coffee collection.',
   ctaHome: 'Back to Homepage',
   ctaExplore: 'Explore Products',
-} as const;
+};
 
 export type PageTranslationsType = Record<keyof typeof pageTranslations, string>;

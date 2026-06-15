@@ -30,7 +30,6 @@ const slides = [
 ---
 
 <section class="hero" aria-label="Hero — Kopi Siholta Introduction">
-  <!-- Background Carousel Layer -->
   <div class="hero__carousel" aria-hidden="true">
     <div class="hero__carousel-track" id="heroCarouselTrack">
       {slides.map((slide, i) => (
@@ -56,7 +55,6 @@ const slides = [
     <div class="hero__vignette" aria-hidden="true"></div>
   </div>
 
-  <!-- Content -->
   <div class="container hero__container">
     <div class="hero__content">
 
@@ -65,7 +63,6 @@ const slides = [
         {subtitle}
       </p>
 
-      <!-- CTAs -->
       <div class="hero__ctas animate-fade-in-up delay-300">
         <a href="#products" class="btn btn--primary hero__cta-primary">
           {ctaPrimary}
@@ -75,7 +72,6 @@ const slides = [
         </a>
       </div>
 
-      <!-- Stats Preview -->
       <div class="hero__stats-preview animate-fade-in-up delay-400">
         {stats.map((stat, i) => (
           <>
@@ -89,7 +85,6 @@ const slides = [
       </div>
     </div>
 
-    <!-- Slide Indicators -->
     <div class="hero__indicators" role="tablist" aria-label="Background slide navigation">
       {slides.map((_, i) => (
         <button

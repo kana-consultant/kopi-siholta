@@ -179,7 +179,7 @@ export const pageTranslations = {
     subtitle: 'PT Siholta Toba Indonesia is open to partnerships with coffee farmers and international buyers. Contact us to discuss further.',
     ctaText: 'Contact Us',
   },
-} as const;
+};
 
 type DeepString<T> = {
   readonly [K in keyof T]: T[K] extends object

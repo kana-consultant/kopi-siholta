@@ -68,7 +68,7 @@ export const pageTranslations = {
     subtitle: 'Shop the Origin and bring the ultimate coffee adventure to your kitchen today.',
     ctaText: 'Contact Us',
   },
-} as const;
+};
 
 type DeepString<T> = {
   readonly [K in keyof T]: T[K] extends object
